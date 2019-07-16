@@ -100,7 +100,7 @@
                 <h2 style="color:#6969ab;">Related Items</h2>
             </div>
             <div style="background-color:#FFD700;">
-                <ul id="" class="responsivex" >
+                <ul id="flexiselDemo1" class="flexiselDemo1" >
                     <li><img src="vitamin_image/8.jpg"  style=" height:200px; "/><div class="grid-flex"><a href="#">Bloch</a><p>Rs 850</p></div></li>
                     <li><img src="vitamin_image/4.jpg"  style=" height:200px;" /><div class="grid-flex"><a href="#">Bloch</a><p>Rs 850</p></div></li>
                     <li><img src="vitamin_image/6.jpg" style=" height:200px;" /><div class="grid-flex"><a href="#">Capzio</a><p>Rs 850</p></div></li>
@@ -114,51 +114,34 @@
             <div style="padding-bottom:10px; text-align:center;" > 
                 <h2 style="color:#6969ab;">Latest Items</h2>
             </div>
-
-            <ul id="" class="flexiselDemo1">
-                <li><img src="vitamin_image/8.jpg"  style=" height:200px; "/><div class="grid-flex"><a href="#">Bloch</a><p>Rs 850</p></div></li>
-                <li><img src="vitamin_image/4.jpg"  style=" height:200px;" /><div class="grid-flex"><a href="#">Bloch</a><p>Rs 850</p></div></li>
-                <li><img src="vitamin_image/6.jpg" style=" height:200px;" /><div class="grid-flex"><a href="#">Capzio</a><p>Rs 850</p></div></li>
-                <li><img src="vitamin_image/5.jpg"  style=" height:200px;" /><div class="grid-flex"><a href="#">Zumba</a><p>Rs 850</p></div></li>
-                <li><img src="vitamin_image/4.jpg"  style=" height:200px;" /><div class="grid-flex"><a href="#">Bloch</a><p>Rs 850</p></div></li>
-                <li><img src="vitamin_image/4.jpg"  style=" height:200px;" /><div class="grid-flex"><a href="#">Bloch</a><p>Rs 850</p></div></li>
-                <li><img src="vitamin_image/4.jpg"  style=" height:200px;" /><div class="grid-flex"><a href="#">Bloch</a><p>Rs 850</p></div></li>
-                <!--<li><img src="images/pi4.jpg" /><div class="grid-flex"><a href="#">Capzio</a><p>Rs 850</p></div></li>-->
-            </ul>
+            
+         
 
             <script type="text/javascript">
-
-                $('.responsivex').slick({
-                    dots: true,
-                    infinite: false,
-                    speed: 300,
-                    slidesToShow: 4,
-                    slidesToScroll: 4,
-                    responsive: [
-                        {
-                            breakpoint: 1024,
-                            settings: {
-                                slidesToShow: 3,
-                                slidesToScroll: 3,
-                                infinite: true,
-                                dots: true
-                            }
-                        },
-                        {
-                            breakpoint: 600,
-                            settings: {
-                                slidesToShow: 2,
-                                slidesToScroll: 2
-                            }
-                        },
-                        {
-                            breakpoint: 480,
-                            settings: {
-                                slidesToShow: 1,
-                                slidesToScroll: 1
+                $(window).load(function () {
+                    $(".flexiselDemo1").flexisel({
+                        visibleItems: 5,
+                        animationSpeed: 1000,
+                        autoPlay: false,
+                        autoPlaySpeed: 3000,
+                        pauseOnHover: true,
+                        enableResponsiveBreakpoints: true,
+                        responsiveBreakpoints: {
+                            portrait: {
+                                changePoint: 480,
+                                visibleItems: 1
+                            },
+                            landscape: {
+                                changePoint: 640,
+                                visibleItems: 2
+                            },
+                            tablet: {
+                                changePoint: 768,
+                                visibleItems: 3
                             }
                         }
-                    ]
+                    });
+
                 });
             </script>
 
