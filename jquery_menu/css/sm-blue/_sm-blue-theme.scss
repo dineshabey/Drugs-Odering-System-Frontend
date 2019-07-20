@@ -311,7 +311,8 @@ $sm-blue__toggle-spacing: floor($sm-blue__item-height * 0.1);
 	.sm-blue {
 		background: $sm-blue__desktop-bg;
 		background-image: linear-gradient(to bottom, lighten($sm-blue__desktop-bg, $sm-blue__gradients_amount), darken($sm-blue__desktop-bg, $sm-blue__gradients_amount));
-		border-radius: $sm-blue__desktop-border-radius;
+		
+                border-radius: $sm-blue__desktop-border-radius;
 		box-shadow: $sm-blue__desktop-box-shadow;
 
 		// Main menu items

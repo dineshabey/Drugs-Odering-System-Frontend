@@ -1,6 +1,6 @@
 
 <!--<TOP HEADER START -->
-<div class="top-header">
+<div class="top-header" style="background: #FFD700;   border-bottom: 2px solid #fff;">
     <div class="container">
         <div class="row">
             <div class="col-lg-6">
@@ -30,7 +30,7 @@
 
 <!--<TOP HEADER END-->
 <!--<BOTTOM HEADER START-->
-<div class="bottom-header">
+<div class="bottom-header" style="background:green;">
     <div class="container">
         <div class="row" style="padding-top: 20px;">
             <div class="col-md-2">
@@ -47,12 +47,11 @@
                     </span>
                 </div>
             </div>
-            <div class="col-md-5 ">
-                <div class="">
-                    <div class="account"><a href="login.php"><span> </span>YOUR ACCOUNT</a></div>
-                    <ul class="login">
-                        <li><a href="login.php"><span> </span>LOGIN</a></li> |
-                        <li ><a href="register.php">SIGNUP</a></li>
+            <div class="col-md-5 " style="padding-top: 28px; ">
+                <div class="" style="background: white; text-align: center;">
+                    <div class="account"><a href="register.php"><span> </span>CREATE ACCOUNT</a></div>
+                    <ul class="login" >
+                        <li><a href="login.php"><span> </span>LOGIN ACCOUNT</a></li> 
                     </ul>
                     <div class="cart"><a href="#"><span> </span>CART</a></div>
                 </div>
@@ -67,10 +66,9 @@
 
 
 <!--<NEW DROP DOWN MENU-->
-<div class="top-header " >
-    <div class="container ">
-        <ul id="main-menu" class="sm sm-blue">
-
+<div class="top-header " style="background:green;">
+    <div class="container " >
+        <ul id="main-menu" class="sm sm-blue" style="background:green;">
             <li><a href="index.php">Home</a></li>
 
             <li><a href="#">Vitamin & Supliment</a>

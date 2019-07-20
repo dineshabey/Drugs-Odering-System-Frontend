@@ -156,8 +156,10 @@
       
     padding: 13px 24px;
     background: #3092c0;
-    background-image: linear-gradient(to bottom, #3298c8, #040403);
+    /*background-image: linear-gradient(to bottom, #3298c8, #040403);*/
+    background-image: linear-gradient(to bottom, #458500, #458500);
     color: #fff;
+    background-image: linear-gradient(to bottom, #458500, #458500);
   }
   .sm-blue a:hover, .sm-blue a:focus, .sm-blue a:active, .sm-blue a.highlighted {
     background: #2b82ac;
