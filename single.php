@@ -31,6 +31,14 @@
             }
             /*RESPONSIVE VEDIOO//////////////////////////////////////////*/ 
 
+            
+            .slick-slide {
+   height:600px;
+}
+
+.slick-slide img {
+   height:600px;
+}
         </style>
         <!--CSS PART ///////////////////////////////////////////////-->
 

@@ -1,29 +1,42 @@
 <?php
 
-define("DB_HOST", "localhost"); // set database host
-define("DB_USER", "root"); // set database user
-define("DB_PASS", ""); // set database password
-define("DB_NAME", "drug"); // set database name
+define('DB_HOST', "localhost");
+define('DB_USER', "root");
+define('DB_PASSWORD', "");
+define('DB_NAME', "drug-odering");
+date_default_timezone_set('Asia/Colombo');
 
-
-$link = mysql_connect(DB_HOST, DB_USER, DB_PASS) or die("Couldn't make connection.");
-$db = mysql_select_db(DB_NAME, $link) or die("Couldn't select database");
+$db_HOST = DB_HOST;
+$db_USER = DB_USER;
+$db_PASS = DB_PASSWORD;
+$db_NAME = DB_NAME;
 
 $user_registration = 1;  // set 0 or 1
 
-
-
 class MainConfig {
-
-    public static function connectDB() {
-        $link = mysql_connect('localhost', 'root', '') or die("Couldn't make connection.");
-        mysql_set_charset('utf8', $link);
+    
+      public static function connectDB() {
+        global $db_HOST, $db_USER, $db_PASS, $db_NAME;
+//        $link = mysqli_connect($db_HOST, $db_USER, $db_PASS) or die("Couldn't make connection.");
+   //     $link = mysqli_connect("localhost", "root", "", "drug");
+         $link = ($GLOBALS["___mysqli_ston"] = mysqli_connect($db_HOST, $db_USER,$db_PASS)) or die("Problem occur in connection");
+       
+        mysqli_set_charset($link,'utf8');
+        mysqli_query($link,"SET @@session.sql_mode= 'NO_ENGINE_SUBSTITUTION'");
         date_default_timezone_set('Asia/Colombo');
-        $db = mysql_select_db('drug', $link) or die("Couldn't select database");
+        $db = mysqli_select_db($link,$db_NAME) or die("Couldn't select database");
+    }
+    
+      public static function conDB() {
+        global $db_HOST, $db_USER, $db_PASS, $db_NAME, $mysqli;
+        $mysqli = new mysqli($db_HOST, $db_USER, $db_PASS, $db_NAME);
+
+        return $mysqli;
     }
 
     public static function closeDB() {
-        mysql_close();
+         global $mysqli;
+        mysqli_close($mysqli);
     }
 
     function EncodeURL($url) {
@@ -74,7 +87,6 @@ class MainConfig {
         if (strlen($x) < 4 || strlen($y) < 4) {
             return false;
         }
-
         if (strcmp($x, $y) != 0) {
             return false;
         }
@@ -82,8 +94,3 @@ class MainConfig {
     }
 
 }
-
-
-
-
-?>

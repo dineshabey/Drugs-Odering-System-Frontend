@@ -1,7 +1,7 @@
 <?php
 //require 'inc/dbc.php';
 //require 'class/systemSetting.php';
-require_once('./inc/dbc.php');
+//require_once('./config/dbc.php');
 require_once('./class/systemSetting.php');
 $system = new setting();
 

@@ -1,14 +1,17 @@
 <?php
-// include_once (str_replace("\\", "/", __DIR__) . '/../config/dbc.php');
-require_once './inc/dbc.php';
+
+include_once (str_replace("\\", "/", __DIR__) . '/config/dbc.php');
+include_once './config/dbc.php';
+
 class setting {
 
     function prepareSelectQueryForJSON($query) {
         $data = array();
         MainConfig::connectDB();
-        $result = mysql_query($query)or die(mysql_error());
+        $link = MainConfig::conDB();
+        $result = mysqli_query($link, $query) or die(mysqli_error($link));
         MainConfig::closeDB();
-        while ($row = mysql_fetch_assoc($result)) {
+        while ($row = mysqli_fetch_assoc($result)) {
             $data[] = $row;
         }
         echo json_encode($data);
@@ -16,16 +19,18 @@ class setting {
 
     function prepareSelectQueryForJSONSingleData($query) {
         MainConfig::connectDB();
-        $result = mysql_query($query);
+        $link = MainConfig::conDB();
+        $result = mysqli_query($link, $query) or die(mysqli_error());
         MainConfig::closeDB();
-        $row = mysql_fetch_assoc($result);
+        $row = mysqli_fetch_assoc($result);
         echo json_encode($row);
     }
 
     function prepareSelectQuaryForAllData($query) {
         $data = array();
         MainConfig::connectDB();
-        $result = mysql_query($query) or die(mysql_error());
+       $link = MainConfig::conDB();
+        $result = mysqli_query($link,$query) or die(mysqli_error());
         MainConfig::closeDB();
         while ($row = mysql_fetch_assoc($result)) {
             $data[] = $row;
@@ -35,7 +40,8 @@ class setting {
 
     function getNextAutoIncrementID($table) {
         MainConfig::connectDB();
-        $result = mysql_query("SHOW TABLE STATUS LIKE '" . $table . "'");
+        $link = MainConfig::conDB();
+        $result = mysqli_query($link,$query) or die(mysqli_error());
         MainConfig::closeDB();
         $row = mysql_fetch_array($result);
         return $nextId = $row['Auto_increment'];
@@ -71,16 +77,18 @@ class setting {
     function prepareSelectQuery($query) {
         $data = array();
         MainConfig::connectDB();
-        $result = mysql_query($query) or die(mysql_error());
+        $link = MainConfig::conDB();
+        $result = mysqli_query($link, $query) or die(mysqli_error($link));
         MainConfig::closeDB();
-        while ($row = mysql_fetch_assoc($result)) {
+        while ($row = mysqli_fetch_assoc($result)) {
             $data[] = $row;
         }
         return $data;
     }
 
     function prepareCommandQuery($query, $successMsg, $errorMsg) {
-        $save = mysql_query($query);
+        $link = MainConfig::conDB();
+        $save = mysqli_query($link, $query);
         if (isset($save) && $save) {
             echo '<div class="alert alert-success">
     <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -94,7 +102,8 @@ class setting {
 
     function prepareCommandQuerySpecial($query) {
         MainConfig::connectDB();
-        $save = mysql_query($query);
+        $link = MainConfig::conDB();
+        $save = mysqli_query($link, $query);
         MainConfig::closeDB();
         if (isset($save) && $save) {
             return TRUE;
@@ -105,7 +114,8 @@ class setting {
 
     function prepareCommandQueryForAlertify($query, $successMsg, $errorMsg) {
         MainConfig::connectDB();
-        $save = mysql_query($query);
+        $link = MainConfig::conDB();
+        $save = mysqli_query($link, $query)or die(mysqli_error($link));
         MainConfig::closeDB();
         if (isset($save) && $save) {
             echo json_encode(array(array("msgType" => 1, "msg" => $successMsg)));
@@ -120,10 +130,13 @@ class setting {
         $countData = $this->getSelectQuaryForAllData($query);
         return $countData[0]['count'];
     }
-	
-	function prepareRowQuntQuary($query) {
-        $data = mysql_query($query);
-        $count = mysql_num_rows($data);
+
+    function prepareRowQuntQuary($query) {
+        MainConfig::connectDB();
+        $link = MainConfig::conDB();
+        $data = mysqli_query($link, $query);
+        $count = mysqli_num_rows($link, $data);
+        MainConfig::closeDB();
         return $count;
     }
 
@@ -137,10 +150,13 @@ class setting {
     function getCountByQuery($query) {
         $count = 0;
         MainConfig::connectDB();
-        $queryResult = mysql_query($query)or die(mysql_error());
-        $count = mysql_num_rows($queryResult);
+
+        $link = MainConfig::conDB();
+        $queryResult = mysqli_query($link, $query);
+        $count = mysqli_num_rows($queryResult);
         MainConfig::closeDB();
         return $count;
     }
 }
 ?>
+
