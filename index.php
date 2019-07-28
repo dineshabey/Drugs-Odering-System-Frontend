@@ -74,6 +74,9 @@
         <script type="text/javascript" src="jquery_menu/jquery.smartmenus.js"></script>
         <!--MENU SCRIPT-->
 
+        <!--SLICK SLIDER--> 
+         <script src="./slick/slick.min.js" type="text/javascript" charset="utf-8"></script>
+        
         <script type="text/javascript">
             $(function () {
                 $('#main-menu').smartmenus({
@@ -113,7 +116,7 @@
             <!--NEW COUSTOMER ITEM SLIDER START /////////////////////////////////////////3333333333333-->
 
             <div style="  border: 1px solid #ddd; margin: 1.5em 0; padding: 0.7em 1em" > 
-                <h4>Mullti Vitamins</h4>
+                <h4>Multi Vitamins</h4>
             </div>
             <div style="background-color:#FFD700;">
                 <section class="regular slider" id="regular1" style=" padding-top:10px ;">

@@ -40,6 +40,7 @@
         <!--MENU SCRIPT-->
                <!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>-->
         <script type="text/javascript" src="jquery_menu/jquery.smartmenus.js"></script>
+        <script src="./slick/slick.min.js" type="text/javascript" charset="utf-8"></script>
         <!--MENU SCRIPT-->
 
         <script type="text/javascript">
@@ -144,39 +145,119 @@
                         <h2 style="color:#6969ab;">Related Items</h2>
                     </div>
 
-                    <ul id="flexiselDemo1">
-                        <li><img src="vitamin_image/8.jpg"  style=" height:200px; "/><div class="grid-flex"><a href="#">Bloch</a><p>Rs 850</p></div></li>
-                        <li><img src="vitamin_image/6.jpg" style=" height:200px;" /><div class="grid-flex"><a href="#">Capzio</a><p>Rs 850</p></div></li>
-                        <li><img src="vitamin_image/5.jpg"  style=" height:200px;" /><div class="grid-flex"><a href="#">Zumba</a><p>Rs 850</p></div></li>
-                        <li><img src="vitamin_image/4.jpg"  style=" height:200px;" /><div class="grid-flex"><a href="#">Bloch</a><p>Rs 850</p></div></li>
-                        <!--<li><img src="images/pi4.jpg" /><div class="grid-flex"><a href="#">Capzio</a><p>Rs 850</p></div></li>-->
-                    </ul>
-                    <script type="text/javascript">
-                        $(window).load(function () {
-                            $("#flexiselDemo1").flexisel({
-                                visibleItems: 5,
-                                animationSpeed: 1000,
-                                autoPlay: true,
-                                autoPlaySpeed: 3000,
-                                pauseOnHover: true,
-                                enableResponsiveBreakpoints: true,
-                                responsiveBreakpoints: {
-                                    portrait: {
-                                        changePoint: 480,
-                                        visibleItems: 1
-                                    },
-                                    landscape: {
-                                        changePoint: 640,
-                                        visibleItems: 2
-                                    },
-                                    tablet: {
-                                        changePoint: 768,
-                                        visibleItems: 3
-                                    }
-                                }
-                            });
 
+                    <?php
+//                    include("./inc/dbc.php");
+//                    include("./inc/commen_functions.php");
+//                    $settings = new settings();
+//
+//                    $category = $settings->prepareSelectQuery("SELECT
+//                                            sub_cat.sub_cat_id,
+//                                            sub_cat.main_cat_id,
+//                                            sub_cat.sub_cat_name,
+//                                            sub_cat.view_status,
+//                                            main_cat.main_cat_name,
+//                                            main_cat.view_status,
+//                                            item_deatails.item_name,
+//                                            item_deatails.item_description,
+//                                            item_deatails.item_id,
+//                                            item_deatails.item_price,
+//                                            item_deatails.item_image
+//                                            FROM
+//                                            sub_cat
+//                                            INNER JOIN main_cat ON sub_cat.main_cat_id = main_cat.main_cat_id
+//                                            INNER JOIN item_deatails ON item_deatails.sub_cat_id = sub_cat.sub_cat_id
+//                    ");
+                    ?>
+                    <section class="regular slider">
+<!--                        <div>
+                            <img src="vitamin_image/8.jpg">
+                        </div>
+                        <div>
+                            <img src="vitamin_image/6.jpg">
+                        </div>
+                        <div>
+                            <img src="vitamin_image/5.jpg">
+                        </div>
+                        <div>
+                            <img src="vitamin_image/4.jpg">
+                        </div>-->
+                    </section>
+
+
+                    <!--                    <ul id="flexiselDemo1">
+                                            <li><img src="vitamin_image/8.jpg"  style=" height:200px; "/><div class="grid-flex"><a href="#">Bloch</a><p>Rs 850</p></div></li>
+                                            <li><img src="vitamin_image/6.jpg" style=" height:200px;" /><div class="grid-flex"><a href="#">Capzio</a><p>Rs 850</p></div></li>
+                                            <li><img src="vitamin_image/5.jpg"  style=" height:200px;" /><div class="grid-flex"><a href="#">Zumba</a><p>Rs 850</p></div></li>
+                                            <li><img src="vitamin_image/4.jpg"  style=" height:200px;" /><div class="grid-flex"><a href="#">Bloch</a><p>Rs 850</p></div></li>
+                                            <li><img src="images/pi4.jpg" /><div class="grid-flex"><a href="#">Capzio</a><p>Rs 850</p></div></li>
+                                        </ul>-->
+                    <script type="text/javascript">
+
+                $(function(){
+                        $(document).on('ready', function () {
+                        load_slider(1);
+                               
+                              setTimeout(function(){ $(".regular").slick({
+                                       dots: true,
+                                       infinite: true,
+                                       slidesToShow: 3,
+                                       slidesToScroll: 3
+                                   });
+ 
+                               }, 2000);
+                               });
                         });
+
+
+                        function load_slider(category) {
+                            var sliderData = '';
+                            
+                            $.post("./loaddata.php", {action: 'load_slider_data',category:category}, function (e) {
+//                            $.post("./loaddata.php", {action: 'load_slider_data'}, function (e) {
+
+                                if (e === undefined || e.length === 0 || e === null) {
+                                    sliderData += '<div><img src="" /></div>';
+                                    $('.regular').html('').append(sliderData);
+                                    //    chosenRefresh();
+                                } else {
+
+                                    $.each(e, function (index, qData) {
+                                        if (e !== null || e.length !== 0) {
+                                            sliderData += '<div><img src=' + qData.item_image + ' /></div>';
+                                        }
+                                    });
+                                    $('.regular').html('').append(sliderData);
+                                    //    chosenRefresh();
+                                }
+                            }, "json");
+                        }
+
+//                        $(window).load(function () {
+//                            $("#flexiselDemo1").flexisel({
+//                                visibleItems: 5,
+//                                animationSpeed: 1000,
+//                                autoPlay: true,
+//                                autoPlaySpeed: 3000,
+//                                pauseOnHover: true,
+//                                enableResponsiveBreakpoints: true,
+//                                responsiveBreakpoints: {
+//                                    portrait: {
+//                                        changePoint: 480,
+//                                        visibleItems: 1
+//                                    },
+//                                    landscape: {
+//                                        changePoint: 640,
+//                                        visibleItems: 2
+//                                    },
+//                                    tablet: {
+//                                        changePoint: 768,
+//                                        visibleItems: 3
+//                                    }
+//                                }
+//                            });
+//
+//                        });
                     </script>
                     <script type="text/javascript" src="js/jquery.flexisel.js"></script>
                     <!---728x90--->
