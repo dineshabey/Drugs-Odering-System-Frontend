@@ -204,7 +204,7 @@
 
                 $(function(){
                         $(document).on('ready', function () {
-                        load_slider(1);
+                        load_slider(3);
                                
                               setTimeout(function(){ $(".regular").slick({
                                        dots: true,

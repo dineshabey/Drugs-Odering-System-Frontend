@@ -1,6 +1,6 @@
 <?php
 
-include_once (str_replace("\\", "/", __DIR__) . '/config/dbc.php');
+//include_once (str_replace("\\", "/", __DIR__) . '/config/dbc.php');
 include_once './config/dbc.php';
 
 class setting {
