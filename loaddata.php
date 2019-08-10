@@ -355,9 +355,13 @@ main_cat.view_status = '0'
 ORDER BY
 main_cat.main_cat_id DESC");
 
-
+$out_put1 = '';
         if (!empty($main_cat_data)) {
-            $out_put = '';
+            
+            /*
+            $out_put = '<div class="menu-container">
+    <div class="menu" >
+        <ul>';
             $main_cat_name = '';
             foreach ($main_cat_data as $val) {
                 $main_cat_id = $val['main_cat_id'];
@@ -440,8 +444,9 @@ item_deatails.item_id DESC");
 //                                $out_put .= '</li>';
 //                            $out_put .= '</div></section>';
                         }
-                        $out_put .= '</ul>';
+                     
                         $out_put .= '</li>';
+                           $out_put .= '</ul>';
                     }
 
 //                        $out_put .= '<ul>';
@@ -456,7 +461,75 @@ item_deatails.item_id DESC");
 //                $out_put .= '</li>';
 //                            $out_put .= '</ul>';
         }
-        echo $out_put;
-    }
+           $out_put .= '</ul></div></div>'   ;
+        
+             * 
+             * 
+             * 
+             */
+            
+            $out_put1 = '<div class="menu-container">
+    <div class="menu" >
+        <ul>
+            <li><a href="index.php">Home</a></li>
+            <li><a href="#">Nature Cream</a>
+                <ul>
+                    <li><a href="#">Web Developement</a>
+                        <ul>
+                            <li><a href="#">JavaScript</a></li>
+                            <li><a href="#">HTML5</a></li>
+                            <li><a href="#">CSS3</a></li>
+                            <li><a href="#">PHP</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li><a href="#">Bio Cream</a>
+                <ul>
+                    <li><a href="#">Web Developement</a>
+                        <ul>
+                            <li><a href="#">JavaScript</a></li>
+                            <li><a href="#">HTML5</a></li>
+                            <li><a href="#">CSS3</a></li>
+                            <li><a href="#">PHP</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li><a href="#">Suppliment</a>
+                <ul>
+                    <li><a href="#">Web Developement</a>
+                        <ul>
+                            <li><a href="#">JavaScript</a></li>
+                            <li><a href="#">HTML5</a></li>
+                            <li><a href="#">CSS3</a></li>
+                            <li><a href="#">PHP</a></li>
+                        </ul>
+                    </li>
+
+                    <li><a href="#">Graphic Design</a>
+                        <ul>
+                            <li><a href="#">Sketch</a></li>
+                            <li><a href="#">Photoshop</a></li>
+                            <li><a href="#">Illustrator</a></li>
+                            <li><a href="#">Corel Draw</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+
+            <li><a href="#">About</a> </li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </div>
+</div>
+';
+            
+        }
+        echo $out_put1;
+    }//END LOAD NAV BAR MENU
+    
+    
+    
 }   //END ARRAY +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
