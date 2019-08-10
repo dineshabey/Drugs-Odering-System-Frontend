@@ -51,19 +51,171 @@
                 <div class="" style="background: white; text-align: center;">
                     <div class="account"><a href="register.php"><span> </span>CREATE ACCOUNT</a></div>
                     <ul class="login" >
-                        <li><a href="login.php"><span> </span>LOGIN ACCOUNT</a></li> 
+                        <li><a href="login.php"><span> </span>LOGIN </a></li> 
                     </ul>
-                    <div class="cart"><a href="#"><span> </span>CART</a></div>
+
+                    <div class="cart"><a href="cart_item.php"><span class=""> </span></a><span style="font-weight: bold; background:#0000e6; font-size: large; color: #ffd700; border-radius: 32px 32px;" class="item_tot"> </span></div>
                 </div>
             </div>
 
-            
+
         </div>
 
     </div>
 </div>
 <!--<BOTTOM HEADER END-->
 
+
+<!--<NEW DROP DOWN MENU-->
+<!--<div class="top-header " style="background:green; " >-->
+    <!--<BOTTOM  NEW HEADER START ------------------------------------------------->
+
+
+    <!--<BOTTOM  NEW HEADER END-->
+
+
+
+
+    <!--<BOTTOM HEADER END-->
+
+
+
+
+
+
+<!--    <div class="menu-container">
+
+        //NEW NAV MENU BAR ----------------------------------------------------
+        <div class="menu " id="nav_menu_bar">  
+            <ul class="nav_menu_bar">
+                                <li class="nav_menu_bar">
+                                    <ul>
+                                        <li>
+                                            <ul>
+                                                <li></li>
+                                                <li></li>
+                                                <li></li>
+                                            </ul>
+                                        </li>
+                
+                                    </ul>
+                                </li> 
+            </ul>
+
+        </div>
+        //NEW NAV MENU BAR ----------------------------------------------------
+
+
+        <div class="menu" id="" hidden="">
+            <ul>
+                <li><a href="index.php">Home</a></li>
+                <li><a href="#">Nature Cream</a>
+                    <ul>
+                        <li><a href="#">Web Developement</a>
+                            <ul>
+                                <li><a href="#">JavaScript</a></li>
+                                <li><a href="#">HTML5</a></li>
+                                <li><a href="#">CSS3</a></li>
+                                <li><a href="#">PHP</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li><a href="#">Bio Cream</a>
+                    <ul>
+                        <li><a href="#">Web Developement</a>
+                            <ul>
+                                <li><a href="#">JavaScript</a></li>
+                                <li><a href="#">HTML5</a></li>
+                                <li><a href="#">CSS3</a></li>
+                                <li><a href="#">PHP</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li><a href="#">Suppliment</a>
+                    <ul>
+                        <li><a href="#">Web Developement</a>
+                            <ul>
+                                <li><a href="#">JavaScript</a></li>
+                                <li><a href="#">HTML5</a></li>
+                                <li><a href="#">CSS3</a></li>
+                                <li><a href="#">PHP</a></li>
+                            </ul>
+                        </li>
+
+                        <li><a href="#">Graphic Design</a>
+                            <ul>
+                                <li><a href="#">Sketch</a></li>
+                                <li><a href="#">Photoshop</a></li>
+                                <li><a href="#">Illustrator</a></li>
+                                <li><a href="#">Corel Draw</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li><a href="#">Categories</a>
+                    <ul>
+                        <li><a href="#">Web Developement</a>
+                            <ul>
+                                <li><a href="#">JavaScript</a></li>
+                                <li><a href="#">HTML5</a></li>
+                                <li><a href="#">CSS3</a></li>
+                                <li><a href="#">PHP</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Graphic Design</a>
+                            <ul>
+                                <li><a href="#">Sketch</a></li>
+                                <li><a href="#">Photoshop</a></li>
+                                <li><a href="#">Illustrator</a></li>
+                                <li><a href="#">Corel Draw</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Programming</a>
+                            <ul>
+                                <li><a href="#">C++</a></li>
+                                <li><a href="#">Java</a></li>
+                                <li><a href="#">Python</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Social</a>
+                            <ul>
+                                <li><a href="#"><a href="https://www.jqueryscript.net/tags.php?/Facebook/">Facebook</a></a></li>
+                                <li><a href="#">Twitter</a></li>
+                                <li><a href="#">Google Plus</a></li>
+                                <li><a href="#">Pinterest</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Herbz</a>
+                            <ul>
+                                <li><a href="#"><a href="https://www.jqueryscript.net/tags.php?/Facebook/">Facebook</a></a></li>
+                                <li><a href="#">Twitter</a></li>
+                                <li><a href="#">Google Plus</a></li>
+                                <li><a href="#">Pinterest</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Vitamin</a>
+                            <ul>
+                                <li><a href="#"><a href="https://www.jqueryscript.net/tags.php?/Facebook/">Facebook</a></a></li>
+                                <li><a href="#">Twitter</a></li>
+                                <li><a href="#">Google Plus</a></li>
+                                <li><a href="#">Pinterest</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li><a href="#">About</a> </li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+
+
+
+
+    </div>
+
+</div>-->
 
 <!--<NEW DROP DOWN MENU-->
 <div class="top-header " style="background:green;">
@@ -121,3 +273,31 @@
 <!--<BOTTOM HEADER END-->
 
 
+
+
+<script type="text/javascript">
+    
+    $(document).on('ready', function () {
+//        alert()
+        //ONLOAD FUNCTION NAVIGATION BAR LOAD ------------------------------------------
+        $(function () {
+            var sliderData = '';
+            $.post("./loaddata.php", {action: 'load_nav_bar_menu'}, function (e) {
+                if (e === undefined || e.length === 0 || e === null) {
+                    $('.nav_menu_bar').html("NO data Found ! ");
+                } else {
+                    $('.nav_menu_bar').html(e);
+
+
+                }
+            });
+        });
+
+
+
+
+    }); //ON LOAD FUCTION END
+
+
+
+</script>

@@ -29,8 +29,8 @@ class setting {
     function prepareSelectQuaryForAllData($query) {
         $data = array();
         MainConfig::connectDB();
-       $link = MainConfig::conDB();
-        $result = mysqli_query($link,$query) or die(mysqli_error());
+        $link = MainConfig::conDB();
+        $result = mysqli_query($link, $query) or die(mysqli_error());
         MainConfig::closeDB();
         while ($row = mysql_fetch_assoc($result)) {
             $data[] = $row;
@@ -41,10 +41,22 @@ class setting {
     function getNextAutoIncrementID($table) {
         MainConfig::connectDB();
         $link = MainConfig::conDB();
-        $result = mysqli_query($link,$query) or die(mysqli_error());
+        $result = mysqli_query($link, $query) or die(mysqli_error());
         MainConfig::closeDB();
         $row = mysql_fetch_array($result);
         return $nextId = $row['Auto_increment'];
+    }
+
+    function deleteQuery($query, $successMsg, $errorMsg) {
+        MainConfig::connectDB();
+        $link = MainConfig::conDB();
+        $save = mysqli_query($link, $query)or die(mysqli_error($link));
+        MainConfig::closeDB();
+        if (isset($save) && $save) {
+            echo json_encode(array(array("msgType" => 1, "msg" => $successMsg)));
+        } else {
+            echo json_encode(array(array("msgType" => 2, "msg" => $errorMsg)));
+        }
     }
 
     function getFirstKey($arr) {
@@ -157,6 +169,7 @@ class setting {
         MainConfig::closeDB();
         return $count;
     }
+
 }
 ?>
 

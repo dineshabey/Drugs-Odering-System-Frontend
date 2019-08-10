@@ -2325,7 +2325,7 @@
 
         _.$slides
             .eq(index)
-            .addClass('slick-current');
+            .addClass('slick-curnt');
 
         if (_.options.centerMode === true) {
 

@@ -5,8 +5,8 @@
             <div class="sub-left-right">
                 <form>
                     <input type="text" value="Enter email here"onfocus="this.value = '';" onblur="if (this.value == '') {
-                                        this.value = 'Enter email here';
-                                    }" />
+                                this.value = 'Enter email here';
+                            }" />
                     <input type="submit" value="SUBSCRIBE" />
                 </form>
             </div>
@@ -87,3 +87,47 @@
         <div class="clearfix"> </div>
     </div>
 </div>
+
+<!-- Scripts for jQuery and the plugin --> 
+<!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>--> 
+<!--
+<script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+-->
+<script src="js/megamenu.js"></script>
+<script type="text/javascript">
+                        $(document).on('ready', function () {
+                            item_tot();
+                        });
+
+//ADD TO CART BTN CLICK ========================================================
+                        $(document).on('click', '#add_to_cart_btn', function () {
+                            var item_id = ($(this).val());
+                            var price = ($(this).data('item_price'));
+                            $.post("./loaddata.php", {action: 'add_to_cart', item_id: item_id, price: price}, function (e) {
+                                if (e === undefined || e.length === 0 || e === null) {
+                                    $('#').html("NO data Found ! ");
+                                } else {
+                                    item_tot();
+                                    $('#').html(e);
+
+                                }
+                                //    chosenRefresh();
+                            });
+                        });
+
+//CART ADDED ITEM TOTAL ===========================================================
+                        function item_tot() {
+                            $.post("./loaddata.php", {action: 'item_total'}, function (e) {
+                                if (e === undefined || e.length === 0 || e === null) {
+                                    $('#').html("NO data Found ! ");
+                                } else {
+                                    var item_tot = (e['item_tot']);
+                                    var item_tot_price = (e['item_tot_price']);
+                                    $('.item_tot').html(item_tot);
+                                    $('.item_tot_price').html(item_tot_price);
+                                    load_cart_item_list();
+                                }
+                                //    chosenRefresh();
+                            }, "json");
+                        }
+</script>

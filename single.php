@@ -1,4 +1,6 @@
 
+
+
 <!DOCTYPE html>
 <html>
     <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
@@ -31,15 +33,43 @@
             }
             /*RESPONSIVE VEDIOO//////////////////////////////////////////*/ 
 
-            
-            .slick-slide {
-   height:600px;
-}
+            /*IMAGE SLIDER CSS START //////////////////////////////////////////*/ 
 
-.slick-slide img {
-   height:600px;
-}
+            html, body {
+                margin: 0;
+                padding: 0;
+            }
+
+            * {
+                box-sizing: border-box;
+            }
+
+            .slider {
+                width: 100%;
+                margin: 10px auto;
+
+            }
+
+            .slick-slide {
+                margin: 0px 20px;
+            }
+
+            .slick-slide img {
+                width: 90%;
+            }
+
+            .slick-prev:before,
+            .slick-next:before {
+                color: green;
+            }
+            .slick-current {
+                /*opacity: 1;*/
+
+                opacity: 1!important;
+            }
+
         </style>
+        <!--/*IMAGE SLIDER CSS   END //////////////////////////////////////////*/--> 
         <!--CSS PART ///////////////////////////////////////////////-->
 
     </head>
@@ -86,19 +116,22 @@
                 });
             });
                                 </script>
-                                <!-- //FlexSlider-->
+                                <!-- //FlexSlider SELECTED ITEM START/////////////////////////////////////////////////////////////-->
                                 <ul class="slides" >
                                     <li data-thumb="images/s4.jpg">
-                                        <div class="thumb-image"> <img style=" height:350px; " src="vitamin_image/8.jpg" data-imagezoom="true" class="img-responsive"> </div>
+                                        <div class="thumb-image selected_img" id="selected_img"> 
+                                            <!--<img style=" height:350px; " src="vitamin_image/8.jpg" data-imagezoom="true" class="img-responsive">--> 
+                                        </div>
                                     </li>
 
                                 </ul>
+                                <!-- //FlexSlider SELECTED ITEM IMG END/////////////////////////////////////////////////////////////-->
                             </div>	
                         </div> 
                         <div class="desc1 span_3_of_2">
 
 
-                            <h4>Vitamin - A</h4>
+                            <!--<h4>Vitamin - A</h4>-->
                             <div class="cart-b">
                                 <div class="left-n ">$329.58</div>
                                 <a class="now-get get-cart-in" href="#">ADD TO CART</a> 
@@ -107,185 +140,236 @@
                             <div>
                                 <span class="border">
                                     <ul style="font-weight: 100;font-size: 21px; color: #777fa5;"><li class="mb-3">
-                                            Price :  1800.00
                                         </li><li class="mb-3">
-                                            Accepted Currency : LKR 
+                                            <div><h3> Item Name : <label id="item_name"></label></h3></div>
                                         </li>
-                                        <li class="mb-3">
-                                            Payment :  Cash on Delivery Eligible.
-                                        </li>
-                                        <li class="mb-3">
-                                            Delivery : Island wild.
-                                        </li>
-                                        <li class="mb-3">
-                                            Delivery Charge: Free.
-                                        </li>
-                                        <li class="mb-3">
-                                            Quality : Best.
-                                        </li>
+                                        <div><h3> Item Price : <label id="price"></label></h3></div>
+                                    </li><li class="mb-3">
+                                    <div><h3> Item Discount : <label id="discount"></label></h3></div>
+                                </li>
+                                <li class="mb-3">
+                                    Payment :  Cash on Delivery Eligible.
+                                </li>
+                                <li class="mb-3">
+                                    Delivery : Island wild.
+                                </li>
+                                <li class="mb-3">
+                                    Delivery Charge: Free.
+                                </li>
+                                <li class="mb-3">
+                                    Quality : Best.
+                                </li>
 
-                                    </ul>
-                                </span>
-                            </div>
-
-
-                        </div>
-                        <div class="clearfix"> </div>
+                            </ul>
+                        </span>
                     </div>
 
-                    <div class="row">
-                        <div class="toogle">
-                            <div class="col-lg-5">
-                                <div class="video-responsive">
-                                    <iframe width="420" height="315" src="https://www.youtube.com/embed/NIeFXPGS7-A" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                </div>
-                            </div>
-                            <div class="col-lg-7 desc1 span_3_of_2 inset" >
-                                <h3 class="m_3">About Item</h3>
-                                <p class="m_text ">
-                                    Vitamin A is a group of unsaturated nutritional organic compounds that includes retinol, retinal, retinoic acid, and several provitamin A carotenoids (most notably beta-carotene). Vitamin A has multiple functions: it is important for growth and development, for the maintenance of the immune system and good vision.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <hr>
-                    <div style="padding-bottom:10px; text-align:center;" > 
-                        <h2 style="color:#6969ab;">Related Items</h2>
-                    </div>
-
-
-                    <?php
-//                    include("./inc/dbc.php");
-//                    include("./inc/commen_functions.php");
-//                    $settings = new settings();
-//
-//                    $category = $settings->prepareSelectQuery("SELECT
-//                                            sub_cat.sub_cat_id,
-//                                            sub_cat.main_cat_id,
-//                                            sub_cat.sub_cat_name,
-//                                            sub_cat.view_status,
-//                                            main_cat.main_cat_name,
-//                                            main_cat.view_status,
-//                                            item_deatails.item_name,
-//                                            item_deatails.item_description,
-//                                            item_deatails.item_id,
-//                                            item_deatails.item_price,
-//                                            item_deatails.item_image
-//                                            FROM
-//                                            sub_cat
-//                                            INNER JOIN main_cat ON sub_cat.main_cat_id = main_cat.main_cat_id
-//                                            INNER JOIN item_deatails ON item_deatails.sub_cat_id = sub_cat.sub_cat_id
-//                    ");
-                    ?>
-                    <section class="regular slider">
-<!--                        <div>
-                            <img src="vitamin_image/8.jpg">
-                        </div>
-                        <div>
-                            <img src="vitamin_image/6.jpg">
-                        </div>
-                        <div>
-                            <img src="vitamin_image/5.jpg">
-                        </div>
-                        <div>
-                            <img src="vitamin_image/4.jpg">
-                        </div>-->
-                    </section>
-
-
-                    <!--                    <ul id="flexiselDemo1">
-                                            <li><img src="vitamin_image/8.jpg"  style=" height:200px; "/><div class="grid-flex"><a href="#">Bloch</a><p>Rs 850</p></div></li>
-                                            <li><img src="vitamin_image/6.jpg" style=" height:200px;" /><div class="grid-flex"><a href="#">Capzio</a><p>Rs 850</p></div></li>
-                                            <li><img src="vitamin_image/5.jpg"  style=" height:200px;" /><div class="grid-flex"><a href="#">Zumba</a><p>Rs 850</p></div></li>
-                                            <li><img src="vitamin_image/4.jpg"  style=" height:200px;" /><div class="grid-flex"><a href="#">Bloch</a><p>Rs 850</p></div></li>
-                                            <li><img src="images/pi4.jpg" /><div class="grid-flex"><a href="#">Capzio</a><p>Rs 850</p></div></li>
-                                        </ul>-->
-                    <script type="text/javascript">
-
-                $(function(){
-                        $(document).on('ready', function () {
-                        load_slider(3);
-                               
-                              setTimeout(function(){ $(".regular").slick({
-                                       dots: true,
-                                       infinite: true,
-                                       slidesToShow: 3,
-                                       slidesToScroll: 3
-                                   });
- 
-                               }, 2000);
-                               });
-                        });
-
-
-                        function load_slider(category) {
-                            var sliderData = '';
-                            
-                            $.post("./loaddata.php", {action: 'load_slider_data',category:category}, function (e) {
-//                            $.post("./loaddata.php", {action: 'load_slider_data'}, function (e) {
-
-                                if (e === undefined || e.length === 0 || e === null) {
-                                    sliderData += '<div><img src="" /></div>';
-                                    $('.regular').html('').append(sliderData);
-                                    //    chosenRefresh();
-                                } else {
-
-                                    $.each(e, function (index, qData) {
-                                        if (e !== null || e.length !== 0) {
-                                            sliderData += '<div><img src=' + qData.item_image + ' /></div>';
-                                        }
-                                    });
-                                    $('.regular').html('').append(sliderData);
-                                    //    chosenRefresh();
-                                }
-                            }, "json");
-                        }
-
-//                        $(window).load(function () {
-//                            $("#flexiselDemo1").flexisel({
-//                                visibleItems: 5,
-//                                animationSpeed: 1000,
-//                                autoPlay: true,
-//                                autoPlaySpeed: 3000,
-//                                pauseOnHover: true,
-//                                enableResponsiveBreakpoints: true,
-//                                responsiveBreakpoints: {
-//                                    portrait: {
-//                                        changePoint: 480,
-//                                        visibleItems: 1
-//                                    },
-//                                    landscape: {
-//                                        changePoint: 640,
-//                                        visibleItems: 2
-//                                    },
-//                                    tablet: {
-//                                        changePoint: 768,
-//                                        visibleItems: 3
-//                                    }
-//                                }
-//                            });
-//
-//                        });
-                    </script>
-                    <script type="text/javascript" src="js/jquery.flexisel.js"></script>
-                    <!---728x90--->
 
                 </div>
-
-
-                <div class="clearfix"> </div>			
+                <div class="clearfix"> </div>
             </div>
-        </div>
-        <!---->
-        <!---728x90--->
-
-        <div class="footer">
-            <!--FOOTER--////////////////////////////////////////////////////////>-->
-            <div class="header">
-                <?php require_once('include/footer.php'); ?>
+            <!--IMAGE VIDEO ///////////////////////////////////////////////////////////////////////////////////////-->
+            <div class="row" id="">
+                <div class="toogle">
+                    <div class="col-lg-5">
+                        <div class="video-responsive" id="img_vdo">
+<!--                                    <iframe width="420" height="315" src="https://www.youtube.com/embed/NIeFXPGS7-A" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            -->
+                        </div>
+                    </div>
+                    <!--IMAGE VIDEO ///////////////////////////////////////////////////////////////////////////////////////-->
+                    <div class="col-lg-7 desc1 span_3_of_2 inset" >
+                        <h3 class="m_3">About Item</h3>
+                        <p class="m_text " id="item_description">
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div style="padding-bottom:10px; " > 
+                <h2 style="color:#6969ab;">Related Items</h2>
             </div>
 
-            <!--FOOTER-- end////////////////////////////////////////////////////>-->
+
+            <!--SLIDER DIV START///////////////////////////////////////////////////////////////////////////////////////////////-->
+            <section class="regular slider" style="background-color: #FFD700; padding-top:10px ;">
+                <?php
+                if (!isset($_GET["item_id"]) && !isset($_GET["sub_cat_id"])) {
+                    echo "Not Found POST data !";
+                }
+                ?>
+            </section>
+            <!--SLIDER DIV END///////////////////////////////////////////////////////////////////////////////////////////////-->
+
+
         </div>
-    </body>
+
+
+        <div class="clearfix"> </div>			
+    </div>
+</div>
+<!---->
+<!---728x90--->
+
+<div class="footer">
+
+    <script type="text/javascript">
+
+        $(function () {
+            $(document).on('ready', function () {
+//SLICK SLIDER FUCTION START/////////////////////////////////////////
+                setTimeout(function () {
+                    $(".regular").slick({
+                        dots: true,
+                        arrows: true,
+                        infinite: true,
+                        slidesToShow: 5,
+                        slidesToScroll: 3,
+                        lazyLoad: 'ondemand',
+                        autoplay: true,
+                        autoplaySpeed: 2000
+
+                    });
+
+                }, 1000);
+            });
+//SLICK SLIDER FUCTION END/////////////////////////////////////////
+            //ONLOAD FUCTION =======================================
+            load_slider(3);
+            single_page_selected_item();
+
+        });
+
+        //LOAD SLIDER FUNCTION START=========================================================
+        function load_slider(category) {
+            var sub_cat_id = "<?php echo $sub_cat_id = $_GET["sub_cat_id"]; ?>";
+
+            var sliderData = '';
+            $.post("./loaddata.php", {action: 'single_page_lode_slider', category: category, sub_cat_id: sub_cat_id}, function (e) {
+                if (e === undefined || e.length === 0 || e === null) {
+                    sliderData += '<div><img src="" /></div>';
+                    $('.regular').html('').append(sliderData);
+                    //    chosenRefresh();
+                } else {
+                    $.each(e, function (index, qData) {
+                        if (e !== null || e.length !== 0) {
+                            sliderData += '<div ><img  onClick="sendimg(this); id="" class="img-responsive" width="60px" src="../drugs_ordering_system_backend/uploads/' + qData.item_image + '"></div>';
+                            sliderData += '<div>' + qData.item_name + '<br>' + qData.item_price + '<br>  <input type="button"  class="btn btn-primary" style="background-color:#ad9936;" onclick="myFunction(' + qData.item_id + ')" value="Deatails"  id="img_select"></button></div>';
+                        }
+                    });
+                    $('.regular').html('').append(sliderData);
+                    //    chosenRefresh();
+                }
+            }, "json");
+        }
+        //LOAD SLIDER FUNCTION END=========================================================
+
+        //ON LOAD SELECTED ITEM FUNCTION START=========================================================
+        function single_page_selected_item(item_id) {
+            var item_id = "<?php echo $sub_cat_id = $_GET["item_id"]; ?>";
+
+            var sliderData = '';
+            $.post("./loaddata.php", {action: 'single_page_selected_item', item_id: item_id}, function (e) {
+                if (e === undefined || e.length === 0 || e === null) {
+                    sliderData += '<div><img src="" /></div>';
+                    $('.selected_img').html('').append(sliderData);
+                    //    chosenRefresh();
+                } else {
+//=====================================================================
+                    var image = (e[0]['item_image']);
+                    var item_price = (e[0]['item_price']);
+                    var vdo = (e[0]['item_video']);
+                    var item_discount = (e[0]['item_discount']);
+                    var item_name = (e[0]['item_name']);
+                    var item_description = (e[0]['item_description']);
+//=====================================================================
+                    var price = '<div>' + item_price + '</div>';
+                    var img_data = '<div><img style=" height:400px;" src="../drugs_ordering_system_backend/uploads/' + image + '" data-imagezoom="true" class="img-responsive"></div>';
+                    var vdo = '<div>' + vdo + '</div>';
+//=====================================================================
+                    $('.selected_img').html('').append(img_data);
+                    $('#price').html('').append(price);
+                    $('#discount').html('').append(item_discount);
+                    $('#img_vdo').html('').append(vdo);
+                    $('#item_name').html('').append(item_name);
+                    $('#item_description').html('').append(item_description);
+
+
+                    $.each(e, function (index, qData) {
+                        if (e !== null || e.length !== 0) {
+//                                    sliderData += '<div><img style=" height:400px;" src="../drugs_ordering_system_backend/uploads/' + qData.item_image + '" data-imagezoom="true" class="img-responsive"></div>';
+
+                        }
+                    });
+//                            $('.selected_img').html('').append(sliderData);
+                    //    chosenRefresh();
+                }
+            }, "json");
+        }
+        //LOAD SELECTED ITEM FUNCTION END=========================================================
+        //ON CLICK SELECTED ITEM FUNCTION START=========================================================
+        function single_page_selected_onclick_item(item_id) {
+
+            var sliderData = '';
+            $.post("./loaddata.php", {action: 'single_page_selected_item', item_id: item_id}, function (e) {
+                if (e === undefined || e.length === 0 || e === null) {
+                    sliderData += '<div><img src="" /></div>';
+                    $('.selected_img').html('').append(sliderData);
+                    //    chosenRefresh();
+                } else {
+//=====================================================================
+                    var image = (e[0]['item_image']);
+                    var item_price = (e[0]['item_price']);
+                    var vdo = (e[0]['item_video']);
+                    var item_discount = (e[0]['item_discount']);
+                    var item_name = (e[0]['item_name']);
+                    var item_description = (e[0]['item_description']);
+//=====================================================================
+                    var price = '<div>' + item_price + '</div>';
+                    var img_data = '<div><img style=" height:400px;" src="../drugs_ordering_system_backend/uploads/' + image + '" data-imagezoom="true" class="img-responsive"></div>';
+                    var vdo = '<div>' + vdo + '</div>';
+//=====================================================================
+                    $('.selected_img').html('').append(img_data);
+                    $('#price').html('').append(price);
+                    $('#discount').html('').append(item_discount);
+                    $('#img_vdo').html('').append(vdo);
+                    $('#item_name').html('').append(item_name);
+                    $('#item_description').html('').append(item_description);
+
+
+                    $.each(e, function (index, qData) {
+                        if (e !== null || e.length !== 0) {
+//                                    sliderData += '<div><img style=" height:400px;" src="../drugs_ordering_system_backend/uploads/' + qData.item_image + '" data-imagezoom="true" class="img-responsive"></div>';
+
+                        }
+                    });
+//                            $('.selected_img').html('').append(sliderData);
+                    //    chosenRefresh();
+                }
+            }, "json");
+        }
+        //LOAD SELECTED ITEM FUNCTION END=========================================================
+
+//START ONCLICK FUNCTION IMG SLIDESHOW============================================
+        function  myFunction(id) {
+            single_page_selected_onclick_item(id);
+        }
+//img_select
+//END   ONCLICK FUNCTION IMG SLIDESHOW============================================
+
+
+    </script>
+    <script type="text/javascript" src="js/jquery.flexisel.js"></script>
+    <!---728x90--->
+
+
+
+    <!--FOOTER--////////////////////////////////////////////////////////>-->
+    <div class="header">
+        <?php require_once('include/footer.php'); ?>
+    </div>
+
+    <!--FOOTER-- end////////////////////////////////////////////////////>-->
+</div>
+</body>
 
