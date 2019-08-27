@@ -1,5 +1,9 @@
-
 <!--<TOP HEADER START -->
+<link href="js/AlertifyJS-master/build/css/themes/default.css" rel="stylesheet" type="text/css"/>
+<link href="js/AlertifyJS-master/build/css/alertify.min.css" rel="stylesheet" type="text/css"/>
+<script src="js/AlertifyJS-master/build/alertify.min.js" type="text/javascript"></script>
+
+
 <div class="top-header" style="background: #FFD700;   border-bottom: 2px solid #fff;">
     <div class="container">
         <div class="row">
@@ -34,7 +38,7 @@
     <div class="container">
         <div class="row" style="padding-top: 20px;">
             <div class="col-md-2">
-                <a href="index.php"><img src="images/logo.png" alt=" " /></a>
+                <a href="index.php"><img src="images/logo_png.png" width="200px" height="150px" alt=" " /></a>
                 <!--<a href="index.php"><span>Lion Vitamin </span></a>-->
             </div>
 
@@ -49,12 +53,33 @@
             </div>
             <div class="col-md-5 " style="padding-top: 28px; ">
                 <div class="" style="background: white; text-align: center;">
-                    <div class="account"><a href="register.php"><span> </span>CREATE ACCOUNT</a></div>
+                    <?php
+                    if (!isset($_SESSION['cus_id'])) {
+                        echo'<div class="account "><a href="register.php"><span> </span>CREATE ACCOUNT</a></div>';
+                    } else {
+                        echo'<div class="account hidden"><a href="register.php"><span> </span>CREATE ACCOUNT</a></div>';
+                    }
+                    ?>
+
                     <ul class="login" >
-                        <li><a href="login.php"><span> </span>LOGIN </a></li> 
+                        <?php
+                        if (!isset($_SESSION['cus_id'])) {
+                            echo '<li><a href = "login.php"><span> </span>LOGIN </a></li>';
+                        } else {
+                            $cus_name = $_SESSION['uname'];
+                            echo '<li><input type = "button" class="btn btn-info" value = ' . $cus_name . ' id = "profil"><span> </span> </a></li>';
+                            echo' <li><input type="button" class="btn btn-warning" value="LOGOUT" id="log_out"><span> </span> </a></li> ';
+                        }
+                        ?>
                     </ul>
 
-                    <div class="cart"><a href="cart_item.php"><span class=""> </span></a><span style="font-weight: bold; background:#0000e6; font-size: large; color: #ffd700; border-radius: 32px 32px;" class="item_tot"> </span></div>
+                    <?php
+                    if (!isset($_SESSION['cus_id'])) {
+                        echo '<div class="cart"><a href="cart_item.php"><span class=""> </span></a><span style="font-weight: bold; background:#0000e6; font-size: large; color: #ffd700; border-radius: 32px 32px;" class="item_tot"> </span></div>';
+                    } else {
+                        echo '<div class="cart hidden" ><a href="cart_item.php"><span class=""> </span></a><span style="font-weight: bold; background:#0000e6; font-size: large; color: #ffd700; border-radius: 32px 32px;" class="item_tot"> </span></div>';
+                    }
+                    ?>
                 </div>
             </div>
 
@@ -68,15 +93,15 @@
 
 <!--<NEW DROP DOWN MENU-->
 <!--<div class="top-header " style="background:green; " >-->
-    <!--<BOTTOM  NEW HEADER START ------------------------------------------------->
+<!--<BOTTOM  NEW HEADER START ------------------------------------------------->
 
 
-    <!--<BOTTOM  NEW HEADER END-->
+<!--<BOTTOM  NEW HEADER END-->
 
 
 
 
-    <!--<BOTTOM HEADER END-->
+<!--<BOTTOM HEADER END-->
 
 
 
@@ -276,7 +301,7 @@
 
 
 <script type="text/javascript">
-    
+
     $(document).on('ready', function () {
 //        alert()
         //ONLOAD FUNCTION NAVIGATION BAR LOAD ------------------------------------------
@@ -293,11 +318,25 @@
             });
         });
 
-
-
-
     }); //ON LOAD FUCTION END
-
+//LOG OUT BTN =================================================================
+    $(document).on('click', '#log_out', function () {
+        $.post("./loaddata.php", {action: 'log_out'}, function (e) {
+            if (e === undefined || e.length === 0 || e === null) {
+                $('.nav_menu_bar').html("NO data Found ! ");
+            } else {
+                if (e == "1") {
+                    window.location.replace("login.php");
+                } else {
+                    alert("Error ! Session not distroy ..!")
+                }
+            }
+        }, "json");
+    });
+//GO TO PROFIL BTN =================================================================
+    $(document).on('click', '#profil', function () {
+        window.location.replace("user_profil.php");
+    });
 
 
 </script>

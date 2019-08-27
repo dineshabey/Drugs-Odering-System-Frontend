@@ -94,6 +94,25 @@
                 <?php require_once('include/footer.php'); ?>
 
                 <script type="text/javascript">
+                    $(document).on('ready', function () {
+                        item_tot();
+                    });
+//CART ADDED ITEM TOTAL ===========================================================
+                    function item_tot() {
+                        $.post("./loaddata.php", {action: 'item_total'}, function (e) {
+                            if (e === undefined || e.length === 0 || e === null) {
+                                $('#').html("NO data Found ! ");
+                            } else {
+                                var item_tot = (e['item_tot']);
+                                var item_tot_price = (e['item_tot_price']);
+                                $('.item_tot').html(item_tot);
+                                $('.item_tot_price').html(item_tot_price);
+//                    load_cart_item_list();
+                            }
+                            //    chosenRefresh();
+                        }, "json");
+                    }
+
                     $(document).on('click', '#submit_btn', function () {
                         reg_cus();
                     });

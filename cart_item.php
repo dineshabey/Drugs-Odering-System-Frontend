@@ -1,4 +1,4 @@
-
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html>
     <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
@@ -23,9 +23,6 @@
 
         </style>
         <!--UL RIHT MARK STYLE-->
-
-
-
 
     </head>
 
@@ -84,8 +81,8 @@
                             <div class="card-body">
                                 <h4  class="card-title">Order Value:&nbsp;<label class="item_tot_price"></label></h4>
                                 <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                               
-                                
+
+
                                 <a href="login.php"><button type="button" class="btn btn-info">CHECKOUT</button></a>
                             </div>
                         </div>
@@ -97,13 +94,16 @@
         <!---->
         <!---728x90--->
 
+        <!--FOOTER--////////////////////////////////////////////////////////>-->
         <div class="footer">
+            <?php require_once('include/footer.php'); ?>
+
 
             <script type="text/javascript">
+
                 $(document).on('ready', function () {
                     load_cart_item_list();
-
-
+                    item_tot();
 
                 });
 
@@ -118,7 +118,6 @@
                                 tableData += '<tr>';
                                 tableData += '<td width="">' + index + '</td>';
                                 tableData += '<td width=""><img style=" height:40px;" src="../drugs_ordering_system_backend/uploads/' + qData.item_image + '" data-imagezoom="true" class="img-responsive"> ' + qData.item_name + '</td>';
-                                //                            tableData += '<td width="">' + qData.item_description + '</td>';
                                 tableData += '<td width=""> Item Link </td>';
                                 tableData += '<td width="10%"><input class="size-36" step="1"  type="number" min="1" max="50" id="add_item_in_cart" class="form-control text-center"  data-price = "' + qData.item_price + '"  data-cart_id = "' + qData.id + '"  value="' + qData.item_qty + '"></td>';
                                 tableData += '<td width="">' + qData.item_price + '</td>';
@@ -153,22 +152,37 @@
                         }
                     }, "json");
                 });
+//CART ADDED ITEM TOTAL ===========================================================
+                function item_tot() {
+                    $.post("./loaddata.php", {action: 'item_total'}, function (e) {
+                        if (e === undefined || e.length === 0 || e === null) {
+                            $('#').html("NO data Found ! ");
+                        } else {
+                            var item_tot = (e['item_tot']);
+                            var item_tot_price = (e['item_tot_price']);
+                            $('.item_tot').html(item_tot);
+                            $('.item_tot_price').html(item_tot_price);
+                            load_cart_item_list();
+                        }
+                        //    chosenRefresh();
+                    }, "json");
+                }
 
-
-
-
-
-
-
-            </script>
-
-
-            <!--FOOTER--////////////////////////////////////////////////////////>-->
-            <div class="header">
-                <?php require_once('include/footer.php'); ?>
-            </div>
-
-            <script>
+//USER ADDED ITEM TOTAL ===========================================================
+                function added_item_tot() {
+                    $.post("./loaddata.php", {action: 'added_item_tot'}, function (e) {
+                        if (e === undefined || e.length === 0 || e === null) {
+                            $('.item_tot').html("NO data Found ! ");
+                        } else {
+                            var oder_full_tot = (e['oder_full_tot']);
+                            var oder_full_pay_val = (e['oder_full_pay_val']);
+                            $('.item_tot').html(oder_full_tot);
+                            $('.item_tot_price').html(oder_full_pay_val);
+//                            load_cart_item_list();
+                        }
+//                            chosenRefresh();
+                    }, "json");
+                }
                 //DELETE CART ITEM  Function====================================
                 function cart_item_remove(id) {
                     //                    confirm("Delete ", "Do you want to remove this item ?", "No", "Yes", function () {

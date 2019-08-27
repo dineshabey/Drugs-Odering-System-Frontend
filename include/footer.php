@@ -1,4 +1,15 @@
+<?php
+if (isset($_SESSION['cus_id'])) {
+    echo '<input type="text" hidden="" id="cus_id" value="' . $_SESSION['cus_id'] . '">';
+} else {
+    echo '<input type="text" hidden="" id="cus_id" value="0">';
+//    echo "<script>location.href='login.php';</script>";
+//    echo "Not Sesseon";
+}
+?>
 <div class="footer-top">
+
+
     <div class="container">
         <div class="latter">
             <h6>NEWS-LETTER</h6>
@@ -94,40 +105,39 @@
 <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
 -->
 <script src="js/megamenu.js"></script>
-<script type="text/javascript">
-                        $(document).on('ready', function () {
-                            item_tot();
-                        });
+<script type="text/javascript"></script>
 
+<script type="text/javascript">
 //ADD TO CART BTN CLICK ========================================================
                         $(document).on('click', '#add_to_cart_btn', function () {
-                            var item_id = ($(this).val());
-                            var price = ($(this).data('item_price'));
-                            $.post("./loaddata.php", {action: 'add_to_cart', item_id: item_id, price: price}, function (e) {
-                                if (e === undefined || e.length === 0 || e === null) {
-                                    $('#').html("NO data Found ! ");
-                                } else {
-                                    item_tot();
-                                    $('#').html(e);
+                            var cus_id = $("#cus_id").val();
+                            //NO LOGIN COUSTOMER ------------------------------
+                            if (cus_id == "0") {
+                                var item_id = ($(this).val());
+                                var price = ($(this).data('item_price'));
+                                $.post("./loaddata.php", {action: 'add_to_cart', item_id: item_id, price: price}, function (e) {
+                                    if (e === undefined || e.length === 0 || e === null) {
+//                                    $('#').html("NO data Found ! ");
+                                        alert('No data found');
+                                    } else {
+                                        item_tot();
 
-                                }
-                                //    chosenRefresh();
-                            });
+                                    }
+                                });
+                            } else {
+                                var item_id = ($(this).val());
+                                $.post("./loaddata.php", {action: 'data_insert_loging_user', item_id: item_id, cus_id: cus_id}, function (e) {
+                                    if (e === undefined || e.length === 0 || e === null) {
+//                                    $('#').html("NO data Found ! ");
+                                        alert('No data found');
+                                    } else {
+                                        alert('Item added successfully !')
+                                        load_user_added_item();
+                                    }
+                                }, "json");
+                            }
+
                         });
 
-//CART ADDED ITEM TOTAL ===========================================================
-                        function item_tot() {
-                            $.post("./loaddata.php", {action: 'item_total'}, function (e) {
-                                if (e === undefined || e.length === 0 || e === null) {
-                                    $('#').html("NO data Found ! ");
-                                } else {
-                                    var item_tot = (e['item_tot']);
-                                    var item_tot_price = (e['item_tot_price']);
-                                    $('.item_tot').html(item_tot);
-                                    $('.item_tot_price').html(item_tot_price);
-                                    load_cart_item_list();
-                                }
-                                //    chosenRefresh();
-                            }, "json");
-                        }
+
 </script>

@@ -1,4 +1,4 @@
-
+<?php session_start(); ?>
 
 <!DOCTYPE html>
 <html>
@@ -56,7 +56,7 @@
     <!--MAIN HEAD END -->
     <body>
 
-        <script src='../../../../ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'></script><script src="../../../../m.servedby-buysellads.com/monetization.js" type="text/javascript"></script>
+        <!--<script src='../../../../ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'></script><script src="../../../../m.servedby-buysellads.com/monetization.js" type="text/javascript"></script>-->
 
         <!--MENU SCRIPT-->
         <!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>-->
@@ -76,67 +76,150 @@
         </script>
         <!--sub header--////////////////////////////////////////////////////////>-->
         <div class="header">
-            <?php require_once('include/coustomer_header_1.php'); ?>
-        </div>
+            <?php require_once('include/coustomer_header.php'); ?>
+            <style type="text/css">
+                /*ADD TO CART CSS START =============================================*/
 
-        <!--sub header-- end////////////////////////////////////////////////////>-->
+                .body {
+                    overflow: hidden;
+                }
+                .wrapper {
+                    max-width: 1520px;
+                    /*height: 880px;*/
+                    margin: 20px auto ;
+                    padding: 20px;
+                    background-color: #f5f5f5;
+                    width: 100%;
+                }
+                h1 {
+                    display: inline-block;
+                    background-color: #333;
+                    color: #fff;
+                    font-size: 20px;
+                    font-weight: normal;
+                    text-transform: uppercase;
+                    padding: 4px 20px;
+                    float: left;
+                }
+                @media all and (max-width: 1200px) and (min-width: 800px) {
+                    /* Change Resolutions Here */
+                    h5 {
+                        font-size: 12px;
+                    }
+                }
+                img
+                {
+                    max-width: 100%;
+                    min-width: 40px;;
+                    height: auto;
+                }
 
-        <!---728x90--->
+                .clear {
+                    clear: both;
+                }
+                .items {
+                    display: block;
+                    margin: 20px 0;
+                }
+                h2 {
+                    font-size: 16px;
+                    display: block;
+                    border-bottom: 1px solid #ccc;
+                    margin: 0 0 10px 0;
+                    padding: 0 0 5px 0;
+                }
 
-        <div class="container">
-            <div class="row" style="padding-bottom: 50px; padding-top: 20px;">
-                <!-- Insert to your webpage where you want to display the slider -->
-                <!--<div id="amazingslider-wrapper-1" style="display:block;position:relative;max-width:100%;padding-left:0px; padding-right:10px;margin:0px auto 0px;">-->
-                <div id="amazingslider-wrapper-1" style="display:block;position:relative;max-width:95%;margin:0px auto 0px;">
-                    <div id="amazingslider-1" style="display:block;position:relative;margin:0 auto;">
-                        <ul class="amazingslider-slides" style="display:none;">
-                            <li><img src="amazing_slider_images/1.jpg" />
-                            </li>
-                            <li><img src="amazing_slider_images/2.png" />
-                            </li>
-                            <li><img src="amazing_slider_images/3.jpg" />
-                            </li>
-                        </ul>
-                    </div>
+                .btn-responsive {
+                    white-space: normal !important;
+                    word-wrap: break-word;
+                }
+
+                span {
+                    float: right;
+                }
+                .shopping-cart {
+                    display: inline-block;
+                    background: url('http://cdn1.iconfinder.com/data/icons/jigsoar-icons/24/_cart.png') no-repeat 0 0;
+                    width: 24px;
+                    height: 24px;
+                    margin: 0 10px 0 0;
+                }
+                /*ADD TO CART CSS END  =============================================*/
+
+            </style>
+        </style>
+    </div>
+
+
+    <!--sub header-- end////////////////////////////////////////////////////>-->
+
+    <!---728x90--->
+
+    <div class="container">
+        <div class="row" style="padding-bottom: 50px; padding-top: 20px;">
+            <!-- Insert to your webpage where you want to display the slider -->
+            <!--<div id="amazingslider-wrapper-1" style="display:block;position:relative;max-width:100%;padding-left:0px; padding-right:10px;margin:0px auto 0px;">-->
+            <div id="amazingslider-wrapper-1" style="display:block;position:relative;max-width:95%;margin:0px auto 0px;">
+                <div id="amazingslider-1" style="display:block;position:relative;margin:0 auto;">
+                    <ul class="amazingslider-slides" style="display:none;">
+                        <li><img src="amazing_slider_images/1.jpg" />
+                        </li>
+                        <li><img src="amazing_slider_images/2.png" />
+                        </li>
+                        <li><img src="amazing_slider_images/3.jpg" />
+                        </li>
+                    </ul>
                 </div>
             </div>
-            <!-- End of body section HTML codes -->
+        </div>
+        <!-- End of body section HTML codes -->
 
-            <!--NAVIGATION MENU BAR start ----------------------------------------->
-            <div style="background-color:#fafbf9;" class="nav_bar" >     </div>
+        <!--NAVIGATION MENU BAR start ----------------------------------------->
+        <div style="background-color:#fafbf9;" class="nav_bar" >     </div>
 
-            <!--NAVIGATION MENU BAR END ------------------------------------------->
-
-
-
-            <!--ALL ITEM SLIDER START /////////////////////////////////////////3333333333333-->
-
-            <div style="background-color:#fafbf9;" class="img_view_panel" >     </div>
-            <!--ALL ITEM SLIDER END /////////////////////////////////////////3333333333333-->
+        <!--NAVIGATION MENU BAR END ------------------------------------------->
 
 
 
+        <!--ALL ITEM SLIDER START /////////////////////////////////////////3333333333333-->
+
+        <div style="background-color:#fafbf9;" class="img_view_panels" >     </div>
+        <!--ALL ITEM SLIDER END /////////////////////////////////////////3333333333333-->
+
+
+        <!-- wrapper -->
+        <div class="wrapper">
+            <h1>Our Stock</h1>
+            <span><i class="shopping-cart"></i></span>
+
+            <div class="clear"></div>
+            <!-- items -->
+            <div class=" img_view_panel" >   </div>
+            <!--/ items -->
+        </div>
+        <!--/ wrapper -->
 
             <!--<script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>-->
 
-            <!--NEW COUSTOMER ITEM SLIDER END /////////////////////////////////////////3333333333333-->
+        <!--NEW COUSTOMER ITEM SLIDER END /////////////////////////////////////////3333333333333-->
 
 
 
-            <!---728x90--->
+        <!---728x90--->
 
 
 
-        </div>
-    </div>   
+    </div>
+</div>   
 
-    <div class="clearfix"> </div>        	         
+<div class="clearfix"> </div>        	         
 </div>
 
 <!---->
 <!---728x90--->
 <!--<SLIDER SCRIPT START />////////////////////////////////////////////////////////-->
 <script src="./slick/slick.min.js" type="text/javascript" charset="utf-8"></script>
+
 <script type="text/javascript">
             $(document).on('ready', function () {
                 setTimeout(function () {
@@ -171,7 +254,7 @@
                         if (e === undefined || e.length === 0 || e === null) {
                             $('.nav_bar').html("NO data Found ! ");
                         } else {
-                            $('.nav_bar').html(e);
+//                            $('.nav_bar').html(e);
 
                         }
                         //    chosenRefresh();
@@ -193,6 +276,68 @@
 <!--FOTER DIV START ///////////////////////////////////////////////////////////-->
 <div class="footer">
     <?php require_once('include/footer.php'); ?>
+    <script type="text/javascript">
+        $(document).on('ready', function () {
+            item_tot();
+        });
+//CART ADDED ITEM TOTAL ===========================================================
+        function item_tot() {
+            $.post("./loaddata.php", {action: 'item_total'}, function (e) {
+                if (e === undefined || e.length === 0 || e === null) {
+                    $('#').html("NO data Found ! ");
+                } else {
+                    var item_tot = (e['item_tot']);
+                    var item_tot_price = (e['item_tot_price']);
+                    $('.item_tot').html(item_tot);
+                    $('.item_tot_price').html(item_tot_price);
+//                    load_cart_item_list();
+                }
+                //    chosenRefresh();
+            }, "json");
+        }
+
+        //ADD TO CART ANIMATION
+        $(document).on('click', '.add-to-cart', function () {
+            var cart = $('.shopping-cart');
+            var imgtodrag = $(this).parent('.item').find("img").eq(0);
+            if (imgtodrag) {
+                var imgclone = imgtodrag.clone()
+                        .offset({
+                            top: imgtodrag.offset().top,
+                            left: imgtodrag.offset().left
+                        })
+                        .css({
+                            'opacity': '0.5',
+                            'position': 'absolute',
+                            'height': '150px',
+                            'width': '150px',
+                            'z-index': '100'
+                        })
+                        .appendTo($('body'))
+                        .animate({
+                            'top': cart.offset().top + 10,
+                            'left': cart.offset().left + 10,
+                            'width': 75,
+                            'height': 75
+                        }, 1000, 'easeInOutExpo');
+
+//                setTimeout(function () {
+//                    cart.effect("shake", {
+//                        times: 2
+//                    }, 200);
+//                }, 1500);
+
+                imgclone.animate({
+                    'width': 0,
+                    'height': 0
+                }, function () {
+                    $(this).detach()
+                });
+            }
+        });
+//    <!--//ADD TO CART ANIMATION END-->
+
+    </script>
 </div>
 
 <!--FOTER DIV END ///////////////////////////////////////////////////////////-->

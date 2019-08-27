@@ -1,4 +1,4 @@
-
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html>
     <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
@@ -25,10 +25,10 @@
 
         <script type="text/javascript">
             $(function () {
-                $('#main-menu').smartmenus({
-                    subMenusSubOffsetX: 1,
-                    subMenusSubOffsetY: -8
-                });
+            $('#main-menu').smartmenus({
+            subMenusSubOffsetX: 1,
+                    subMenusSubOffsetY: - 8
+            });
             });
         </script>
         <!--sub header--////////////////////////////////////////////////////////>-->
@@ -82,24 +82,57 @@
             <div class="header">
                 <?php require_once('include/footer.php'); ?>
                 <script type="text/javascript">
-//                <!--//LOGIN BTN FUNCTION ===========================================-->
-                    $(document).on('click', '#login_btn', function () {
-                        var mail = $('#email_login_page').val();
-                        var pw = $('#password_login_page').val();
-                        $.post("./loaddata.php", {action: 'user_login', email: mail, pw: pw}, function (e) {
-                            if (e === undefined || e.length === 0 || e === null) {
-                                alert('NO data Found ..Error !');
-                            } else {
-
-                                if (e == 1) {
-                                    window.location.replace("user_profil.php");
-                                } else {
-                                    alert('Email or password incorrect, Try again !')
-                                }
-                            }
-                        }, "json");
+                    $(document).on('ready', function () {
+                    item_tot();
                     });
-//                <!--//LOGIN BTN FUNCTION ===========================================-->
+                    //CART ADDED ITEM TOTAL ===========================================================
+                    function item_tot() {
+                    $.post("./loaddata.php", {action: 'item_total'}, function (e) {
+                    if (e === undefined || e.length === 0 || e === null) {
+                    $('#').html("NO data Found !");
+                    } else {                         var item_tot = (e['item_tot']);
+                    var item_tot_price = (e['item_tot_price']);
+                    $('.item_tot').html(item_tot);
+                    $('.item_tot_price').html(item_tot_price);
+                    //                    load_cart_item_list();
+                    }
+                    //    chosenRefresh();
+                    }
+                    , "json");
+                    }
+
+    //              LOGIN BTN FUNCTION ===============================================
+                    $(document).on('click', '#login_btn', function () {
+                    var mail = $('#email_login_page').val();
+                    var pw = $('#password_login_page').val();
+                    $.post(" ./loaddata.php", {action: 'user_login', email: mail, pw: pw}, function (e) {
+                    if (e === undefined || e.length === 0 || e === null) {
+                    alert('NO data Found ..Error !');
+                    } else {
+                    if (e == 1) {
+                    window.location.replace("user_profil.php");
+                    } else if (e == 5){
+                    window.location.replace("user_profil.php");
+                    } else if (e == 750){
+                    alert("Erro in login ! Erro code 750");
+                            //BILL NO INSERT ERROR
+                    } else if (e == 760){
+                    alert("Erro in login ! Erro code 760");
+                    //BILL NO UPDATE ERROR
+                    } else if (e == 720){
+                    alert("Erro in login ! Erro code 720");
+                    //ERRO IN UPDATE ADDED ITEM
+                    } else if (e == 730){
+                    alert("Erro in login ! Erro code 730");
+                    //ERRO IN INSERT CART ITEM TO USER
+                    }
+                    else {
+                    alert('Email or password incorrect, Try again !')
+                    }
+                    }
+                    }, "json");
+                    });
+    //                            LOGIN BTN FUNCTION ===========================================
                 </script>
 
 
