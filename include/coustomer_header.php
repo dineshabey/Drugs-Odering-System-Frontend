@@ -2,298 +2,272 @@
 <link href="js/AlertifyJS-master/build/css/themes/default.css" rel="stylesheet" type="text/css"/>
 <link href="js/AlertifyJS-master/build/css/alertify.min.css" rel="stylesheet" type="text/css"/>
 <script src="js/AlertifyJS-master/build/alertify.min.js" type="text/javascript"></script>
+<a href="fonts/user-solid.svg"></a>
 
 
-<div class="top-header" style="background: #FFD700;   border-bottom: 2px solid #fff;">
+
+ <style type="text/css">
+                /*ADD TO CART CSS START =============================================*/
+
+                .body {
+                    overflow: hidden;
+                }
+                .wrapper {
+                    max-width: 1520px;
+                    /*height: 880px;*/
+                    margin: 20px auto ;
+                    padding: 20px;
+                    background-color: #f5f5f5;
+                    width: 100%;
+                }
+                h1 {
+                    display: inline-block;
+                    background-color: #333;
+                    color: #fff;
+                    font-size: 20px;
+                    font-weight: normal;
+                    text-transform: uppercase;
+                    padding: 4px 20px;
+                    float: left;
+                }
+                @media all and (max-width: 1200px) and (min-width: 800px) {
+                    /* Change Resolutions Here */
+                    h5 {
+                        font-size: 12px;
+                    }
+                }
+                img
+                {
+                    max-width: 100%;
+                    min-width: 40px;;
+                    height: auto;
+                }
+
+                .clear {
+                    clear: both;
+                }
+                .items {
+                    display: block;
+                    margin: 20px 0;
+                }
+                h2 {
+                    font-size: 16px;
+                    display: block;
+                    border-bottom: 1px solid #ccc;
+                    margin: 0 0 10px 0;
+                    padding: 0 0 5px 0;
+                }
+
+                .btn-responsive {
+                    white-space: normal !important;
+                    word-wrap: break-word;
+                }
+
+                span {
+                    float: right;
+                }
+                .shopping-cart {
+                    display: inline-block;
+                    background: url('http://cdn1.iconfinder.com/data/icons/jigsoar-icons/24/_cart.png') no-repeat 0 0;
+                    width: 24px;
+                    height: 24px;
+                    margin: 0 10px 0 0;
+                }
+                /*ADD TO CART CSS END  =============================================*/
+
+            </style>
+
+<style type="text/css">
+    .top_head_cus {
+        background-image: url("images/site_img/gold_bac.jpg");
+        border-bottom: 1px solid #fff;
+        /*padding: 1.9em 0;*/
+    }
+    .bottom_head_cus {
+        background-image: url("images/site_img/green_bac5.jpg");
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+
+    }
+    .bottom_head_cus2 {
+        background-image: url("images/site_img/green_bac5.jpg");
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+
+    }
+    .topcorner{
+        position:absolute;
+        top:10px;
+        right: 10px;
+    }
+
+    .mini_mart{
+        text-shadow: 0 0 3px #FF0000;
+
+    }
+
+    /*HEADING TABALE CSS ///////////////////////////////////*/
+    .head_tbl{
+        table-layout: fixed;
+        max-width:100%;
+        border="0";
+        border: none;
+
+    }
+    .blocks{
+        border: none;
+        border: 0;
+    }
+    /*HEADING TABALE CSS ///////////////////////////////////*/
+
+
+
+</style>
+<meta name="viewport" content="width=600">
+<div class="top-header top_head_cus" >
     <div class="container">
-        <div class="row">
-            <div class="col-lg-6">
-                <ul class="support">
-                    <li><a href="#"><label> </label></a></li>
-                    <li><a href="#">24x7 live<span class="live"> support</span></a></li>
-                </ul>
-                <ul class="support">
-                    <li class="van"><a href="#"><label> </label></a></li>
-                    <li><a href="#">Fast shipping <span class="live">on any order </span></a></li>
-                </ul>
-            </div>
-            <div class="col-lg-2" ></div>
-            <div class="col-md-4" style="float: right">
-                <!--<div class="" id="google_translate_element">-->		
-                <div class="" id="">		
-                    <select class="in-drop" style="float: right" id="">
-                        <option value="volvo" class="in-of">English</option>
-                        <option value="saab" class="in-of">Sinhala</option>
-                    </select>
+        <div class="">
+            <div class="col-lg-5 "  > 
 
+                <!--                <ul class="van">
+                                    <li ><a href="#"><label> </label></a></li>
+                                    <li><a href="#">Fast shipping <span class="live">on any order </span></a></li>
+                                </ul>-->
+            </div>
+            <div class="col-lg-3 " style=""> </div>
+
+            <div class="col-lg-3 " style="float: ;">
+                <div class="login" style="float:right; ">
+                    <?php
+                    if (!isset($_SESSION['cus_id'])) {
+                        echo '<a href = "login.php" style="text-decoration: ; color:black;" span class="login"><span class="login"> </span> USER LOGIN </a>';
+//                         echo '<button type="button" style="margin:2px;" class="btn btn-success btn-md" value = ' . $cus_name . ' id = "profil">' . $cus_name . '</buttn>';
+                    } else {
+                        $cus_name = $_SESSION['uname'];
+                        echo '<button type="button" style="margin:2px;" class="btn btn-success btn-md" value = ' . $cus_name . ' id = "profil">' . $cus_name . '</buttn>';
+                        echo' <button  type="button" id="log_out" style="background-color:red;" class="btn btn-primary btn-md" ><span></span>LOGOUT</button>';
+                    }
+                    ?>
                 </div>
             </div>
+
+
+            <!--            <div class="col-lg-7 " style=""></div>
+                        <div class="col-md-5 " style="padding-top: 10px;">
+                            <div class="col-lg-6 " style=""></div>-->
+
+
         </div>
+
     </div>
 </div>
+
 
 <!--<TOP HEADER END-->
 <!--<BOTTOM HEADER START-->
-<div class="bottom-header" style="background:green;">
-    <div class="container">
-        <div class="row" style="padding-top: 20px;">
-            <div class="col-md-2">
-                <a href="index.php"><img src="images/logo_png.png" width="200px" height="150px" alt=" " /></a>
-                <!--<a href="index.php"><span>Lion Vitamin </span></a>-->
-            </div>
-
-            <div class="col-md-5">
-                <div class="input-group">
-                    <input type="hidden" name="search_param" value="all" id="search_param">         
-                    <input type="text" class="form-control" name="x" placeholder="Search term...">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" type="button">Search</button>
-                    </span>
-                </div>
-            </div>
-            <div class="col-md-5 " style="padding-top: 28px; ">
-                <div class="" style="background: white; text-align: center;">
-                    <?php
-                    if (!isset($_SESSION['cus_id'])) {
-                        echo'<div class="account "><a href="register.php"><span> </span>CREATE ACCOUNT</a></div>';
-                    } else {
-                        echo'<div class="account hidden"><a href="register.php"><span> </span>CREATE ACCOUNT</a></div>';
-                    }
-                    ?>
-
-                    <ul class="login" >
-                        <?php
-                        if (!isset($_SESSION['cus_id'])) {
-                            echo '<li><a href = "login.php"><span> </span>LOGIN </a></li>';
-                        } else {
-                            $cus_name = $_SESSION['uname'];
-                            echo '<li><input type = "button" class="btn btn-info" value = ' . $cus_name . ' id = "profil"><span> </span> </a></li>';
-                            echo' <li><input type="button" class="btn btn-warning" value="LOGOUT" id="log_out"><span> </span> </a></li> ';
-                        }
-                        ?>
-                    </ul>
-
-                    <?php
-                    if (!isset($_SESSION['cus_id'])) {
-                        echo '<div class="cart"><a href="cart_item.php"><span class=""> </span></a><span style="font-weight: bold; background:#0000e6; font-size: large; color: #ffd700; border-radius: 32px 32px;" class="item_tot"> </span></div>';
-                    } else {
-                        echo '<div class="cart hidden" ><a href="cart_item.php"><span class=""> </span></a><span style="font-weight: bold; background:#0000e6; font-size: large; color: #ffd700; border-radius: 32px 32px;" class="item_tot"> </span></div>';
-                    }
-                    ?>
-                </div>
-            </div>
-
-
-        </div>
-
-    </div>
-</div>
-<!--<BOTTOM HEADER END-->
-
-
-<!--<NEW DROP DOWN MENU-->
-<!--<div class="top-header " style="background:green; " >-->
-<!--<BOTTOM  NEW HEADER START ------------------------------------------------->
-
-
-<!--<BOTTOM  NEW HEADER END-->
-
-
-
-
-<!--<BOTTOM HEADER END-->
-
-
-
-
-
-
-<!--    <div class="menu-container">
-
-        //NEW NAV MENU BAR ----------------------------------------------------
-        <div class="menu " id="nav_menu_bar">  
-            <ul class="nav_menu_bar">
-                                <li class="nav_menu_bar">
-                                    <ul>
-                                        <li>
-                                            <ul>
-                                                <li></li>
-                                                <li></li>
-                                                <li></li>
-                                            </ul>
-                                        </li>
-                
-                                    </ul>
-                                </li> 
-            </ul>
-
-        </div>
-        //NEW NAV MENU BAR ----------------------------------------------------
-
-
-        <div class="menu" id="" hidden="">
-            <ul>
-                <li><a href="index.php">Home</a></li>
-                <li><a href="#">Nature Cream</a>
-                    <ul>
-                        <li><a href="#">Web Developement</a>
-                            <ul>
-                                <li><a href="#">JavaScript</a></li>
-                                <li><a href="#">HTML5</a></li>
-                                <li><a href="#">CSS3</a></li>
-                                <li><a href="#">PHP</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <li><a href="#">Bio Cream</a>
-                    <ul>
-                        <li><a href="#">Web Developement</a>
-                            <ul>
-                                <li><a href="#">JavaScript</a></li>
-                                <li><a href="#">HTML5</a></li>
-                                <li><a href="#">CSS3</a></li>
-                                <li><a href="#">PHP</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <li><a href="#">Suppliment</a>
-                    <ul>
-                        <li><a href="#">Web Developement</a>
-                            <ul>
-                                <li><a href="#">JavaScript</a></li>
-                                <li><a href="#">HTML5</a></li>
-                                <li><a href="#">CSS3</a></li>
-                                <li><a href="#">PHP</a></li>
-                            </ul>
-                        </li>
-
-                        <li><a href="#">Graphic Design</a>
-                            <ul>
-                                <li><a href="#">Sketch</a></li>
-                                <li><a href="#">Photoshop</a></li>
-                                <li><a href="#">Illustrator</a></li>
-                                <li><a href="#">Corel Draw</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <li><a href="#">Categories</a>
-                    <ul>
-                        <li><a href="#">Web Developement</a>
-                            <ul>
-                                <li><a href="#">JavaScript</a></li>
-                                <li><a href="#">HTML5</a></li>
-                                <li><a href="#">CSS3</a></li>
-                                <li><a href="#">PHP</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#">Graphic Design</a>
-                            <ul>
-                                <li><a href="#">Sketch</a></li>
-                                <li><a href="#">Photoshop</a></li>
-                                <li><a href="#">Illustrator</a></li>
-                                <li><a href="#">Corel Draw</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#">Programming</a>
-                            <ul>
-                                <li><a href="#">C++</a></li>
-                                <li><a href="#">Java</a></li>
-                                <li><a href="#">Python</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#">Social</a>
-                            <ul>
-                                <li><a href="#"><a href="https://www.jqueryscript.net/tags.php?/Facebook/">Facebook</a></a></li>
-                                <li><a href="#">Twitter</a></li>
-                                <li><a href="#">Google Plus</a></li>
-                                <li><a href="#">Pinterest</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#">Herbz</a>
-                            <ul>
-                                <li><a href="#"><a href="https://www.jqueryscript.net/tags.php?/Facebook/">Facebook</a></a></li>
-                                <li><a href="#">Twitter</a></li>
-                                <li><a href="#">Google Plus</a></li>
-                                <li><a href="#">Pinterest</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#">Vitamin</a>
-                            <ul>
-                                <li><a href="#"><a href="https://www.jqueryscript.net/tags.php?/Facebook/">Facebook</a></a></li>
-                                <li><a href="#">Twitter</a></li>
-                                <li><a href="#">Google Plus</a></li>
-                                <li><a href="#">Pinterest</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <li><a href="#">About</a> </li>
-                <li><a href="#">Contact</a></li>
-            </ul>
-        </div>
-
-
-
-
-    </div>
+<!--<div class="row" >
+    <div class="col-md-2">  <?php // require_once('navbar.php');                            ?> </div>
 
 </div>-->
 
-<!--<NEW DROP DOWN MENU-->
-<div class="top-header " style="background:green;">
-    <div class="container " >
-        <ul id="main-menu" class="sm sm-blue" style="background:green;">
-            <li><a href="index.php">Home</a></li>
 
-            <li><a href="#">Vitamin & Supliment</a>
-                <ul>
-                    <!--                    <li><a href="#">Introduction to SmartMenus jQuery</a></li>
-                                        <li><a href="#">Themes</a></li>
-                                        <li><a href="#">The author</a></li>-->
-                    <li><a href="#">Multivitamins</a>
-                        <ul>
-                            <li><a href="#">Men's Multivitamins</a></li>
-                            <li><a href="#">Whole Food Multivitamins</a></li>
-                            <li><a href="#">Prenatal Multivitamins</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#">Letter Vitamin</a>
-                        <ul>
-                            <li><a href="index.php">Vitamins - A</a></li>
-                            <li><a href="#">Vitamins - B</a></li>
-                            <li><a href="#">Vitamins - c</a></li>
-                        </ul>
-                    </li>
+<div class="bottom_head_cus" style="margin-right: 0px; margin-left: 0px;">
+    <!--    <div class=" " style="">
+            <div class="col-md-5 "><a href="index.php"><img src="images/logo_png.png" height="190px" width="150px" alt=" " /></a></div>
+            <div class="col-md-2">  </div>
+    
+        </div>-->
 
-                    <!--<li><a href="#">Old SmartMenus versions</a></li>-->
-                </ul>
-            </li>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <table class="table table-bordered head_tbl " cellpadding=""  >
+                    <tbody>
+                        <tr>
+                            <td class="blocks" style="text-align: left; ine-height: 0; border:none ; height: 1%; width: 15%;">
+                                <label>
+                                    <a href="index.php"><img src="images/site_img/minimart.jpg" height="190px" width="150px" alt=" " /></a>
+                                </label>
 
-            <li><a href="#">Natural Beauty & Skin</a>
-                <ul>
-                    <!--                    <li><a href="#">Introduction to SmartMenus jQuery</a></li>
-                                        <li><a href="#">Themes</a></li>
-                                        <li><a href="#">The author</a></li>-->
-                    <li><a href="#">Popular Herbs</a>
-                        <ul>
-                            <li><a href="#">Turmeric</a></li>
-                            <li><a href="#">Ashwagandha</a></li>
-                            <li><a href="#">Melatonin</a></li>
-                            <li><a href="#">Mushrooms</a></li>
-                        </ul>
-                    </li>
+                            </td>
+                            <td class="blocks" style="text-align: center; ine-height: 0; border:none ;  height: 0%; width:50%;">
+                                <div>
+                                    <input  style="border-radius:2px; background-color:#ffffff59; width: 100%;" class="form-control" type="text" placeholder="Search" aria-label="Search">
+                                </div>
+                                <br>
+                                <div class="btn-group" role="group" aria-label="Basic example">
+                                    <button type="button" class="btn btn-success">CAT 1</button>
+                                    <button type="button" class="btn btn-secondary">CAT 2</button>
+                                    <button type="button" class="btn btn-secondary">CAT 3</button>
+                                </div>
+                            </td>
+                            <td class="blocks" style="text-align: center; ine-height: 0; border: none; ">
+                                <label>
+                                    <span>
+             <!--<i class="shopping-cart"></i>-->
+                                        <?php
+                                        if (!isset($_SESSION['cus_id'])) {
+                                            echo '<a href="cart_item.php"><button type="button" class="btn btn-success" style="background-color:#ffffff;" ><img src="images/site_img/cart_add.png" height="190px" width="60px;" height="2%"  alt=" " />&nbsp;<span class=" item_tot" style="color:blue;  font-size: 40px;"></span> </button></a>';
+                                        } else {
+                                            echo '<div class="cart hidden" ><a href="cart_item.php"><span class=""> </span></a><span style="font-weight: bold; background:#0000e6; font-size: large; color: #ffd700; border-radius: 32px 32px;" class="item_tot"> </span></div>';
+                                        }
+                                        ?>
+                                    </span>
+                                </label>
 
-                    <!--<li><a href="#">Old SmartMenus versions</a></li>-->
+                            </td>
 
 
-                </ul>
-            </li>
-        </ul>
+                            <td class="blocks"  rowspan="3" style="text-align: center; width: 20%; height: 8%; border:none ;"><a href="index.php"><img src="images/site_img/edit_logo.jpg" height="180px" width="100px" alt=" " /></a></td>
 
+                        </tr>
+                        <tr>
+                            <td class="blocks" colspan="3" style="text-align: left; height: 10%;  border:none ;"> <?php require_once('navbar.php'); ?></td>
+                        </tr>
+                        <tr hidden="">
+                            <td class="blocks" colspan="2" style="text-align: left; border: ;">
+                                <div class="btn-group" role="group" aria-label="Basic example">
+                                    <button type="button" class="btn btn-success">CAT 1</button>
+                                    <button type="button" class="btn btn-secondary">CAT 2</button>
+                                    <button type="button" class="btn btn-secondary">CAT 3</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
     </div>
+
+
+</div>
+
+
+<!--<div class="row"> 
+    <a href="index.php"><img src="images/logo_png.png" height="190px" width="150px" alt=" " /></a>
+</div>
+<div class="container " >
+    <div class="col-md-2"></div>
+    <div class="col-md-2" style="float: right;">    <a href="index.php"><img src="images/logo_png.png" height="190px" width="150px" alt=" " /></a></div>
+
+    <div class="col-md-7" style="padding-top: 60px; float: right;">
+        <input  class="form-control" type="text" placeholder="Search" aria-label="Search">
+        <button class="btn aqua-gradient btn-rounded btn-sm my-0" type="submit">Search</button>
+    </div>
+</div>-->
+
+
+
+<!--<BOTTOM HEADER START-->
+<div class="top-header bottom_head_cus2" hidden="">
+
+    <?php // require_once('navbar.php'); ?>
+
 </div>
 <!--<BOTTOM HEADER END-->
 
@@ -303,7 +277,8 @@
 <script type="text/javascript">
 
     $(document).on('ready', function () {
-//        alert()
+//        viewportElement.setAttribute( 'content', 'initial-scale=' + ratio );
+        //        alert()
         //ONLOAD FUNCTION NAVIGATION BAR LOAD ------------------------------------------
         $(function () {
             var sliderData = '';
@@ -319,7 +294,7 @@
         });
 
     }); //ON LOAD FUCTION END
-//LOG OUT BTN =================================================================
+    //LOG OUT BTN =================================================================
     $(document).on('click', '#log_out', function () {
         $.post("./loaddata.php", {action: 'log_out'}, function (e) {
             if (e === undefined || e.length === 0 || e === null) {
@@ -333,7 +308,7 @@
             }
         }, "json");
     });
-//GO TO PROFIL BTN =================================================================
+    //GO TO PROFIL BTN =================================================================
     $(document).on('click', '#profil', function () {
         window.location.replace("user_profil.php");
     });

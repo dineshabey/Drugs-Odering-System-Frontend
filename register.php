@@ -28,9 +28,9 @@
         </div>
 
         <!--sub header-- end////////////////////////////////////////////////////>-->
+        <div style="padding-bottom: 30px;"></div>
 
-
-        <div class="container"> 
+        <div class="container" style="background-color: white;"> 
 
             <h3>CREATE YOUR ACCOUNT</h3>
             <div class="register">
@@ -135,7 +135,19 @@
                             if (e === undefined || e.length === 0 || e === null) {
                                 alert('Error in create account !');
                             } else {
-                                window.location.replace("login.php");
+                                if (e == 751) {
+                                    alert("Error ! code 751");
+                                }
+                                if (e == 752) {
+                                    alert("Error ! code 752");
+                                }
+                                if (e == 2) {
+                                    alert("Error ! error data inserting");
+                                }
+                                if (e == 1) {
+                                    window.location.replace("login.php");
+                                }
+
                             }
                         }, "json");
                     }

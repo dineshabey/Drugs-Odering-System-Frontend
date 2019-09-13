@@ -52,7 +52,7 @@ if (!isset($_SESSION['cus_id'])) {
         </script>
         <!--sub header--////////////////////////////////////////////////////////>-->
         <div class="header">
-            <?php require_once('include/coustomer_header.php'); ?>
+            <?php require_once('include/coustomer_header_for_client.php'); ?>
         </div>
 
         <!--sub header-- end////////////////////////////////////////////////////>-->
@@ -60,7 +60,7 @@ if (!isset($_SESSION['cus_id'])) {
 
         <div class="container">
             <div class="row" style="padding-top: 50px;"></div>
-            <div class="row order_summary" id="order_summary" style="padding-top: 50px; background: yellowgreen;">
+            <div class="row order_summary" id="order_summary" style="padding-top: 50px; padding-right: 15px; background: white;">
                 <div class="col-lg-6">
                     <div class="" >
                         <legend>Order Summary</legend>
@@ -102,7 +102,7 @@ if (!isset($_SESSION['cus_id'])) {
                         <!--ODER VALUES ==============================================================-->
                         <input type="text" hidden="" class="tot_order_val" id="tot_order_val_hidden">
                         <input type="text" hidden="" class="tot_discount" id="tot_discount_hidden">
-                        <input type="text"  class="item_bill_no" id="item_bill_no">
+                        <input type="text"  hidden="" class="item_bill_no" id="item_bill_no">
                         <!--ODER VALUES ==============================================================-->
                         <input type="text" id="shipping_id"  hidden="">
                         <input type="text" hidden="" >
@@ -155,14 +155,14 @@ if (!isset($_SESSION['cus_id'])) {
                             <!-- Button -->
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for=""></label>
-                                <div class="col-md-3">
-                                    <button id="next_step" name=""  class="next_step btn btn-primary hidden">NEXT STEP</button>
-                                    <button id="next_step_edit" name="" class="next_step_edit btn btn-primary ">EDIT DEATAILS</button>
-                                    <button id="next_step_reset" name="" class="next_step_reset btn btn-danger hidden">RESET</button>
-                                    <button id="order_confirm" name="" class="next_step_reset btn btn-danger ">ODER CONFIRM</button>
+                                <div class=" btn-group" role="group">
+                                    <button type="button" id="next_step" name=""  class="next_step btn btn-primary hidden">NEXT STEP</button>
+                                    <button  type="button" id="next_step_edit" name="" class="next_step_edit btn btn-primary ">EDIT DEATAILS</button>
+                                    <button  type="button" id="next_step_reset" name="" class="next_step_reset btn btn-danger hidden">RESET</button>
+                                    <button id="next_step_update" name=""  class="next_step_update btn btn-info ">UPDATE DEATAILS</button>
+                                    <button  type="button" id="order_confirm" name="" class="order_confirm btn btn-success hidden">ODER CONFIRM</button>
                                 </div>
                                 <div class="col-md-3">
-                                    <button id="next_step_update" name=""  class="next_step_update btn btn-info ">UPDATE DEATAILS</button>
                                 </div>
                             </div>
 
@@ -269,6 +269,30 @@ if (!isset($_SESSION['cus_id'])) {
                                 <img src="images/visa_master.png" width="200" height="100" title="White flower" alt="Flower">
                                 <input type="checkbox" checked="checked" >
                             </div>
+
+
+                            <!--PAY HEARE FORM START ////////////////////////////////////////////////////////////-->
+                            <form method="post" action="https://sandbox.payhere.lk/pay/checkout" hidden="">   
+                                <input type="hidden" name="merchant_id" value="121XXXX">    <!-- Replace your Merchant ID -->
+                                <input type="hidden" name="return_url" value="http://sample.com/return">
+                                <input type="hidden" name="cancel_url" value="http://sample.com/cancel">
+                                <input type="hidden" name="notify_url" value="http://sample.com/notify">  
+                                <br><br>Item Details<br>
+                                <input type="text" name="order_id" value="ItemNo12345">
+                                <input type="text" name="items" value="Door bell wireless"><br>
+                                <input type="text" name="currency" value="LKR">
+                                <input type="text" name="amount" value="1000">  
+                                <br><br>Customer Details<br>
+                                <input type="text" name="first_name" value="Saman">
+                                <input type="text" name="last_name" value="Perera"><br>
+                                <input type="text" name="email" value="samanp@gmail.com">
+                                <input type="text" name="phone" value="0771234567"><br>
+                                <input type="text" name="address" value="No.1, Galle Road">
+                                <input type="text" name="city" value="Colombo">
+                                <input type="hidden" name="country" value="Sri Lanka"><br><br> 
+                                <input type="submit" value="Buy Now">   
+                            </form> 
+                            <!--PAY HEARE FORM END   ////////////////////////////////////////////////////////////-->
 
 
                         </fieldset>
@@ -379,6 +403,9 @@ if (!isset($_SESSION['cus_id'])) {
                 });
                 //NEXT STEP BTN EDIT  ===========================================
                 $(document).on('click', '#next_step', function () {
+                    if ($(".order_confirm").hasClass("hidden")) {
+                        $(".order_confirm").removeClass("hidden");
+                    }
                     add_shipping_deatail();
                 });
                 //NEXT STEP BTN UPDATE  ===========================================
@@ -397,7 +424,6 @@ if (!isset($_SESSION['cus_id'])) {
                 //START CARD PAYMENT BTB  ======================================
                 $(document).on('click', '#start_card_payment_btn', function () {
                     added_item_tot();
-                    
                     var oder_val = parseFloat($('#tot_order_val_hidden').val());
                     var tot_discount_val = parseFloat($('#tot_discount_hidden').val());
                     var shipping_id = parseInt($('#shipping_id').val());
@@ -445,6 +471,7 @@ if (!isset($_SESSION['cus_id'])) {
                                 return;
                             }
                             if (e == 1) {
+                                alertify.success("Thank you ! Payment successfully ..");
                                 window.open('user_profil.php', '_top');
                                 return;
                             }
@@ -479,8 +506,6 @@ if (!isset($_SESSION['cus_id'])) {
                         $('.added_item_summary tbody').html(tableData);
                     }, "json");
                 }
-
-
 
                 //USER ADDED ITEM TOTAL ===========================================================
                 function added_item_tot() {
@@ -530,6 +555,9 @@ if (!isset($_SESSION['cus_id'])) {
                             if ($(".next_step_edit").hasClass("hidden")) {
                                 $(".next_step_edit").removeClass("hidden");
                             }
+                            if ($(".order_confirm").hasClass("hidden")) {
+                                $(".order_confirm").removeClass("hidden");
+                            }
                             $('#recipient_name').val(e['recipients_name']);
                             $('#recipient_phone').val(e['recipients_phone']);
                             $('#address').val(e['shipping_address']);
@@ -572,19 +600,51 @@ if (!isset($_SESSION['cus_id'])) {
                 }
 //NEXT STEP BTN  FUNCTION =========================================================
                 function add_shipping_deatail() {
+                    if (!$(".order_confirm").hasClass("hidden")) {
+                        $(".order_confirm").addClass("hidden");
+                    }
+
+
                     var recipient_name = $('#recipient_name').val();
                     var recipient_phone = $('#recipient_phone').val();
                     var msg = $('#msg').val();
                     var address = $('#address').val();
                     var tot_order_val = parseFloat($('#tot_order_val_hidden').val());
                     var order_discount = parseFloat($('#tot_discount_hidden').val());
+                    if (recipient_name.trim() == "") {
+                        alertify.error('Please enter recipient name.');
+                        $('#recipient_name').focus();
+                        return;
+                    }
+                    if (recipient_phone.trim() == "") {
+                        alertify.error('Please enter recipient phone.');
+                        $('#recipient_phone').focus();
+                        return;
+                    }
+                    if (address.trim() == "") {
+                        alertify.error('Please enter recipient address.');
+                        $('#address').focus();
+                        return;
+                    }
+
+                    if (isNaN(tot_order_val)) {
+                        alert('Not found tot order value ');
+                        return;
+                    }
+                    if (isNaN(order_discount)) {
+                        alert('Not found tot order discount ');
+                        return;
+                    }
                     var send_obj = {recipient_name: recipient_name, recipient_phone: recipient_phone, note: msg, address: address, order_val: tot_order_val, order_discount: order_discount};
                     $.post("./loaddata.php", {action: 'add_shipping_deatail', send_obj: send_obj}, function (e) {
                         if (e === undefined || e.length === 0 || e === null) {
                             alert('Error in Data insert !');
                         } else {
-                            get_shipping_deatails();
-//                            window.location.replace("order_complete.php");
+                            if (e == "1") {
+                                get_shipping_deatails();
+                            } else {
+                                alert('Error ! data inserting ..!')
+                            }
                         }
                     }, "json");
                 }
@@ -597,16 +657,43 @@ if (!isset($_SESSION['cus_id'])) {
                     var address = $('#address').val();
                     var tot_order_val = parseFloat($('#tot_order_val_hidden').val());
                     var order_discount = parseFloat($('#tot_discount_hidden').val());
+                    if (recipient_name.trim() == "") {
+                        alertify.error('Please enter recipient name.');
+                        $('#recipient_name').focus();
+                        return;
+                    }
+                    if (recipient_phone.trim() == "") {
+                        alertify.error('Please enter recipient phone.');
+                        $('#recipient_phone').focus();
+                        return;
+                    }
+                    if (address.trim() == "") {
+                        alertify.error('Please enter recipient address.');
+                        $('#address').focus();
+                        return;
+                    }
+
+                    if (isNaN(tot_order_val)) {
+                        alert('Not found tot order value ');
+                        return;
+                    }
+                    if (isNaN(order_discount)) {
+                        alert('Not found tot order discount ');
+                        return;
+                    }
                     var send_obj = {id: shipping_id, recipient_name: recipient_name, recipient_phone: recipient_phone, note: msg, address: address, order_val: tot_order_val, order_discount: order_discount};
                     $.post("./loaddata.php", {action: 'update_shipping_deatail', send_obj: send_obj}, function (e) {
                         if (e === undefined || e.length === 0 || e === null) {
                             alert('Error in Data insert !');
                         } else {
+                            if (e == "1") {
+                                get_shipping_deatails();
+                            } else {
+                                alert('Error ! data inserting ..!')
+                            }
                             if (!$(".next_step_reset").hasClass("hidden")) {
                                 $(".next_step_reset").addClass("hidden");
                             }
-                            get_shipping_deatails();
-//                            window.location.replace("order_complete.php");
                         }
                     }, "json");
                 }

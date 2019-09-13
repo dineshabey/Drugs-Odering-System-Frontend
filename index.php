@@ -49,6 +49,9 @@
                 opacity: 1!important;
             }
             /*<!--ITEM SLIDER CSS   END////////////////////-->*/
+
+
+
         </style>
 
 
@@ -76,119 +79,15 @@
         </script>
         <!--sub header--////////////////////////////////////////////////////////>-->
         <div class="header">
-<<<<<<< HEAD
             <?php require_once('include/coustomer_header.php'); ?>
-            <style type="text/css">
-                /*ADD TO CART CSS START =============================================*/
+            <!--<a href="navbar.php"></a>-->
 
-                .body {
-                    overflow: hidden;
-                }
-                .wrapper {
-                    max-width: 1520px;
-                    /*height: 880px;*/
-                    margin: 20px auto ;
-                    padding: 20px;
-                    background-color: #f5f5f5;
-                    width: 100%;
-                }
-                h1 {
-                    display: inline-block;
-                    background-color: #333;
-                    color: #fff;
-                    font-size: 20px;
-                    font-weight: normal;
-                    text-transform: uppercase;
-                    padding: 4px 20px;
-                    float: left;
-                }
-                @media all and (max-width: 1200px) and (min-width: 800px) {
-                    /* Change Resolutions Here */
-                    h5 {
-                        font-size: 12px;
-                    }
-                }
-                img
-                {
-                    max-width: 100%;
-                    min-width: 40px;;
-                    height: auto;
-                }
-
-                .clear {
-                    clear: both;
-                }
-                .items {
-                    display: block;
-                    margin: 20px 0;
-                }
-                h2 {
-                    font-size: 16px;
-                    display: block;
-                    border-bottom: 1px solid #ccc;
-                    margin: 0 0 10px 0;
-                    padding: 0 0 5px 0;
-                }
-
-                .btn-responsive {
-                    white-space: normal !important;
-                    word-wrap: break-word;
-                }
-
-                span {
-                    float: right;
-                }
-                .shopping-cart {
-                    display: inline-block;
-                    background: url('http://cdn1.iconfinder.com/data/icons/jigsoar-icons/24/_cart.png') no-repeat 0 0;
-                    width: 24px;
-                    height: 24px;
-                    margin: 0 10px 0 0;
-                }
-                /*ADD TO CART CSS END  =============================================*/
-
-            </style>
-        </style>
-    </div>
-
-
-    <!--sub header-- end////////////////////////////////////////////////////>-->
-
-    <!---728x90--->
-
-    <div class="container">
-        <div class="row" style="padding-bottom: 50px; padding-top: 20px;">
-            <!-- Insert to your webpage where you want to display the slider -->
-            <!--<div id="amazingslider-wrapper-1" style="display:block;position:relative;max-width:100%;padding-left:0px; padding-right:10px;margin:0px auto 0px;">-->
-            <div id="amazingslider-wrapper-1" style="display:block;position:relative;max-width:95%;margin:0px auto 0px;">
-                <div id="amazingslider-1" style="display:block;position:relative;margin:0 auto;">
-                    <ul class="amazingslider-slides" style="display:none;">
-                        <li><img src="amazing_slider_images/1.jpg" />
-                        </li>
-                        <li><img src="amazing_slider_images/2.png" />
-                        </li>
-                        <li><img src="amazing_slider_images/3.jpg" />
-                        </li>
-                    </ul>
-=======
-            <?php //require_once('include/coustomer_header_1.php'); ?>
-
-
-            
         </div>
 
-        <!--sub header-- end////////////////////////////////////////////////////>-->
 
         <!---728x90--->
 
         <div class="container">
-            
-                             <!--NAVIGATION MENU BAR start ----------------------------------------->
-            <div style="background-color:#fafbf9;" class="nav_bar" >   
-
-            </div>
-            
-            
             <div class="row" style="padding-bottom: 50px; padding-top: 20px;">
                 <!-- Insert to your webpage where you want to display the slider -->
                 <!--<div id="amazingslider-wrapper-1" style="display:block;position:relative;max-width:100%;padding-left:0px; padding-right:10px;margin:0px auto 0px;">-->
@@ -203,58 +102,45 @@
                             </li>
                         </ul>
                     </div>
->>>>>>> 8d99ef8ce8e13984ae7832a672794d3e2c6527e7
                 </div>
             </div>
-        </div>
-        <!-- End of body section HTML codes -->
+            <!-- End of body section HTML codes -->
+            <!--ALL ITEM SLIDER START /////////////////////////////////////////3333333333333-->
 
-<<<<<<< HEAD
-        <!--NAVIGATION MENU BAR start ----------------------------------------->
-        <div style="background-color:#fafbf9;" class="nav_bar" >     </div>
-=======
-<!--            NAVIGATION MENU BAR start ---------------------------------------
-            <div style="background-color:#fafbf9;" class="nav_bar" >   
-
-            </div>-->
->>>>>>> 8d99ef8ce8e13984ae7832a672794d3e2c6527e7
-
-        <!--NAVIGATION MENU BAR END ------------------------------------------->
+            <div style="background-color:#fafbf9;" class="img_view_panels" >     </div>
+            <!--ALL ITEM SLIDER END /////////////////////////////////////////3333333333333-->
 
 
+            <!-- wrapper -->
+            <div class="wrapper" style="background-color: white;">
+                <h1>Our Stock</h1>
+                <span hidden="">
+                    <!--<i class="shopping-cart"></i>-->
+                    <?php
+                    if (!isset($_SESSION['cus_id'])) {
+                        echo '<div class="cart"><a href="cart_item.php"><span class="shopping-cart"> </span></a><span style="font-weight: bold; background:#0000e6; font-size: large; color: #ffd700; border-radius: 32px 32px;" class="item_tot"> </span></div>';
+                    } else {
+                        echo '<div class="cart hidden" ><a href="cart_item.php"><span class=""> </span></a><span style="font-weight: bold; background:#0000e6; font-size: large; color: #ffd700; border-radius: 32px 32px;" class="item_tot"> </span></div>';
+                    }
+                    ?>
+                </span>
 
-        <!--ALL ITEM SLIDER START /////////////////////////////////////////3333333333333-->
-
-        <div style="background-color:#fafbf9;" class="img_view_panels" >     </div>
-        <!--ALL ITEM SLIDER END /////////////////////////////////////////3333333333333-->
-
-
-        <!-- wrapper -->
-        <div class="wrapper">
-            <h1>Our Stock</h1>
-            <span><i class="shopping-cart"></i></span>
-
-            <div class="clear"></div>
-            <!-- items -->
-            <div class=" img_view_panel" >   </div>
-            <!--/ items -->
-        </div>
-        <!--/ wrapper -->
+                <div class="clear"></div>
+                <!-- items -->
+                <div class=" img_view_panel" >   </div>
+                <!--/ items -->
+            </div>
+            <!--/ wrapper -->
 
             <!--<script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>-->
 
-        <!--NEW COUSTOMER ITEM SLIDER END /////////////////////////////////////////3333333333333-->
+            <!--NEW COUSTOMER ITEM SLIDER END /////////////////////////////////////////3333333333333-->
 
+            <!---728x90--->
+        </div>
+    </div>   
 
-
-        <!---728x90--->
-
-
-
-    </div>
-</div>   
-
-<div class="clearfix"> </div>        	         
+    <div class="clearfix"> </div>        	         
 </div>
 
 <!---->
@@ -289,31 +175,16 @@
                         //    chosenRefresh();
                     });
                 });
-              
-        
-        //ONLOAD FUNCTION NAVIGATION BAR LOAD ------------------------------------------
-               
-
-        $(function () {
-                    var menu_data = '';
-                    $.post("./loaddata.php", {action: 'load_nav_bar_menu'}, function (e) {
+                //ONLOAD FUNCTION NAVIGATION BAR LOAD ------------------------------------------
+                $(function () {
+                    var sliderData = '';
+                    $.post("./loaddata.php", {action: 'load_nav_bar'}, function (e) {
                         if (e === undefined || e.length === 0 || e === null) {
-                           menu_data += '-- No Data Found --';
+                            $('.nav_bar').html("NO data Found ! ");
                         } else {
-<<<<<<< HEAD
 //                            $('.nav_bar').html(e);
 
-=======
-                            
-                               menu_data += e.toString();
-                           //                  $(div).find('.nav_bar').html(e).end().appendTo($('.body'));
-                         //                             $(div).appendTo('body');
-                         //                             $("body div").find('.nav_bar').html(e);
->>>>>>> 8d99ef8ce8e13984ae7832a672794d3e2c6527e7
                         }
-                        
-                    $('.nav_bar').append(menu_data);
-                        
                         //    chosenRefresh();
                     });
                 });
@@ -354,7 +225,7 @@
         }
 
         //ADD TO CART ANIMATION
-        $(document).on('click', '.add-to-cart', function () {
+        $(document).on('click', '.add-to', function () {
             var cart = $('.shopping-cart');
             var imgtodrag = $(this).parent('.item').find("img").eq(0);
             if (imgtodrag) {
@@ -395,6 +266,7 @@
 //    <!--//ADD TO CART ANIMATION END-->
 
     </script>
+
 </div>
 
 <!--FOTER DIV END ///////////////////////////////////////////////////////////-->

@@ -25,6 +25,7 @@ function getUserIpAddr() {
 }
 
 $user_key = getUserIpAddr();
+
 // GET USER IP ADDRESS END------------------------------------------------------
 if (array_key_exists("action", $_POST)) {
 //SINGAL PAGE LOAD SLIDER DATA =================================================
@@ -62,7 +63,7 @@ item_deatails.item_id = '{$_POST['item_id']}'";
         $system->prepareSelectQueryForJSON($query);
         //DELETE(CANCEL) ORDER -================================================
     } else if ($_POST['action'] == 'cancel_order') {
-        $query1 = "DELETE FROM `customer_added_item` WHERE (`cus_id`='{$_SESSION['cus_id']}' AND `pay_status` = '0' AND `item_save_status`= '1')";
+        $query1 = "DELETE FROM `customer_added_item` WHERE (`cus_id`='{$_SESSION['cus_id']}' AND `pay_status` = '0' AND `item_save_status`= '7')";
         $query2 = "DELETE FROM `shipping_details` WHERE (`cus_id`='{$_SESSION['cus_id']}' AND `pay_status` = '0')";
         MainConfig::connectDB();
         $link = MainConfig::conDB();
@@ -92,14 +93,41 @@ item_deatails.item_id = '{$_POST['item_id']}'";
             MainConfig::closeDB();
             return;
         }
-
 //COUSTOMER REGISTRATION (INSERT)============ ==================================
     } else if ($_POST['action'] == 'reg_cus') {
         $send_obj = $_POST['send_obj'];
-        $query = "INSERT INTO `customer_details` ( `f_name`, `l_name`, `email`, `city`, `address`, `phone`, "
+        MainConfig::connectDB();
+        $link = MainConfig::conDB();
+        $error = TRUE;
+        mysqli_query($link, "START TRANSACTION");
+
+        $query1 = "INSERT INTO `customer_details` ( `f_name`, `l_name`, `email`, `city`, `address`, `phone`, "
                 . "`password`,  `account_status`, `reg_date`,`reg_time`) "
                 . "VALUES ( '{$send_obj['f_name']}', '{$send_obj['l_name']}', '{$send_obj['email']}', '{$send_obj['city']}', '{$send_obj['address']}', '{$send_obj['phone']}', '{$send_obj['password']}' , '0', '$date','$time');";
-        $system->prepareCommandQueryForAlertify($query, "Value insert successfully .!", "Error !");
+
+        $insert = mysqli_query($link, $query1);
+        if (!$insert) {
+            $error = FALSE;
+            echo json_encode("751");
+            return;
+        }
+        $next_cus_id = mysqli_insert_id($link);
+        //INSERT QRY BILL NO---------------------------------------------------
+        $query2 = "INSERT INTO `bill_no` ( `cus_id`, `bill_no`) VALUES ('{$next_cus_id}', '1');";
+        $insert2 = mysqli_query($link, $query2);
+        if (!$insert2) {
+            $error = FALSE;
+            echo json_encode("752");
+            return;
+        }
+        if ($error) {
+            mysqli_query($link, "COMMIT");
+            echo json_encode("1");
+            return;
+        } else {
+            mysqli_query($link, "ROLLBACK");
+            echo json_encode("2");
+        }
 //ADDED ITEM FOR LOG USER(INSERT)============ ==================================
     } else if ($_POST['action'] == 'data_insert_loging_user') {
         //        check insert data availabel-----------------------------------
@@ -123,11 +151,11 @@ customer_added_item.item_id = '{$_POST['item_id']}'
         if (!empty($row)) {
             $new_qty = ($row['item_qty']) + 1;
 //data update ------------------------------------------------------------------
-            $update_qry = "UPDATE `customer_added_item` SET  `item_qty`='$new_qty', `pay_status`='0',`item_save_status`='0' WHERE (`id`='{$row['id']}');";
+            $update_qry = "UPDATE `customer_added_item` SET  `item_qty`='$new_qty', `pay_status`='0',`item_save_status`='5' WHERE (`id`='{$row['id']}');";
             $system->prepareCommandQueryForAlertify($update_qry, "Update Successfully", "Erro while updating");
         } else {
 //data insert in first time ----------------------------------------------------
-            $qry_insert = "INSERT INTO `customer_added_item` (`cus_id`, `item_id`, `item_qty`, `pay_status`, `item_add_date`, `item_add_time`, `item_save_status`) VALUES ( '{$_POST['cus_id']}', '{$_POST['item_id']}', '1', '0', '$date', '$time', '0');";
+            $qry_insert = "INSERT INTO `customer_added_item` (`cus_id`, `item_id`, `item_qty`, `pay_status`, `item_add_date`, `item_add_time`, `item_save_status`) VALUES ( '{$_POST['cus_id']}', '{$_POST['item_id']}', '1', '0', '$date', '$time', '5');";
             $system->prepareCommandQueryForAlertify($qry_insert, "Insert Successfully", "Erro while Inserting ");
         }
     }
@@ -196,70 +224,120 @@ web_cart.item_id = '{$_POST['item_id']}'";
     } else if ($_POST['action'] == 'card_payment_complete') {
         $send_obj = $_POST['send_obj'];
 // CARD PAYMENT COMPLETE QRY///////////////////////////////////////////////////////
-
-        //GET CUSTOMER ADDED ITEM DEATAILS START----------------------------------
-        
-        //GET CUSTOMER ADDED ITEM DEATAILS END------------------------------------
-        
-        
-//            ALL UPDATE QRY START----------------------------------------------
-        //%%%%%%%%%% UPDATE shipping_deatails TABLE %%%%%%%%%%%%%%%%%
-        $qry1_up = "UPDATE `shipping_details` SET  `bill_no`='{$send_obj['bill_no']}',  `pay_status`='1', `order_value`='{$send_obj['oder_val']}', `order_discount`='{$send_obj['tot_discount_val']}' WHERE (`shipping_id`='{$send_obj['shipping_id']}');";
-        //%%%%%%%%%% UPDATE coustomer_added_item TABLE %%%%%%%%%%%%%%%
-        $qry2_up = "UPDATE `customer_added_item` SET   `pay_status`='1', `item_save_status`='3' WHERE (`cus_id`='{$_SESSION['cus_id']}' AND `bill_no`='{$send_obj['bill_no']}');";
-        //%%%%%%%%%% UPDATE bill_no TABLE %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-        $new_bill_no = ($send_obj['bill_no']) + 1;
-        $qry3_up = "UPDATE `bill_no` SET  `bill_no`='{$new_bill_no}', `bill_status`='1' WHERE (`cus_id`='{$_SESSION['cus_id']}' AND `bill_no`='{$send_obj['bill_no']}');";
-//            ALL UPDATE QRY END------------------------------------------------
-//            ALL INSERT  QRY START---------------------------------------------
-        //%%%%%%%%%% INSERT pay_completed_invoice_summary TABLE %%%%%%%%%%%%%%%%
-        $qry1_in = "INSERT INTO `pay_completed_invoice_summary` (`shipping_id`, `order_value`, `pay_date`, `pay_time`, `pay_status`) VALUES ( '{$send_obj['shipping_id']}', '{$send_obj['oder_val']}', '$date', '$time', '2');";
-        //%%%%%%%%%% INSERT pay_completed_item_summary TABLE %%%%%%%%%%%%%%%%
-        $qry3_in = "INSERT INTO `pay_completed_item_summary` ( `cus_added_item_id`, `item_tot_discount`, `item_unit_discount`, `item_unit_price`, `item_qty`, `item_tot_bill_price`, `item_pay_date`, `item_pay_time`) VALUES ( NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);";
-
-        //-----------------------------------------------------------------------
+//TRANSACTION START ------------------------------------------------------------
         MainConfig::connectDB();
         $link = MainConfig::conDB();
         $error = TRUE;
         mysqli_query($link, "START TRANSACTION");
 
-        $result_qry1_up = mysqli_query($link, $qry1_up) or die(mysqli_error());
-        $result_qry2_up = mysqli_query($link, $qry2_up) or die(mysqli_error());
-        $result_qry3_up = mysqli_query($link, $qry3_up) or die(mysqli_error());
+        //GET CUSTOMER ADDED ITEM DEATAILS START--------------------------------
+        //GET COUS ADDED ITEM id's =============================================
+        $qry1_select = $system->prepareSelectQuery("SELECT
+customer_added_item.id AS customer_added_item_id,
+customer_added_item.item_id
+FROM
+customer_added_item
+INNER JOIN item_deatails ON customer_added_item.item_id = item_deatails.item_id
+WHERE
+customer_added_item.cus_id = '{$_SESSION['cus_id']}' AND
+customer_added_item.bill_no = '{$send_obj['bill_no']}' AND
+item_deatails.item_view_status = '0' AND
+customer_added_item.item_save_status = '7'");
 
-        $result_qry1_in = mysqli_query($link, $qry1_in) or die(mysqli_error());
-        $invoice_id = mysqli_insert_id($link);
-        //%%%%%%%%%% INSERT shipping order list TABLE %%%%%%%%%%%%%%%%%%%%%%%%%%
-        $qry2_in = "INSERT INTO `shipping_order_list` (`invoice_id`,  `order_complete_status`) VALUES ( '{$invoice_id}', '0');";
-        $result_qry2_in = mysqli_query($link, $qry2_in) or die(mysqli_error());
-        //----------------------------------------------------------------------
-        if (!$result_qry1_up) {
-            $error = FALSE;
-            echo json_encode("100");
-        }
-        if (!$result_qry2_up) {
-            $error = FALSE;
-            echo json_encode("200");
-        }
-        if (!$result_qry3_up) {
-            $error = FALSE;
-            echo json_encode("300");
-        }
-        if (!$result_qry1_in) {
-            $error = FALSE;
-            echo json_encode("400");
-        }
-        if (!$result_qry2_in) {
-            $error = FALSE;
-            echo json_encode("500");
-        }
-        if ($error) {
-            mysqli_query($link, "COMMIT");
-            echo json_encode("1");
-            return;
-        } else {
-            mysqli_query($link, "ROLLBACK");
-            echo json_encode("2");
+
+        if (!empty($qry1_select)) {
+            $item_tot_bill_price_count = 0;
+            $item_tot_bill_discount_count = 0;
+
+            foreach ($qry1_select as $row1) {
+                $item_id = $row1['item_id'];
+                $customer_added_item_id = $row1['customer_added_item_id'];
+                $qry2_select = $system->prepareSelectQuery("SELECT
+customer_added_item.id AS cus_added_item_id,
+customer_added_item.cus_id,
+customer_added_item.item_qty,
+item_deatails.item_price AS item_unit_price,
+item_deatails.item_discount AS item_unit_discount,
+Sum(item_deatails.item_price * customer_added_item.item_qty) AS oder_full_tot,
+Sum(item_deatails.item_discount * customer_added_item.item_qty) AS item_tot_discount,
+SUM(item_deatails.item_price * customer_added_item.item_qty)- SUM(item_deatails.item_discount * customer_added_item.item_qty) AS item_tot_bill_price,
+customer_added_item.item_id,
+customer_added_item.bill_no
+FROM
+customer_added_item
+INNER JOIN item_deatails ON customer_added_item.item_id = item_deatails.item_id
+WHERE
+customer_added_item.id = '{$row1['customer_added_item_id']}'");
+
+                if (!empty($qry2_select)) {
+                    foreach ($qry2_select as $row2) {
+                        //%%%%%%%%%% INSERT pay_completed_item_summary TABLE %%%%%%%%%%%%%%%%
+                        $qry3_in = "INSERT INTO `pay_completed_item_summary` ( `cus_added_item_id`, `item_tot_discount`, `item_unit_discount`, `item_unit_price`, `item_qty`, `item_tot_bill_price`, `item_pay_date`, `item_pay_time`,`bill_no`)"
+                                . " VALUES "
+                                . "( '{$row2['cus_added_item_id']}', '{$row2['item_tot_discount']}', '{$row2['item_unit_discount']}', '{$row2['item_unit_price']}', '{$row2['item_qty']}', '{$row2['item_tot_bill_price']}', '{$date}', '{$time}','{$row2['bill_no']}');";
+                        $result_qry3_insert = mysqli_query($link, $qry3_in) or die(mysqli_error());
+                        if (!$result_qry3_insert) {
+                            $error = FALSE;
+                            echo json_encode("600");
+                        }
+
+                        $item_tot_bill_price_count += $row2['item_tot_bill_price'];
+                        $item_tot_bill_discount_count += $row2['item_tot_discount'];
+                    }
+                }
+            }
+            //GET CUSTOMER ADDED ITEM DEATAILS END------------------------------
+//            ALL UPDATE QRY START----------------------------------------------
+            //%%%%%%%%%% UPDATE shipping_deatails TABLE %%%%%%%%%%%%%%%%%
+            $qry1_up = "UPDATE `shipping_details` SET  `bill_no`='{$send_obj['bill_no']}',  `pay_status`='2'   WHERE (`shipping_id`='{$send_obj['shipping_id']}');";
+            //%%%%%%%%%% UPDATE coustomer_added_item TABLE %%%%%%%%%%%%%%%
+            $qry2_up = "UPDATE `customer_added_item` SET   `pay_status`='1', `item_save_status`='3' WHERE (`cus_id`='{$_SESSION['cus_id']}' AND `bill_no`='{$send_obj['bill_no']}');";
+            //%%%%%%%%%% UPDATE bill_no TABLE %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+            $new_bill_no = ($send_obj['bill_no']) + 1;
+            $qry3_up = "UPDATE `bill_no` SET  `bill_no`='{$new_bill_no}', `bill_status`='1' WHERE (`cus_id`='{$_SESSION['cus_id']}' AND `bill_no`='{$send_obj['bill_no']}');";
+//            ALL UPDATE QRY END------------------------------------------------
+//            ALL INSERT  QRY START---------------------------------------------
+            //%%%%%%%%%% INSERT pay_completed_invoice_summary TABLE %%%%%%%%%%%%
+            $qry1_in = "INSERT INTO `pay_completed_invoice_summary` (`shipping_id`, `order_value`, `order_discount`, `pay_date`, `pay_time`, `pay_status`) VALUES ( '{$send_obj['shipping_id']}', '{$item_tot_bill_price_count}', '{$item_tot_bill_discount_count}', '$date', '$time', '2');";
+
+            $result_qry1_up = mysqli_query($link, $qry1_up) or die(mysqli_error());
+            $result_qry2_up = mysqli_query($link, $qry2_up) or die(mysqli_error());
+            $result_qry3_up = mysqli_query($link, $qry3_up) or die(mysqli_error());
+
+            $result_qry1_in = mysqli_query($link, $qry1_in) or die(mysqli_error());
+            $invoice_id = mysqli_insert_id($link);
+            //%%%%%%%%%% INSERT shipping order list TABLE %%%%%%%%%%%%%%%%%%%%%%%%%%
+            $qry2_in = "INSERT INTO `shipping_order_list` (`invoice_id`,  `order_complete_status`) VALUES ( '{$invoice_id}', '0');";
+            $result_qry2_in = mysqli_query($link, $qry2_in) or die(mysqli_error());
+            //----------------------------------------------------------------------
+            if (!$result_qry1_up) {
+                $error = FALSE;
+                echo json_encode("100");
+            }
+            if (!$result_qry2_up) {
+                $error = FALSE;
+                echo json_encode("200");
+            }
+            if (!$result_qry3_up) {
+                $error = FALSE;
+                echo json_encode("300");
+            }
+            if (!$result_qry1_in) {
+                $error = FALSE;
+                echo json_encode("400");
+            }
+            if (!$result_qry2_in) {
+                $error = FALSE;
+                echo json_encode("500");
+            }
+            if ($error) {
+                mysqli_query($link, "COMMIT");
+                echo json_encode("1");
+                return;
+            } else {
+                mysqli_query($link, "ROLLBACK");
+                echo json_encode("2");
+            }
         }
     } else if ($_POST['action'] == 'item_total') {
 // GET ITEM TOTAL - ------------------------------------------------------------
@@ -292,7 +370,7 @@ INNER JOIN item_deatails ON customer_added_item.item_id = item_deatails.item_id
 WHERE
 item_deatails.item_view_status = '0' AND
 customer_added_item.pay_status = '0' AND
-customer_added_item.item_save_status = '1' AND
+customer_added_item.item_save_status = '7' AND
 customer_added_item.cus_id = '{$_SESSION['cus_id']}'
 ";
         $system->prepareSelectQueryForJSONSingleData($qry);
@@ -315,17 +393,17 @@ shipping_details.pay_status = '0'
     } else if ($_POST['action'] == 'load_transaction_tbl') {
 // LOAD TRASACTION DEATAILS - ----------------------------------------------------------
         $qry = "SELECT
-shipping_details.bill_no,
-pay_completed_invoice_summary.order_value,
 pay_completed_invoice_summary.invoice_id,
+pay_completed_invoice_summary.shipping_id,
+pay_completed_invoice_summary.order_value,
 pay_completed_invoice_summary.pay_status,
 pay_completed_invoice_summary.pay_date,
 pay_completed_invoice_summary.pay_time
 FROM
-shipping_details
-INNER JOIN pay_completed_invoice_summary ON pay_completed_invoice_summary.shipping_id = shipping_details.shipping_id
+pay_completed_invoice_summary
+INNER JOIN shipping_details ON pay_completed_invoice_summary.shipping_id = shipping_details.shipping_id
 WHERE
-shipping_details.cus_id = '{$_SESSION['cus_id']}' 
+shipping_details.cus_id = '{$_SESSION['cus_id']}'
 ORDER BY
 pay_completed_invoice_summary.invoice_id DESC
 ";
@@ -354,6 +432,41 @@ ORDER BY
 pay_completed_invoice_summary.invoice_id DESC
 ";
         $system->prepareSelectQueryForJSON($qry);
+    } else if ($_POST['action'] == 'load_buy_item_list') {
+// LOAD BUY ITEM LIST DEATAILS - ----------------------------------------------------------
+        $qry = "SELECT
+item_deatails.item_name,
+pay_completed_item_summary.item_qty,
+pay_completed_item_summary.item_tot_bill_price
+FROM
+customer_added_item
+INNER JOIN pay_completed_item_summary ON pay_completed_item_summary.cus_added_item_id = customer_added_item.id
+INNER JOIN item_deatails ON customer_added_item.item_id = item_deatails.item_id
+WHERE
+customer_added_item.cus_id = '{$_SESSION['cus_id']}' AND
+pay_completed_item_summary.bill_no = '{$_POST['bill_no']}'
+ORDER BY
+pay_completed_item_summary.id DESC
+";
+        $system->prepareSelectQueryForJSON($qry);
+    } else if ($_POST['action'] == 'load_profile_setting_tbl') {
+// LOAD PROFILE SETTING DEATAILS - ----------------------------------------------------------
+        $qry = "SELECT
+customer_details.cus_id,
+customer_details.f_name,
+customer_details.l_name,
+customer_details.email,
+customer_details.city,
+customer_details.address,
+customer_details.phone,
+customer_details.`password`
+FROM
+customer_details
+WHERE
+customer_details.account_status = '0' AND
+customer_details.cus_id = '{$_SESSION['cus_id']}'
+";
+        $system->prepareSelectQueryForJSONSingleData($qry);
     } else if ($_POST['action'] == 'add_shipping_deatail') {
         $send_obj = $_POST['send_obj'];
 // INSERT SHIPPING DEATAILS - ----------------------------------------------------------
@@ -364,13 +477,29 @@ pay_completed_invoice_summary.invoice_id DESC
             VALUES ( '{$_SESSION['cus_id']}', '{$send_obj['recipient_name']}', '{$send_obj['recipient_phone']}', '-',
             '{$send_obj['address']}', '{$send_obj['note']}', '0', '0', '0', 
             '0', '0');");
-        $system->prepareCommandQueryForAlertify($qry, "Insert Successfully", "Erro while inserting");
+        MainConfig::connectDB();
+        $link = MainConfig::conDB();
+        $save = mysqli_query($link, $qry);
+        MainConfig::closeDB();
+        if (isset($save) && $save) {
+            echo json_encode('1');
+        } else {
+            echo json_encode('2');
+        }
     } else if ($_POST['action'] == 'update_shipping_deatail') {
         $send_obj = $_POST['send_obj'];
 // UPDATE SHIPPING DEATAILS - ----------------------------------------------------------
         $qry = ("UPDATE `shipping_details` SET  `recipients_name`='{$send_obj['recipient_name']}', `recipients_phone`='{$send_obj['recipient_phone']}',"
                 . " `shipping_city`='-', `shipping_address`='{$send_obj['address']}', `user_note`='{$send_obj['note']}' WHERE (`shipping_id`='{$send_obj['id']}');");
-        $system->prepareCommandQueryForAlertify($qry, "Insert Successfully", "Erro while inserting");
+        MainConfig::connectDB();
+        $link = MainConfig::conDB();
+        $save = mysqli_query($link, $qry);
+        MainConfig::closeDB();
+        if (isset($save) && $save) {
+            echo json_encode('1');
+        } else {
+            echo json_encode('2');
+        }
     } else if ($_POST['action'] == 'added_item_summary') {
 // ADDED ITEM TOTAL SUMMARY- ----------------------------------------------------------
         $qry = "SELECT
@@ -394,7 +523,7 @@ INNER JOIN item_deatails ON customer_added_item.item_id = item_deatails.item_id
 WHERE
 item_deatails.item_view_status = '0' AND
 customer_added_item.pay_status = '0' AND
-customer_added_item.item_save_status = '1' AND
+customer_added_item.item_save_status = '7' AND
 customer_added_item.cus_id = '{$_SESSION['cus_id']}'";
         $system->prepareSelectQueryForJSON($qry);
     } else if ($_POST['action'] == 'log_out') {
@@ -409,7 +538,7 @@ customer_added_item.cus_id = '{$_SESSION['cus_id']}'";
 //            echo $_SESSION['uname'];
             echo json_encode("0");
         } else {
-//SESSION DISTROY COMPLETED------------------------
+//SESSION DISTROY COMPLETED----------------------------
 //            echo $_SESSION['uname'];
             echo json_encode("1");
         }
@@ -431,10 +560,17 @@ customer_details.email = '{$_POST['email']}'
         MainConfig::connectDB();
         $link = MainConfig::conDB();
         $result = mysqli_query($link, $qry) or die(mysqli_error());
-        MainConfig::closeDB();
+//        MainConfig::closeDB();
         $row = mysqli_fetch_assoc($result);
-
         if (!empty($row)) {
+            // SESSEON SET /////////////////////////////////////////////////////
+            $_SESSION['uname'] = $row['f_name'];
+            $_SESSION['cus_id'] = $row['cus_id'];
+            // SESSEON SET End /////////////////////////////////////////////////
+//START TRANSACTION ------------------------------------------------------------
+            $error = TRUE;
+            mysqli_query($link, "START TRANSACTION");
+
 //SELECT WEB CART DATA ---------------------------------------------
             $select_web_cart = $system->prepareSelectQuery("SELECT
 web_cart.id,
@@ -448,12 +584,6 @@ INNER JOIN item_deatails ON web_cart.item_id = item_deatails.item_id
 WHERE
 web_cart.user_key = '$user_key' AND
 item_deatails.item_view_status = '0'");
-
-            MainConfig::connectDB();
-            $link = MainConfig::conDB();
-//START TRANSACTION ------------------------------------------------------------
-            $error = TRUE;
-            mysqli_query($link, "START TRANSACTION");
 
             if (!empty($select_web_cart)) {
                 foreach ($select_web_cart as $val) {
@@ -486,7 +616,7 @@ customer_added_item.item_save_status = '0'
                             return;
                         }
                     } else {
-                        //WEB CART DATA CPPY TO ITEM ADDED TABLE ---------------------------------------
+                        //WEB CART DATA CPPY TO ITEM ADDED TABLE ------------------------------------------
                         $qry_insert = "INSERT INTO `customer_added_item` (`cus_id`, `item_id`,`item_qty`, `pay_status`,`item_add_date`,`item_add_time`) "
                                 . "VALUES"
                                 . " ('{$row['cus_id']}', '{$val['item_id']}','{$val['item_qty']}', '0','$date','$time');";
@@ -499,46 +629,6 @@ customer_added_item.item_save_status = '0'
                         }
                     }
                 }
-                //CHECK BILL NO GET OR NOT -----------------------------------------
-                $qry_bill = ("SELECT
-bill_no.bill_id,
-bill_no.bill_no,
-bill_no.bill_status
-FROM
-bill_no
-WHERE
-bill_no.cus_id = {$row['cus_id']}");
-//                MainConfig::connectDB();
-//                $link = MainConfig::conDB();
-                $result = mysqli_query($link, $qry_bill);
-                $row_bill = mysqli_fetch_assoc($result);
-
-                if (!empty($row_bill)) {
-                    //bill status 0 is not complete bill
-                    //bill status 1 is  complete bill
-                    if ($row_bill['bill_status'] == 1) {
-                        $nw_bill_no = ($row_bill['bill_no']) + 1;
-                        //UPDATE QRY -----------------------------------------------
-                        $qry = "UPDATE `bill_no` SET `bill_no`='{$nw_bill_no}', `bill_status`='0' WHERE (`bill_id`='{$row_bill['bill_id']}'));";
-                        $update = mysqli_query($link, $qry);
-                        if (!$update) {
-                            $error = FALSE;
-                            echo json_encode("760");
-//                            echo 'Data update error in to bill no tbl';
-                            return;
-                        }
-                    }
-                } else {
-                    //INSERT QRY --------------------------------------------------
-                    $qry = "INSERT INTO `bill_no` ( `cus_id`, `bill_no`) VALUES ('{$row['cus_id']}', '1');";
-                    $insert = mysqli_query($link, $qry);
-                    if (!$insert) {
-                        $error = FALSE;
-                        echo json_encode("750");
-//                        echo 'Data insert error in to bill no tbl';
-                        return;
-                    }
-                }
                 if ($error) {
 //DELETE DATA IN WEB CART ----------------------------------
                     $qry_delete = "DELETE FROM `web_cart` WHERE (`user_key`='$user_key')";
@@ -548,73 +638,24 @@ bill_no.cus_id = {$row['cus_id']}");
                         echo 'Data delete error in web cart';
                         return;
                     } else {
-                        //SET LOGIN USER INTO SESSEON ------ -------------------------------
-                        $_SESSION['uname'] = $row['f_name'];
-                        $_SESSION['cus_id'] = $row['cus_id'];
-                        //------------------------------------------------------------------
                         $error = TRUE;
                         mysqli_query($link, "COMMIT");
-                        MainConfig::closeDB();
-                        echo json_encode("1");
+                        echo json_encode("5");
                         return;
                     }
                 } else {
                     mysqli_query($link, "ROLLBACK");
-                    MainConfig::closeDB();
 //                    echo "data insert error";
                     echo json_encode("0");
                     return;
                 }
             } else {
-                //CHECK BILL NO GET OR NOT -----------------------------------------
-                $qry_bill = ("SELECT
-bill_no.bill_id,
-bill_no.bill_no,
-bill_no.bill_status
-FROM
-bill_no
-WHERE
-bill_no.cus_id = {$row['cus_id']}");
-                MainConfig::connectDB();
-                $link = MainConfig::conDB();
-                $result = mysqli_query($link, $qry_bill);
-                $row_bill = mysqli_fetch_assoc($result);
-
-                if (!empty($row_bill)) {
-                    //bill status 0 is not complete bill
-                    //bill status 1 is  complete bill
-                    if ($row_bill['bill_status'] == 1) {
-                        $nw_bill_no = ($row_bill['bill_no']) + 1;
-                        //UPDATE QRY -----------------------------------------------
-                        $qry = "UPDATE `bill_no` SET `bill_no`='{$nw_bill_no}', `bill_status`='0' WHERE (`bill_id`='{$row_bill['bill_id']}'));";
-                        $update = mysqli_query($link, $qry);
-                        if (!$update) {
-                            $error = FALSE;
-                            echo json_encode("760");
-                            return;
-                        }
-                    }
-                } else {
-                    //INSERT QRY --------------------------------------------------
-                    $qry = "INSERT INTO `bill_no` ( `cus_id`, `bill_no`) VALUES ('{$row['cus_id']}', '1');";
-                    $insert = mysqli_query($link, $qry);
-                    if (!$insert) {
-                        $error = FALSE;
-                        echo json_encode("750");
-                        return;
-                    }
-                }
-                //SET LOGIN USER INTO SESSEON ------ -------------------------------
-                $_SESSION['uname'] = $row['f_name'];
-                $_SESSION['cus_id'] = $row['cus_id'];
-                //------------------------------------------------------------------
-                //NOT WEB CART ADDED ITEM --------------------------------------
+                //NO WEB CART ITEM ----------------------------
                 echo json_encode("5");
             }
-//EMAIL & PW MATCH     -------------------------------------------
         } else {
 //EMAIL & PW NOT MATCH -------------------------------------------
-            echo json_encode("0");
+            echo json_encode("9");
         }
     } else if ($_POST['action'] == 'load_cart_item_list') {
 // GET ITEM INFO. TO CART TBL - ------------------------------------------------
@@ -636,6 +677,30 @@ web_cart.user_key = '$user_key'
 ORDER BY
 web_cart.id DESC";
         $system->prepareSelectQueryForJSON($qry);
+    } else if ($_POST['action'] == 'search_item') {
+// GET ITEM INFO. TO CART TBL - ------------------------------------------------
+        $qry = $system->prepareSelectQuery("SELECT
+item_deatails.item_name,
+item_deatails.sub_cat_id,
+item_deatails.item_id
+FROM
+item_deatails
+WHERE
+item_deatails.item_view_status = '0' AND
+(lower(item_deatails.item_name) LIKE '{$_POST['searchTerm']}%') or (UPPER(item_deatails.item_name) LIKE '{$_POST['searchTerm']}%')
+ORDER BY
+item_deatails.item_id DESC");
+        $out_put = '';
+        echo $out_put.='<ul class="live-search-list">';
+        if (!empty($qry)) {
+            foreach ($qry as $val) {
+                echo $out_put.='<li>' . $val['item_name'] . '</li>';
+            }
+        }
+
+        echo $out_put.='</ul>';
+        echo $out_put;
+//        $system->prepareSelectQueryForJSON($qry);
     } else if ($_POST['action'] == 'added_item_remove') {
 // REMOVE ADDED ITEM ------------ ------------------------------------------------
         $qry = "DELETE FROM `customer_added_item` WHERE (`id`='{$_POST['id']}')";
@@ -730,9 +795,6 @@ ORDER BY
 item_deatails.item_id DESC");
 
                         if (!empty($item_info_data)) {
-//                            $output_data = array();
-//                            $sliderData = '<div>';
-
                             $out_put .= '<section class="slider regular"   style=" padding-top:10px ;">';
 
                             foreach ($item_info_data as $val3) {
@@ -746,27 +808,11 @@ item_deatails.item_id DESC");
                                 $item_price = $val3['item_price'];
                                 $item_id = $val3['item_id'];
 
-//                                $out_put .= '<div align="center" class="product-inner" ><a href="single.php?item_id=' . $item_id . '&sub_cat_id=' . $sub_cat_id . ' "><img class="img-responsive" style="" width="60px" src="../drugs_ordering_system_backend/uploads/' . $val3['item_image'] . '"></a>'
-//                                        . '<label ><h5 style="text-align: center;"><span style="color:blue;">' . $item_name . '</span></h5>'
-//                                        . '<h6 ><span style="color:red;">LKR : ' . $item_price . '</span></h6>'
-//                                        . '<button type="button" class="btn btn-success" id="add_to_cart_btn"  data-item_price = "' . $item_price . '"    value=' . $item_id . '>Add to cart</button>'
-//                                        . '</label>'
-//                                        . '</div>';
-
                                 $out_put .= '<div align="center" class="container  item" ><a href="single.php?item_id=' . $item_id . '&sub_cat_id=' . $sub_cat_id . ' "><img class="" style="" width="60px" src="../drugs_ordering_system_backend/uploads/' . $val3['item_image'] . '"/></a>'
                                         . '<p aling="center"><h5>' . $item_name . '</h5>'
                                         . '<p style="color:red;">RS. : <em>' . $item_price . '</em></p>'
                                         . '<button type="button" class="btn btn-success add-to-cart" id="add_to_cart_btn"  data-item_price = "' . $item_price . '"    value=' . $item_id . '>Add to cart</button></p>'
                                         . '</div>';
-//
-//                                $out_put = '<div class="item">   <img width="60px" alt="item" src="../drugs_ordering_system_backend/uploads/' . $val3['item_image'] . '"/>
-//                        <h2>Item 1</h2>
-//
-//                        <p>Price: <em>$449</em>
-//                        </p>
-//                        <button class="add-to-cart" type="button">Add to cart</button>
-//                    </div>';
-
                                 $out_put .= '<div>    </div>';
 //                           
                             }
@@ -882,119 +928,8 @@ main_cat.view_status = '0'
 ORDER BY
 main_cat.main_cat_id DESC");
 
-$out_put1 = '';
+        $out_put1 = '';
         if (!empty($main_cat_data)) {
-            
-            /*
-            $out_put = '<div class="menu-container">
-    <div class="menu" >
-        <ul>';
-            $main_cat_name = '';
-            foreach ($main_cat_data as $val) {
-                $main_cat_id = $val['main_cat_id'];
-//                echo '//////////////MAin Cat>>' . $val['main_cat_id'] . '<br>';
-//                echo '/////////////main cat name>>' . $val['main_cat_name'] . '<br>';
-//                        $out_put .='<div style="background-color: coral;">'. $val['main_cat_name'] . '</br></div>';
-//                $out_put .= '<ul>';
-                $out_put .= '<li>';
-                $out_put .= '<a href="index.php">' . $val['main_cat_name'] . '</a>';
-//                $out_put .= '</ul>';
-//                $out_put .= '</li>';
-//                $out_put .= ' <li>popopopopo</li>';
-                $sub_cat_data = $system->prepareSelectQuery("SELECT
-sub_cat.sub_cat_id,
-sub_cat.sub_cat_name
-FROM
-sub_cat
-WHERE
-sub_cat.view_status = '0' AND
-sub_cat.main_cat_id = '$main_cat_id'
-ORDER BY
-sub_cat.sub_cat_id DESC");
-                if (!empty($sub_cat_data)) {
-                    foreach ($sub_cat_data as $val2) {
-                        $sub_cat_id = $val2['sub_cat_id'];
-//                        echo '=============SUB CAT ==' . $val2['sub_cat_id'] . '<br>';
-//                        echo '============= SUB CAT name==' . $val2['sub_cat_name'] . '<br>';
-                        $out_put .= '<ul>';
-                        $out_put .= '<li>';
-                        $out_put .= '<a style="color: black;">' . $val2['sub_cat_name'] . '</a>';
-//                        $out_put .= '<div</div>';
-//                       
-
-                        $item_info_data = $system->prepareSelectQuery("SELECT
-item_deatails.item_id,
-item_deatails.item_name,
-item_deatails.item_price,
-item_deatails.item_image,
-item_deatails.item_discount,
-sub_cat.sub_cat_name,
-main_cat.main_cat_name,
-main_cat.main_cat_id,
-sub_cat.sub_cat_id
-FROM
-item_deatails
-INNER JOIN sub_cat ON item_deatails.sub_cat_id = sub_cat.sub_cat_id
-INNER JOIN main_cat ON sub_cat.main_cat_id = main_cat.main_cat_id
-WHERE
-item_deatails.sub_cat_id = '$sub_cat_id' AND
-item_deatails.img_status = '1' AND
-item_deatails.item_view_status = '0'
-ORDER BY
-item_deatails.item_id DESC");
-
-                        if (!empty($item_info_data)) {
-//                            $output_data = array();
-//                            $sliderData = '<div>';
-//                            $out_put .= '<section class="slider regular"   style=" padding-top:10px ;">';
-
-                            foreach ($item_info_data as $val3) {
-
-                                $main_cat_names = $val3['main_cat_name'];
-                                $main_cat_id = $val3['main_cat_name'];
-                                $sub_cat_name = $val3['sub_cat_name'];
-                                $sub_cat_id = $val3['sub_cat_id'];
-                                $item_name = $val3['item_name'];
-                                $item_img = $val3['item_image'];
-                                $item_price = $val3['item_price'];
-                                $item_id = $val3['item_id'];
-
-
-
-
-//                                $out_put .= '<label style="text-align: center;"><h5 style="text-align: center;"><span style="color:blue;">' . $item_name . '</span></h5>'
-//                                        . '</label>'
-//                                        . '</div>';
-//                           
-                            }
-//                                $out_put .= '</ul>';
-//                                $out_put .= '</li>';
-//                            $out_put .= '</div></section>';
-                        }
-                     
-                        $out_put .= '</li>';
-                           $out_put .= '</ul>';
-                    }
-
-//                        $out_put .= '<ul>';
-//                        $out_put .= '<li>';
-//                        $out_put .= '<ul>';
-                }
-            }
-            $out_put .= '</li>';
-
-//            $out_put .= '</li>';
-//                 $out_put .= '</ul>';
-//                $out_put .= '</li>';
-//                            $out_put .= '</ul>';
-        }
-           $out_put .= '</ul></div></div>'   ;
-        
-             * 
-             * 
-             * 
-             */
-            
             $out_put1 = '<div class="menu-container">
     <div class="menu" >
         <ul>
@@ -1051,12 +986,12 @@ item_deatails.item_id DESC");
     </div>
 </div>
 ';
-            
         }
         echo $out_put1;
     }//END LOAD NAV BAR MENU
-    
-    
-    
 }   //END ARRAY +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+
+
+
+    

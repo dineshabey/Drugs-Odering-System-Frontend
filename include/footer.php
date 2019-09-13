@@ -7,26 +7,14 @@ if (isset($_SESSION['cus_id'])) {
 //    echo "Not Sesseon";
 }
 ?>
-<div class="footer-top">
+<div class="footer-top bottom_head_cus2" style="background-color: #357ae833; ">
 
-
-    <div class="container">
-        <div class="latter">
-            <h6>NEWS-LETTER</h6>
-            <div class="sub-left-right">
-                <form>
-                    <input type="text" value="Enter email here"onfocus="this.value = '';" onblur="if (this.value == '') {
-                                this.value = 'Enter email here';
-                            }" />
-                    <input type="submit" value="SUBSCRIBE" />
-                </form>
-            </div>
-            <div class="clearfix"> </div>
-        </div>
-        <div class="latter-right">
+    <div class="container " >
+        
+        <div class="latter-right" style="padding-bottom: 10px">
             <p>FOLLOW US</p>
             <ul class="face-in-to">
-                <li><a href="#"><span> </span></a></li>
+                <!--<li><a href="#"><span> </span></a></li>-->
                 <li><a href="#"><span class="facebook-in"> </span></a></li>
                 <div class="clearfix"> </div>
             </ul>
@@ -34,9 +22,23 @@ if (isset($_SESSION['cus_id'])) {
         </div>
         <div class="clearfix"> </div>
     </div>
+
+    <!--<hr style="border: 1px solid cornsilk;">-->
+    <div class="container" style="padding-bottom: 50px">
+     
+        <div class="row" style="">
+            <div class="col-lg-2">   <h2>PAY ACCEPTED</h2> </div>
+            <div class="col-lg-8">
+                <img src="images/site_img/payhere_long_banner.png" alt="" class="responsive" style="max-width: 100%;" />
+
+            </div>
+            <!--<div class="col-lg-2"> </div>-->
+        </div>
+    </div>
+
 </div>
-<div class="footer-bottom">
-    <div class="container">
+<div class="footer-bottom " style="background-color: #ffffffb3; padding-top: 20px">
+    <div class="container" style="padding-top: 20px;">
         <div class="footer-bottom-cate">
             <h6>CATEGORIES</h6>
             <ul>
@@ -86,15 +88,13 @@ if (isset($_SESSION['cus_id'])) {
         <div class="footer-bottom-cate cate-bottom">
             <h6>OUR ADDRESS</h6>
             <ul>
-                <li>Aliquam metus  dui. </li>
-                <li>orci, ornareidquet</li>
-                <li> ut,DUI.</li>
-                <li >nisi, dignissim</li>
-                <li >gravida at.</li>
-                <li class="phone">PH : 6985792466</li>
+                <li>Anamaduwa Road, </li>
+                <li>Nawagathegama</li>
+                <li class="phone">061 405305848</li>
                 <li class="temp"><p>&copy 2019  All Rights Reserved | Design by  <a href="http://goldendit.com/" target="_blank">Golden-D IT Solution</a> </p></li>
             </ul>
         </div>
+        
         <div class="clearfix"> </div>
     </div>
 </div>
@@ -131,7 +131,6 @@ if (isset($_SESSION['cus_id'])) {
 //                                    $('#').html("NO data Found ! ");
                                         alert('No data found');
                                     } else {
-                                        alert('Item added successfully !')
                                         load_user_added_item();
                                     }
                                 }, "json");
