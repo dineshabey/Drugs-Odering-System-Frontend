@@ -4,7 +4,6 @@
 <script src="js/AlertifyJS-master/build/alertify.min.js" type="text/javascript"></script>
 <a href="fonts/user-solid.svg"></a>
 <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-<script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
 
 <link rel="stylesheet"  href= "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
 
@@ -245,16 +244,23 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-lg-12" style="margin-top:5px;">
-                <div class="col-lg-9">
-                  <div class="input-icons">                                      
+            <div class="col-lg-12">
+                <table class="table table-bordered head_tbl " cellpadding=""  >
+                    <tbody>
+                        <tr>
+                            <td class="blocks" style="text-align: left; ine-height: 0; border:none ; height: 1%; width: 15%;">
+                             
+
+                            </td>
+                            <td class="blocks" style="text-align: center; line-height: 0; border:none ;  height: 0%; width:50%;">
+                                <div class="input-icons">                                      
                                     <input  style="border-radius:2px; background-color:#ffffff59; width: 100%;" id="search_text" class="form-control" type="text" placeholder="Search" aria-label="Search">
                                    <!--<i class="fa fa-search icon"></i>-->
                                 </div>
                                 <br>
                               
-                </div>
-                <div class="col-lg-3">
+                            </td>
+                            <td class="blocks" style="text-align: center; ine-height: 0; border: none; ">
                                 <label>
                                     <span>
              <!--<i class="shopping-cart"></i>-->
@@ -268,15 +274,28 @@
                                     </span>
                                 </label>
 
-                      
+                            </td>
 
-                </div>
-                
-                <div class="col-lg-12">
+
                             <!--<td class="blocks"  rowspan="3" style="text-align: center; width: 20%; height: 8%; border:none ;"><a href="index.php"><img src="images/site_img/edit_logo.jpg" height="180px" width="100px" alt=" " /></a></td>-->
-                             <?php require_once('navbar.php'); ?></td>
-                     
-                 </div>
+
+                        </tr>
+                        <tr>
+                            <td class="blocks" colspan="3" style="text-align: left; height: 10%;  border:none ;"> <?php require_once('navbar.php'); ?></td>
+                        </tr>
+                        <tr hidden="">
+                            <td class="blocks" colspan="2" style="text-align: left; border: ;">
+                                <div class="btn-group" role="group" aria-label="Basic example">
+                                    <button type="button" class="btn btn-success">CAT 1</button>
+                                    <button type="button" class="btn btn-secondary">CAT 2</button>
+                                    <button type="button" class="btn btn-secondary">CAT 3</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
         </div>
     </div>
 

@@ -701,6 +701,24 @@ item_deatails.item_id DESC");
         echo $out_put.='</ul>';
         echo $out_put;
 //        $system->prepareSelectQueryForJSON($qry);
+    } else if ($_POST['action'] == 'search_text') {
+// GET ITEM INFO. TO CART TBL - ------------------------------------------------
+        
+        
+        
+        $qry = "SELECT
+item_deatails.item_name,
+item_deatails.sub_cat_id,
+item_deatails.item_id
+FROM
+item_deatails
+WHERE
+item_deatails.item_view_status = '0' AND
+(lower(item_deatails.item_name) LIKE '{$_POST['searchTerm']}%') or (UPPER(item_deatails.item_name) LIKE '{$_POST['searchTerm']}%')
+ORDER BY
+item_deatails.item_id DESC";
+       
+      return  $system->prepareSelectQueryForJSON($qry);
     } else if ($_POST['action'] == 'added_item_remove') {
 // REMOVE ADDED ITEM ------------ ------------------------------------------------
         $qry = "DELETE FROM `customer_added_item` WHERE (`id`='{$_POST['id']}')";

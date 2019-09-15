@@ -32,7 +32,8 @@ $time = date("h:i:sa");
                 background: #3498DB;
 
             }
-
+            
+       
             .menu-mobile {
                 display: none;
                 padding: 10px;
@@ -267,7 +268,7 @@ $time = date("h:i:sa");
                          <div class="menu"> ';
                     $main_cat_name = '';
 
-                    $out_put .= '<ul>';
+                    $out_put .= '<ul  class="nav navbar-nav navbar-dark bg-dark navbar-toggler">';
                     $out_put .= '<li><a href="index.php">HOME </a>';
                     foreach ($main_cat_data as $val) {
                         $main_cat_id = $val['main_cat_id'];
