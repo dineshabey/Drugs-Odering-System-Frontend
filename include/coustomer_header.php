@@ -6,76 +6,87 @@
 
 
 
- <style type="text/css">
-                /*ADD TO CART CSS START =============================================*/
+<style type="text/css">
 
-                .body {
-                    overflow: hidden;
-                }
-                .wrapper {
-                    max-width: 1520px;
-                    /*height: 880px;*/
-                    margin: 20px auto ;
-                    padding: 20px;
-                    background-color: #f5f5f5;
-                    width: 100%;
-                }
-                h1 {
-                    display: inline-block;
-                    background-color: #333;
-                    color: #fff;
-                    font-size: 20px;
-                    font-weight: normal;
-                    text-transform: uppercase;
-                    padding: 4px 20px;
-                    float: left;
-                }
-                @media all and (max-width: 1200px) and (min-width: 800px) {
-                    /* Change Resolutions Here */
-                    h5 {
-                        font-size: 12px;
-                    }
-                }
-                img
-                {
-                    max-width: 100%;
-                    min-width: 40px;;
-                    height: auto;
-                }
+    /*BORDER COLOR IMAGE SLIDER*/ 
+    .boder_img{
+        border-style: solid;
+        border-color: #fff;
+        border-width: 1px;
+    }
+    /*BORDER COLOR IMAGE SLIDER*/ 
 
-                .clear {
-                    clear: both;
-                }
-                .items {
-                    display: block;
-                    margin: 20px 0;
-                }
-                h2 {
-                    font-size: 16px;
-                    display: block;
-                    border-bottom: 1px solid #ccc;
-                    margin: 0 0 10px 0;
-                    padding: 0 0 5px 0;
-                }
 
-                .btn-responsive {
-                    white-space: normal !important;
-                    word-wrap: break-word;
-                }
 
-                span {
-                    float: right;
-                }
-                .shopping-cart {
-                    display: inline-block;
-                    background: url('http://cdn1.iconfinder.com/data/icons/jigsoar-icons/24/_cart.png') no-repeat 0 0;
-                    width: 24px;
-                    height: 24px;
-                    margin: 0 10px 0 0;
-                }
-                /*ADD TO CART CSS END  =============================================*/
+    /*ADD TO CART CSS START =============================================*/
 
-            </style>
+    .body {
+        overflow: hidden;
+    }
+    .wrapper {
+        max-width: 1520px;
+        /*height: 880px;*/
+        margin: 20px auto ;
+        padding: 20px;
+        background-color: #f5f5f5;
+        width: 100%;
+    }
+    h1 {
+        display: inline-block;
+        background-color: #333;
+        color: #fff;
+        font-size: 20px;
+        font-weight: normal;
+        text-transform: uppercase;
+        padding: 4px 20px;
+        float: left;
+    }
+    @media all and (max-width: 1200px) and (min-width: 800px) {
+        /* Change Resolutions Here */
+        h5 {
+            font-size: 12px;
+        }
+    }
+
+    img {
+        max-width: 100%;
+        min-width: 40px;;
+        height: auto;
+    }
+
+    .clear {
+        clear: both;
+    }
+    .items {
+        display: block;
+        margin: 20px 0;
+    }
+    h2 {
+        font-size: 16px;
+        display: block;
+        border-bottom: 1px solid #ccc;
+        margin: 0 0 10px 0;
+        padding: 0 0 5px 0;
+    }
+
+    .btn-responsive {
+        white-space: normal !important;
+        word-wrap: break-word;
+    }
+
+    span {
+        float: right;
+    }
+    .shopping-cart {
+        display: inline-block;
+        background: url('http://cdn1.iconfinder.com/data/icons/jigsoar-icons/24/_cart.png') no-repeat 0 0;
+        width: 24px;
+        height: 24px;
+        margin: 0 10px 0 0;
+    }
+    /*ADD TO CART CSS END  =============================================*/
+
+</style>
 
 <style type="text/css">
     .top_head_cus {
@@ -114,7 +125,7 @@
     .head_tbl{
         table-layout: fixed;
         max-width:100%;
-        border="0";
+        border = "0";
         border: none;
 
     }
@@ -170,7 +181,7 @@
 <!--<TOP HEADER END-->
 <!--<BOTTOM HEADER START-->
 <!--<div class="row" >
-    <div class="col-md-2">  <?php // require_once('navbar.php');                            ?> </div>
+    <div class="col-md-2">  <?php // require_once('navbar.php');                               ?> </div>
 
 </div>-->
 

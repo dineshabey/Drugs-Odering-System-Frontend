@@ -37,7 +37,7 @@ if (isset($_SESSION['cus_id'])) {
     </div>
 
 </div>
-<div class="footer-bottom " style="background-color: #ffffffb3; padding-top: 20px">
+<div class="footer-bottom " style="background-color: #ffffffb3; padding-top: 20px" hidden="">
     <div class="container" style="padding-top: 20px;">
         <div class="footer-bottom-cate">
             <h6>CATEGORIES</h6>

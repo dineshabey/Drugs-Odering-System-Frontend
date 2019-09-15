@@ -691,14 +691,14 @@ item_deatails.item_view_status = '0' AND
 ORDER BY
 item_deatails.item_id DESC");
         $out_put = '';
-        echo $out_put.='<ul class="live-search-list">';
+        echo $out_put .= '<ul class="live-search-list">';
         if (!empty($qry)) {
             foreach ($qry as $val) {
-                echo $out_put.='<li>' . $val['item_name'] . '</li>';
+                echo $out_put .= '<li>' . $val['item_name'] . '</li>';
             }
         }
 
-        echo $out_put.='</ul>';
+        echo $out_put .= '</ul>';
         echo $out_put;
 //        $system->prepareSelectQueryForJSON($qry);
     } else if ($_POST['action'] == 'added_item_remove') {
@@ -740,7 +740,7 @@ ORDER BY
 customer_added_item.id DESC";
         $system->prepareSelectQueryForJSON($qry);
     } else if ($_POST['action'] == 'load_slider_data_index_page') {
-//SINGAL PAGE LOAD SLIDER DATA =================================================
+        //PAGE LOAD SLIDER DATA =================================================
         $main_cat_data = $system->prepareSelectQuery("SELECT
 main_cat.main_cat_name,
 main_cat.main_cat_id
@@ -755,7 +755,7 @@ main_cat.main_cat_id DESC");
             $main_cat_name = '';
             foreach ($main_cat_data as $val) {
                 $main_cat_id = $val['main_cat_id'];
-                $out_put .= '<div style="color: black; border: 1px solid #ddd; background:#39d239; margin: 1.5em 0; padding: 0.7em 1em">'
+                $out_put .= '<div style="border: 1px solid #ddd; margin: 1.5em 0; padding: 0.7em 1em; background: #2cce22;">'
                         . '<h4>' . $val['main_cat_name'] . '</h4></div>';
                 $sub_cat_data = $system->prepareSelectQuery("SELECT
 sub_cat.sub_cat_id,
@@ -795,7 +795,7 @@ ORDER BY
 item_deatails.item_id DESC");
 
                         if (!empty($item_info_data)) {
-                            $out_put .= '<section class="slider regular"   style=" padding-top:10px ;">';
+                            $out_put .= '<div style="background: #0492f70d;"><section class="regular slider" id="regular2" style=" padding-top:10px ;">';
 
                             foreach ($item_info_data as $val3) {
 
@@ -808,12 +808,13 @@ item_deatails.item_id DESC");
                                 $item_price = $val3['item_price'];
                                 $item_id = $val3['item_id'];
 
-                                $out_put .= '<div align="center" class="container  item" ><a href="single.php?item_id=' . $item_id . '&sub_cat_id=' . $sub_cat_id . ' "><img class="" style="" width="60px" src="../drugs_ordering_system_backend/uploads/' . $val3['item_image'] . '"/></a>'
-                                        . '<p aling="center"><h5>' . $item_name . '</h5>'
-                                        . '<p style="color:red;">RS. : <em>' . $item_price . '</em></p>'
-                                        . '<button type="button" class="btn btn-success add-to-cart" id="add_to_cart_btn"  data-item_price = "' . $item_price . '"    value=' . $item_id . '>Add to cart</button></p>'
+                                $out_put .= '<div align="" class="boder_img">'
+                                        . '<a href="single.php?item_id=' . $item_id . '&sub_cat_id=' . $sub_cat_id . ' "><img class="" style="" width="" src="../drugs_ordering_system_backend/uploads/' . $val3['item_image'] . '"/></a>'
+                                        . '<p style="text-align:center;"><h3 style="font-size:20px; text-align:center; color:black;">' . $item_name . '</h3>'
+                                        . '<p style="color:red;"><h2 style="font-size:20px; text-align:center; color:red;">RS. : ' . $item_price . '</h2></p>'
+                                        . '<label style="display: block; line-height: 150%; text-align:center;"><button type="button"  class=" add-to-cart" id="add_to_cart_btn"  data-item_price = "' . $item_price . '"    value=' . $item_id . '><img style="height:55px; width:55px;" text-align:center; src="images/site_img/cart_add.png"  alt=" " /></button></label></p>'
                                         . '</div>';
-                                $out_put .= '<div>    </div>';
+//                                $out_put .= '<div>    </div>';
 //                           
                             }
 

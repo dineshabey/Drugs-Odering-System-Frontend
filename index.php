@@ -88,7 +88,7 @@
         <!---728x90--->
 
         <div class="container">
-            <div class="row" style="padding-bottom: 50px; padding-top: 20px;">
+            <div class="row" style="padding-bottom: 1px; padding-top: 5px;">
                 <!-- Insert to your webpage where you want to display the slider -->
                 <!--<div id="amazingslider-wrapper-1" style="display:block;position:relative;max-width:100%;padding-left:0px; padding-right:10px;margin:0px auto 0px;">-->
                 <div id="amazingslider-wrapper-1" style="display:block;position:relative;max-width:95%;margin:0px auto 0px;">
@@ -107,13 +107,13 @@
             <!-- End of body section HTML codes -->
             <!--ALL ITEM SLIDER START /////////////////////////////////////////3333333333333-->
 
-            <div style="background-color:#fafbf9;" class="img_view_panels" >     </div>
+            <div  class="img_view_panels" >     </div>
             <!--ALL ITEM SLIDER END /////////////////////////////////////////3333333333333-->
 
 
             <!-- wrapper -->
             <div class="wrapper" style="background-color: white;">
-                <h1>Our Stock</h1>
+                <!--<h1>Our Stock</h1>-->
                 <span hidden="">
                     <!--<i class="shopping-cart"></i>-->
                     <?php
@@ -130,6 +130,7 @@
                 <div class=" img_view_panel" >   </div>
                 <!--/ items -->
             </div>
+
             <!--/ wrapper -->
 
             <!--<script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>-->
@@ -151,16 +152,52 @@
 <script type="text/javascript">
             $(document).on('ready', function () {
                 setTimeout(function () {
-                    $(".regular").slick({
+//                    $(".regular").slick({
+//                        dots: true,
+//                        arrows: true,
+//                        infinite: true,
+//                        slidesToShow: 4,
+//                        slidesToScroll: 3,
+//                        lazyLoad: 'ondemand'
+//                    });
+
+
+//                    new script------------ -
+                            $(".regular").slick({
+                        // normal options...
                         dots: true,
-                        arrows: true,
                         infinite: true,
-                        slidesToShow: 5,
-                        slidesToScroll: 5,
-                        lazyLoad: 'ondemand'
+                        slidesToShow: 4,
+                        slidesToScroll: 2,
+                        mobileFirst: true,
+                        responsive: [{
+                                breakpoint: 1000,
+                                settings: {
+                                    slidesToShow: 4,
+                                    infinite: true
+                                }
+                            }, {
+                                breakpoint: 768,
+                                settings: {
+                                    slidesToShow: 2,
+                                    infinite: true
+                                }}, {
+                                breakpoint: 550,
+                                settings: {
+                                    slidesToShow: 3,
+                                    infinite: true
+                                }}]
                     });
+//                 new script-------------
 
                 }, 1000);
+
+//              
+
+
+
+
+
 
                 //ONLOAD FUNCTION IMAGE MAIN CAT LOAD ------------------------------------------
                 $(function () {
@@ -175,19 +212,7 @@
                         //    chosenRefresh();
                     });
                 });
-                //ONLOAD FUNCTION NAVIGATION BAR LOAD ------------------------------------------
-                $(function () {
-                    var sliderData = '';
-                    $.post("./loaddata.php", {action: 'load_nav_bar'}, function (e) {
-                        if (e === undefined || e.length === 0 || e === null) {
-                            $('.nav_bar').html("NO data Found ! ");
-                        } else {
-//                            $('.nav_bar').html(e);
 
-                        }
-                        //    chosenRefresh();
-                    });
-                });
 
 
 
