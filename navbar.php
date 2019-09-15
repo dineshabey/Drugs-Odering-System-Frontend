@@ -33,6 +33,15 @@ $time = date("h:i:sa");
 
             }
             
+            .ui-autocomplete-custom {
+    background: #87ceeb;
+    z-index: 2;
+}
+
+.search input { 
+  text-indent: 30px;
+   font-family:  FontAwesome, sans-serif;
+}
        
             .menu-mobile {
                 display: none;
@@ -40,8 +49,8 @@ $time = date("h:i:sa");
             }
 
             .menu-mobile:after {
-                content: "\f394";
-                font-family: "Ionicons";
+                content: "f0c9" ;
+                font-family: "font awesome";
                 font-size: 2.5rem;
                 padding: 0;
                 float: right;

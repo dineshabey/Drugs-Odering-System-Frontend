@@ -10,46 +10,46 @@
 
 <!--FONTAWESOME ICONS-->
 <style> 
-  .input-icons i { 
-            position: absolute; 
-        } 
-          
-        .input-icons { 
-            width: 100%; 
-            margin-bottom: 10px; 
-        } 
-          
-        .icon { 
-            padding: 10px; 
-            color: green; 
-            min-width: 50px; 
-            text-align: center; 
-        } 
-          
-        .input-field { 
-            width: 100%; 
-            padding: 10px; 
-            text-align: center; 
-        } 
-          
-        h2 { 
-            color: green; 
-        } 
+    .input-icons i { 
+        position: absolute; 
+    } 
+
+    .input-icons { 
+        width: 100%; 
+        margin-bottom: 10px; 
+    } 
+
+    .icon { 
+        padding: 10px; 
+        color: green; 
+        min-width: 50px; 
+        text-align: center; 
+    } 
+
+    .input-field { 
+        width: 100%; 
+        padding: 10px; 
+        text-align: center; 
+    } 
+
+    h2 { 
+        color: green; 
+    } 
 
     .ui-autocomplete-custom {
         background: #ccc;
         z-index: 2;
     }
-    
-    
+
+
     .input-group .fa-search{
-     display: table-cell;
-}
+        display: table-cell;
+    }
 </style> 
 
 <!--UI AUTOCOMPLETE-->
 <style>
-    
+
     .btnLogin{
         background-color: #36dc12;
         color: white;
@@ -231,7 +231,7 @@
 <!--<TOP HEADER END-->
 <!--<BOTTOM HEADER START-->
 <!--<div class="row" >
-    <div class="col-md-2">  <?php // require_once('navbar.php');                              ?> </div>
+    <div class="col-md-2">  <?php // require_once('navbar.php');                               ?> </div>
 
 </div>-->
 
@@ -247,147 +247,147 @@
         <div class="row">
             <div class="col-lg-12" style="margin-top:5px;">
                 <div class="col-lg-9">
-                  <div class="input-icons">                                      
-                                    <input  style="border-radius:2px; background-color:#ffffff59; width: 100%;" id="search_text" class="form-control" type="text" placeholder="Search" aria-label="Search">
-                                   <!--<i class="fa fa-search icon"></i>-->
-                                </div>
-                                <br>
-                              
+                    <div class=" form-group">
+                        <input  style="border-radius:2px; background-color:#ffff59; width: 100%;position: relative" id="search_text" class="form-control" type="text" aria-label="Search">
+                        <span style="position:absolute; right:20px;top:8px;" class="fa fa-search  "></span>
+                    </div>
+                    <br>
+
                 </div>
                 <div class="col-lg-3">
-                                <label>
-                                    <span>
-             <!--<i class="shopping-cart"></i>-->
-                                        <?php
-                                        if (!isset($_SESSION['cus_id'])) {
-                                            echo '<a href="cart_item.php"><button type="button" class="btn btn-success" style="background-color:#ffffff;" ><img src="images/site_img/cart_add.png" height="190px" width="60px;" height="2%"  alt=" " />&nbsp;<span class=" item_tot" style="color:blue;  font-size: 40px;"></span> </button></a>';
-                                        } else {
-                                            echo '<div class="cart hidden" ><a href="cart_item.php"><span class=""> </span></a><span style="font-weight: bold; background:#0000e6; font-size: large; color: #ffd700; border-radius: 32px 32px;" class="item_tot"> </span></div>';
-                                        }
-                                        ?>
-                                    </span>
-                                </label>
+                    <label>
+                        <span>
+ <!--<i class="shopping-cart"></i>-->
+                            <?php
+                            if (!isset($_SESSION['cus_id'])) {
+                                echo '<a href="cart_item.php"><button type="button" class="btn btn-success" style="background-color:#ffffff;" ><img src="images/site_img/cart_add.png" height="190px" width="60px;" height="2%"  alt=" " />&nbsp;<span class=" item_tot" style="color:blue;  font-size: 40px;"></span> </button></a>';
+                            } else {
+                                echo '<div class="cart hidden" ><a href="cart_item.php"><span class=""> </span></a><span style="font-weight: bold; background:#0000e6; font-size: large; color: #ffd700; border-radius: 32px 32px;" class="item_tot"> </span></div>';
+                            }
+                            ?>
+                        </span>
+                    </label>
 
-                      
+
 
                 </div>
-                
+
                 <div class="col-lg-12">
                             <!--<td class="blocks"  rowspan="3" style="text-align: center; width: 20%; height: 8%; border:none ;"><a href="index.php"><img src="images/site_img/edit_logo.jpg" height="180px" width="100px" alt=" " /></a></td>-->
-                             <?php require_once('navbar.php'); ?></td>
-                     
-                 </div>
+                    <?php require_once('navbar.php'); ?></td>
+
+                </div>
+            </div>
         </div>
+
+
     </div>
 
 
-</div>
-
-
-<!--<div class="row"> 
-    <a href="index.php"><img src="images/logo_png.png" height="190px" width="150px" alt=" " /></a>
-</div>
-<div class="container " >
-    <div class="col-md-2"></div>
-    <div class="col-md-2" style="float: right;">    <a href="index.php"><img src="images/logo_png.png" height="190px" width="150px" alt=" " /></a></div>
-
-    <div class="col-md-7" style="padding-top: 60px; float: right;">
-        <input  class="form-control" type="text" placeholder="Search" aria-label="Search">
-        <button class="btn aqua-gradient btn-rounded btn-sm my-0" type="submit">Search</button>
+    <!--<div class="row"> 
+        <a href="index.php"><img src="images/logo_png.png" height="190px" width="150px" alt=" " /></a>
     </div>
-</div>-->
+    <div class="container " >
+        <div class="col-md-2"></div>
+        <div class="col-md-2" style="float: right;">    <a href="index.php"><img src="images/logo_png.png" height="190px" width="150px" alt=" " /></a></div>
+    
+        <div class="col-md-7" style="padding-top: 60px; float: right;">
+            <input  class="form-control" type="text" placeholder="Search" aria-label="Search">
+            <button class="btn aqua-gradient btn-rounded btn-sm my-0" type="submit">Search</button>
+        </div>
+    </div>-->
 
 
 
-<!--<BOTTOM HEADER START-->
-<div class="top-header bottom_head_cus2" hidden="">
+    <!--<BOTTOM HEADER START-->
+    <div class="top-header bottom_head_cus2" hidden="">
 
-    <?php // require_once('navbar.php'); ?>
+        <?php // require_once('navbar.php'); ?>
 
-</div>
-<!--<BOTTOM HEADER END-->
-
-
+    </div>
+    <!--<BOTTOM HEADER END-->
 
 
-<script type="text/javascript">
 
 
-    $(function () {
-        $('#search_text').keyup(function () {
-            loadItems();
-        });
-    });
+    <script type="text/javascript">
 
-    $(document).on('ready', function () {
-        
-          loadItems(); //LOAD Items Array
-//        viewportElement.setAttribute( 'content', 'initial-scale=' + ratio );
-        //        alert()
-        //ONLOAD FUNCTION NAVIGATION BAR LOAD ------------------------------------------
+
         $(function () {
-            var sliderData = '';
-            $.post("./loaddata.php", {action: 'load_nav_bar_menu'}, function (e) {
+            $('#search_text').keyup(function () {
+                loadItems();
+            });
+        });
+
+        $(document).on('ready', function () {
+
+            loadItems(); //LOAD Items Array
+            //        viewportElement.setAttribute( 'content', 'initial-scale=' + ratio );
+            //        alert()
+            //ONLOAD FUNCTION NAVIGATION BAR LOAD ------------------------------------------
+            $(function () {
+                var sliderData = '';
+                $.post("./loaddata.php", {action: 'load_nav_bar_menu'}, function (e) {
+                    if (e === undefined || e.length === 0 || e === null) {
+                        $('.nav_menu_bar').html("NO data Found ! ");
+                    } else {
+                        $('.nav_menu_bar').html(e);
+
+
+                    }
+                });
+            });
+
+
+
+        }); //ON LOAD FUCTION END
+
+
+        //LOG OUT BTN =================================================================
+        $(document).on('click', '#log_out', function () {
+            $.post("./loaddata.php", {action: 'log_out'}, function (e) {
                 if (e === undefined || e.length === 0 || e === null) {
                     $('.nav_menu_bar').html("NO data Found ! ");
                 } else {
-                    $('.nav_menu_bar').html(e);
-
-
+                    if (e == "1") {
+                        window.location.replace("login.php");
+                    } else {
+                        alert("Error ! Session not distroy ..!")
+                    }
                 }
-            });
+            }, "json");
+        });
+
+        //SEARCH FUNCTION
+        //    $('#search_text').keyup(function(){
+        //       var txt = $(this).val();
+        //       console.log(txt);
+        //       });
+
+
+        //GO TO PROFIL BTN =================================================================
+        $(document).on('click', '#profil', function () {
+            window.location.replace("user_profil.php");
         });
 
 
+        function loadItems() {
+            var serachArray = new Array();
+            var searchTerm = $('#search_text').val();
+            $.post("loaddata.php", {action: 'search_text', searchTerm: searchTerm}, function (e) {
 
-    }); //ON LOAD FUCTION END
+                $.each(e, function (index, qData) {
+                    index++;
+                    console.log(qData.item_name);
 
+                    serachArray.push(qData.item_name);
+                });
 
-    //LOG OUT BTN =================================================================
-    $(document).on('click', '#log_out', function () {
-        $.post("./loaddata.php", {action: 'log_out'}, function (e) {
-            if (e === undefined || e.length === 0 || e === null) {
-                $('.nav_menu_bar').html("NO data Found ! ");
-            } else {
-                if (e == "1") {
-                    window.location.replace("login.php");
-                } else {
-                    alert("Error ! Session not distroy ..!")
-                }
-            }
-        }, "json");
-    });
+                $('#search_text').autocomplete({
+                    source: serachArray
+                });
 
-    //SEARCH FUNCTION
-//    $('#search_text').keyup(function(){
-//       var txt = $(this).val();
-//       console.log(txt);
-//       });
+            }, "json");
+        }
 
-
-    //GO TO PROFIL BTN =================================================================
-    $(document).on('click', '#profil', function () {
-        window.location.replace("user_profil.php");
-    });
-
-
-    function loadItems() {
-        var serachArray = new Array();
-        var searchTerm = $('#search_text').val();
-        $.post("loaddata.php", {action: 'search_text', searchTerm: searchTerm}, function (e) {
-
-            $.each(e, function (index, qData) {
-                index++;
-                console.log(qData.item_name);
-
-                serachArray.push(qData.item_name);
-            });
-
-            $('#search_text').autocomplete({
-                source: serachArray
-            });
-
-        }, "json");
-    }
-
-</script>
+    </script>
