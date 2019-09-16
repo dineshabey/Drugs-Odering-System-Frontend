@@ -701,6 +701,24 @@ item_deatails.item_id DESC");
         echo $out_put .= '</ul>';
         echo $out_put;
 //        $system->prepareSelectQueryForJSON($qry);
+    } else if ($_POST['action'] == 'search_text') {
+// GET ITEM INFO. TO CART TBL - ------------------------------------------------
+
+
+
+        $qry = "SELECT
+item_deatails.item_name,
+item_deatails.sub_cat_id,
+item_deatails.item_id
+FROM
+item_deatails
+WHERE
+item_deatails.item_view_status = '0' AND
+(lower(item_deatails.item_name) LIKE '{$_POST['searchTerm']}%') or (UPPER(item_deatails.item_name) LIKE '{$_POST['searchTerm']}%')
+ORDER BY
+item_deatails.item_id DESC";
+
+        return $system->prepareSelectQueryForJSON($qry);
     } else if ($_POST['action'] == 'added_item_remove') {
 // REMOVE ADDED ITEM ------------ ------------------------------------------------
         $qry = "DELETE FROM `customer_added_item` WHERE (`id`='{$_POST['id']}')";
@@ -808,17 +826,102 @@ item_deatails.item_id DESC");
                                 $item_price = $val3['item_price'];
                                 $item_id = $val3['item_id'];
 
-                                $out_put .= '<div align="" class="boder_img">'
-                                        . '<a href="single.php?item_id=' . $item_id . '&sub_cat_id=' . $sub_cat_id . ' "><img class="" style="" width="" src="../drugs_ordering_system_backend/uploads/' . $val3['item_image'] . '"/></a>'
-                                        . '<p style="text-align:center;"><h3 style="font-size:20px; text-align:center; color:black;">' . $item_name . '</h3>'
-                                        . '<p style="color:red;"><h2 style="font-size:20px; text-align:center; color:red;">RS. : ' . $item_price . '</h2></p>'
-                                        . '<label style="display: block; line-height: 150%; text-align:center;"><button type="button"  class=" add-to-cart" id="add_to_cart_btn"  data-item_price = "' . $item_price . '"    value=' . $item_id . '><img style="height:55px; width:55px;" text-align:center; src="images/site_img/cart_add.png"  alt=" " /></button></label></p>'
+                                $out_put .= '<div align="" class="boder_imgz card">'
+                                        . '<a href="single.php?item_id=' . $item_id . '&sub_cat_id=' . $sub_cat_id . ' "><img class=""  style="text-aling:center;  width:222px; height:210px; " src="../drugs_ordering_system_backend/uploads/' . $val3['item_image'] . '"/></a>'
+                                        . '<p style="padding-top:9px; font-size: large;     color: #001dfff7;">' . $item_name . '</p>'
+                                        . '<p  class="">RS. : ' . $item_price . '</p>'
+//                                        . '<p  class="price">d comfy lorem ipsum lorem jeansum. Lorem jeamsun denim lorem jeansum.</p>'
+//                                        . '<p> Add to Cart<button  class=" add-to-cart" id="add_to_cart_btn"  data-item_price = "' . $item_price . '"    value=' . $item_id . '><label><img  style="height:40px; width:40px;" src="images/site_img/cart_add.png"  alt=" " /></label></button></p>'
+                                        . '<p> <button  class=" " id="add_to_cart_btn"  data-item_price = "' . $item_price . '"    value=' . $item_id . '>Add to cart</button></p>'
                                         . '</div>';
 //                                $out_put .= '<div>    </div>';
 //                           
                             }
 
                             $out_put .= '</div></section>';
+                        }
+                    }
+                }
+            }
+            echo $out_put;
+        }
+    } else if ($_POST['action'] == 'load_special_items') {
+        //PAGE LOAD SLIDER DATA =================================================
+        $main_cat_data = $system->prepareSelectQuery("SELECT
+main_cat.main_cat_name,
+main_cat.main_cat_id
+FROM
+main_cat
+WHERE
+main_cat.view_status = '0'
+ORDER BY
+main_cat.main_cat_id DESC");
+        if (!empty($main_cat_data)) {
+            $out_put = '';
+            $main_cat_name = '';
+            foreach ($main_cat_data as $val) {
+                $main_cat_id = $val['main_cat_id'];
+//                $out_put .= '<div style="border: 1px solid #ddd; margin: 1.5em 0; padding: 0.7em 1em; background: #2cce22;">'
+//                        . '<h4>' . $val['main_cat_name'] . '</h4></div>';
+                $sub_cat_data = $system->prepareSelectQuery("SELECT
+sub_cat.sub_cat_id,
+sub_cat.sub_cat_name
+FROM
+sub_cat
+WHERE
+sub_cat.view_status = '0' AND
+sub_cat.main_cat_id = '$main_cat_id'
+ORDER BY
+sub_cat.sub_cat_id DESC");
+                if (!empty($sub_cat_data)) {
+                    foreach ($sub_cat_data as $val2) {
+                        $sub_cat_id = $val2['sub_cat_id'];
+//                        $out_put .= '<div style="color: black;">'
+//                                . '<h4>' . $val2['sub_cat_name'] . '</h4></div>';
+
+                        $item_info_data = $system->prepareSelectQuery("SELECT
+item_deatails.item_id,
+item_deatails.item_name,
+item_deatails.item_price,
+item_deatails.item_image,
+item_deatails.item_discount,
+sub_cat.sub_cat_name,
+main_cat.main_cat_name,
+main_cat.main_cat_id,
+sub_cat.sub_cat_id
+FROM
+item_deatails
+INNER JOIN sub_cat ON item_deatails.sub_cat_id = sub_cat.sub_cat_id
+INNER JOIN main_cat ON sub_cat.main_cat_id = main_cat.main_cat_id
+WHERE
+item_deatails.sub_cat_id = '$sub_cat_id' AND
+item_deatails.img_status = '1' AND
+item_deatails.item_view_status = '0'
+ORDER BY
+item_deatails.item_id DESC LIMIT 4");
+
+                        if (!empty($item_info_data)) {
+//                            $out_put .= '<div style="background: #0492f70d;"><section class="regular slider" id="regular2" style=" padding-top:10px ;">';
+
+                            foreach ($item_info_data as $val3) {
+
+                                $main_cat_names = $val3['main_cat_name'];
+                                $main_cat_id = $val3['main_cat_name'];
+                                $sub_cat_name = $val3['sub_cat_name'];
+                                $sub_cat_id = $val3['sub_cat_id'];
+                                $item_name = $val3['item_name'];
+                                $item_img = $val3['item_image'];
+                                $item_price = $val3['item_price'];
+                                $item_id = $val3['item_id'];
+
+                                $out_put .= '  <div class="column">
+                    <div class="content" style="align:center">
+                    <img class="" style="text-aling:center;  width:213px; height:213px;" src="../drugs_ordering_system_backend/uploads/' . $val3['item_image'] . '"/>
+    <h5 >'.$item_name.'</h5>
+                    </div>
+                </div>';                   }
+
+//                            $out_put .= '</div></section>';
                         }
                     }
                 }

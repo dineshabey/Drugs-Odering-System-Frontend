@@ -50,11 +50,118 @@
             }
             /*<!--ITEM SLIDER CSS   END////////////////////-->*/
 
+            /*FEATURES ITEMS LIST CSS START*/ 
+            * {
+                box-sizing: border-box;
+            }
+
+            /*            body {
+                            background-color: #f1f1f1;
+                            padding: 20px;
+                            font-family: Arial;
+                        }*/
+
+            /* Center website */
+            .main {
+                max-width: 1000px;
+                margin: auto;
+            }
+
+            h1 {
+                font-size: 50px;
+                word-break: break-all;
+            }
+
+            .row {
+                margin: 8px -16px;
+            }
+
+            /* Add padding BETWEEN each column (if you want) */
+            .row,
+            .row > .column {
+                padding: 8px;
+            }
+
+            /* Create four equal columns that floats next to each other */
+            .column {
+                float: left;
+                width: 25%;
+            }
+
+            /* Clear floats after rows */
+            .row:after {
+                content: "";
+                display: table;
+                clear: both;
+            }
+
+            /* Content */
+            .content {
+                background-color: white;
+                padding: 10px;
+            }
+
+            /* Responsive layout - makes a two column-layout instead of four columns */
+            @media screen and (max-width: 900px) {
+                .column {
+                    width: 50%;
+                }
+            }
+
+            /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+            @media screen and (max-width: 600px) {
+                .column {
+                    width: 50%;
+                }
+            }
+
+            /*FEATURES ITEMS LIST CSS   END*/ 
+
+            /*CART CSS*/ 
+            .card {
+                box-shadow: 0 4px 8px 0 rgba(0, 0, 2, 0.2);
+                /*box-shadow: 0 4px 8px 0 rgb(134,136,173);*/
+                max-width: 300px;
+                margin: auto;
+                text-align: center;
+                font-family: arial;
+            }
+
+            .price {
+                color: grey;
+                font-size: 22px;
+            }
+
+            .card button {
+                border: none;
+                outline: 0;
+                padding: 12px;
+                color: white;
+                background-color: #2cce22;
+                text-align: center;
+                cursor: pointer;
+                width: 100%;
+                font-size: 18px;
+            }
+
+            .card button:hover {
+                opacity: 0.7;
+            }
+            /*CART CSS*/ 
+
+
+            /*special item width height css*/
+            .secial_item{
+                width:100%; 
+                heigh:210px;
+            }
+            /*special item width height css*/
+
+
+
 
 
         </style>
-
-
     </head>
     <!--MAIN HEAD END -->
     <body>
@@ -104,6 +211,89 @@
                     </div>
                 </div>
             </div>
+
+
+
+            <!-- Portfolio Gallery Grid -->
+            <div class="row" style="background-color: #eaffd2;">
+
+                <div class="column ">
+                    <div class="content ">
+                        <!--<img src="lights.jpg" alt="Lights" style="width:100%">-->
+                        <img class="secial_item" src="images/special_item/10.jpg" alt=""/>
+                        <h3 style="text-align: center;">Product Name</h3>
+                        <p style="text-align: center;">Description ..</p>
+                    </div>
+                </div>
+                <div class="column ">
+                    <div class="content ">
+                        <!--<img src="nature.jpg" alt="Nature" style="width:100%">-->
+                        <img class="secial_item" src="images/special_item/2.jpg" alt=""/>
+                        <h3 style="text-align: center;">Product Name</h3>
+                        <p style="text-align: center;">Description ..</p>
+                    </div>
+                </div>
+                <div class="column ">
+                    <div class="content">
+                        <!--<img src="mountains.jpg" alt="Mountains" style="width:100%">-->
+                        <img class="secial_item" src="images/special_item/3.jpg" alt=""/>
+                        <h3 style="text-align: center;">Product Name</h3>
+                        <p style="text-align: center;">Description ..</p>
+
+                    </div>
+                </div>
+                <div class="column ">
+                    <div class="content">
+                        <img class="secial_item" src="images/special_item/4.jpg" alt=""/>
+                        <h3 style="text-align: center;">Product Name</h3>
+                        <p style="text-align: center;">Description ..</p>
+                    </div>
+                </div>
+                <div class="column ">
+                    <div class="content ">
+                        <!--<img src="mountains.jpg" alt="Mountains" style="width:100%">-->
+                        <img class="secial_item" src="images/special_item/5.jpg" alt=""/>
+                        <h3 style="text-align: center;">Product Name</h3>
+                        <p style="text-align: center;">Description ..</p>
+                    </div>
+                </div>
+
+                <div class="column ">
+                    <div class="content ">
+                        <!--<img src="mountains.jpg" alt="Mountains" style="width:100%">-->
+                        <img class="secial_item" src="images/special_item/10.jpg" alt=""/>
+                        <h3 style="text-align: center;">Product Name</h3>
+                        <p style="text-align: center;">Description ..</p>
+                    </div>
+                </div>
+                <div class="column ">
+                    <div class="content ">
+                        <!--<img src="mountains.jpg" alt="Mountains" style="width:100%">-->
+                        <img class="secial_item" src="images/special_item/8.jpg" alt=""/>
+                        <h3 style="text-align: center;">Product Name</h3>
+                        <p style="text-align: center;">Description ..</p>
+                    </div>
+                </div>
+                <div class="column ">
+                    <div class="content ">
+                        <!--<img src="mountains.jpg" alt="Mountains" style="width:100%">-->
+                        <img class="secial_item" src="images/special_item/9.jpg" alt=""/>
+                        <h3 style="text-align: center;">Product Name</h3>
+                        <p style="text-align: center;">Description ..</p>
+                    </div>
+                </div>
+                <div class="column ">
+                    <div class="content ">
+                        <!--<img src="mountains.jpg" alt="Mountains" style="width:100%">-->
+                        <img class="secial_item" src="images/special_item/10.jpg" alt=""/>
+                        <h3 style="text-align: center;">Product Name</h3>
+                        <p style="text-align: center;">Description ..</p>
+                    </div>
+                </div>
+            </div>
+
+
+
             <!-- End of body section HTML codes -->
             <!--ALL ITEM SLIDER START /////////////////////////////////////////3333333333333-->
 
@@ -163,7 +353,7 @@
 
 
 //                    new script------------ -
-                            $(".regular").slick({
+                    $(".regular").slick({
                         // normal options...
                         dots: true,
                         infinite: true,
@@ -190,7 +380,7 @@
                     });
 //                 new script-------------
 
-                }, 1000);
+                }, 2000);
 
 //              
 
@@ -207,6 +397,19 @@
                             $('.img_view_panel').html("NO data Found ! ");
                         } else {
                             $('.img_view_panel').html(e);
+
+                        }
+                        //    chosenRefresh();
+                    });
+                });
+                //ONLOAD FUNCTION IMAGE MAIN CAT LOAD ------------------------------------------
+                $(function () {
+                    var sliderData = '';
+                    $.post("./loaddata.php", {action: 'load_special_items'}, function (e) {
+                        if (e === undefined || e.length === 0 || e === null) {
+                            $('.load_special_items').html("NO data Found ! ");
+                        } else {
+                            $('.load_special_items').html(e);
 
                         }
                         //    chosenRefresh();

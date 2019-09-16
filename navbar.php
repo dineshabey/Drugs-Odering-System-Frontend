@@ -33,13 +33,23 @@ $time = date("h:i:sa");
 
             }
 
+            .ui-autocomplete-custom {
+                background: #87ceeb;
+                z-index: 2;
+            }
+
+            .search input { 
+                text-indent: 30px;
+                font-family:  FontAwesome, sans-serif;
+            }
+
             .menu-mobile {
                 display: none;
                 padding: 10px;
             }
 
             .menu-mobile:after {
-                content: "\f394";
+                content: "\f394" ;
                 font-family: "Ionicons";
                 font-size: 2.5rem;
                 padding: 0;
@@ -66,7 +76,7 @@ $time = date("h:i:sa");
 
             .menu > ul {
 
-                background-color: #59a86b;
+                background-color: #ffdb53c7;
                 margin: 0 auto;
                 width: 100%;
                 list-style: none;
@@ -221,6 +231,20 @@ $time = date("h:i:sa");
             }
 
             /*<!--ITEM SLIDER CSS   END////////////////////-->*/
+
+            /*SEARCH BAR*/ 
+            .ui-autocomplete {
+                max-height: 100px;
+                overflow-y: auto;
+                /* prevent horizontal scrollbar */
+                overflow-x: hidden;
+                background: #F7F3F2;
+                z-index: 2;
+                width: 100px; 
+            }
+            /*SEARCH BAR*/ 
+
+
         </style>
 
     </head>
@@ -267,7 +291,7 @@ $time = date("h:i:sa");
                          <div class="menu"> ';
                     $main_cat_name = '';
 
-                    $out_put .= '<ul>';
+                    $out_put .= '<ul  class="">';
                     $out_put .= '<li><a href="index.php">HOME </a>';
                     foreach ($main_cat_data as $val) {
                         $main_cat_id = $val['main_cat_id'];
@@ -325,7 +349,7 @@ item_deatails.item_id DESC");
 
 //                                        $out_put .= '<li><a style="color: black;">' . $item_name . '</a>';
 //                                        $out_put .= '<li><a href="single.php?item_id=' . $item_id . '&sub_cat_id=' . $sub_cat_id . ' style="color: black;" >' . $item_name . '</a>';
-                                        $out_put .= '<li><a href="single.php?item_id=' . $item_id . '&sub_cat_id=' . $sub_cat_id . '  style="color: black; text-aling="right;" >' . $item_name . '&nbsp;-<img class="" align="right" style="text-aling:center;"  width="60px" src="../drugs_ordering_system_backend/uploads/' . $val3['item_image'] . '"/></a>';
+                                        $out_put .= '<li><a href="single.php?item_id=' . $item_id . '&sub_cat_id=' . $sub_cat_id . '  style="color: black; text-aling="right; " >' . $item_name . '&nbsp;-<img class="" align="right" style="text-aling:center;  width:100px; height:100px; "  src="../drugs_ordering_system_backend/uploads/' . $val3['item_image'] . '"/></a>';
                                     }
                                     $out_put .= '</ul>';
                                 }

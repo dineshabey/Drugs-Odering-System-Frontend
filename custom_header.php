@@ -4,51 +4,51 @@
 <script src="js/AlertifyJS-master/build/alertify.min.js" type="text/javascript"></script>
 <a href="fonts/user-solid.svg"></a>
 <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-<script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
 
 <link rel="stylesheet"  href= "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
 
 <!--FONTAWESOME ICONS-->
 <style> 
-    .input-icons i { 
-        position: absolute; 
-    } 
-
-    .input-icons { 
-        width: 100%; 
-        margin-bottom: 10px; 
-    } 
-
-    .icon { 
-        padding: 10px; 
-        color: green; 
-        min-width: 50px; 
-        text-align: center; 
-    } 
-
-    .input-field { 
-        width: 100%; 
-        padding: 10px; 
-        text-align: center; 
-    } 
-
-    h2 { 
-        color: green; 
-    } 
+  .input-icons i { 
+            position: absolute; 
+        } 
+          
+        .input-icons { 
+            width: 100%; 
+            margin-bottom: 10px; 
+        } 
+          
+        .icon { 
+            padding: 10px; 
+            color: green; 
+            min-width: 50px; 
+            text-align: center; 
+        } 
+          
+        .input-field { 
+            width: 100%; 
+            padding: 10px; 
+            text-align: center; 
+        } 
+          
+        h2 { 
+            color: green; 
+        } 
 
     .ui-autocomplete-custom {
         background: #ccc;
         z-index: 2;
     }
-
-
+    
+    
     .input-group .fa-search{
-        display: table-cell;
-    }
+     display: table-cell;
+}
+</style> 
 
-    /*<!--UI AUTOCOMPLETE-->*/
-
-
+<!--UI AUTOCOMPLETE-->
+<style>
+    
     .btnLogin{
         background-color: #36dc12;
         color: white;
@@ -59,25 +59,15 @@
     }
 
 
-
-    /*BORDER COLOR IMAGE SLIDER*/ 
-    .boder_img{
-        border-style: solid;
-        border-color: #fff;
-        border-width: 1px;
-    }
-    /*BORDER COLOR IMAGE SLIDER*/ 
-
-
-
-    /*=======*/
-
     .ui-autocomplete-custom {
         background: #ccc !important;
         z-index: 2;
     }
+</style> 
 
 
+
+<style type="text/css">
     /*ADD TO CART CSS START =============================================*/
 
     .body {
@@ -107,8 +97,6 @@
             font-size: 12px;
         }
     }
-
-
     img
     {
         max-width: 100%;
@@ -148,6 +136,9 @@
     }
     /*ADD TO CART CSS END  =============================================*/
 
+</style>
+
+<style type="text/css">
     .top_head_cus {
         background-image: url("images/site_img/gold_bac.jpg");
         border-bottom: 1px solid #fff;
@@ -184,7 +175,7 @@
     .head_tbl{
         table-layout: fixed;
         max-width:100%;
-        border = "0";
+        border: 0px;
         border: none;
 
     }
@@ -200,77 +191,117 @@
 </head>
 
 <meta name="viewport" content="width=600">
-<div class="top-header bottom_head_cus" >
-    <div class="table-responsive">          
-        <table class="table">
-            <tbody>
-                <tr >
-                    <td> <label style=" color: #ffff00;">  <a href="index.php"><h1 style="color:#ffff59;">LION MINI MART</h1></a> </label></td>
-                    <td align="right"   ><div class="login" style="">
-                            <?php
-                            if (!isset($_SESSION['cus_id'])) {
-                                echo '<a href = "login.php" style="text-decoration: ; color:black;" span class="login btnLogin"><span class="login">  USER LOGIN </span> </a>';
+<div class="top-header top_head_cus" >
+    <div class="container">
+        <div class="">
+            <div class="col-lg-5 "  > 
+
+                <label style="margin-top:-5px;margin-bottom: -6px;">  <a href="index.php"><img src="images/site_img/minimart.jpg" height="190px" width="150px" alt=" " /></a> </label>
+            </div>
+            <div class="col-lg-3 " style=""> </div>
+
+            <div class="col-lg-3 " style="">
+                <div class="login" style="float:right; ">
+                    <?php
+                    if (!isset($_SESSION['cus_id'])) {
+                        echo '<a href = "login.php" style="text-decoration: ; color:black;" span class="login btnLogin"><span class="login">  USER LOGIN </span> </a>';
 //                         echo '<button type="button" style="margin:2px;" class="btn btn-success btn-md" value = ' . $cus_name . ' id = "profil">' . $cus_name . '</buttn>';
-                            } else {
-                                $cus_name = $_SESSION['uname'];
-                                echo '<button type="button" style="margin:2px;" class="btn btn-success btn-md" value = ' . $cus_name . ' id = "profil">' . $cus_name . '</buttn>';
-                                echo' <button  type="button" id="log_out" style="background-color:red;" class="btn btn-primary btn-md" ><span></span>LOGOUT</button>';
-                            }
-                            ?>
-                        </div>
-                    </td>
-                    <td align="right"> <label style="">  <a href="index.php"><img src="images/site_img/edit_logo_1.jpg" alt=" "  style=" height:90px; width:120px;"/></a> </label></td>
-                  
-                </tr>
-            </tbody>
-        </table>
+                    } else {
+                        $cus_name = $_SESSION['uname'];
+                        echo '<button type="button" style="margin:2px;" class="btn btn-success btn-md" value = ' . $cus_name . ' id = "profil">' . $cus_name . '</buttn>';
+                        echo' <button  type="button" id="log_out" style="background-color:red;" class="btn btn-primary btn-md" ><span></span>LOGOUT</button>';
+                    }
+                    ?>
+                </div>
+            </div>
+
+
+            <!--            <div class="col-lg-7 " style=""></div>
+                        <div class="col-md-5 " style="padding-top: 10px;">
+                            <div class="col-lg-6 " style=""></div>-->
+
+
+        </div>
+
     </div>
 </div>
 
 
+<!--<TOP HEADER END-->
+<!--<BOTTOM HEADER START-->
+<!--<div class="row" >
+    <div class="col-md-2">  <?php // require_once('navbar.php');                              ?> </div>
 
-<div class="top_head_cus" >
+</div>-->
+
+
+<div class="bottom_head_cus" style="margin-right: 0px; margin-left: 0px;">
+    <!--    <div class=" " style="">
+            <div class="col-md-5 "><a href="index.php"><img src="images/logo_png.png" height="190px" width="150px" alt=" " /></a></div>
+            <div class="col-md-2">  </div>
+    
+        </div>-->
 
     <div class="container">
         <div class="row">
-            <div class="col-lg-12" style="">
-                <div class="col-sm-9">
-                    <div class=" form-group">
-                        <input  style="border-radius:2px; background-color:#ffff59; width: 100%;position: relative" id="search_text" class="form-control" type="text" aria-label="Search">
-                        <span style="position:absolute; right:20px;top:8px;" class="fa fa-search  "></span>
-                    </div>
-                    <br>
+            <div class="col-lg-12">
+                <table class="table table-bordered head_tbl " cellpadding=""  >
+                    <tbody>
+                        <tr>
+                            <td class="blocks" style="text-align: left; ine-height: 0; border:none ; height: 1%; width: 15%;">
+                             
 
-                </div>
-                <div class="col-sm-3">
-                    <label>
-                        <span>
- <!--<i class="shopping-cart"></i>-->
-                            <?php
-                            if (!isset($_SESSION['cus_id'])) {
-                                echo '<a href="cart_item.php"><button type="button" class="btn btn-success" style="background-color:#ffffff;" ><img src="images/site_img/cart_add.png" height="190px" width="60px;" height="2%"  alt=" " />&nbsp;<span class=" item_tot" style="color:blue;  font-size: 40px;"></span> </button></a>';
-                            } else {
-                                echo '<div class="cart hidden" ><a href="cart_item.php"><span class=""> </span></a><span style="font-weight: bold; background:#0000e6; font-size: large; color: #ffd700; border-radius: 32px 32px;" class="item_tot"> </span></div>';
-                            }
-                            ?>
-                        </span>
-                    </label>
+                            </td>
+                            <td class="blocks" style="text-align: center; line-height: 0; border:none ;  height: 0%; width:50%;">
+                                <div class="input-icons">                                      
+                                    <input  style="border-radius:2px; background-color:#ffffff59; width: 100%;" id="search_text" class="form-control" type="text" placeholder="Search" aria-label="Search">
+                                   <!--<i class="fa fa-search icon"></i>-->
+                                </div>
+                                <br>
+                              
+                            </td>
+                            <td class="blocks" style="text-align: center; ine-height: 0; border: none; ">
+                                <label>
+                                    <span>
+             <!--<i class="shopping-cart"></i>-->
+                                        <?php
+                                        if (!isset($_SESSION['cus_id'])) {
+                                            echo '<a href="cart_item.php"><button type="button" class="btn btn-success" style="background-color:#ffffff;" ><img src="images/site_img/cart_add.png" height="190px" width="60px;" height="2%"  alt=" " />&nbsp;<span class=" item_tot" style="color:blue;  font-size: 40px;"></span> </button></a>';
+                                        } else {
+                                            echo '<div class="cart hidden" ><a href="cart_item.php"><span class=""> </span></a><span style="font-weight: bold; background:#0000e6; font-size: large; color: #ffd700; border-radius: 32px 32px;" class="item_tot"> </span></div>';
+                                        }
+                                        ?>
+                                    </span>
+                                </label>
+
+                            </td>
 
 
-
-                </div>
-
-                <div class="col-lg-12">
                             <!--<td class="blocks"  rowspan="3" style="text-align: center; width: 20%; height: 8%; border:none ;"><a href="index.php"><img src="images/site_img/edit_logo.jpg" height="180px" width="100px" alt=" " /></a></td>-->
-                    <?php require_once('navbar.php'); ?></td>
 
-                </div>
+                        </tr>
+                        <tr>
+                            <td class="blocks" colspan="3" style="text-align: left; height: 10%;  border:none ;"> <?php require_once('navbar.php'); ?></td>
+                        </tr>
+                        <tr hidden="">
+                            <td class="blocks" colspan="2" style="text-align: left; border: ;">
+                                <div class="btn-group" role="group" aria-label="Basic example">
+                                    <button type="button" class="btn btn-success">CAT 1</button>
+                                    <button type="button" class="btn btn-secondary">CAT 2</button>
+                                    <button type="button" class="btn btn-secondary">CAT 3</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
             </div>
         </div>
-
-
     </div>
+
+
 </div>
+
 
 <!--<div class="row"> 
     <a href="index.php"><img src="images/logo_png.png" height="190px" width="150px" alt=" " /></a>
@@ -308,9 +339,9 @@
     });
 
     $(document).on('ready', function () {
-
-        loadItems(); //LOAD Items Array
-        //        viewportElement.setAttribute( 'content', 'initial-scale=' + ratio );
+        
+          loadItems(); //LOAD Items Array
+//        viewportElement.setAttribute( 'content', 'initial-scale=' + ratio );
         //        alert()
         //ONLOAD FUNCTION NAVIGATION BAR LOAD ------------------------------------------
         $(function () {
@@ -347,10 +378,10 @@
     });
 
     //SEARCH FUNCTION
-    //    $('#search_text').keyup(function(){
-    //       var txt = $(this).val();
-    //       console.log(txt);
-    //       });
+//    $('#search_text').keyup(function(){
+//       var txt = $(this).val();
+//       console.log(txt);
+//       });
 
 
     //GO TO PROFIL BTN =================================================================
