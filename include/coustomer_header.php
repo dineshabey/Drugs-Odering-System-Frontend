@@ -6,35 +6,35 @@
 <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
 
-<link rel="stylesheet"  href= "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+<link rel="stylesheet"  href= "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <!--FONTAWESOME ICONS-->
-<style> 
-    .input-icons i { 
-        position: absolute; 
-    } 
+<style>
+    .input-icons i {
+        position: absolute;
+    }
 
-    .input-icons { 
-        width: 100%; 
-        margin-bottom: 10px; 
-    } 
+    .input-icons {
+        width: 100%;
+        margin-bottom: 10px;
+    }
 
-    .icon { 
-        padding: 10px; 
-        color: green; 
-        min-width: 50px; 
-        text-align: center; 
-    } 
+    .icon {
+        padding: 10px;
+        color: green;
+        min-width: 50px;
+        text-align: center;
+    }
 
-    .input-field { 
-        width: 100%; 
-        padding: 10px; 
-        text-align: center; 
-    } 
+    .input-field {
+        width: 100%;
+        padding: 10px;
+        text-align: center;
+    }
 
-    h2 { 
-        color: green; 
-    } 
+    h2 {
+        color: green;
+    }
 
     .ui-autocomplete-custom {
         background: #ccc;
@@ -60,13 +60,13 @@
 
 
 
-    /*BORDER COLOR IMAGE SLIDER*/ 
+    /*BORDER COLOR IMAGE SLIDER*/
     .boder_img{
         border-style: solid;
         border-color: #fff;
         border-width: 1px;
     }
-    /*BORDER COLOR IMAGE SLIDER*/ 
+    /*BORDER COLOR IMAGE SLIDER*/
 
 
 
@@ -201,7 +201,7 @@
 
 <meta name="viewport" content="width=600">
 <div class="top-header bottom_head_cus" >
-    <div class="table-responsive">          
+    <div class="table-responsive">
         <table class="table">
             <tbody>
                 <tr >
@@ -220,7 +220,7 @@
                         </div>
                     </td>
                     <td align="right"> <label style="">  <a href="index.php"><img src="images/site_img/edit_logo_1.jpg" alt=" "  style=" height:90px; width:120px;"/></a> </label></td>
-                  
+
                 </tr>
             </tbody>
         </table>
@@ -272,7 +272,7 @@
     </div>
 </div>
 
-<!--<div class="row"> 
+<!--<div class="row">
     <a href="index.php"><img src="images/logo_png.png" height="190px" width="150px" alt=" " /></a>
 </div>
 <div class="container " >

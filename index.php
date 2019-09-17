@@ -5,7 +5,7 @@
     <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 
     <!--MAIN HEAD START -->
-    <head> 
+    <head>
         <?php require_once('include/header.php'); ?>
 
         <!--AMAZING SLIDER SCRIPT START-->
@@ -50,7 +50,7 @@
             }
             /*<!--ITEM SLIDER CSS   END////////////////////-->*/
 
-            /*FEATURES ITEMS LIST CSS START*/ 
+            /*FEATURES ITEMS LIST CSS START*/
             * {
                 box-sizing: border-box;
             }
@@ -115,9 +115,9 @@
                 }
             }
 
-            /*FEATURES ITEMS LIST CSS   END*/ 
+            /*FEATURES ITEMS LIST CSS   END*/
 
-            /*CART CSS*/ 
+            /*CART CSS*/
             .card {
                 box-shadow: 0 4px 8px 0 rgba(0, 0, 2, 0.2);
                 /*box-shadow: 0 4px 8px 0 rgb(134,136,173);*/
@@ -147,12 +147,12 @@
             .card button:hover {
                 opacity: 0.7;
             }
-            /*CART CSS*/ 
+            /*CART CSS*/
 
 
             /*special item width height css*/
             .secial_item{
-                width:100%; 
+                width:100%;
                 heigh:210px;
             }
             /*special item width height css*/
@@ -173,7 +173,7 @@
         <script type="text/javascript" src="jquery_menu/jquery.smartmenus.js"></script>
         <!--MENU SCRIPT-->
 
-        <!--SLICK SLIDER--> 
+        <!--SLICK SLIDER-->
         <script src="./slick/slick.min.js" type="text/javascript" charset="utf-8"></script>
 
         <script type="text/javascript">
@@ -329,12 +329,14 @@
 
             <!---728x90--->
         </div>
-    </div>   
+    </div>
 
-    <div class="clearfix"> </div>        	         
+    <div class="clearfix"> </div>
 </div>
 
 <!---->
+<script src="./js/functions.js" type="text/javascript" charset="utf-8"></script>
+
 <!---728x90--->
 <!--<SLIDER SCRIPT START />////////////////////////////////////////////////////////-->
 <script src="./slick/slick.min.js" type="text/javascript" charset="utf-8"></script>
@@ -382,7 +384,7 @@
 
                 }, 2000);
 
-//              
+//
 
 
 

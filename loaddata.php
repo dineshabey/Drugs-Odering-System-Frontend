@@ -471,11 +471,11 @@ customer_details.cus_id = '{$_SESSION['cus_id']}'
         $send_obj = $_POST['send_obj'];
 // INSERT SHIPPING DEATAILS - ----------------------------------------------------------
         $qry = ("INSERT INTO `shipping_details`
-            (`cus_id`, `recipients_name`, `recipients_phone`, `shipping_city`, 
+            (`cus_id`, `recipients_name`, `recipients_phone`, `shipping_city`,
             `shipping_address`, `user_note`, `shipping_status`, `pay_status`, `order_value`,
-            `order_discount`, `order_status`) 
+            `order_discount`, `order_status`)
             VALUES ( '{$_SESSION['cus_id']}', '{$send_obj['recipient_name']}', '{$send_obj['recipient_phone']}', '-',
-            '{$send_obj['address']}', '{$send_obj['note']}', '0', '0', '0', 
+            '{$send_obj['address']}', '{$send_obj['note']}', '0', '0', '0',
             '0', '0');");
         MainConfig::connectDB();
         $link = MainConfig::conDB();
@@ -544,7 +544,32 @@ customer_added_item.cus_id = '{$_SESSION['cus_id']}'";
         }
     } else if ($_POST['action'] == 'user_login') {
 // USER LOGIN (COUSTPMER)- -----------------------------------------------------
-        $qry = "SELECT
+
+$qry ='';
+$email = $_POST['email'];
+
+if (!stristr($email,"@") OR !stristr($email,".")) {
+
+//IF email field is not send an email Login with phone number
+  $qry = "SELECT
+customer_details.account_status,
+customer_details.`password`,
+customer_details.email,
+customer_details.f_name,
+customer_details.cus_id
+FROM
+customer_details
+WHERE
+customer_details.account_status = '0' AND
+customer_details.`password` = '{$_POST['pw']}' AND
+customer_details.phone = '{$_POST['email']}'
+";
+
+} else {
+
+//Login with email
+
+  $qry = "SELECT
 customer_details.account_status,
 customer_details.`password`,
 customer_details.email,
@@ -557,9 +582,12 @@ customer_details.account_status = '0' AND
 customer_details.`password` = '{$_POST['pw']}' AND
 customer_details.email = '{$_POST['email']}'
 ";
+
+}
+
         MainConfig::connectDB();
         $link = MainConfig::conDB();
-        $result = mysqli_query($link, $qry) or die(mysqli_error());
+        $result = mysqli_query($link, $qry) or die(mysqli_error($link));
 //        MainConfig::closeDB();
         $row = mysqli_fetch_assoc($result);
         if (!empty($row)) {
@@ -603,7 +631,7 @@ customer_added_item.cus_id = '{$row['cus_id']}' AND
 customer_added_item.pay_status = '0' AND
 customer_added_item.item_save_status = '0'
 ";
-                    $result1 = mysqli_query($link, $select_qry) or die(mysqli_error());
+                    $result1 = mysqli_query($link, $select_qry) or die(mysqli_error($link));
                     $row1 = mysqli_fetch_assoc($result1);
                     if (!empty($row1)) {
                         $new_qty = ($row1['item_qty']) + 1;
@@ -835,7 +863,7 @@ item_deatails.item_id DESC");
                                         . '<p> <button  class=" " id="add_to_cart_btn"  data-item_price = "' . $item_price . '"    value=' . $item_id . '>Add to cart</button></p>'
                                         . '</div>';
 //                                $out_put .= '<div>    </div>';
-//                           
+//
                             }
 
                             $out_put .= '</div></section>';
@@ -1009,7 +1037,7 @@ item_deatails.item_id DESC");
                                         . '</label>'
                                         . '</div>';
                                 $out_put .= '<div>    </div>';
-//                           
+//
                             }
 
 //                            $out_put .= '</div></section>';
@@ -1094,8 +1122,3 @@ main_cat.main_cat_id DESC");
         echo $out_put1;
     }//END LOAD NAV BAR MENU
 }   //END ARRAY +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-
-
-
-    
