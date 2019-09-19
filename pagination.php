@@ -297,7 +297,7 @@ item_deatails.sub_cat_id DESC
                     foreach ($item_info_data as $val3) {
 
 
-                        if( ($start >= $i ) && ($i < $end)){
+                        if( ($start > $i ) && ($i < $end)){
 
                         $main_cat_names = $val3['main_cat_name'];
                         $main_cat_id = $val3['main_cat_name'];
