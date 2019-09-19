@@ -1,4 +1,15 @@
-<?php session_start(); ?>
+<?php
+//require 'inc/dbc.php';
+//require 'class/systemSetting.php';
+require_once('./config/dbc.php');
+require_once('./class/systemSetting.php');
+$system = new setting();
+
+$date = date("Y-m-d");
+$time = date("h:i:sa");
+?>
+
+
 
 <!DOCTYPE html>
 <html>
@@ -61,7 +72,7 @@
                             font-family: Arial;
                         }*/
 
-            /* Center website */
+            /*Center website*/ 
             .main {
                 max-width: 1000px;
                 margin: auto;
@@ -204,73 +215,93 @@
         <!---728x90--->
 
         <div class="container">
-            <div class="row" style="padding-bottom: 1px; padding-top: 5px;">
-                <!-- Insert to your webpage where you want to display the slider -->
-                <!--<div id="amazingslider-wrapper-1" style="display:block;position:relative;max-width:100%;padding-left:0px; padding-right:10px;margin:0px auto 0px;">-->
-                <div id="amazingslider-wrapper-1" style="display:block;position:relative;max-width:95%;margin:0px auto 0px;">
-                    <div id="amazingslider-1" style="display:block;position:relative;margin:0 auto;">
-                        <ul class="amazingslider-slides" style="display:none;">
-                            <li><img src="amazing_slider_images/1.jpg" />
-                            </li>
-                            <li><img src="amazing_slider_images/2.png" />
-                            </li>
-                            <li><img src="amazing_slider_images/3.jpg" />
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- LOAD FEATURED ITEMS START-->
-            <div class="row load_featured_items " style="background-color: white;" > </div>
-            <!-- LOAD FEATURED ITEMS END -->
-            
-            
-            <!-- LOAD FEATURED ITEMS START-->
-            <div class="row load_item_cat " style="background-color: white;" hidden=""> </div>
-            <!-- LOAD FEATURED ITEMS END -->
-            
-            
+            <!-- items -->
+            <div class=" img_view_panel" >  
+                <?php
+                if (!isset($_GET["main_cat_id"]) && !isset($_GET["sub_cat_id"])) {
+                    echo "Not Found POST data !";
+                }
 
 
-            <!-- End of body section HTML codes -->
-            <!--ALL ITEM SLIDER START /////////////////////////////////////////3333333333333-->
+                $item_info_data = $system->prepareSelectQuery("SELECT
+item_deatails.item_id,
+item_deatails.item_name,
+item_deatails.item_price,
+item_deatails.item_image,
+item_deatails.item_discount,
+sub_cat.sub_cat_name,
+main_cat.main_cat_name,
+main_cat.main_cat_id,
+sub_cat.sub_cat_id,
+item_deatails.out_of_stock,
+item_deatails.item_description
+FROM
+item_deatails
+INNER JOIN sub_cat ON item_deatails.sub_cat_id = sub_cat.sub_cat_id
+INNER JOIN main_cat ON sub_cat.main_cat_id = main_cat.main_cat_id
+WHERE
+item_deatails.img_status = '1' AND
+item_deatails.item_view_status = '0' AND
+sub_cat.main_cat_id = '{$_GET["main_cat_id"]}' AND
+item_deatails.img_status = '1' AND
+item_deatails.item_view_status = '0'
+ORDER BY
+item_deatails.sub_cat_id DESC
+");
 
-            <div  class="img_view_panels" >     </div>
-            <!--ALL ITEM SLIDER END /////////////////////////////////////////3333333333333-->
+                if (!empty($item_info_data)) {
+                    $item_out_put = '<div style="background:white"><section class=" " id="regular2" style=" padding-top:10px ;">';
+
+                    foreach ($item_info_data as $val3) {
+
+                        $main_cat_names = $val3['main_cat_name'];
+                        $main_cat_id = $val3['main_cat_name'];
+                        $sub_cat_name = $val3['sub_cat_name'];
+                        $sub_cat_id = $val3['sub_cat_id'];
+                        $item_name = $val3['item_name'];
+                        $item_img = $val3['item_image'];
+                        $item_price = $val3['item_price'];
+                        $item_id = $val3['item_id'];
+                        $out_of_stock = $val3['out_of_stock'];
+
+                        $item_out_put .= '<div class="column cus_font">
+                    <div class="content" align="middle">
+                    <a href="single.php?item_id=' . $item_id . '&sub_cat_id=' . $sub_cat_id . ' ">
+                    <img class="secial_item responsive card" align="middle" style="text-aling:center;  width:213px; height:213px;" src="../drugs_ordering_system_backend/uploads/' . $val3['item_image'] . '"/>
+                    <h3 style="text-align: center;">' . $item_name . '</h3>
+                    <h3 style="text-align: center;">' . $main_cat_names . '</h3>
+                    <h3 style="text-align: center; color:red;">LKR ' . $item_price . '</h3>
+                        </a>';
+                        if ($out_of_stock == '1') {
+                            //STOCK OUT ================================
+                            $item_out_put .= '<p style="color:red;">Stoke Out</p>';
+                        } else {
+                            $item_out_put .= '<p> <button type = "button" class = "btn btn-success" id = "add_to_cart_btn" data-item_price = "' . $item_price . '" value = ' . $item_id . '>Add to cart</button></p>';
+                        }
 
 
-            <!-- wrapper -->
-            <div class="wrapper" style="background-color: white;">
-                <!--<h1>Our Stock</h1>-->
-                <span hidden="">
-                    <!--<i class="shopping-cart"></i>-->
-                    <?php
-                    if (!isset($_SESSION['cus_id'])) {
-                        echo '<div class="cart"><a href="cart_item.php"><span class="shopping-cart"> </span></a><span style="font-weight: bold; background:#0000e6; font-size: large; color: #ffd700; border-radius: 32px 32px;" class="item_tot"> </span></div>';
-                    } else {
-                        echo '<div class="cart hidden" ><a href="cart_item.php"><span class=""> </span></a><span style="font-weight: bold; background:#0000e6; font-size: large; color: #ffd700; border-radius: 32px 32px;" class="item_tot"> </span></div>';
+                        $item_out_put .= '</div></div>';
                     }
-                    ?>
-                </span>
 
-                <div class="clear"></div>
-                <!-- items -->
-                <div class=" img_view_panel" >   </div>
-                <!--/ items -->
+                    $item_out_put .= '</div></section>';
+                    echo $item_out_put;
+                }
+                ?>
             </div>
+            <!--/ items -->
+        </div>
 
-            <!--/ wrapper -->
+        <!--/ wrapper -->
 
             <!--<script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>-->
 
-            <!--NEW COUSTOMER ITEM SLIDER END /////////////////////////////////////////3333333333333-->
+        <!--NEW COUSTOMER ITEM SLIDER END /////////////////////////////////////////3333333333333-->
 
-            <!---728x90--->
-        </div>
+        <!---728x90--->
     </div>
+</div>
 
-    <div class="clearfix"> </div>
+<div class="clearfix"> </div>
 </div>
 
 <!---->
@@ -323,52 +354,33 @@
 
                 }, 2000);
 
-//
-
-
-
-
-
-
                 //ONLOAD FUNCTION IMAGE MAIN CAT LOAD ------------------------------------------
                 $(function () {
-                    var sliderData = '';
-                    $.post("./loaddata.php", {action: 'load_slider_data_index_page'}, function (e) {
-                        if (e === undefined || e.length === 0 || e === null) {
-                            $('.img_view_panel').html("NO data Found ! ");
-                        } else {
-                            $('.img_view_panel').html(e);
+                    var sub_cat_id = "<?php echo $sub_cat_id = $_GET["sub_cat_id"]; ?>";
+                    var main_cat_id = "<?php echo $sub_cat_id = $_GET["main_cat_id"]; ?>";
 
-                        }
-                        //    chosenRefresh();
-                    });
-                });
-                //LOAD FEATURED ITEMS  ------------------------------------------
-                $(function () {
-                    var sliderData = '';
-                    $.post("./loaddata.php", {action: 'load_featured_items'}, function (e) {
-                        if (e === undefined || e.length === 0 || e === null) {
-                            $('.load_featured_items').html("NO data Found ! ");
-                        } else {
-                            $('.load_featured_items').html(e);
+                    var sub_cats_id = parseInt(sub_cat_id);
+                    var main_cats_id = parseInt(main_cat_id);
 
-                        }
-                        //    chosenRefresh();
-                    });
-                });
-                //LOAD ITEM CATEGORY ------------------------------------------
-                $(function () {
-                    var sliderData = '';
-                    $.post("./loaddata.php", {action: 'load_item_cat'}, function (e) {
-                        if (e === undefined || e.length === 0 || e === null) {
-                            $('.load_item_cat').html("NO data Found ! ");
-                        } else {
-                            $('.load_item_cat').html(e);
+//                    if (!isNaN(sub_cats_id) || (main_cats_id)) {
+//                        alert('one')
+//                    } else {
+//                        window.location.replace("index.php");
+//
+//                    }
 
-                        }
-                        //    chosenRefresh();
-                    });
+//                    var sliderData = '';
+//                    $.post("./loaddata.php", {action: 'load_slider_data_index_page'}, function (e) {
+//                        if (e === undefined || e.length === 0 || e === null) {
+//                            $('.img_view_panel').html("NO data Found ! ");
+//                        } else {
+//                            $('.img_view_panel').html(e);
+//
+//                        }
+//                        //    chosenRefresh();
+//                    });
                 });
+
 
 
 

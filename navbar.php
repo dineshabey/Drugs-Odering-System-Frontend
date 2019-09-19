@@ -14,7 +14,7 @@ $time = date("h:i:sa");
     <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 
     <!--MAIN HEAD START -->
-    <head> 
+    <head>
         <style type="text/css">
 
             .nav_bar_cuss{
@@ -33,12 +33,8 @@ $time = date("h:i:sa");
 
             }
 
-            .ui-autocomplete-custom {
-                background: #87ceeb;
-                z-index: 2;
-            }
 
-            .search input { 
+            .search input {
                 text-indent: 30px;
                 font-family:  FontAwesome, sans-serif;
             }
@@ -232,17 +228,22 @@ $time = date("h:i:sa");
 
             /*<!--ITEM SLIDER CSS   END////////////////////-->*/
 
-            /*SEARCH BAR*/ 
+            /*SEARCH BAR*/
             .ui-autocomplete {
                 max-height: 100px;
                 overflow-y: auto;
                 /* prevent horizontal scrollbar */
                 overflow-x: hidden;
-                background: #F7F3F2;
+                background: rgba(241, 242, 233, 0.5);
                 z-index: 2;
-                width: 100px; 
+                width: 100px;
             }
-            /*SEARCH BAR*/ 
+
+            .ui-autocomplete-custom {
+                            background: #87ceeb;
+                            z-index: 2;
+                        }
+            /*SEARCH BAR*/
 
 
         </style>
@@ -270,7 +271,7 @@ $time = date("h:i:sa");
         <div class="">
 
             <!--NAVIGATION MENU BAR start ----------------------------------------->
-            <div style="" class=" "  >   
+            <div style="" class=" "  >
                 <?php
 //NAVIGATION BAR ============= =================================================
                 $main_cat_data = $system->prepareSelectQuery("SELECT
@@ -368,7 +369,7 @@ item_deatails.item_id DESC");
                 echo $out_put;
                 ?>
 
-            </div>            
+            </div>
 
 
             <!-- End of body section HTML codes -->
@@ -377,7 +378,7 @@ item_deatails.item_id DESC");
 
 
 
-        <div class="clearfix"> </div>        	         
+        <div class="clearfix"> </div>
     </div>
 
     <script type="text/javascript">

@@ -433,7 +433,7 @@ pay_completed_invoice_summary.invoice_id DESC
 ";
         $system->prepareSelectQueryForJSON($qry);
     } else if ($_POST['action'] == 'load_buy_item_list') {
-// LOAD BUY ITEM LIST DEATAILS - ----------------------------------------------------------
+// LOAD BUY ITEM LIST DEATAILS - -----------------------------------------------
         $qry = "SELECT
 item_deatails.item_name,
 pay_completed_item_summary.item_qty,
@@ -450,7 +450,7 @@ pay_completed_item_summary.id DESC
 ";
         $system->prepareSelectQueryForJSON($qry);
     } else if ($_POST['action'] == 'load_profile_setting_tbl') {
-// LOAD PROFILE SETTING DEATAILS - ----------------------------------------------------------
+// LOAD PROFILE SETTING DEATAILS - ---------------------------------------------
         $qry = "SELECT
 customer_details.cus_id,
 customer_details.f_name,
@@ -469,13 +469,13 @@ customer_details.cus_id = '{$_SESSION['cus_id']}'
         $system->prepareSelectQueryForJSONSingleData($qry);
     } else if ($_POST['action'] == 'add_shipping_deatail') {
         $send_obj = $_POST['send_obj'];
-// INSERT SHIPPING DEATAILS - ----------------------------------------------------------
+// INSERT SHIPPING DEATAILS - --------------------------------------------------
         $qry = ("INSERT INTO `shipping_details`
-            (`cus_id`, `recipients_name`, `recipients_phone`, `shipping_city`, 
+            (`cus_id`, `recipients_name`, `recipients_phone`, `shipping_city`,
             `shipping_address`, `user_note`, `shipping_status`, `pay_status`, `order_value`,
-            `order_discount`, `order_status`) 
+            `order_discount`, `order_status`)
             VALUES ( '{$_SESSION['cus_id']}', '{$send_obj['recipient_name']}', '{$send_obj['recipient_phone']}', '-',
-            '{$send_obj['address']}', '{$send_obj['note']}', '0', '0', '0', 
+            '{$send_obj['address']}', '{$send_obj['note']}', '0', '0', '0',
             '0', '0');");
         MainConfig::connectDB();
         $link = MainConfig::conDB();
@@ -488,7 +488,7 @@ customer_details.cus_id = '{$_SESSION['cus_id']}'
         }
     } else if ($_POST['action'] == 'update_shipping_deatail') {
         $send_obj = $_POST['send_obj'];
-// UPDATE SHIPPING DEATAILS - ----------------------------------------------------------
+// UPDATE SHIPPING DEATAILS - --------------------------------------------------
         $qry = ("UPDATE `shipping_details` SET  `recipients_name`='{$send_obj['recipient_name']}', `recipients_phone`='{$send_obj['recipient_phone']}',"
                 . " `shipping_city`='-', `shipping_address`='{$send_obj['address']}', `user_note`='{$send_obj['note']}' WHERE (`shipping_id`='{$send_obj['id']}');");
         MainConfig::connectDB();
@@ -501,7 +501,7 @@ customer_details.cus_id = '{$_SESSION['cus_id']}'
             echo json_encode('2');
         }
     } else if ($_POST['action'] == 'added_item_summary') {
-// ADDED ITEM TOTAL SUMMARY- ----------------------------------------------------------
+// ADDED ITEM TOTAL SUMMARY- ----------------------------------------------------
         $qry = "SELECT
 customer_added_item.id,
 customer_added_item.cus_id,
@@ -544,7 +544,31 @@ customer_added_item.cus_id = '{$_SESSION['cus_id']}'";
         }
     } else if ($_POST['action'] == 'user_login') {
 // USER LOGIN (COUSTPMER)- -----------------------------------------------------
-        $qry = "SELECT
+
+        $qry = '';
+        $email = $_POST['email'];
+
+        if (!stristr($email, "@") OR ! stristr($email, ".")) {
+
+//IF email field is not send an email Login with phone number
+            $qry = "SELECT
+customer_details.account_status,
+customer_details.`password`,
+customer_details.email,
+customer_details.f_name,
+customer_details.cus_id
+FROM
+customer_details
+WHERE
+customer_details.account_status = '0' AND
+customer_details.`password` = '{$_POST['pw']}' AND
+customer_details.phone = '{$_POST['email']}'
+";
+        } else {
+
+//Login with email
+
+            $qry = "SELECT
 customer_details.account_status,
 customer_details.`password`,
 customer_details.email,
@@ -557,9 +581,11 @@ customer_details.account_status = '0' AND
 customer_details.`password` = '{$_POST['pw']}' AND
 customer_details.email = '{$_POST['email']}'
 ";
+        }
+
         MainConfig::connectDB();
         $link = MainConfig::conDB();
-        $result = mysqli_query($link, $qry) or die(mysqli_error());
+        $result = mysqli_query($link, $qry) or die(mysqli_error($link));
 //        MainConfig::closeDB();
         $row = mysqli_fetch_assoc($result);
         if (!empty($row)) {
@@ -603,7 +629,7 @@ customer_added_item.cus_id = '{$row['cus_id']}' AND
 customer_added_item.pay_status = '0' AND
 customer_added_item.item_save_status = '0'
 ";
-                    $result1 = mysqli_query($link, $select_qry) or die(mysqli_error());
+                    $result1 = mysqli_query($link, $select_qry) or die(mysqli_error($link));
                     $row1 = mysqli_fetch_assoc($result1);
                     if (!empty($row1)) {
                         $new_qty = ($row1['item_qty']) + 1;
@@ -773,8 +799,8 @@ main_cat.main_cat_id DESC");
             $main_cat_name = '';
             foreach ($main_cat_data as $val) {
                 $main_cat_id = $val['main_cat_id'];
-                $out_put .= '<div style="border: 1px solid #ddd; margin: 1.5em 0; padding: 0.7em 1em; background: #2cce22;">'
-                        . '<h4>' . $val['main_cat_name'] . '</h4></div>';
+                $out_put .= '<div class="" style="border: 1px solid #ddd; margin: 1.5em 0; padding: 0.7em 1em; background:white;">'
+                        . '<h4 style="font-weight: 700; color:black; font-size: 20px;">' . $val['main_cat_name'] . '</h4></div>';
                 $sub_cat_data = $system->prepareSelectQuery("SELECT
 sub_cat.sub_cat_id,
 sub_cat.sub_cat_name
@@ -789,7 +815,8 @@ sub_cat.sub_cat_id DESC");
                     foreach ($sub_cat_data as $val2) {
                         $sub_cat_id = $val2['sub_cat_id'];
                         $out_put .= '<div style="color: black;">'
-                                . '<h4>' . $val2['sub_cat_name'] . '</h4></div>';
+                                . '<h4 style="  text-align: left; color:red;"> ' . $val2['sub_cat_name'] . '</h4></div>'
+                                . '<h4 style="  text-align: right; color:blue;"><a style="text-align: right; color:blue;" href="item_cat_list.php?main_cat_id=' . $val['main_cat_id'] . '&sub_cat_id=' . $sub_cat_id . ' "> VIEW ALL ITEMS  </a></h4></div>';
 
                         $item_info_data = $system->prepareSelectQuery("SELECT
 item_deatails.item_id,
@@ -800,7 +827,8 @@ item_deatails.item_discount,
 sub_cat.sub_cat_name,
 main_cat.main_cat_name,
 main_cat.main_cat_id,
-sub_cat.sub_cat_id
+sub_cat.sub_cat_id,
+item_deatails.out_of_stock
 FROM
 item_deatails
 INNER JOIN sub_cat ON item_deatails.sub_cat_id = sub_cat.sub_cat_id
@@ -810,10 +838,10 @@ item_deatails.sub_cat_id = '$sub_cat_id' AND
 item_deatails.img_status = '1' AND
 item_deatails.item_view_status = '0'
 ORDER BY
-item_deatails.item_id DESC");
+item_deatails.item_id DESC LIMIT 4");
 
                         if (!empty($item_info_data)) {
-                            $out_put .= '<div style="background: #0492f70d;"><section class="regular slider" id="regular2" style=" padding-top:10px ;">';
+                            $out_put .= '<div style="background:white"><section class="regular slider" id="regular2" style=" padding-top:10px ;">';
 
                             foreach ($item_info_data as $val3) {
 
@@ -825,17 +853,25 @@ item_deatails.item_id DESC");
                                 $item_img = $val3['item_image'];
                                 $item_price = $val3['item_price'];
                                 $item_id = $val3['item_id'];
+                                $out_of_stock = $val3['out_of_stock'];
 
-                                $out_put .= '<div align="" class="boder_imgz card">'
+                                $out_put .= '<div align="" class="boder_imgz card cus_font">'
                                         . '<a href="single.php?item_id=' . $item_id . '&sub_cat_id=' . $sub_cat_id . ' "><img class=""  style="text-aling:center;  width:222px; height:210px; " src="../drugs_ordering_system_backend/uploads/' . $val3['item_image'] . '"/></a>'
-                                        . '<p style="padding-top:9px; font-size: large;     color: #001dfff7;">' . $item_name . '</p>'
-                                        . '<p  class="">RS. : ' . $item_price . '</p>'
+                                        . '<p style="padding-top:9px;">' . $item_name . '</p>'
+                                        . '<p  class="" style="color:red;">LKR : ' . $item_price . '</p>';
 //                                        . '<p  class="price">d comfy lorem ipsum lorem jeansum. Lorem jeamsun denim lorem jeansum.</p>'
 //                                        . '<p> Add to Cart<button  class=" add-to-cart" id="add_to_cart_btn"  data-item_price = "' . $item_price . '"    value=' . $item_id . '><label><img  style="height:40px; width:40px;" src="images/site_img/cart_add.png"  alt=" " /></label></button></p>'
-                                        . '<p> <button  class=" " id="add_to_cart_btn"  data-item_price = "' . $item_price . '"    value=' . $item_id . '>Add to cart</button></p>'
-                                        . '</div>';
+
+                                if ($out_of_stock == '1') {
+                                    //STOCK OUT ================================
+                                    $out_put .= '<p style="color:red;">Stoke Out</p>';
+                                } else {
+                                    $out_put .= '<p> <button  class=" " id="add_to_cart_btn"  data-item_price = "' . $item_price . '"    value=' . $item_id . '>Add to cart</button></p>';
+                                }
+
+                                $out_put .= '</div>';
 //                                $out_put .= '<div>    </div>';
-//                           
+//
                             }
 
                             $out_put .= '</div></section>';
@@ -845,7 +881,7 @@ item_deatails.item_id DESC");
             }
             echo $out_put;
         }
-    } else if ($_POST['action'] == 'load_special_items') {
+    } else if ($_POST['action'] == 'load_featured_items') {
         //PAGE LOAD SLIDER DATA =================================================
         $main_cat_data = $system->prepareSelectQuery("SELECT
 main_cat.main_cat_name,
@@ -859,10 +895,10 @@ main_cat.main_cat_id DESC");
         if (!empty($main_cat_data)) {
             $out_put = '';
             $main_cat_name = '';
+            $out_put .= '<section class=" "><div style="border: 1px solid #ddd; margin: 1.5em 0; padding: 0.7em 1em; padding-top:10px; background: #4cd107;  ">'
+                    . '<h4 style="font-weight: 700;">FEATURED COLLECTION</h4></div> </section>';
             foreach ($main_cat_data as $val) {
                 $main_cat_id = $val['main_cat_id'];
-//                $out_put .= '<section class=" regular2"><div style="border: 1px solid #ddd; margin: 1.5em 0; padding: 0.7em 1em; padding-top:10px ">'
-//                        . '<h4>' . $val['main_cat_name'] . '</h4></div> </section>';
                 $sub_cat_data = $system->prepareSelectQuery("SELECT
 sub_cat.sub_cat_id,
 sub_cat.sub_cat_name
@@ -888,7 +924,8 @@ item_deatails.item_discount,
 sub_cat.sub_cat_name,
 main_cat.main_cat_name,
 main_cat.main_cat_id,
-sub_cat.sub_cat_id
+sub_cat.sub_cat_id,
+item_deatails.out_of_stock
 FROM
 item_deatails
 INNER JOIN sub_cat ON item_deatails.sub_cat_id = sub_cat.sub_cat_id
@@ -896,16 +933,19 @@ INNER JOIN main_cat ON sub_cat.main_cat_id = main_cat.main_cat_id
 WHERE
 item_deatails.sub_cat_id = '$sub_cat_id' AND
 item_deatails.img_status = '1' AND
-item_deatails.item_view_status = '0'
+item_deatails.item_view_status = '0' AND
+item_deatails.featured_item = '1'
 ORDER BY
-item_deatails.item_id DESC");
+item_deatails.item_id DESC
+");
+
 
                         if (!empty($item_info_data)) {
-//                            $out_put .= '<div style="background: #0492f70d;"><section class="regular slider" id="regular2" style=" padding-top:10px ;">';
-//                            $out_put .= '<div style="background: #0492f70d; padding-top:10px ;">';
+
+//                                $out_put .= '<section class=" regular2"><div style="border: 1px solid #ddd; margin: 1.5em 0; padding: 0.7em 1em; padding-top:10px ">'
+//                        . '<h4>' . $val['main_cat_name'] . '</h4></div> </section>';
 
                             foreach ($item_info_data as $val3) {
-
                                 $main_cat_names = $val3['main_cat_name'];
                                 $main_cat_id = $val3['main_cat_name'];
                                 $sub_cat_name = $val3['sub_cat_name'];
@@ -914,21 +954,128 @@ item_deatails.item_id DESC");
                                 $item_img = $val3['item_image'];
                                 $item_price = $val3['item_price'];
                                 $item_id = $val3['item_id'];
+                                $out_of_stock = $val3['out_of_stock'];
 
-                                $out_put .= '  <div class="column cus_font">
+                                $out_put .= '<div class="column cus_font">
                     <div class="content" align="middle">
                     <a href="single.php?item_id=' . $item_id . '&sub_cat_id=' . $sub_cat_id . ' ">
                     <img class="secial_item responsive card" align="middle" style="text-aling:center;  width:213px; height:213px;" src="../drugs_ordering_system_backend/uploads/' . $val3['item_image'] . '"/>
                     <h3 style="text-align: center;">' . $item_name . '</h3>
                     <h3 style="text-align: center;">' . $main_cat_names . '</h3>
                     <h3 style="text-align: center; color:red;">LKR ' . $item_price . '</h3>
-                        </a>
-                    </div>
-                    </div>';
+                        </a>';
+                                if ($out_of_stock == '1') {
+                                    //STOCK OUT ================================
+                                    $out_put .= '<p style="color:red;">Stoke Out</p>';
+                                } else {
+                                    $out_put .= '<p> <button type = "button" class = "btn btn-success" id = "add_to_cart_btn" data-item_price = "' . $item_price . '" value = ' . $item_id . '>Add to cart</button></p>';
+                                }
+
+
+                                $out_put .= '</div></div>';
                             }
 
 //                            $out_put .= '</div></section>';
 //                            $out_put .= '</div>';
+                        }
+                    }
+                }
+            }
+            echo $out_put;
+        }
+    } else if ($_POST['action'] == 'load_item_cat') {
+        //LOAD ITEM CAT=================================================
+        $main_cat_data = $system->prepareSelectQuery("SELECT
+main_cat.main_cat_name,
+main_cat.main_cat_id
+FROM
+main_cat
+WHERE
+main_cat.view_status = '0'
+ORDER BY
+main_cat.main_cat_id DESC");
+        if (!empty($main_cat_data)) {
+            $out_put = '';
+            $main_cat_name = '';
+            foreach ($main_cat_data as $val) {
+                $main_cat_id = $val['main_cat_id'];
+                $main_cat_name = $val['main_cat_name'];
+                $out_put .= '<section class=" "><div class="row" style="border: 1px solid #ddd; margin: 1.5em 0; padding: 0.7em 1em; padding-top:10px; background: #4cd107;  ">'
+                        . '<h4 style="font-weight: 700;">' . $main_cat_name . '</h4></div> </section>';
+                $sub_cat_data = $system->prepareSelectQuery("SELECT
+sub_cat.sub_cat_id,
+sub_cat.sub_cat_name
+FROM
+sub_cat
+WHERE
+sub_cat.view_status = '0' AND
+sub_cat.main_cat_id = '$main_cat_id'
+ORDER BY
+sub_cat.sub_cat_id DESC");
+                if (!empty($sub_cat_data)) {
+                    foreach ($sub_cat_data as $val2) {
+                        $sub_cat_id = $val2['sub_cat_id'];
+                        $sub_cat_name = $val2['sub_cat_name'];
+                        $out_put .= '<div style="color: black;" class="row">'
+                                . '<h4></h4></div>';
+
+                        $item_info_data = $system->prepareSelectQuery("SELECT
+item_deatails.item_id,
+item_deatails.item_name,
+item_deatails.item_price,
+item_deatails.item_image,
+item_deatails.item_discount,
+sub_cat.sub_cat_name,
+main_cat.main_cat_name,
+main_cat.main_cat_id,
+sub_cat.sub_cat_id,
+item_deatails.out_of_stock
+FROM
+item_deatails
+INNER JOIN sub_cat ON item_deatails.sub_cat_id = sub_cat.sub_cat_id
+INNER JOIN main_cat ON sub_cat.main_cat_id = main_cat.main_cat_id
+WHERE
+item_deatails.sub_cat_id = '$sub_cat_id' AND
+item_deatails.img_status = '1' AND
+item_deatails.item_view_status = '0' AND
+item_deatails.img_status = '1'
+ORDER BY
+item_deatails.item_id DESC LIMIT 4
+");
+
+
+                        if (!empty($item_info_data)) {
+                            $out_put .= '<div style="background: #0492f70d;"><section class="regular" id="" style=" padding-top:10px ;">';
+                            foreach ($item_info_data as $val3) {
+                                $main_cat_names = $val3['main_cat_name'];
+                                $main_cat_id = $val3['main_cat_name'];
+                                $sub_cat_name = $val3['sub_cat_name'];
+                                $sub_cat_id = $val3['sub_cat_id'];
+                                $item_name = $val3['item_name'];
+                                $item_img = $val3['item_image'];
+                                $item_price = $val3['item_price'];
+                                $item_id = $val3['item_id'];
+                                $out_of_stock = $val3['out_of_stock'];
+
+                                $out_put .= '<div class="column cus_font">
+                    <div class="content" align="middle">
+                    <a href="single.php?item_id=' . $item_id . '&sub_cat_id=' . $sub_cat_id . ' ">
+                    <img class="secial_item responsive card" align="middle" style="text-aling:center;  width:213px; height:213px;" src="../drugs_ordering_system_backend/uploads/' . $val3['item_image'] . '"/>
+                    <h3 style="text-align: center;">' . $item_name . '</h3>
+                    <h3 style="text-align: center;">' . $main_cat_names . '</h3>
+                    <h3 style="text-align: center; color:red;">LKR ' . $item_price . '</h3>
+                        </a>';
+                                if ($out_of_stock == '1') {
+                                    //STOCK OUT ================================
+                                    $out_put .= '<p style="color:red;">Stoke Out</p>';
+                                } else {
+                                    $out_put .= '<p> <button type = "button" class = "btn btn-success" id = "add_to_cart_btn" data-item_price = "' . $item_price . '" value = ' . $item_id . '>Add to cart</button></p>';
+                                }
+                                $out_put .= '</div></div>';
+                            }
+
+//                            $out_put .= '</div>';
+                            $out_put .= '</div></section>';
                         }
                     }
                 }
@@ -1016,7 +1163,7 @@ item_deatails.item_id DESC");
                                         . '</label>'
                                         . '</div>';
                                 $out_put .= '<div>    </div>';
-//                           
+//
                             }
 
 //                            $out_put .= '</div></section>';
@@ -1101,8 +1248,6 @@ main_cat.main_cat_id DESC");
         echo $out_put1;
     }//END LOAD NAV BAR MENU
 }   //END ARRAY +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-
 
 
     
