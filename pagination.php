@@ -223,7 +223,7 @@ $time = date("h:i:sa");
                 }
 
 
-                $item_info_data = $system->prepareSelectQuery("SELECT
+$item_query = "SELECT
 item_deatails.item_id,
 item_deatails.item_name,
 item_deatails.item_price,
@@ -246,12 +246,58 @@ sub_cat.main_cat_id = '{$_GET["main_cat_id"]}' AND
 item_deatails.img_status = '1'
 ORDER BY
 item_deatails.sub_cat_id DESC
-");
+";
+
+                $item_info_data = $system->prepareSelectQuery($item_query);
+                $item_count = $system->getCountByQuery($item_query);
+
+
+// Return the number of rows in result set
+ $total= $item_count;
+
+ // How many items to list per page
+ $limit = 4;
+
+ // How many pages will there be
+ $pages = ceil($total / $limit);
+
+
+ // What page are we currently on?
+ $page = min($pages, filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT, array(
+     'options' => array(
+         'default'   => 1,
+         'min_range' => 1,
+     ),
+ )));
+
+ // Calculate the offset for the query
+ $offset = ($page - 1)  * $limit;
+
+ // Some information to display to the user
+ $start = $offset + 1;
+ $end = min(($offset + $limit), $total);
+
+ // The "back" link
+ $prevlink = ($page > 1) ? '<a href="?page=1" title="First page">&laquo;</a> <a href="?page=' . ($page - 1) . '" title="Previous page">&lsaquo;</a>' : '<span class="disabled">&laquo;</span> <span class="disabled">&lsaquo;</span>';
+
+ // The "forward" link
+ $nextlink = ($page < $pages) ? '<a href="?page=' . ($page + 1) . '" title="Next page">&rsaquo;</a> <a href="?page=' . $pages . '" title="Last page">&raquo;</a>' : '<span class="disabled">&rsaquo;</span> <span class="disabled">&raquo;</span>';
+
+ // Display the paging information
+ echo '<div id="paging"><p>', $prevlink, ' Page ', $page, ' of ', $pages, ' pages, displaying ', $start, '-', $end, ' of ', $total, ' results ', $nextlink, ' </p></div>';
+
 
                 if (!empty($item_info_data)) {
+
                     $item_out_put = '<div style="background:white"><section class=" " id="regular2" style=" padding-top:10px ;">';
 
+                  $i = 1;
+
+        //        while( ($start <= $i ) || ($i<= $end)){
                     foreach ($item_info_data as $val3) {
+
+
+                        if( ($start >= $i ) && ($i < $end)){
 
                         $main_cat_names = $val3['main_cat_name'];
                         $main_cat_id = $val3['main_cat_name'];
@@ -280,34 +326,52 @@ item_deatails.sub_cat_id DESC
 
 
                         $item_out_put .= '</div></div>';
-                    }
+
+                          $i++;
+
+                        }//END if
+
+                    }//END foreach
+
+
 
                     $item_out_put .= '</div></section>';
                     echo $item_out_put;
                 }
                 ?>
+
+                <!-- Pagination -->
+
+                <div class="row">
+                   <div class=" center-block" >
+
+                <ul class="pagination pagination-lg">
+                  <li class="page-item"><a class="page-link" href="<?php echo $page-1 ?>">Previous</a></li>
+
+                  <?php
+
+                  for($v=1;$v<=$pages;$v++){
+
+                    if($v==$page){
+                              echo '<li class="active"><a href="'.$v.'">'.$v.'</a></li>';
+                    }else{
+                              echo '<li><a href="'.$v.'">'.$v.'</a></li>';
+                    }
+                  }
+                ?>
+                     <li class="page-item"><a class="page-link" href="<?php echo $page+1 ?>">Next</a></li>
+                </ul>
+
+                </div>
+                </div>
+                <!-- Pagination End -->
+
+
             </div>
             <!--/ items -->
 
 
-            <!-- Pagination -->
 
-            <div class="row">
-               <div class=" center-block" >
-
-            <ul class="pagination pagination-lg">
-              <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-              <li><a href="#">1</a></li>
-              <li class="active"><a href="#">2</a></li>
-              <li><a href="#">3</a></li>
-              <li><a href="#">4</a></li>
-              <li><a href="#">5</a></li>
-                 <li class="page-item"><a class="page-link" href="#">Next</a></li>
-            </ul>
-
-            </div>
-            </div>
-            <!-- Pagination End -->
 
 
         </div>
@@ -328,52 +392,9 @@ item_deatails.sub_cat_id DESC
 <!---->
 <script src="./js/functions.js" type="text/javascript" charset="utf-8"></script>
 
-<!---728x90--->
-<!--<SLIDER SCRIPT START />////////////////////////////////////////////////////////-->
-<script src="./slick/slick.min.js" type="text/javascript" charset="utf-8"></script>
-
 <script type="text/javascript">
             $(document).on('ready', function () {
-                setTimeout(function () {
-//                    $(".regular").slick({
-//                        dots: true,
-//                        arrows: true,
-//                        infinite: true,
-//                        slidesToShow: 4,
-//                        slidesToScroll: 3,
-//                        lazyLoad: 'ondemand'
-//                    });
 
-
-//                    new script------------ -
-                    $(".regular").slick({
-                        // normal options...
-//                        dots: true,
-                        infinite: true,
-                        slidesToShow: 4,
-                        slidesToScroll: 2,
-                        mobileFirst: true,
-                        responsive: [{
-                                breakpoint: 1000,
-                                settings: {
-                                    slidesToShow: 4,
-                                    infinite: true
-                                }
-                            }, {
-                                breakpoint: 768,
-                                settings: {
-                                    slidesToShow: 2,
-                                    infinite: true
-                                }}, {
-                                breakpoint: 550,
-                                settings: {
-                                    slidesToShow: 2,
-                                    infinite: true
-                                }}]
-                    });
-//                 new script-------------
-
-                }, 2000);
 
                 //ONLOAD FUNCTION IMAGE MAIN CAT LOAD ------------------------------------------
                 $(function () {
@@ -383,35 +404,9 @@ item_deatails.sub_cat_id DESC
                     var sub_cats_id = parseInt(sub_cat_id);
                     var main_cats_id = parseInt(main_cat_id);
 
-//                    if (!isNaN(sub_cats_id) || (main_cats_id)) {
-//                        alert('one')
-//                    } else {
-//                        window.location.replace("index.php");
-//
-//                    }
-
-//                    var sliderData = '';
-//                    $.post("./loaddata.php", {action: 'load_slider_data_index_page'}, function (e) {
-//                        if (e === undefined || e.length === 0 || e === null) {
-//                            $('.img_view_panel').html("NO data Found ! ");
-//                        } else {
-//                            $('.img_view_panel').html(e);
-//
-//                        }
-//                        //    chosenRefresh();
-//                    });
                 });
 
-
-
-
-
-
             }); //ON LOAD FUCTION END
-
-
-
-
 </script>
 
 <!--<SLIDER SCRIPT END />////////////////////////////////////////////////////////-->
@@ -423,62 +418,7 @@ item_deatails.sub_cat_id DESC
         $(document).on('ready', function () {
             item_tot();
         });
-//CART ADDED ITEM TOTAL ===========================================================
-        function item_tot() {
-            $.post("./loaddata.php", {action: 'item_total'}, function (e) {
-                if (e === undefined || e.length === 0 || e === null) {
-                    $('#').html("NO data Found ! ");
-                } else {
-                    var item_tot = (e['item_tot']);
-                    var item_tot_price = (e['item_tot_price']);
-                    $('.item_tot').html(item_tot);
-                    $('.item_tot_price').html(item_tot_price);
-//                    load_cart_item_list();
-                }
-                //    chosenRefresh();
-            }, "json");
-        }
 
-        //ADD TO CART ANIMATION
-        $(document).on('click', '.add-to', function () {
-            var cart = $('.shopping-cart');
-            var imgtodrag = $(this).parent('.item').find("img").eq(0);
-            if (imgtodrag) {
-                var imgclone = imgtodrag.clone()
-                        .offset({
-                            top: imgtodrag.offset().top,
-                            left: imgtodrag.offset().left
-                        })
-                        .css({
-                            'opacity': '0.5',
-                            'position': 'absolute',
-                            'height': '150px',
-                            'width': '150px',
-                            'z-index': '100'
-                        })
-                        .appendTo($('body'))
-                        .animate({
-                            'top': cart.offset().top + 10,
-                            'left': cart.offset().left + 10,
-                            'width': 75,
-                            'height': 75
-                        }, 1000, 'easeInOutExpo');
-
-//                setTimeout(function () {
-//                    cart.effect("shake", {
-//                        times: 2
-//                    }, 200);
-//                }, 1500);
-
-                imgclone.animate({
-                    'width': 0,
-                    'height': 0
-                }, function () {
-                    $(this).detach()
-                });
-            }
-        });
-//    <!--//ADD TO CART ANIMATION END-->
 
     </script>
 
