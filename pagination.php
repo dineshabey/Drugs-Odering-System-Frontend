@@ -248,6 +248,9 @@ ORDER BY
 item_deatails.sub_cat_id DESC
 ";
 
+$main_cat = $_GET["main_cat_id"];
+$sub_cat = $_GET["sub_cat_id"];
+
                 $item_info_data = $system->prepareSelectQuery($item_query);
                 $item_count = $system->getCountByQuery($item_query);
 
@@ -297,7 +300,7 @@ item_deatails.sub_cat_id DESC
                     foreach ($item_info_data as $val3) {
 
 
-                        if( ($start > $i ) && ($i < $end)){
+                        if( ($start >= $i ) && ($i <= $end)){
 
                         $main_cat_names = $val3['main_cat_name'];
                         $main_cat_id = $val3['main_cat_name'];
@@ -353,9 +356,9 @@ item_deatails.sub_cat_id DESC
                   for($v=1;$v<=$pages;$v++){
 
                     if($v==$page){
-                              echo '<li class="active"><a href="'.$v.'">'.$v.'</a></li>';
+                              echo '<li class="active"><a href="pagination.php?main_cat_id='.$main_cat.'&sub_cat_id='.$sub_cat.'&page='.$v.'">'.$v.'</a></li>';
                     }else{
-                              echo '<li><a href="'.$v.'">'.$v.'</a></li>';
+                              echo '<li><a href="pagination.php?main_cat_id='.$main_cat.'&sub_cat_id='.$sub_cat.'&page='.$v.'">'.$v.'</a></li>';
                     }
                   }
                 ?>
