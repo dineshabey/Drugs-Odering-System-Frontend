@@ -158,7 +158,13 @@
             /*special item width height css*/
 
 
-
+            .cus_font{
+                font-size: 24px;
+                color: #1e2c9c;
+                font-style: normal;
+                font-family: cursive;
+                font-weight: 900;
+            }
 
 
         </style>
@@ -212,19 +218,13 @@
                 </div>
             </div>
 
-
-
             <!-- Portfolio Gallery Grid -->
-            <div class="row" style="background-color: #eaffd2;">
+            <div class="row load_special_items " style="background-color: white;">
 
-                <div class="column ">
-                    <div class="content ">
-                        <!--<img src="lights.jpg" alt="Lights" style="width:100%">-->
-                        <img class="secial_item" src="images/special_item/10.jpg" alt=""/>
-                        <h3 style="text-align: center;">Product Name</h3>
-                        <p style="text-align: center;">Description ..</p>
-                    </div>
-                </div>
+            </div>
+            <div class="row" style="background-color: #eaffd2;" hidden="">
+
+               
                 <div class="column ">
                     <div class="content ">
                         <!--<img src="nature.jpg" alt="Nature" style="width:100%">-->

@@ -861,8 +861,8 @@ main_cat.main_cat_id DESC");
             $main_cat_name = '';
             foreach ($main_cat_data as $val) {
                 $main_cat_id = $val['main_cat_id'];
-//                $out_put .= '<div style="border: 1px solid #ddd; margin: 1.5em 0; padding: 0.7em 1em; background: #2cce22;">'
-//                        . '<h4>' . $val['main_cat_name'] . '</h4></div>';
+//                $out_put .= '<section class=" regular2"><div style="border: 1px solid #ddd; margin: 1.5em 0; padding: 0.7em 1em; padding-top:10px ">'
+//                        . '<h4>' . $val['main_cat_name'] . '</h4></div> </section>';
                 $sub_cat_data = $system->prepareSelectQuery("SELECT
 sub_cat.sub_cat_id,
 sub_cat.sub_cat_name
@@ -898,10 +898,11 @@ item_deatails.sub_cat_id = '$sub_cat_id' AND
 item_deatails.img_status = '1' AND
 item_deatails.item_view_status = '0'
 ORDER BY
-item_deatails.item_id DESC LIMIT 4");
+item_deatails.item_id DESC");
 
                         if (!empty($item_info_data)) {
 //                            $out_put .= '<div style="background: #0492f70d;"><section class="regular slider" id="regular2" style=" padding-top:10px ;">';
+//                            $out_put .= '<div style="background: #0492f70d; padding-top:10px ;">';
 
                             foreach ($item_info_data as $val3) {
 
@@ -914,14 +915,20 @@ item_deatails.item_id DESC LIMIT 4");
                                 $item_price = $val3['item_price'];
                                 $item_id = $val3['item_id'];
 
-                                $out_put .= '  <div class="column">
-                    <div class="content" style="align:center">
-                    <img class="" style="text-aling:center;  width:213px; height:213px;" src="../drugs_ordering_system_backend/uploads/' . $val3['item_image'] . '"/>
-    <h5 >'.$item_name.'</h5>
+                                $out_put .= '  <div class="column cus_font">
+                    <div class="content" align="middle">
+                    <a href="single.php?item_id=' . $item_id . '&sub_cat_id=' . $sub_cat_id . ' ">
+                    <img class="secial_item responsive card" align="middle" style="text-aling:center;  width:213px; height:213px;" src="../drugs_ordering_system_backend/uploads/' . $val3['item_image'] . '"/>
+                    <h3 style="text-align: center;">' . $item_name . '</h3>
+                    <h3 style="text-align: center;">' . $main_cat_names . '</h3>
+                    <h3 style="text-align: center; color:red;">LKR ' . $item_price . '</h3>
+                        </a>
                     </div>
-                </div>';                   }
+                    </div>';
+                            }
 
 //                            $out_put .= '</div></section>';
+//                            $out_put .= '</div>';
                         }
                     }
                 }

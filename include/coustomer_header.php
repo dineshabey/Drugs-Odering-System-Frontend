@@ -67,9 +67,6 @@
         border-width: 1px;
     }
     /*BORDER COLOR IMAGE SLIDER*/ 
-
-
-
     /*=======*/
 
     .ui-autocomplete-custom {
@@ -108,7 +105,7 @@
         }
     }
 
-
+    /*img*/
     img
     {
         max-width: 100%;
@@ -194,7 +191,26 @@
     }
     /*HEADING TABALE CSS ///////////////////////////////////*/
 
+    .lion_text{
+        /*text-shadow: 0 4px 0 #000,  0 3px 0 #0e0c0c, 0 4px 0 #b9b9b9, 0 5px 0 #aaa, 0 6px 1px #9bbaeca1, 0 0 5px rgba(0,0,0,.1), 0 1px 3px rgba(0,0,0,.3), 0 3px 5px rgba(0,0,0,.2), 0 5px 10px rgba(0,0,0,.25), 0 10px 10px rgba(0,0,0,.2), 0 20px 20px rgba(0,0,0,.15);*/
 
+        text-shadow: 0 4px 0 #ccc, 
+            /*0 2px 0 #c9c9c9,*/
+            2px 4px 3px #231c1c,
+            0 4px 0 #b9b9b9,
+            0 4px 0 #b9b9b9,
+            0 5px 0 #aaa,
+            0 6px 1px rgba(0,0,0,.1),
+            0 0 5px rgba(0,0,0,.1),
+            0 1px 3px rgba(0,0,0,.3),
+            0 3px 5px rgba(0,0,0,.2),
+            0 5px 10px rgba(0,0,0,.25),
+            0 10px 10px rgba(0,0,0,.2),
+            0 20px 20px rgba(0,0,0,.15);
+        font-size: 31px;
+        color: #ffff59;
+
+    }
 
 </style>
 </head>
@@ -202,14 +218,15 @@
 <meta name="viewport" content="width=600">
 <div class="top-header bottom_head_cus" >
     <div class="table-responsive">          
-        <table class="table">
+        <table class="table"  cellspacing="100px" >
             <tbody>
-                <tr >
-                    <td> <label style=" color: #ffff00;">  <a href="index.php"><h1 style="color:#ffff59;">LION MINI MART</h1></a> </label></td>
-                    <td align="right"   ><div class="login" style="">
+                <tr>
+                    <td> <label style="" class="">  <a href="index.php"><p  class="lion_text">LION MINI MART</p></a> </label></td>
+                    <td align="left">
+                        <div class="login" style="">
                             <?php
                             if (!isset($_SESSION['cus_id'])) {
-                                echo '<a href = "login.php" style="text-decoration: ; color:black;" span class="login btnLogin"><span class="login">  USER LOGIN </span> </a>';
+                                echo '<a href = "login.php" style="text-decoration: ; color:black;" class=""><button type="button" style="margin:2px;" class="btn btn-success btn-md">USER LOGIN </button> </a>';
 //                         echo '<button type="button" style="margin:2px;" class="btn btn-success btn-md" value = ' . $cus_name . ' id = "profil">' . $cus_name . '</buttn>';
                             } else {
                                 $cus_name = $_SESSION['uname'];
@@ -219,9 +236,28 @@
                             ?>
                         </div>
                     </td>
-                    <td align="right"> <label style="">  <a href="index.php"><img src="images/site_img/edit_logo_1.jpg" alt=" "  style=" height:90px; width:120px;"/></a> </label></td>
-                  
                 </tr>
+                <tr>
+                    <td align="left"> 
+                        <label>
+                            <span>
+     <!--<i class="shopping-cart"></i>-->
+                                <img src="images/site_img/cart7.jpg" style=" height:50px; " class="responsive" >
+                                <!--<img src="images/site_img/cart_add.png" style=" height:50px; " class="responsive" >-->
+                                <?php
+                                if (!isset($_SESSION['cus_id'])) {
+//                                    echo '<a href="cart_item.php"><button type="button" class="btn btn-success" style="background-color:#ffffff;" >&nbsp;<span class=" item_tot" style="color:blue;  font-size: 40px;"></span> </button></a>';
+                                    echo '<a href="cart_item.php"><label  class="btn btn-success" style="background-color:#ffffff;" >&nbsp;<span class=" item_tot" style="color:blue;  font-size: 28px;"></span> </label></a>';
+                                } else {
+                                    echo '<div class="cart hidden" ><a href="cart_item.php"><span class=""> </span></a><span style="font-weight: bold; background:#0000e6; font-size: large; color: #ffd700; border-radius: 32px 32px;" class="item_tot"> </span></div>';
+                                }
+                                ?>
+                            </span>
+                        </label>
+                    </td>
+                    <td align="right"> <label style="">  <a href="index.php"><img src="images/site_img/edit_logo_1.jpg" alt=" " class="responsive"  style=" height:90px; width:120px;"/></a> </label></td>
+                </tr>
+
             </tbody>
         </table>
     </div>
@@ -242,7 +278,7 @@
                     <br>
 
                 </div>
-                <div class="col-sm-3">
+                <div class="col-sm-3" hidden="">
                     <label>
                         <span>
  <!--<i class="shopping-cart"></i>-->
@@ -255,9 +291,6 @@
                             ?>
                         </span>
                     </label>
-
-
-
                 </div>
 
                 <div class="col-lg-12">
@@ -290,7 +323,7 @@
 <!--<BOTTOM HEADER START-->
 <div class="top-header bottom_head_cus2" hidden="">
 
-    <?php // require_once('navbar.php'); ?>
+    <?php // require_once('navbar.php');  ?>
 
 </div>
 <!--<BOTTOM HEADER END-->
