@@ -216,7 +216,10 @@
 </head>
 
 <meta name="viewport" content="width=600">
-<div class="top-header bottom_head_cus" >
+
+
+
+<div class="top-header bottom_head_cus"  >
     <div class="table-responsive">          
         <table class="table"  cellspacing="100px" >
             <tbody>
