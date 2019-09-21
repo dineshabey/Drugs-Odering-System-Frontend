@@ -158,8 +158,8 @@
                                 tableData += '<td width="5%" height="150">' + index + '</td>';
                                 tableData += '<td width=""><img style=" height:90px;" src="../drugs_ordering_system_backend/uploads/' + qData.item_image + '" data-imagezoom="true" class="img-responsive"> <p style="text"> ' + qData.item_name + '</p></td>';
 //                                tableData += '<td width=""> Item Link </td>';
-//                                tableData += '<td width="10%"><input class="size-36" step="1"  type="number" min="1" max="50" id="add_item_in_cart" class="form-control text-center"  data-price = "' + qData.item_price + '"  data-cart_id = "' + qData.id + '"  value="' + qData.item_qty + '"></td>';
-                                tableData += '<td width="" align="center" >  <input class="input_qty" id="qty" value="0" />  <div><button class="dec qty_btn" onclick="modify_qty(-1)">-</button></div><div><button class="inc qty_btn" onclick="modify_qty(+1)">+</button></div></td>';
+                                tableData += '<td width="10%"><input class="size-36" step="1"  type="number" min="1" max="50" id="add_item_in_cart" class="form-control text-center"  data-price = "' + qData.item_price + '"  data-cart_id = "' + qData.id + '"  value="' + qData.item_qty + '"></td>';
+                                tableData += '<td width="" align="center" >  <input class="input_qty" id="qty" value="0"  />  <div><button class="dec qty_btn" onclick="modify_qty(-1)">-</button></div><div><button class="inc qty_btn" onclick="modify_qty(+1)">+</button></div></td>';
                                 tableData += '<td width="" style="text-aling:left;">' + qData.item_price + '</td>';
                                 tableData += '<td width="">' + qData.tot_price + '</td>';
                                 tableData += '<td width=""><button  id="delete" class="btn btn-danger delStrData   btn-sm fa fa-trash-o fa-sm" type="button" value="' + qData.id + '"></button></td>';

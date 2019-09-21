@@ -874,7 +874,7 @@ item_deatails.item_id DESC LIMIT 4");
 
                             $out_put .= '</div></section>';
                         }
-                        $out_put .= '<div class="view_all_itm"> <h4 style="ext-align: right; color:blue; " class="view_all_itm"><a style="text-align: right; color:blue; background: yellow;"  href="item_cat_list.php?main_cat_id=' . $val['main_cat_id'] . '&sub_cat_id=' . $sub_cat_id . ' "> View all items  &nbsp;> </a></h4></div>';
+                        $out_put .= '<div class="view_all_itm"> <h4 style="ext-align: right; color:blue; " class="view_all_itm"><a style="text-align: right; color:blue; background: yellow;"  href="item_cat_list.php?main_cat_id=' . $val['main_cat_id'] . '&sub_cat_id=' . $sub_cat_id . '&page=1 "> View all items  &nbsp;> </a></h4></div>';
                     }
                 }
             }
