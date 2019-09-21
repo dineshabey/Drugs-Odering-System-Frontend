@@ -799,8 +799,8 @@ main_cat.main_cat_id DESC");
             $main_cat_name = '';
             foreach ($main_cat_data as $val) {
                 $main_cat_id = $val['main_cat_id'];
-                $out_put .= '<div class="" style="border: 1px solid #ddd; margin: 1.5em 0; padding: 0.7em 1em; background:white;">'
-                        . '<h4 style="font-weight: 700; color:black; font-size: 20px;">' . $val['main_cat_name'] . '</h4></div>';
+                $out_put .= '<div class="" style="border: 1px solid #ddd; margin: 1.5em 0; padding: 0.5em 1em; background:white;">'
+                        . '<h4  style="font-weight: 700; color:black; font-size: 25px;">' . $val['main_cat_name'] . '</h4></div>';
                 $sub_cat_data = $system->prepareSelectQuery("SELECT
 sub_cat.sub_cat_id,
 sub_cat.sub_cat_name
@@ -816,7 +816,8 @@ sub_cat.sub_cat_id DESC");
                         $sub_cat_id = $val2['sub_cat_id'];
                         $out_put .= '<div style="color: black;">'
                                 . '<h4 style="  text-align: left; color:red;"> ' . $val2['sub_cat_name'] . '</h4></div>'
-                                . '<h4 style="  text-align: right; color:blue;"><a style="text-align: right; color:blue;" href="item_cat_list.php?main_cat_id=' . $val['main_cat_id'] . '&sub_cat_id=' . $sub_cat_id . ' "> VIEW ALL ITEMS  </a></h4></div>';
+//                                . '<h4 style="  text-align: right; color:blue;"><a style="text-align: right; color:blue;" href="item_cat_list.php?main_cat_id=' . $val['main_cat_id'] . '&sub_cat_id=' . $sub_cat_id . ' "> VIEW ALL ITEMS  </a></h4>'
+                                . '</div>';
 
                         $item_info_data = $system->prepareSelectQuery("SELECT
 item_deatails.item_id,
@@ -842,9 +843,7 @@ item_deatails.item_id DESC LIMIT 4");
 
                         if (!empty($item_info_data)) {
                             $out_put .= '<div style="background:white"><section class="regular slider" id="regular2" style=" padding-top:10px ;">';
-
                             foreach ($item_info_data as $val3) {
-
                                 $main_cat_names = $val3['main_cat_name'];
                                 $main_cat_id = $val3['main_cat_name'];
                                 $sub_cat_name = $val3['sub_cat_name'];
@@ -854,9 +853,8 @@ item_deatails.item_id DESC LIMIT 4");
                                 $item_price = $val3['item_price'];
                                 $item_id = $val3['item_id'];
                                 $out_of_stock = $val3['out_of_stock'];
-
                                 $out_put .= '<div align="" class="boder_imgz card cus_font">'
-                                        . '<a href="single.php?item_id=' . $item_id . '&sub_cat_id=' . $sub_cat_id . ' "><img class=""  style="text-aling:center;  width:222px; height:210px; " src="../drugs_ordering_system_backend/uploads/' . $val3['item_image'] . '"/></a>'
+                                        . '<a href="single.php?item_id=' . $item_id . '&sub_cat_id=' . $sub_cat_id . ' "><img class=""  style="text-aling:center;   opacity:1; background-color: rgba(0,255,255,0.4)  width:222px; height:auto; " src="../drugs_ordering_system_backend/uploads/' . $val3['item_image'] . '"/></a>'
                                         . '<p style="padding-top:9px;">' . $item_name . '</p>'
                                         . '<p  class="" style="color:red;">LKR : ' . $item_price . '</p>';
 //                                        . '<p  class="price">d comfy lorem ipsum lorem jeansum. Lorem jeamsun denim lorem jeansum.</p>'
@@ -866,7 +864,7 @@ item_deatails.item_id DESC LIMIT 4");
                                     //STOCK OUT ================================
                                     $out_put .= '<p style="color:red;">Stoke Out</p>';
                                 } else {
-                                    $out_put .= '<p> <button  class=" " id="add_to_cart_btn"  data-item_price = "' . $item_price . '"    value=' . $item_id . '>Add to cart</button></p>';
+                                    $out_put .= '<p> <button  type="button" class="btn btn-warning" id="add_to_cart_btn"  data-item_price = "' . $item_price . '"    value=' . $item_id . '>Add to cart</button></p>';
                                 }
 
                                 $out_put .= '</div>';
@@ -876,6 +874,7 @@ item_deatails.item_id DESC LIMIT 4");
 
                             $out_put .= '</div></section>';
                         }
+                        $out_put .= '<div class="view_all_itm"> <h4 style="ext-align: right; color:blue; " class="view_all_itm"><a style="text-align: right; color:blue; background: yellow;"  href="item_cat_list.php?main_cat_id=' . $val['main_cat_id'] . '&sub_cat_id=' . $sub_cat_id . ' "> View all items  &nbsp;> </a></h4></div>';
                     }
                 }
             }
@@ -895,8 +894,8 @@ main_cat.main_cat_id DESC");
         if (!empty($main_cat_data)) {
             $out_put = '';
             $main_cat_name = '';
-            $out_put .= '<section class=" "><div style="border: 1px solid #ddd; margin: 1.5em 0; padding: 0.7em 1em; padding-top:10px; background: #4cd107;  ">'
-                    . '<h4 style="font-weight: 700;">FEATURED COLLECTION</h4></div> </section>';
+            $out_put .= '<section class=" "><div style="border: 1px solid #ddd; margin: 1.5em 0; padding: 0.7em 1em; padding-top:10px; background: #8dd10700;  ">'
+                    . '<h4 style="font-weight: 700; color:blue;">FEATURED COLLECTION</h4></div> </section>';
             foreach ($main_cat_data as $val) {
                 $main_cat_id = $val['main_cat_id'];
                 $sub_cat_data = $system->prepareSelectQuery("SELECT
@@ -956,7 +955,7 @@ item_deatails.item_id DESC
                                 $item_id = $val3['item_id'];
                                 $out_of_stock = $val3['out_of_stock'];
 
-                                $out_put .= '<div class="column cus_font">
+                                $out_put .= '<div class="column cus_font ">
                     <div class="content" align="middle">
                     <a href="single.php?item_id=' . $item_id . '&sub_cat_id=' . $sub_cat_id . ' ">
                     <img class="secial_item responsive card" align="middle" style="text-aling:center;  width:213px; height:213px;" src="../drugs_ordering_system_backend/uploads/' . $val3['item_image'] . '"/>
@@ -968,7 +967,7 @@ item_deatails.item_id DESC
                                     //STOCK OUT ================================
                                     $out_put .= '<p style="color:red;">Stoke Out</p>';
                                 } else {
-                                    $out_put .= '<p> <button type = "button" class = "btn btn-success" id = "add_to_cart_btn" data-item_price = "' . $item_price . '" value = ' . $item_id . '>Add to cart</button></p>';
+                                    $out_put .= '<p class="card"> <button type = "button" class = "btn btn-success " id = "add_to_cart_btn" data-item_price = "' . $item_price . '" value = ' . $item_id . '>Add to cart</button></p>';
                                 }
 
 

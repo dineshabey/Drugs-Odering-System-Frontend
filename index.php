@@ -135,18 +135,32 @@
             .card button {
                 border: none;
                 outline: 0;
-                padding: 12px;
+                padding: 6px;
+                /*color: #7dff1e;*/
                 color: white;
-                background-color: #2cce22;
+                background-color: #141c54d9;
                 text-align: center;
                 cursor: pointer;
                 width: 100%;
-                font-size: 18px;
+                font-size: 24px;
+                font-weight: 700;
+
             }
 
             .card button:hover {
                 opacity: 0.7;
             }
+
+            .view_all_itm{
+                
+                padding: 1px;
+                background: white;
+                text-align: right;
+                color: #0f0f10;
+                font-size: 23px;
+                font-weight: 700;
+            }
+
             /*CART CSS*/
 
 
@@ -196,8 +210,8 @@
         <!--sub header--////////////////////////////////////////////////////////>-->
         <div class="header">
 
-            <?php require_once('header2.php'); ?>
-            <?php // require_once('include/coustomer_header.php'); ?>
+            <?php // require_once('header2.php'); ?>
+            <?php require_once('include/coustomer_header.php'); ?>
 
             <!--<a href="navbar.php"></a>-->
 

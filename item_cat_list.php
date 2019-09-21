@@ -249,7 +249,8 @@ item_deatails.sub_cat_id DESC
 ");
 
                 if (!empty($item_info_data)) {
-                    $item_out_put = '<div style="background:white"><section class=" " id="regular2" style=" padding-top:10px ;">';
+                    $sub_cat_name = "";
+                    $item_out_put = '<div style="background:white"><section class=" " id="regular2" style=" padding-top:10px ;"><p>' . $sub_cat_name . '</p>';
 
                     foreach ($item_info_data as $val3) {
 
@@ -264,6 +265,7 @@ item_deatails.sub_cat_id DESC
                         $out_of_stock = $val3['out_of_stock'];
 
                         $item_out_put .= '<div class="column cus_font">
+                            <p>'.$sub_cat_name.'</p>
                     <div class="content" align="middle">
                     <a href="single.php?item_id=' . $item_id . '&sub_cat_id=' . $sub_cat_id . ' ">
                     <img class="secial_item responsive card" align="middle" style="text-aling:center;  width:213px; height:213px;" src="../drugs_ordering_system_backend/uploads/' . $val3['item_image'] . '"/>
@@ -293,19 +295,19 @@ item_deatails.sub_cat_id DESC
             <!-- Pagination -->
 
             <div class="row">
-               <div class=" center-block" >
+                <div class=" center-block" >
 
-            <ul class="pagination pagination-lg">
-              <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-              <li><a href="#">1</a></li>
-              <li class="active"><a href="#">2</a></li>
-              <li><a href="#">3</a></li>
-              <li><a href="#">4</a></li>
-              <li><a href="#">5</a></li>
-                 <li class="page-item"><a class="page-link" href="#">Next</a></li>
-            </ul>
+                    <ul class="pagination pagination-lg">
+                        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                        <li><a href="#">1</a></li>
+                        <li class="active"><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                    </ul>
 
-            </div>
+                </div>
             </div>
             <!-- Pagination End -->
 
