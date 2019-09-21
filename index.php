@@ -195,7 +195,10 @@
         </script>
         <!--sub header--////////////////////////////////////////////////////////>-->
         <div class="header">
-            <?php require_once('include/coustomer_header.php'); ?>
+
+            <?php require_once('header2.php'); ?>
+            <?php // require_once('include/coustomer_header.php'); ?>
+
             <!--<a href="navbar.php"></a>-->
 
         </div>
@@ -224,13 +227,13 @@
             <!-- LOAD FEATURED ITEMS START-->
             <div class="row load_featured_items " style="background-color: white;" > </div>
             <!-- LOAD FEATURED ITEMS END -->
-            
-            
+
+
             <!-- LOAD FEATURED ITEMS START-->
             <div class="row load_item_cat " style="background-color: white;" hidden=""> </div>
             <!-- LOAD FEATURED ITEMS END -->
-            
-            
+
+
 
 
             <!-- End of body section HTML codes -->
