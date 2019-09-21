@@ -24,6 +24,45 @@
         </style>
         <!--UL RIHT MARK STYLE-->
 
+
+        <!--TABALE QTY ADD / REMOVE BTN -->
+
+        <style type="text/css">
+            .input_qty{
+                text-align: center;
+                border: blue 1px solid;
+                width: 43px;
+                height: 43px;
+                font-weight: 800;
+                font-size: x-large;
+
+                /*                border: black 2px solid;
+                                width: 35px;
+                                height: 25px;
+                                text-align: center;*/
+            }
+
+            .qty_img{
+                height:50px;
+                width: 50px;
+            }
+            .qty_btn{
+                border: blue 1px solid;
+                width: 43px;
+                height: 43px;
+                font-weight: 800;
+                font-size: x-large;
+            }
+
+            .description{
+                position:relative;
+                left: 70px;
+                bottom: 50px;
+            }
+
+        </style>
+        <!--TABALE QTY ADD / REMOVE BTN -->
+
     </head>
 
     <body>
@@ -53,12 +92,12 @@
                 <div class="col-lg-9">
                     <div class="" >
                         <div class="scrollable" style="height: auto; overflow-y: auto">
-                            <table class="table table-bordered table-striped table-hover datable load_cart_tbl" id="load_cart_tbl">
+                            <table class="table table-bordered table-striped table-hover datable load_cart_tbl"  id="load_cart_tbl">
                                 <thead>
                                     <tr>
                                         <th>#</th>
                                         <th>Item</th>
-                                        <th>Description</th>
+                                        <!--<th>Description</th>-->
                                         <th>QTY</th>
                                         <th>Price</th>
                                         <th>Total</th>
@@ -116,13 +155,14 @@
                             $.each(e, function (index, qData) {
                                 index++;
                                 tableData += '<tr>';
-                                tableData += '<td width="">' + index + '</td>';
-                                tableData += '<td width=""><img style=" height:40px;" src="../drugs_ordering_system_backend/uploads/' + qData.item_image + '" data-imagezoom="true" class="img-responsive"> ' + qData.item_name + '</td>';
-                                tableData += '<td width=""> Item Link </td>';
+                                tableData += '<td width="5%" height="150">' + index + '</td>';
+                                tableData += '<td width=""><img style=" height:90px;" src="../drugs_ordering_system_backend/uploads/' + qData.item_image + '" data-imagezoom="true" class="img-responsive"> <p style="text"> ' + qData.item_name + '</p></td>';
+//                                tableData += '<td width=""> Item Link </td>';
                                 tableData += '<td width="10%"><input class="size-36" step="1"  type="number" min="1" max="50" id="add_item_in_cart" class="form-control text-center"  data-price = "' + qData.item_price + '"  data-cart_id = "' + qData.id + '"  value="' + qData.item_qty + '"></td>';
-                                tableData += '<td width="">' + qData.item_price + '</td>';
+                                tableData += '<td width="" align="center" >  <input class="input_qty" id="qty" value="0"  />  <div><button class="dec qty_btn" onclick="modify_qty(-1)">-</button></div><div><button class="inc qty_btn" onclick="modify_qty(+1)">+</button></div></td>';
+                                tableData += '<td width="" style="text-aling:left;">' + qData.item_price + '</td>';
                                 tableData += '<td width="">' + qData.tot_price + '</td>';
-                                tableData += '<td width=""><button  id="delete" class="btn btn-danger delStrData   btn-sm fa fa-trash-o fa-sm" type="button" value="' + qData.id + '">Remove</button></td>';
+                                tableData += '<td width=""><button  id="delete" class="btn btn-danger delStrData   btn-sm fa fa-trash-o fa-sm" type="button" value="' + qData.id + '"></button></td>';
 
                                 tableData += '</tr>';
                             });
@@ -195,6 +235,25 @@
                     }, "json");
                     //                    });
                 }
+
+//                TABALE QTY ADD REMOVE BTN==========================================
+                function modify_qty(val) {
+                    var qty = document.getElementById('qty').value;
+                    var new_qty = parseInt(qty, 10) + val;
+
+
+                    if (new_qty < 0) {
+                        new_qty = 0;
+                    }
+                    document.getElementById('qty').value = new_qty;
+                    return new_qty;
+                }
+//                TABALE QTY ADD REMOVE BTN==========================================
+
+
+
+
+
             </script>
 
             <!--FOOTER-- end////////////////////////////////////////////////////>-->
