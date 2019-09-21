@@ -290,17 +290,20 @@ $sub_cat = $_GET["sub_cat_id"];
  echo '<div id="paging"><p>', $prevlink, ' Page ', $page, ' of ', $pages, ' pages, displaying ', $start, '-', $end, ' of ', $total, ' results ', $nextlink, ' </p></div>';
 
 
+
+
                 if (!empty($item_info_data)) {
+
+                $pg = count($item_info_data)/4;
+
+                $cols = array_chunk($item_info_data, ceil(count($item_info_data)/$pg));
+
+
+                // print_r($cols[0]);exit;
 
                     $item_out_put = '<div style="background:white"><section class=" " id="regular2" style=" padding-top:10px ;">';
 
-                  $i = 1;
-
-        //        while( ($start <= $i ) || ($i<= $end)){
-                    foreach ($item_info_data as $val3) {
-
-
-                        if( ($start >= $i ) && ($i <= $end)){
+                    foreach ($cols[$page-1] as $val3) {
 
                         $main_cat_names = $val3['main_cat_name'];
                         $main_cat_id = $val3['main_cat_name'];
@@ -313,13 +316,13 @@ $sub_cat = $_GET["sub_cat_id"];
                         $out_of_stock = $val3['out_of_stock'];
 
                         $item_out_put .= '<div class="column cus_font">
-                    <div class="content" align="middle">
-                    <a href="single.php?item_id=' . $item_id . '&sub_cat_id=' . $sub_cat_id . ' ">
-                    <img class="secial_item responsive card" align="middle" style="text-aling:center;  width:213px; height:213px;" src="../drugs_ordering_system_backend/uploads/' . $val3['item_image'] . '"/>
-                    <h3 style="text-align: center;">' . $item_name . '</h3>
-                    <h3 style="text-align: center;">' . $main_cat_names . '</h3>
-                    <h3 style="text-align: center; color:red;">LKR ' . $item_price . '</h3>
-                        </a>';
+                        <div class="content" align="middle">
+                        <a href="single.php?item_id=' . $item_id . '&sub_cat_id=' . $sub_cat_id . ' ">
+                        <img class="secial_item responsive card" align="middle" style="text-aling:center;  width:213px; height:213px;" src="../drugs_ordering_system_backend/uploads/' . $val3['item_image'] . '"/>
+                        <h3 style="text-align: center;">' . $item_name . '</h3>
+                        <h3 style="text-align: center;">' . $main_cat_names . '</h3>
+                        <h3 style="text-align: center; color:red;">LKR ' . $item_price . '</h3></a>';
+
                         if ($out_of_stock == '1') {
                             //STOCK OUT ================================
                             $item_out_put .= '<p style="color:red;">Stoke Out</p>';
@@ -327,12 +330,8 @@ $sub_cat = $_GET["sub_cat_id"];
                             $item_out_put .= '<p> <button type = "button" class = "btn btn-success" id = "add_to_cart_btn" data-item_price = "' . $item_price . '" value = ' . $item_id . '>Add to cart</button></p>';
                         }
 
-
                         $item_out_put .= '</div></div>';
 
-                          $i++;
-
-                        }//END if
 
                     }//END foreach
 
