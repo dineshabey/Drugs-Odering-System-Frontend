@@ -159,22 +159,7 @@ item_deatails.sub_cat_id DESC
     echo json_encode($item_out_put);
     
 //Item End
-} elseif ($_POST['action'] == 'load_recent') {
-    $query = "SELECT
-item_deatails.sub_cat_id,
-item_deatails.item_id,
-item_deatails.item_image,
-item_deatails.item_name,
-item_deatails.item_price
-FROM
-item_deatails
-WHERE
-item_deatails.img_status = '1' AND
-item_deatails.item_view_status = '0' AND
-item_deatails.sub_cat_id = '{$_POST['sub_cat_id']}'
-ORDER BY
-item_deatails.item_id DESC";
-    $system->prepareSelectQueryForJSON($query);
-//SINGAL PAGE LOAD SELECTED ITEM DATA ==========================================
+} elseif ($_POST['action'] == 'load_recent_items') {
+
 }
 

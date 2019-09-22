@@ -233,15 +233,19 @@ $time = date("h:i:sa");
                     <button type="button" id="recently_added"  class="btn btn-primary">Recently Added</button>
                     <button type="button" class="btn btn-primary">Lowest Price</button>
                     <button type="button" class="btn btn-primary">Highest Price</button>
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                            Sort By Category <span class="caret"></span></button>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="all">All</a></li>
-                            <li><a href="1">Multi Vitamin</a></li>
-                            <li><a href="2">Later Vitamin</a></li>
-                        </ul>
-                    </div>
+
+                </div>
+
+
+          
+                <div class="btn-group"  style="margin-top:10px;margin-bottom:5px;">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                        Sort By Category <span class="caret"></span></button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="all">All</a></li>
+                        <li><a href="1">Multi Vitamin</a></li>
+                        <li><a href="2">Later Vitamin</a></li>
+                    </ul>
                 </div>
             </div>
 
@@ -292,7 +296,7 @@ $time = date("h:i:sa");
     <script type="text/javascript">
         $(document).on('ready', function () {
 
-           load_items_with_pagination(8, 24, 1);
+            load_items_with_pagination(8, 24, 1);
             //  item_tot();
         });
         $('filter_res').change(function () {
