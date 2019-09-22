@@ -245,171 +245,22 @@ $time = date("h:i:sa");
                 </div>
             </div>
 
+
+            <?php
+            if (!isset($_GET["main_cat_id"]) && !isset($_GET["sub_cat_id"])) {
+                echo "Not Found POST data !";
+            }
+            ?>
+
+
             <!-- items -->
-            <div class=" img_view_panel" >
-                <?php
-                if (!isset($_GET["main_cat_id"]) && !isset($_GET["sub_cat_id"])) {
-                    echo "Not Found POST data !";
-                }
-
-
-                $item_query = "SELECT
-item_deatails.item_id,
-item_deatails.item_name,
-item_deatails.item_price,
-item_deatails.item_image,
-item_deatails.item_discount,
-sub_cat.sub_cat_name,
-main_cat.main_cat_name,
-main_cat.main_cat_id,
-sub_cat.sub_cat_id,
-item_deatails.out_of_stock,
-item_deatails.item_description
-FROM
-item_deatails
-INNER JOIN sub_cat ON item_deatails.sub_cat_id = sub_cat.sub_cat_id
-INNER JOIN main_cat ON sub_cat.main_cat_id = main_cat.main_cat_id
-WHERE
-item_deatails.img_status = '1' AND
-item_deatails.item_view_status = '0' AND
-sub_cat.main_cat_id = '{$_GET["main_cat_id"]}' AND
-item_deatails.img_status = '1'
-ORDER BY
-item_deatails.sub_cat_id DESC
-";
-
-                $main_cat = $_GET["main_cat_id"];
-                $sub_cat = $_GET["sub_cat_id"];
-
-                $item_info_data = $system->prepareSelectQuery($item_query);
-                $item_count = $system->getCountByQuery($item_query);
-
-
-// Return the number of rows in result set
-                $total = $item_count;
-
-                // How many items to list per page
-                $limit = 4;
-
-                // How many pages will there be
-                $pages = ceil($total / $limit);
-
-
-                // What page are we currently on?
-                $page = min($pages, filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT, array(
-                    'options' => array(
-                        'default' => 1,
-                        'min_range' => 1,
-                    ),
-                )));
-
-                // Calculate the offset for the query
-                $offset = ($page - 1) * $limit;
-
-                // Some information to display to the user
-                $start = $offset + 1;
-                $end = min(($offset + $limit), $total);
-
-                // The "back" link
-                $prevlink = ($page > 1) ? '<a href="?page=1" title="First page">&laquo;</a> <a href="?page=' . ($page - 1) . '" title="Previous page">&lsaquo;</a>' : '<span class="disabled">&laquo;</span> <span class="disabled">&lsaquo;</span>';
-
-                // The "forward" link
-                $nextlink = ($page < $pages) ? '<a href="?page=' . ($page + 1) . '" title="Next page">&rsaquo;</a> <a href="?page=' . $pages . '" title="Last page">&raquo;</a>' : '<span class="disabled">&rsaquo;</span> <span class="disabled">&raquo;</span>';
-
-                // Display the paging information
-                echo '<div id="paging"><p>', $prevlink, ' Page ', $page, ' of ', $pages, ' pages, displaying ', $start, '-', $end, ' of ', $total, ' results ', $nextlink, ' </p></div>';
-
-
-
-
-                if (!empty($item_info_data)) {
-
-                    $pg = count($item_info_data) / 4;
-
-                    $cols = array_chunk($item_info_data, ceil(count($item_info_data) / $pg));
-
-
-                    // print_r($cols[0]);exit;
-
-                    $item_out_put = '<div style="background:white"><section class=" " id="regular2" style=" padding-top:10px ;">';
-
-                    foreach ($cols[$page - 1] as $val3) {
-
-                        $main_cat_names = $val3['main_cat_name'];
-                        $main_cat_id = $val3['main_cat_name'];
-                        $sub_cat_name = $val3['sub_cat_name'];
-                        $sub_cat_id = $val3['sub_cat_id'];
-                        $item_name = $val3['item_name'];
-                        $item_img = $val3['item_image'];
-                        $item_price = $val3['item_price'];
-                        $item_id = $val3['item_id'];
-                        $out_of_stock = $val3['out_of_stock'];
-
-                        $item_out_put .= '<div data-sort="' . $item_id . '"    class="column cus_font item_div">
-                        <div class="content" align="middle">
-                        <a href="single.php?item_id=' . $item_id . '&sub_cat_id=' . $sub_cat_id . ' ">
-                        <img class="secial_item responsive card" align="middle" style="text-aling:center;  width:213px; height:213px;" src="../drugs_ordering_system_backend/uploads/' . $val3['item_image'] . '"/>
-                        <h3 style="text-align: center;">' . $item_name . '</h3>
-                        <h3 style="text-align: center;">' . $main_cat_names . '</h3>
-                        <h3 style="text-align: center; color:red;">LKR ' . $item_price . '</h3></a>';
-
-                        if ($out_of_stock == '1') {
-                            //STOCK OUT ================================
-                            $item_out_put .= '<p style="color:red;">Stock Out</p>';
-                        } else {
-                            $item_out_put .= '<p> <button type = "button" class = "btn btn-success" id = "add_to_cart_btn" data-item_price = "' . $item_price . '" value = ' . $item_id . '>Add to cart</button></p>';
-                        }
-
-                        $item_out_put .= '</div></div>';
-                    }//END foreach
-
-                    $item_out_put .= '</div></section>';
-                    echo $item_out_put;
-                }
-                ?>
-
-                <!-- Pagination -->
-
-                <div class="row">
-                    <div class=" center-block" >
-
-                        <ul class="pagination pagination-lg">
-                            <li class="page-item"><a class="page-link" href="<?php echo $page - 1 ?>">Previous</a></li>
-
-                            <?php
-                            for ($v = 1; $v <= $pages; $v++) {
-
-                                if ($v == $page) {
-                                    echo '<li class="active"><a href="pagination.php?main_cat_id=' . $main_cat . '&sub_cat_id=' . $sub_cat . '&page=' . $v . '">' . $v . '</a></li>';
-                                } else {
-                                    echo '<li><a href="pagination.php?main_cat_id=' . $main_cat . '&sub_cat_id=' . $sub_cat . '&page=' . $v . '">' . $v . '</a></li>';
-                                }
-                            }
-                            ?>
-                            <li class="page-item"><a class="page-link" href="<?php echo $page + 1 ?>">Next</a></li>
-                        </ul>
-
-                    </div>
-                </div>
-                <!-- Pagination End -->
-
+            <div class=" img_view_panel"  id="img_view_panel">
 
             </div>
             <!--/ items -->
 
-
-
-
-
         </div>
 
-        <!--/ wrapper -->
-
-            <!--<script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>-->
-
-        <!--NEW COUSTOMER ITEM SLIDER END /////////////////////////////////////////3333333333333-->
-
-        <!---728x90--->
     </div>
 </div>
 
@@ -440,26 +291,16 @@ item_deatails.sub_cat_id DESC
     <?php require_once('include/footer.php'); ?>
     <script type="text/javascript">
         $(document).on('ready', function () {
+
+           load_items_with_pagination(8, 24, 1);
             //  item_tot();
         });
         $('filter_res').change(function () {
             // load_filtered_categories();
         });
         $('#recently_added').click(function () {
-            sort_item();
+            load_items_with_pagination(8, 24, 1);
         });
-
-        function sort_item() {
-                  console.log('dad');
-
-            $('div').sort(function (a, b) {
-
-                var contentA = parseInt($(a).attr('data-sort'));
-                var contentB = parseInt($(b).attr('data-sort'));
-                return (contentA < contentB) ? -1 : (contentA > contentB) ? 1 : 0;
-            });
-
-        }
 
     </script>
 
