@@ -234,19 +234,23 @@ $time = date("h:i:sa");
                     <button type="button" class="btn btn-primary">Lowest Price</button>
                     <button type="button" class="btn btn-primary">Highest Price</button>
 
-                </div>
+                    <input type="hidden" id="main_cat"  value="<?php echo $_GET["main_cat_id"]; ?>">
+                    <input type="hidden" id="sub_cat"  value="<?php echo $_GET["sub_cat_id"]; ?>">
+                    <input type="hidden" id="page_id"  value="<?php echo $_GET["page"]; ?>">
 
 
-          
-                <div class="btn-group"  style="margin-top:10px;margin-bottom:5px;">
-                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                        Sort By Category <span class="caret"></span></button>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="all">All</a></li>
-                        <li><a href="1">Multi Vitamin</a></li>
-                        <li><a href="2">Later Vitamin</a></li>
-                    </ul>
+                    <div class="btn-group"  >
+                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                            Sort By Category</button>
+                               <ul class="dropdown-menu" role="menu">
+                            <li><a href="all">All</a></li>
+                            <li><a href="1">Multi Vitamin</a></li>
+                            <li><a href="2">Later Vitamin</a></li>
+                        </ul>
+                    </div>
+
                 </div>
+
             </div>
 
 
@@ -282,8 +286,10 @@ $time = date("h:i:sa");
                 $(function () {
                     var sub_cat_id = "<?php echo $sub_cat_id = $_GET["sub_cat_id"]; ?>";
                     var main_cat_id = "<?php echo $sub_cat_id = $_GET["main_cat_id"]; ?>";
+                    var pages_id = "<?php echo $sub_cat_id = $_GET["page"]; ?>";
                     var sub_cats_id = parseInt(sub_cat_id);
                     var main_cats_id = parseInt(main_cat_id);
+                    var page_id = parseInt(pages_id);
                 });
             }); //ON LOAD FUCTION END
 </script>
@@ -294,16 +300,23 @@ $time = date("h:i:sa");
 <div class="footer">
     <?php require_once('include/footer.php'); ?>
     <script type="text/javascript">
+
+
+
         $(document).on('ready', function () {
 
-            load_items_with_pagination(8, 24, 1);
+            var main_cats_id = $('#main_cat').val();
+            var sub_cats_id = $('#sub_cat').val();
+            var page_id = $('#page_id').val();
+
+            load_items_with_pagination(main_cats_id, sub_cats_id, page_id);
             //  item_tot();
         });
         $('filter_res').change(function () {
             // load_filtered_categories();
         });
         $('#recently_added').click(function () {
-            load_items_with_pagination(8, 24, 1);
+            load_recent_items_with_pagination(main_cats_id, sub_cats_id, page_id);
         });
 
     </script>

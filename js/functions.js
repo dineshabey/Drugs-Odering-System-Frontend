@@ -28,9 +28,14 @@ function load_items_with_pagination(main_cat,sub_cat,page){
 
 function load_recent_items_with_pagination(main_cat,sub_cat,page){
  
+// 
+ 
     $.post("./loadTables.php", {action: 'load_recent_items',main_cat:main_cat,sub_cat:sub_cat,page:page}, function (e) {
 
-        $('#img_view_panel').append(e);                  
+             alert(e)
+
+            //       $('#img_view_panel').empty(); 
+     //   $('#img_view_panel').append(e);                  
 
     }, "json");
 }//Load Recent items with Pagination
