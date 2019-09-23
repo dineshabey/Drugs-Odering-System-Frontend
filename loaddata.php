@@ -93,6 +93,44 @@ item_deatails.item_id = '{$_POST['item_id']}'";
             MainConfig::closeDB();
             return;
         }
+    } else if ($_POST['action'] == 'check_user_email_phone') {
+// CHECK USER EMAIL NO & PHONE NO  - -------------------------------------------
+        $qry = "SELECT
+customer_details.email,
+customer_details.phone
+FROM
+customer_details
+WHERE
+(customer_details.phone = '{$_POST['phone']}') OR
+(customer_details.email = '{$_POST['email']}')
+    LIMIT 1
+";
+        MainConfig::connectDB();
+        $link = MainConfig::conDB();
+        $result = mysqli_query($link, $qry) or die(mysqli_error());
+        MainConfig::closeDB();
+        $row = mysqli_fetch_assoc($result);
+        
+        if (($row['phone']) == ($_POST['phone']) && ($row['email']) == ($_POST['email'])) {
+//            echo ("error phone/email matching") . '<hr>';
+            echo json_encode("5");
+        } else {
+//            echo ("phone/email not maching") . '<hr>';
+            if (($row['email']) == ($_POST['email'])) {
+//                echo ("error email matching") . '<hr>';
+                echo json_encode("4");
+            } else {
+//                echo ("email not maching") . '<hr>';
+                if (($row['phone']) == ($_POST['phone'])) {
+//                    echo ("error phone matching") . '<hr>';
+                    echo json_encode("3");
+                } else {
+//                    echo ("You can create account") . '<hr>';
+                    echo json_encode("0");
+                }
+            }
+        }
+
 //COUSTOMER REGISTRATION (INSERT)============ ==================================
     } else if ($_POST['action'] == 'reg_cus') {
         $send_obj = $_POST['send_obj'];
@@ -874,7 +912,7 @@ item_deatails.item_id DESC LIMIT 4");
 
                             $out_put .= '</div></section>';
                         }
-                        $out_put .= '<div class="view_all_itm"> <h4 style="ext-align: right; color:blue; " class="view_all_itm"><a style="text-align: right; color:blue; background: yellow;"  href="item_cat_list.php?main_cat_id=' . $val['main_cat_id'] . '&sub_cat_id=' . $sub_cat_id . '&page=1 "> View all items  &nbsp;> </a></h4></div>';
+                        $out_put .= '<div class="view_all_itm"> <h4 style="ext-align: right; color:blue; " class="view_all_itm"><a style="text-align: right; color:blue; background: yellow;"  href="pagination.php?main_cat_id=' . $val['main_cat_id'] . '&sub_cat_id=' . $sub_cat_id . '&page=1 "> View all items  &nbsp;> </a></h4></div>';
                     }
                 }
             }
@@ -958,7 +996,7 @@ item_deatails.item_id DESC
                                 $out_put .= '<div class="column cus_font ">
                     <div class="content" align="middle">
                     <a href="single.php?item_id=' . $item_id . '&sub_cat_id=' . $sub_cat_id . ' ">
-                    <img class="secial_item responsive card" align="middle" style="text-aling:center;  width:213px; height:213px;" src="../drugs_ordering_system_backend/uploads/' . $val3['item_image'] . '"/>
+                    <img class="secial_item responsive card" align="middle" style="text-aling:center;  width:250px; height:350px;" src="../drugs_ordering_system_backend/uploads/' . $val3['item_image'] . '"/>
                     <h3 style="text-align: center;">' . $item_name . '</h3>
                     <h3 style="text-align: center;">' . $main_cat_names . '</h3>
                     <h3 style="text-align: center; color:red;">LKR ' . $item_price . '</h3>
@@ -1247,6 +1285,10 @@ main_cat.main_cat_id DESC");
         echo $out_put1;
     }//END LOAD NAV BAR MENU
 }   //END ARRAY +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+
 
 
     

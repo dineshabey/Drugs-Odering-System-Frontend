@@ -1,217 +1,25 @@
 <!--<TOP HEADER START -->
-<link href="js/AlertifyJS-master/build/css/themes/default.css" rel="stylesheet" type="text/css"/>
+<!--<link href="js/AlertifyJS-master/build/css/themes/default.css" rel="stylesheet" type="text/css"/>
 <link href="js/AlertifyJS-master/build/css/alertify.min.css" rel="stylesheet" type="text/css"/>
 <script src="js/AlertifyJS-master/build/alertify.min.js" type="text/javascript"></script>
 <a href="fonts/user-solid.svg"></a>
 <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
 
-<link rel="stylesheet"  href= "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
-
+<link rel="stylesheet"  href= "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
 
 <!--FONTAWESOME ICONS-->
 <style> 
-    .input-icons i { 
-        position: absolute; 
-    } 
-
-    .input-icons { 
-        width: 100%; 
-        margin-bottom: 10px; 
-    } 
-
-    .icon { 
-        padding: 10px; 
-        color: green; 
-        min-width: 50px; 
-        text-align: center; 
-    } 
-
-    .input-field { 
-        width: 100%; 
-        padding: 10px; 
-        text-align: center; 
-    } 
-
-    h2 { 
-        color: green; 
-    } 
-
-    .ui-autocomplete-custom {
-        background: #ccc;
-        z-index: 2;
-    }
-
-
-    .input-group .fa-search{
-        display: table-cell;
-    }
-
-    /*<!--UI AUTOCOMPLETE-->*/
-
-
-    .btnLogin{
-        background-color: #36dc12;
-        color: white;
-        padding: 14px 25px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-    }
-
-
-
-    /*BORDER COLOR IMAGE SLIDER*/ 
-    .boder_img{
-        border-style: solid;
-        border-color: #fff;
-        border-width: 1px;
-    }
-    /*BORDER COLOR IMAGE SLIDER*/
-
-    .ui-autocomplete-custom {
-        background: #ccc !important;
-        z-index: 2;
-    }
+  
+   
 
 
     /*ADD TO CART CSS START =============================================*/
 
-    .body {
-        overflow: hidden;
-    }
-    .wrapper {
-        max-width: 1520px;
-        /*height: 880px;*/
-        margin: 20px auto ;
-        padding: 20px;
-        background-color: #f5f5f5;
-        width: 100%;
-    }
-    h1 {
-        display: inline-block;
-        background-color: #333;
-        color: #fff;
-        font-size: 20px;
-        font-weight: normal;
-        text-transform: uppercase;
-        padding: 4px 20px;
-        float: left;
-    }
-    @media all and (max-width: 1200px) and (min-width: 800px) {
-        /* Change Resolutions Here */
-        h5 {
-            font-size: 12px;
-        }
-    }
-
-    /*img*/
-    img
-    {
-        max-width: 100%;
-        min-width: 40px;;
-        height: auto;
-    }
-
-    .clear {
-        clear: both;
-    }
-    .items {
-        display: block;
-        margin: 20px 0;
-    }
-    h2 {
-        font-size: 16px;
-        display: block;
-        border-bottom: 1px solid #ccc;
-        margin: 0 0 10px 0;
-        padding: 0 0 5px 0;
-    }
-
-    .btn-responsive {
-        white-space: normal !important;
-        word-wrap: break-word;
-    }
-
-    span {
-        float: right;
-    }
-    .shopping-cart {
-        display: inline-block;
-        background: url('http://cdn1.iconfinder.com/data/icons/jigsoar-icons/24/_cart.png') no-repeat 0 0;
-        width: 24px;
-        height: 24px;
-        margin: 0 10px 0 0;
-    }
-    /*ADD TO CART CSS END  =============================================*/
-
-    .top_head_cus {
-        background-image: url("images/site_img/gold_bac.jpg");
-        border-bottom: 1px solid #fff;
-        /*padding: 1.9em 0;*/
-    }
-    .bottom_head_cus {
-        background-image: url("images/site_img/green_bac5.jpg");
-        -webkit-background-size: cover;
-        -moz-background-size: cover;
-        -o-background-size: cover;
-        background-size: cover;
-
-    }
-    .bottom_head_cus2 {
-        background-image: url("images/site_img/green_bac5.jpg");
-        -webkit-background-size: cover;
-        -moz-background-size: cover;
-        -o-background-size: cover;
-        background-size: cover;
-
-    }
-    .topcorner{
-        position:absolute;
-        top:10px;
-        right: 10px;
-    }
-
-    .mini_mart{
-        text-shadow: 0 0 3px #FF0000;
-
-    }
-
-    /*HEADING TABALE CSS ///////////////////////////////////*/
-    .head_tbl{
-        table-layout: fixed;
-        max-width:100%;
-        border = "0";
-        border: none;
-
-    }
-    .blocks{
-        border: none;
-        border: 0;
-    }
-    /*HEADING TABALE CSS ///////////////////////////////////*/
-
-    .lion_text{
-        /*text-shadow: 0 4px 0 #000,  0 3px 0 #0e0c0c, 0 4px 0 #b9b9b9, 0 5px 0 #aaa, 0 6px 1px #9bbaeca1, 0 0 5px rgba(0,0,0,.1), 0 1px 3px rgba(0,0,0,.3), 0 3px 5px rgba(0,0,0,.2), 0 5px 10px rgba(0,0,0,.25), 0 10px 10px rgba(0,0,0,.2), 0 20px 20px rgba(0,0,0,.15);*/
-
-        text-shadow: 0 4px 0 #ccc, 
-            /*0 2px 0 #c9c9c9,*/
-            2px 4px 3px #231c1c,
-            0 4px 0 #b9b9b9,
-            0 4px 0 #b9b9b9,
-            0 5px 0 #aaa,
-            0 6px 1px rgba(0,0,0,.1),
-            0 0 5px rgba(0,0,0,.1),
-            0 1px 3px rgba(0,0,0,.3),
-            0 3px 5px rgba(0,0,0,.2),
-            0 5px 10px rgba(0,0,0,.25),
-            0 10px 10px rgba(0,0,0,.2),
-            0 20px 20px rgba(0,0,0,.15);
-        font-size: 31px;
-        color: #ffff59;
-
-    }
-
+ 
+    
+    
+    
 </style>
 </head>
 

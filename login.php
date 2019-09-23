@@ -12,6 +12,15 @@
         <style type="text/css">
             /*.inset {border-style: inset;}*/
             .inset {border-style: ridge;}
+
+            .form_input{
+                border: 1px solid #1ad41a;
+                border-radius: 4px;
+                height: 39px;
+                color: red;
+                font-size: 20px;
+            }
+
         </style>
         <!--UL RIHT MARK STYLE-->
 
@@ -33,47 +42,71 @@
         </script>
         <!--sub header--////////////////////////////////////////////////////////>-->
         <div class="header">
-            <?php require_once('include/coustomer_header.php'); ?>
+            <?php // require_once('include/coustomer_header.php'); ?>
+            <?php require_once('header2.php'); ?>
         </div>
 
         <!--sub header-- end////////////////////////////////////////////////////>-->
 
 
         <div class="container" style="padding-top: 50px;">
-            <div></div>
-            <div class="row" style="padding-top: 50px; padding-left: 10px; background-color:white ; ">
-                <div class="col-lg-1"></div>
-                <div class="col-lg-8" style="">
-                    <div class="form-horizontal">
-                        <div class="account_grid " style="">
-                            <div class=" login-right">
-                                <h3 class="form-group">REGISTERED CUSTOMERS</h3>
-                                <p class="form-group">If you have an account with us, please log in.</p>
-                                <div class="form-group">
-                                    <span>Email Address<label>*</label></span>
-                                    <input type="text" id="email_login_page"> 
-                                </div>
-                                <div  class="form-group">
-                                    <span>Password<label>*</label></span>
-                                    <input type="text" id="password_login_page"> 
-                                </div>
-                                <button  class="btn btn-info form-group" id="login_btn">LOGIN</button>
-                                <label style="padding-left: 20px;"> <a class="forgot" href="#">Forgot Your Password ?</a></label>
-                            </div>
-                            <!---728x90--->
 
-                            <div class=" login-left form-group" >
-                                <h3>NEW CUSTOMERS</h3>
-                                <p>By creating an account with our store, you will be able to move through the checkout process faster, store multiple shipping addresses, view and track your orders in your account and more.</p>
-                                <a class="acount-btn" href="register.php">Create an Account</a>
-                            </div>
-                            <!--<div class="clearfix"> </div>-->
+
+            <div class="form-horizontal" style="text-align: center;">
+                <fieldset>
+                    <!-- Form Name -->
+                    <legend><h4 style="color:black; font-weight: 500;">REGISTERED CUSTOMERS</h4></legend>
+
+                    <!-- Text input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="textinput">Email Or Phone No.</label>  
+                        <div class="col-md-4">
+                            <input name="textinput" type="text" id="email_login_page" placeholder="" class="form-control input-md form_input">
+                            <span class="help-block"></span>  
                         </div>
-
-                        <!--<div class="clearfix"> </div>-->
                     </div>
-                </div>
+                    <!-- Password input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="passwordinput">Password </label>
+                        <div class="col-md-4">
+                            <input  name="passwordinput" type="password" id="password_login_page" placeholder="" class="form-control input-md form_input">
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+                    <!-- Button -->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="singlebutton"></label>
+                        <div class="col-md-4">
+                            <button   id="login_btn"  name="singlebutton" class="btn btn-success btn-lg">Login </button>
+                            <!--<label style="padding-left: 20px;"> <a class="forgot" href="#">Forgot Your Password ?</a></label>-->
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <!-- Form Name -->
+                    <!--<legend></legend>-->
+                    <legend><h4 style="color: black; font-weight: 500;">NEW CUSTOMERS</h4></legend>
+
+                    <!-- Text input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="singlebutton"></label>
+                        <!--<label class="col-md-4 control-label" for="textinput"> <p style="text-align: left;">By creating an account with our store, you will be able to move through the checkout process faster, store multiple shipping addresses, view and track your orders in your account and more.</p></label>-->  
+                        <label class="col-md-4 control-label" for="singlebutton"></label>
+
+                    </div>
+                    <div class="form-group">
+                        <!--<label class="col-md-4 control-label" for="singlebutton"></label>-->
+                        <label class="col-md-4 control-label" for="textinput"> </label>
+                        <div class="col-md-4">
+                            <a class="acount-btn" href="register.php">Create an Account</a>
+                        </div>
+                    </div>
+                </fieldset>
             </div>
+
+
+            <div></div>
+
         </div>
         <!---->
         <!---728x90--->
@@ -102,11 +135,22 @@
                         }
                         , "json");
                     }
-
+                    
                     //              LOGIN BTN FUNCTION ===============================================
                     $(document).on('click', '#login_btn', function () {
                         var mail = $('#email_login_page').val();
                         var pw = $('#password_login_page').val();
+                        if (mail.trim() == "") {
+                            alertify.alert('Error ..!', 'Feild can not be empty !');
+//                            alertify.error("Feild can't be empty !");
+                            $("#email_login_page").focus();
+                            return;
+                        }
+                        if (pw.trim() == "") {
+                            alertify.alert('Error ..!', "Password feild can not be empty !");
+                            $("#password_login_page").focus();
+                            return;
+                        }
                         $.post(" ./loaddata.php", {action: 'user_login', email: mail, pw: pw}, function (e) {
                             if (e === undefined || e.length === 0 || e === null) {
                                 alert('NO data Found ..Error !');

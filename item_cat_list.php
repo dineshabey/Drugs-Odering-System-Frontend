@@ -83,15 +83,15 @@ $time = date("h:i:sa");
                 word-break: break-all;
             }
 
-            .row {
+/*            .row {
                 margin: 8px -16px;
             }
 
-            /* Add padding BETWEEN each column (if you want) */
+             Add padding BETWEEN each column (if you want) 
             .row,
             .row > .column {
                 padding: 8px;
-            }
+            }*/
 
             /* Create four equal columns that floats next to each other */
             .column {
@@ -206,7 +206,8 @@ $time = date("h:i:sa");
         </script>
         <!--sub header--////////////////////////////////////////////////////////>-->
         <div class="header">
-            <?php require_once('include/coustomer_header.php'); ?>
+            <?php // require_once('include/coustomer_header.php'); ?>
+                 <?php require_once('header2.php'); ?>
             <!--<a href="navbar.php"></a>-->
 
         </div>

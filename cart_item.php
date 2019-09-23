@@ -20,7 +20,6 @@
             input[type=number]::-webkit-outer-spin-button {
                 opacity: 1;
             }
-
         </style>
         <!--UL RIHT MARK STYLE-->
 
@@ -28,6 +27,17 @@
         <!--TABALE QTY ADD / REMOVE BTN -->
 
         <style type="text/css">
+
+/*            input[type=number] {
+                height: 30px;
+            }*/
+
+/*            input[type=number]:hover::-webkit-inner-spin-button {  
+                width: 14px;
+                height: 30px;
+            }*/
+            
+            
             .input_qty{
                 text-align: center;
                 border: blue 1px solid;
@@ -35,11 +45,6 @@
                 height: 43px;
                 font-weight: 800;
                 font-size: x-large;
-
-                /*                border: black 2px solid;
-                                width: 35px;
-                                height: 25px;
-                                text-align: center;*/
             }
 
             .qty_img{
@@ -85,8 +90,6 @@
         </div>
 
         <!--sub header-- end////////////////////////////////////////////////////>-->
-
-
         <div class="container">
             <div class="row" style="padding-top: 50px;">
                 <div class="col-lg-9">
@@ -159,7 +162,12 @@
                                 tableData += '<td width=""><img style=" height:90px;" src="../drugs_ordering_system_backend/uploads/' + qData.item_image + '" data-imagezoom="true" class="img-responsive"> <p style="text"> ' + qData.item_name + '</p></td>';
 //                                tableData += '<td width=""> Item Link </td>';
                                 tableData += '<td width="10%"><input class="size-36" step="1"  type="number" min="1" max="50" id="add_item_in_cart" class="form-control text-center"  data-price = "' + qData.item_price + '"  data-cart_id = "' + qData.id + '"  value="' + qData.item_qty + '"></td>';
-                                tableData += '<td width="" align="center" >  <input class="input_qty" id="qty" value="0"  />  <div><button class="dec qty_btn" onclick="modify_qty(-1)">-</button></div><div><button class="inc qty_btn" onclick="modify_qty(+1)">+</button></div></td>';
+
+
+//                                tableData += '<td width="10%"><span class="input-number-decrement">–</span><input class="size-36" step="1"  type="number" min="1" max="50" id="add_item_in_cart" class="form-control text-center"  data-price = "' + qData.item_price + '"  data-cart_id = "' + qData.id + '"  value="' + qData.item_qty + '"><span class="input-number-increment">+</span></td>';
+
+//                                tableData += '<td width="10%"><input class="size-36" step="1"  type="number" min="1" max="50" id="add_item_in_cart" class="form-control text-center"  data-price = "' + qData.item_price + '"  data-cart_id = "' + qData.id + '"  value="' + qData.item_qty + '"> <div id="inc-button" class="spinner-button">+</div><div id="dec-button" class="spinner-button">-</div></td>';
+//                                tableData += '<td width="" align="center" >  <input class="input_qty qty" id="qty" value="' + qData.item_qty + '" data-item_id = "' + qData.item_price + '" />  <div><button class="dec qty_btn" id="minus_item_btn" onclick="modif_qty(-1)">-</button></div><div><button class="inc qty_btn" id="plus_item_btn" onclick="modify_qy(+1)">+</button></div></td>';
                                 tableData += '<td width="" style="text-aling:left;">' + qData.item_price + '</td>';
                                 tableData += '<td width="">' + qData.tot_price + '</td>';
                                 tableData += '<td width=""><button  id="delete" class="btn btn-danger delStrData   btn-sm fa fa-trash-o fa-sm" type="button" value="' + qData.id + '"></button></td>';
@@ -236,6 +244,7 @@
                     //                    });
                 }
 
+
 //                TABALE QTY ADD REMOVE BTN==========================================
                 function modify_qty(val) {
                     var qty = document.getElementById('qty').value;
@@ -248,6 +257,37 @@
                     document.getElementById('qty').value = new_qty;
                     return new_qty;
                 }
+
+//              ITEM PLUS (+) BTNBTN==========================================
+                $(document).on('click', '#plus_item_btn', function () {
+                    var qty = parseInt($('#qty').val());
+                    var new_qty = qty + 1;
+                    $('.qty').val(new_qty);
+
+                });
+//              ITEM MINUS(-) BTNBTN==========================================
+                $(document).on('click', '#minus_item_btn', function () {
+                    var qty = parseInt($('#qty').val());
+
+                    var a = $('#qty').data('item_id'); //getter
+                    var item_id = ($(this).data('item_id'));
+//                      var price = ($(this).data('price'));
+//                    alert(a)
+
+
+                    var new_qty = qty - 1;
+                    if (new_qty < 0) {
+                        new_qty = 0;
+                    }
+
+
+
+                    $(this).data('item_id').val(new_qty);
+//                    $($(this).data('item_id')).val(new_qty);
+
+                });
+
+
 //                TABALE QTY ADD REMOVE BTN==========================================
 
 

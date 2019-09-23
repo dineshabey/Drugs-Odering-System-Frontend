@@ -249,7 +249,7 @@
                         $cus_name = $_SESSION['uname'];
                         echo '<button type="button" style="margin:2px;" class="btn btn-success btn-md" value = ' . $cus_name . ' id = "profil">' . $cus_name . '</buttn>';
                       
-                        echo' <button  type="button" style="background-color:red;" class="btn btn-primary btn-md" ><span></span>LOGOUT</button>';
+                        echo' <button  type="button" id="log_out" style="background-color:red;" class="btn btn-primary btn-md" ><span></span>LOGOUT</button>';
                     }
                     ?>
                 </div>

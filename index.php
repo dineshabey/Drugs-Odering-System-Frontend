@@ -30,12 +30,12 @@
             }
 
             .slider {
-                width: 95%;
+                width: 100%;
                 margin: 10px auto;
 
             }
             .slick-slide {
-                margin: 0px 20px;
+                margin: 1px 10px;
             }
 
             .slick-slide img {
@@ -72,15 +72,15 @@
                 word-break: break-all;
             }
 
-            .row {
+/*            .row {
                 margin: 8px -16px;
             }
 
-            /* Add padding BETWEEN each column (if you want) */
+             Add padding BETWEEN each column (if you want) 
             .row,
             .row > .column {
                 padding: 8px;
-            }
+            }*/
 
             /* Create four equal columns that floats next to each other */
             .column {
@@ -152,7 +152,7 @@
             }
 
             .view_all_itm{
-                
+
                 padding: 1px;
                 background: white;
                 text-align: right;
@@ -184,6 +184,71 @@
                 text-decoration:none !important;
             }
 
+            /*//CUS HEADER CSS ///////////////////////////////////*/
+            /*BORDER COLOR IMAGE SLIDER*/ 
+            .boder_img{
+                border-style: solid;
+                border-color: #fff;
+                border-width: 1px;
+            }
+            /*BORDER COLOR IMAGE SLIDER*/
+
+            .ui-autocomplete-custom {
+                background: #ccc !important;
+                z-index: 2;
+            }
+
+
+            /*ADD TO CART CSS START =============================================*/
+
+            .body {
+                overflow: hidden;
+            }
+            .wrapper {
+                max-width: 1520px;
+                /*height: 880px;*/
+                margin: 20px auto ;
+                padding: 20px;
+                background-color: #f5f5f5;
+                width: 100%;
+            }
+            h1 {
+                display: inline-block;
+                background-color: #333;
+                color: #fff;
+                font-size: 20px;
+                font-weight: normal;
+                text-transform: uppercase;
+                padding: 4px 20px;
+                float: left;
+            }
+            @media all and (max-width: 1200px) and (min-width: 800px) {
+                /* Change Resolutions Here */
+                h5 {
+                    font-size: 12px;
+                }
+            }
+
+            /*img*/
+            img
+            {
+                max-width: 100%;
+                min-width: 40px;;
+                height: auto;
+            }
+
+            .clear {
+                clear: both;
+            }
+            .items {
+                display: block;
+                margin: 20px 0;
+            }
+            /*//CUS HEADER CSS ///////////////////////////////////*/
+
+
+
+
         </style>
     </head>
     <!--MAIN HEAD END -->
@@ -210,8 +275,9 @@
         <!--sub header--////////////////////////////////////////////////////////>-->
         <div class="header">
 
-            <?php // require_once('header2.php'); ?>
-            <?php require_once('include/coustomer_header.php'); ?>
+            <?php require_once('header2.php'); ?>
+            <?php // require_once('include/coustomer_header.php'); ?>
+            <?php // require_once('include/custom_header2.php'); ?>
 
             <!--<a href="navbar.php"></a>-->
 
@@ -405,23 +471,9 @@
     <?php require_once('include/footer.php'); ?>
     <script type="text/javascript">
         $(document).on('ready', function () {
-            item_tot();
+            
         });
-//CART ADDED ITEM TOTAL ===========================================================
-        function item_tot() {
-            $.post("./loaddata.php", {action: 'item_total'}, function (e) {
-                if (e === undefined || e.length === 0 || e === null) {
-                    $('#').html("NO data Found ! ");
-                } else {
-                    var item_tot = (e['item_tot']);
-                    var item_tot_price = (e['item_tot_price']);
-                    $('.item_tot').html(item_tot);
-                    $('.item_tot_price').html(item_tot_price);
-//                    load_cart_item_list();
-                }
-                //    chosenRefresh();
-            }, "json");
-        }
+
 
         //ADD TO CART ANIMATION
         $(document).on('click', '.add-to', function () {

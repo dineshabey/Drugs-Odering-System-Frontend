@@ -6,6 +6,17 @@
     <!--MAIN HEAD START -->
     <head> 
         <?php require_once('include/header.php'); ?>
+
+        <style type="text/css">
+            .form_input{
+                border: 1px solid #1ad41a;
+                border-radius: 4px;
+                height: 39px;
+                color: red;
+                font-size: 20px;
+            }
+        </style>
+
     </head>
 
     <body>
@@ -24,67 +35,103 @@
         </script>
         <!--sub header--////////////////////////////////////////////////////////>-->
         <div class="header">
-            <?php require_once('include/coustomer_header.php'); ?>
+            <?php // require_once('include/coustomer_header.php'); ?>
+            <?php require_once('header2.php'); ?>
         </div>
 
         <!--sub header-- end////////////////////////////////////////////////////>-->
-        <div style="padding-bottom: 30px;"></div>
+        <div class="" style="padding-bottom: 30px;"></div>
 
-        <div class="container" style="background-color: white;"> 
+        <div class="container" style="text-align: center;">
+            <div class="form-horizontal">
+                <fieldset>
+                    <!-- Form Name -->
+                    <legend><h4 style="color: black; font-weight: 500;">CREATE YOUR ACCOUNT</h4></legend>
+                    <legend>  
+                        <!--<span class="col-md-2"></span>-->
+                        <h5 style="text-align: center;font-weight: 800;color: black;">PERSONAL INFORMATION</h5>
+                    </legend>
 
-            <h3>CREATE YOUR ACCOUNT</h3>
-            <div class="register">
-
-                <div class="form-horizontal">
-                    <div class="  register-top-grid">
-
-                        <h3>PERSONAL INFORMATION</h3>
-
-                        <div class="mation">
-
-                            <span>First Name<label>*</label></span>
-                            <input type="text" id="f_name" name="f_name"> 
-
-                            <span>Last Name<label>*</label></span>
-                            <input type="text" id="l_name" name="l_name"> 
-
-                            <span>Email <label>*</label></span>
-                            <input type="text" id="email" name="email"> 
-
-                            <span> City<label>*</label></span>
-                            <input type="text" id="city" name="city"> 
-
-                            <span> Address<label>*</label></span>
-                            <input type="text" id="address" name="address"> 
-
-                            <span> Phone Number<label>*</label></span>
-                            <input type="text" id="phone" name="phone"> 
-                        </div>
-                        <div class="clearfix"> </div>
-                        <a class="news-letter" href="#">
-                            <label class="checkbox"><input type="checkbox" id="signup"  name="checkbox" checked=""><i> </i>Sign Up</label>
-                        </a>
-                    </div>
-                    <!---728x90--->
-
-                    <div class="  register-bottom-grid">
-                        <h3>LOGIN INFORMATION</h3>
-                        <div class="mation">
-                            <span>Password<label>*</label></span>
-                            <input type="text" id="password" name="password">
-                            <span>Confirm Password<label>*</label></span>
-                            <input type="text" id="confirm_password" name="confirm_password">
+                    <!-- Text input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="textinput">First Name</label>  
+                        <div class="col-md-4">
+                            <input name="textinput" type="text" id="f_name" placeholder="" class="form-control input-md form_input">
+                            <span class="help-block"></span>  
                         </div>
                     </div>
-                </div>
-                <div class="clearfix"> </div>
-                <div class="register-but">
-                    <button class="btn btn-warning"  id="submit_btn">CREATE ACCOUNT</button>
-                    <div class="clearfix"> </div>
-                </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="textinput">Last Name</label>  
+                        <div class="col-md-4">
+                            <input name="textinput" type="text" id="l_name" placeholder="" class="form-control input-md form_input">
+                            <span class="help-block"></span>  
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="textinput">Email</label>  
+                        <div class="col-md-4">
+                            <input name="textinput" type="text" id="email" placeholder=" " class="form-control input-md form_input">
+                            <span class="help-block"></span>  
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="textinput">City</label>  
+                        <div class="col-md-4">
+                            <input name="textinput" type="text" id="city" placeholder="" class="form-control input-md form_input" required="">
+                            <span class="help-block"></span>  
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="textinput">Address</label>  
+                        <div class="col-md-4">
+                            <textarea name="textinput" type="text" id="address" placeholder="  " class="form-control input-md form_input"></textarea>
+                            <span class="help-block"></span>  
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="textinput">Phone Number</label>  
+                        <div class="col-md-4">
+                            <input name="textinput" type="text" id="phone" placeholder="" class="form-control input-md form_input">
+                            <span class="help-block"></span>  
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <!-- Form Name -->
+                    <legend>  <h5 style="text-align: center;"></h5></legend>
+                    <legend> 
+                        <!--<span class="col-md-2"></span>-->
+                        <h5 class="" style="text-align: center;font-weight: 800;color: black;">LOGIN INFORMATION</h5>
+                    </legend>
+
+                    <!-- Password input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="passwordinput">Password </label>
+                        <div class="col-md-4">
+                            <input  name="passwordinput" type="password" id="password" placeholder="" class="form-control input-md form_input">
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="passwordinput">Confirm Password </label>
+                        <div class="col-md-4">
+                            <input  name="passwordinput" type="password" id="confirm_password" placeholder="" class="form-control input-md form_input">
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <!--<label class="col-md-4 control-label" for="singlebutton"></label>-->
+                        <label class="col-md-4 control-label " for="textinput"> </label>
+                        <div class="col-md-4">
+                            <button class="btn btn-warning"  id="submit_btn">CREATE ACCOUNT</button>
+                        </div>
+                    </div>
+                    <hr>
+                </fieldset>
             </div>
-
         </div>
+
+
         <!---->
         <!---728x90--->
 
@@ -113,8 +160,58 @@
                         }, "json");
                     }
 
+
+                    //email validation
+                    $(document).on('keyup', '#email', function () {
+                        alert()
+                        if ($(this).val() !== "") {
+                            var valid = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/.test(this.value) && this.value.length;
+                            if (valid) {
+
+                                $('.emailvalue').removeClass('has-error');
+                                $('#em_val').html('');
+                                $('#systemUserAdd').removeClass('hidden');
+                            } else {
+
+                                alert(' E-Mail address is not valid.');
+//                                $('.emailvalue').addClass('has-error');
+//                                $('#em_val').html('<i class="glyphicon glyphicon-warning-sign"></i> E-Mail address is not valid.');
+//                                $('#systemUserAdd').addClass('hidden');
+                            }
+
+                        } else {
+                            $('.emailvalue').removeClass('has-error');
+                            $('#em_val').html('');
+                            $('#systemUserAdd').removeClass('hidden');
+                        }
+                    });
+
                     $(document).on('click', '#submit_btn', function () {
-                        reg_cus();
+                        var email = $('#email').val();
+                        var phone = $('#phone').val();
+                        $.post("./loaddata.php", {action: 'check_user_email_phone', email: email, phone: phone}, function (e) {
+                            alert(e)
+                            if (e === undefined || e.length === 0 || e === null) {
+                                alert('Error in query');
+                            } else {
+                                if (e == "0") {
+//                                    EMAIL & PHONE NUMBER IS OK -------------------------
+                                    reg_cus();
+                                }
+                                if (e == 5) {
+                                    alert("Error ! Phone number & email alrady registered");
+                                }
+                                if (e == 4) {
+                                    alert("Error ! Email alrady registered");
+                                }
+                                if (e == 3) {
+                                    alert("Error ! Phone number alrady registered");
+                                }
+
+                            }
+                        }, "json");
+
+//                        reg_cus();
                     });
 
                     //COUSTOMER REF FUNCTION====================================

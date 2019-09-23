@@ -17,7 +17,6 @@ $time = date("h:i:sa");
 
     <!--MAIN HEAD START -->
     <head>
-        <?php require_once('include/header.php'); ?>
 
         <!--AMAZING SLIDER SCRIPT START-->
         <!-- Insert to your webpage before the </head> -->
@@ -25,6 +24,10 @@ $time = date("h:i:sa");
         <script src="sliderengine/amazingslider.js"></script>
         <link rel="stylesheet" type="text/css" href="sliderengine/amazingslider-1.css">
         <script src="sliderengine/initslider-1.js"></script>
+
+        <?php require_once('include/header.php'); ?>
+
+
         <!--AMAZING SLIDER SCRIPT END-->
 
         <!--ITEM SLIDER CSS START////////////////////-->
@@ -83,16 +86,7 @@ $time = date("h:i:sa");
                 word-break: break-all;
             }
 
-            .row {
-                margin: 8px -16px;
-            }
-
-            /* Add padding BETWEEN each column (if you want) */
-            .row,
-            .row > .column {
-                padding: 8px;
-            }
-
+          
             /* Create four equal columns that floats next to each other */
             .column {
                 float: left;
@@ -206,7 +200,9 @@ $time = date("h:i:sa");
         </script>
         <!--sub header--////////////////////////////////////////////////////////>-->
         <div class="header">
-            <?php require_once('include/coustomer_header.php'); ?>
+            <?php // require_once('include/coustomer_header.php'); ?>
+            <?php require_once('header2.php'); ?>
+            <?php // require_once('include/header2.php'); ?>
             <!--<a href="navbar.php"></a>-->
 
         </div>
@@ -215,6 +211,25 @@ $time = date("h:i:sa");
         <!---728x90--->
 
         <div class="container">
+
+            <div class="sort_conditions">
+
+                <div class="btn-group" style="margin-top:10ps;margin-bottom:5px;">
+                    <button type="button" class="btn btn-primary">Recently Added</button>
+                    <button type="button" class="btn btn-primary">Lowest Price</button>
+                    <button type="button" class="btn btn-primary">Highest Price</button>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                            Sort By Category <span class="caret"></span></button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="all">All</a></li>
+                            <li><a href="#">Multi Vitamin</a></li>
+                            <li><a href="#">Later Vitamin</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
             <!-- items -->
             <div class=" img_view_panel" >
                 <?php
@@ -223,7 +238,7 @@ $time = date("h:i:sa");
                 }
 
 
-$item_query = "SELECT
+                $item_query = "SELECT
 item_deatails.item_id,
 item_deatails.item_name,
 item_deatails.item_price,
@@ -248,59 +263,62 @@ ORDER BY
 item_deatails.sub_cat_id DESC
 ";
 
-$main_cat = $_GET["main_cat_id"];
-$sub_cat = $_GET["sub_cat_id"];
+                $main_cat = $_GET["main_cat_id"];
+                $sub_cat = $_GET["sub_cat_id"];
 
                 $item_info_data = $system->prepareSelectQuery($item_query);
                 $item_count = $system->getCountByQuery($item_query);
 
 
 // Return the number of rows in result set
- $total= $item_count;
+                $total = $item_count;
 
- // How many items to list per page
- $limit = 4;
+                // How many items to list per page
+                $limit = 4;
 
- // How many pages will there be
- $pages = ceil($total / $limit);
+                // How many pages will there be
+                $pages = ceil($total / $limit);
 
 
- // What page are we currently on?
- $page = min($pages, filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT, array(
-     'options' => array(
-         'default'   => 1,
-         'min_range' => 1,
-     ),
- )));
+                // What page are we currently on?
+                $page = min($pages, filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT, array(
+                    'options' => array(
+                        'default' => 1,
+                        'min_range' => 1,
+                    ),
+                )));
 
- // Calculate the offset for the query
- $offset = ($page - 1)  * $limit;
+                // Calculate the offset for the query
+                $offset = ($page - 1) * $limit;
 
- // Some information to display to the user
- $start = $offset + 1;
- $end = min(($offset + $limit), $total);
+                // Some information to display to the user
+                $start = $offset + 1;
+                $end = min(($offset + $limit), $total);
 
- // The "back" link
- $prevlink = ($page > 1) ? '<a href="?page=1" title="First page">&laquo;</a> <a href="?page=' . ($page - 1) . '" title="Previous page">&lsaquo;</a>' : '<span class="disabled">&laquo;</span> <span class="disabled">&lsaquo;</span>';
+                // The "back" link
+                $prevlink = ($page > 1) ? '<a href="?page=1" title="First page">&laquo;</a> <a href="?page=' . ($page - 1) . '" title="Previous page">&lsaquo;</a>' : '<span class="disabled">&laquo;</span> <span class="disabled">&lsaquo;</span>';
 
- // The "forward" link
- $nextlink = ($page < $pages) ? '<a href="?page=' . ($page + 1) . '" title="Next page">&rsaquo;</a> <a href="?page=' . $pages . '" title="Last page">&raquo;</a>' : '<span class="disabled">&rsaquo;</span> <span class="disabled">&raquo;</span>';
+                // The "forward" link
+                $nextlink = ($page < $pages) ? '<a href="?page=' . ($page + 1) . '" title="Next page">&rsaquo;</a> <a href="?page=' . $pages . '" title="Last page">&raquo;</a>' : '<span class="disabled">&rsaquo;</span> <span class="disabled">&raquo;</span>';
 
- // Display the paging information
- echo '<div id="paging"><p>', $prevlink, ' Page ', $page, ' of ', $pages, ' pages, displaying ', $start, '-', $end, ' of ', $total, ' results ', $nextlink, ' </p></div>';
+                // Display the paging information
+                echo '<div id="paging"><p>', $prevlink, ' Page ', $page, ' of ', $pages, ' pages, displaying ', $start, '-', $end, ' of ', $total, ' results ', $nextlink, ' </p></div>';
+
+
 
 
                 if (!empty($item_info_data)) {
 
+                    $pg = count($item_info_data) / 4;
+
+                    $cols = array_chunk($item_info_data, ceil(count($item_info_data) / $pg));
+
+
+                    // print_r($cols[0]);exit;
+
                     $item_out_put = '<div style="background:white"><section class=" " id="regular2" style=" padding-top:10px ;">';
 
-                  $i = 1;
-
-        //        while( ($start <= $i ) || ($i<= $end)){
-                    foreach ($item_info_data as $val3) {
-
-
-                        if( ($start >= $i ) && ($i <= $end)){
+                    foreach ($cols[$page - 1] as $val3) {
 
                         $main_cat_names = $val3['main_cat_name'];
                         $main_cat_id = $val3['main_cat_name'];
@@ -313,27 +331,21 @@ $sub_cat = $_GET["sub_cat_id"];
                         $out_of_stock = $val3['out_of_stock'];
 
                         $item_out_put .= '<div class="column cus_font">
-                    <div class="content" align="middle">
-                    <a href="single.php?item_id=' . $item_id . '&sub_cat_id=' . $sub_cat_id . ' ">
-                    <img class="secial_item responsive card" align="middle" style="text-aling:center;  width:213px; height:213px;" src="../drugs_ordering_system_backend/uploads/' . $val3['item_image'] . '"/>
-                    <h3 style="text-align: center;">' . $item_name . '</h3>
-                    <h3 style="text-align: center;">' . $main_cat_names . '</h3>
-                    <h3 style="text-align: center; color:red;">LKR ' . $item_price . '</h3>
-                        </a>';
+                        <div class="content" align="middle">
+                        <a href="single.php?item_id=' . $item_id . '&sub_cat_id=' . $sub_cat_id . ' ">
+                        <img class="secial_item responsive card" align="middle" style="text-aling:center;  width:213px; height:213px;" src="../drugs_ordering_system_backend/uploads/' . $val3['item_image'] . '"/>
+                        <h3 style="text-align: center;">' . $item_name . '</h3>
+                        <h3 style="text-align: center;">' . $main_cat_names . '</h3>
+                        <h3 style="text-align: center; color:red;">LKR ' . $item_price . '</h3></a>';
+
                         if ($out_of_stock == '1') {
                             //STOCK OUT ================================
-                            $item_out_put .= '<p style="color:red;">Stoke Out</p>';
+                            $item_out_put .= '<p style="color:red;">Stock Out</p>';
                         } else {
                             $item_out_put .= '<p> <button type = "button" class = "btn btn-success" id = "add_to_cart_btn" data-item_price = "' . $item_price . '" value = ' . $item_id . '>Add to cart</button></p>';
                         }
 
-
                         $item_out_put .= '</div></div>';
-
-                          $i++;
-
-                        }//END if
-
                     }//END foreach
 
 
@@ -346,26 +358,25 @@ $sub_cat = $_GET["sub_cat_id"];
                 <!-- Pagination -->
 
                 <div class="row">
-                   <div class=" center-block" >
+                    <div class=" center-block" >
 
-                <ul class="pagination pagination-lg">
-                  <li class="page-item"><a class="page-link" href="<?php echo $page-1 ?>">Previous</a></li>
+                        <ul class="pagination pagination-lg">
+                            <li class="page-item"><a class="page-link" href="<?php echo $page - 1 ?>">Previous</a></li>
 
-                  <?php
+<?php
+for ($v = 1; $v <= $pages; $v++) {
 
-                  for($v=1;$v<=$pages;$v++){
+    if ($v == $page) {
+        echo '<li class="active"><a href="pagination.php?main_cat_id=' . $main_cat . '&sub_cat_id=' . $sub_cat . '&page=' . $v . '">' . $v . '</a></li>';
+    } else {
+        echo '<li><a href="pagination.php?main_cat_id=' . $main_cat . '&sub_cat_id=' . $sub_cat . '&page=' . $v . '">' . $v . '</a></li>';
+    }
+}
+?>
+                            <li class="page-item"><a class="page-link" href="<?php echo $page + 1 ?>">Next</a></li>
+                        </ul>
 
-                    if($v==$page){
-                              echo '<li class="active"><a href="pagination.php?main_cat_id='.$main_cat.'&sub_cat_id='.$sub_cat.'&page='.$v.'">'.$v.'</a></li>';
-                    }else{
-                              echo '<li><a href="pagination.php?main_cat_id='.$main_cat.'&sub_cat_id='.$sub_cat.'&page='.$v.'">'.$v.'</a></li>';
-                    }
-                  }
-                ?>
-                     <li class="page-item"><a class="page-link" href="<?php echo $page+1 ?>">Next</a></li>
-                </ul>
-
-                </div>
+                    </div>
                 </div>
                 <!-- Pagination End -->
 
@@ -416,12 +427,16 @@ $sub_cat = $_GET["sub_cat_id"];
 
 <!--FOTER DIV START ///////////////////////////////////////////////////////////-->
 <div class="footer">
-    <?php require_once('include/footer.php'); ?>
+<?php require_once('include/footer.php'); ?>
     <script type="text/javascript">
         $(document).on('ready', function () {
-            item_tot();
+            //  item_tot();
         });
 
+
+        $('filter_res').change(function () {
+            // load_filtered_categories();
+        });
 
     </script>
 
