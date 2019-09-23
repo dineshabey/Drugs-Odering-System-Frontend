@@ -316,6 +316,11 @@ $time = date("h:i:sa");
             // load_filtered_categories();
         });
         $('#recently_added').click(function () {
+            
+              var main_cats_id = $('#main_cat').val();
+            var sub_cats_id = $('#sub_cat').val();
+            var page_id = $('#page_id').val();
+            
             load_recent_items_with_pagination(main_cats_id, sub_cats_id, page_id);
         });
 

@@ -92,8 +92,6 @@ item_deatails.sub_cat_id DESC
 
         $cols = array_chunk($item_info_data, ceil(count($item_info_data) / $pg));
 
-//echo $page;exit;
-// print_r($cols[0]);exit;
 
         $item_out_put = '<div style="background:white"><section class=" " id="regular2" style=" padding-top:10px ;">';
 
@@ -164,7 +162,9 @@ item_deatails.sub_cat_id DESC
   $main_cat = $_POST['main_cat'];
     $sub_cat = $_POST['sub_cat'];
     $page_cat = 1;
+       $page = $_POST['page'];
 
+       
     $item_query = "SELECT
 item_deatails.item_id,
 item_deatails.item_name,
@@ -187,7 +187,6 @@ item_deatails.item_view_status = '0' AND
 sub_cat.main_cat_id = '{$main_cat}' AND
 item_deatails.img_status = '1'
 ORDER BY
-item_deatails.sub_cat_id DESC,
 item_deatails.item_id DESC
 ";
 
@@ -205,14 +204,6 @@ item_deatails.item_id DESC
 // How many pages will there be
     $pages = ceil($total / $limit);
 
-
-// What page are we currently on?
-    $page = min($pages, filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT, array(
-        'options' => array(
-            'default' => 1,
-            'min_range' => 1,
-        ),
-    )));
 
 // Calculate the offset for the query
     $offset = ($page - 1) * $limit;
