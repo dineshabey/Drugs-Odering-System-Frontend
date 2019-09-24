@@ -181,7 +181,7 @@
     .head_tbl{
         table-layout: fixed;
         max-width:100%;
-        border = "0";
+        border:0;
         border: none;
 
     }
