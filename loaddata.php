@@ -933,7 +933,7 @@ main_cat.main_cat_id DESC");
             $out_put = '';
             $main_cat_name = '';
             $out_put .= '<section class=" "><div style="border: 1px solid #ddd; margin: 1.5em 0; padding: 0.7em 1em; padding-top:10px; background: #8dd10700;  ">'
-                    . '<h4 style="font-weight: 700; color:blue;">FEATURED COLLECTION</h4></div> </section>';
+                    . '<h4 style="font-weight: 700; color:black; text-align: center; ">FEATURED COLLECTION</h4></div> </section>';
             foreach ($main_cat_data as $val) {
                 $main_cat_id = $val['main_cat_id'];
                 $sub_cat_data = $system->prepareSelectQuery("SELECT
@@ -1037,8 +1037,8 @@ main_cat.main_cat_id DESC");
             foreach ($main_cat_data as $val) {
                 $main_cat_id = $val['main_cat_id'];
                 $main_cat_name = $val['main_cat_name'];
-                $out_put .= '<section class=" "><div class="row" style="border: 1px solid #ddd; margin: 1.5em 0; padding: 0.7em 1em; padding-top:10px; background: #4cd107;  ">'
-                        . '<h4 style="font-weight: 700;">' . $main_cat_name . '</h4></div> </section>';
+                $out_put .= '<section class=" "><div class="row" style="border: 1px solid #ddd; margin: 1.5em 0; padding: 0.7em 1em; text-align: center; padding-top:10px; background: #4cd107;  ">'
+                        . '<h4 style="font-weight: 700; color:black; text-align: center;"><span  style="font-weight: 700; color:black; text-align:center !important;; ">' . $main_cat_name . '</span></h4></div> </section>';
                 $sub_cat_data = $system->prepareSelectQuery("SELECT
 sub_cat.sub_cat_id,
 sub_cat.sub_cat_name
@@ -1139,8 +1139,8 @@ main_cat.main_cat_id DESC");
 //                echo '//////////////MAin Cat>>' . $val['main_cat_id'] . '<br>';
 //                echo '/////////////main cat name>>' . $val['main_cat_name'] . '<br>';
 //                        $out_put .='<div style="background-color: coral;">'. $val['main_cat_name'] . '</br></div>';
-                $out_put .= '<div style="color: black; border: 1px solid #ddd; background:#39d239; margin: 1.5em 0; padding: 0.7em 1em">'
-                        . '<h4>' . $val['main_cat_name'] . '</h4></div>';
+                $out_put .= '<div style="color: black; border: 1px solid #ddd; background:#39d239; margin: 1.5em 0; padding: 0.7em 1em;text-align: center;">'
+                        . '<h4 ><span  style="font-weight: 700; color:black; text-align:center;">' . $val['main_cat_name'] . '</span></h4></div>';
                 $sub_cat_data = $system->prepareSelectQuery("SELECT
 sub_cat.sub_cat_id,
 sub_cat.sub_cat_name

@@ -86,7 +86,7 @@
         </script>
         <!--sub header--////////////////////////////////////////////////////////>-->
         <div class="header">
-            <?php require_once('include/coustomer_header.php'); ?>
+           <?php require_once('header2.php'); ?>
         </div>
 
         <!--sub header-- end////////////////////////////////////////////////////>-->
@@ -116,13 +116,16 @@
                     </div>
                 </div>
 
-                <div class="col-lg-3">
+                <div class="col-lg-3" style="text-align: center; padding-bottom:  15px;">
                     <span style="text-align: center;">
                         <div class="card" style="border-style: outset; border-radius: 5px; background-color: #e2a5a5;  border-color:gold;">
                             <h2 style="background-color: #f7f7f7; color: red; text-align: center;">Order Summary</h2>
                             <div class="card-body">
-                                <h4  class="card-title">Order Value:&nbsp;<label class="item_tot_price"></label></h4>
-                                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                                <div></div>
+                                <h4  class="card-title">Cart Value (LKR)</h4>
+                                <h2  class="card-title"><label class="item_tot_price"></label></h2>
+                                <div></div>
+                                <!--<h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>-->
 
 
                                 <a href="login.php"><button type="button" class="btn btn-info">CHECKOUT</button></a>

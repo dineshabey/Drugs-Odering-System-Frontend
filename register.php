@@ -57,42 +57,43 @@
                         <label class="col-md-4 control-label" for="textinput">First Name</label>  
                         <div class="col-md-4">
                             <input name="textinput" type="text" id="f_name" placeholder="" class="form-control input-md form_input">
-                            <span class="help-block"></span>  
+                            <h5 id="f_name_msg" style="color: red;"></h5>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="textinput">Last Name</label>  
                         <div class="col-md-4">
                             <input name="textinput" type="text" id="l_name" placeholder="" class="form-control input-md form_input">
-                            <span class="help-block"></span>  
+                            <h5 id="l_name_msg" style="color: red;"></h5>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="textinput">Email</label>  
                         <div class="col-md-4">
                             <input name="textinput" type="text" id="email" placeholder=" " class="form-control input-md form_input">
-                            <span class="help-block"></span>  
+                            <h5 id="email_msg" style="color: red;"></h5>
+                            <h5 id="email_msg_suc" style="color: blue;"></h5>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="textinput">City</label>  
                         <div class="col-md-4">
                             <input name="textinput" type="text" id="city" placeholder="" class="form-control input-md form_input" required="">
-                            <span class="help-block"></span>  
+                            <h5 id="city_msg" style="color: red;"></h5>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="textinput">Address</label>  
                         <div class="col-md-4">
                             <textarea name="textinput" type="text" id="address" placeholder="  " class="form-control input-md form_input"></textarea>
-                            <span class="help-block"></span>  
+                            <h5 id="address_msg" style="color: red;"></h5>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="textinput">Phone Number</label>  
                         <div class="col-md-4">
                             <input name="textinput" type="text" id="phone" placeholder="" class="form-control input-md form_input">
-                            <span class="help-block"></span>  
+                            <h5 id="phone_msg" style="color: red;"></h5>
                         </div>
                     </div>
                 </fieldset>
@@ -103,6 +104,7 @@
                         <!--<span class="col-md-2"></span>-->
                         <h5 class="" style="text-align: center;font-weight: 800;color: black;">LOGIN INFORMATION</h5>
                     </legend>
+
 
                     <!-- Password input-->
                     <div class="form-group">
@@ -116,7 +118,7 @@
                         <label class="col-md-4 control-label" for="passwordinput">Confirm Password </label>
                         <div class="col-md-4">
                             <input  name="passwordinput" type="password" id="confirm_password" placeholder="" class="form-control input-md form_input">
-                            <span class="help-block"></span>
+                            <h5 id="passMasseg" style="color: red;"></h5>
                         </div>
                     </div>
                     <div class="form-group">
@@ -160,35 +162,127 @@
                         }, "json");
                     }
 
+//                    FORM VALIDATION  START/////////////////////////////////////////////////////////////////////////
 
-                    //email validation
-                    $(document).on('keyup', '#email', function () {
-                        alert()
-                        if ($(this).val() !== "") {
-                            var valid = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/.test(this.value) && this.value.length;
-                            if (valid) {
-
-                                $('.emailvalue').removeClass('has-error');
-                                $('#em_val').html('');
-                                $('#systemUserAdd').removeClass('hidden');
+                    //PASSWORD CONFIRM CHK -------------------------------------
+                    $(document).on('keyup', '#confirm_password', function () {
+                        setTimeout(function () {
+                            var password = $('#password').val();
+                            var conpassword = $('#confirm_password').val();
+                            if (password === conpassword) {
+                                $('#passMasseg').html('');
                             } else {
-
-                                alert(' E-Mail address is not valid.');
-//                                $('.emailvalue').addClass('has-error');
-//                                $('#em_val').html('<i class="glyphicon glyphicon-warning-sign"></i> E-Mail address is not valid.');
-//                                $('#systemUserAdd').addClass('hidden');
+                                $('#passMasseg').html('Password Does Not Match');
                             }
-
-                        } else {
-                            $('.emailvalue').removeClass('has-error');
-                            $('#em_val').html('');
-                            $('#systemUserAdd').removeClass('hidden');
-                        }
+                        }, 250);
                     });
 
+
+                    $(document).on('keyup', '#f_name', function () {
+                        setTimeout(function () {
+                            var f_name = $('#f_name').val();
+                            if (f_name.trim() == "") {
+                                $('#f_name_msg').html("First Name can't empty ");
+                            } else {
+                                $('#f_name_msg').html('');
+                            }
+                        }, 250);
+                    });
+                    $(document).on('keyup', '#l_name', function () {
+                        setTimeout(function () {
+                            var f_name = $('#f_name').val();
+                            if (f_name.trim() == "") {
+                                $('#l_name_msg').html("Last Name can't empty ");
+                            } else {
+                                $('#l_name_msg').html('');
+                            }
+                        }, 250);
+                    });
+
+                    $(document).on('keyup', '#email', function () {
+                        setTimeout(function () {
+                            var email = $('#email').val();
+                            if (email.trim() == "") {
+                                $('#email_msg').html("Email can't empty ");
+                            } else {
+                                var valid = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/.test(email) && email.length;
+                                if (valid) {
+                                    $('#email_msg_suc').html("E-Mail address is valid");
+                                    $('#email_msg').html("");
+                                } else {
+                                    $('#email_msg').html("E-Mail address is not valid");
+                                    $('#email_msg_suc').html("");
+                                }
+
+                            }
+                        }, 250);
+                    });
+
+//                    FORM VALIDATION END/////////////////////////////////////////////////////////////////////////
+
+
                     $(document).on('click', '#submit_btn', function () {
+
+
+                        var f_name = $('#f_name').val();
+                        var l_name = $('#l_name').val();
                         var email = $('#email').val();
+                        var city = $('#city').val();
+                        var address = $('#address').val();
                         var phone = $('#phone').val();
+                        var password = $('#password').val();
+                        var confirm_password = $('#confirm_password').val();
+
+
+                        if (f_name.trim() == "") {
+                            alertify.error("Please enter first name ", 3500);
+                            $("#f_name").focus();
+                            return;
+                        }
+                        if (l_name.trim() == "") {
+                            alertify.error("Please enter last name ", 3500);
+                            $("#l_name").focus();
+                            return;
+                        }
+
+                        //Email validation Start---------------------------------------
+                        if (email.trim() == "") {
+                            alertify.error("Please enter email ", 3500);
+                            $("#email").focus();
+                            return;
+                        } else {
+                            var valid = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/.test(this.value) && this.value.length;
+                            if (valid) {
+                                alert(' E-Mail address is valid.');
+                            } else {
+                                alert(' E-Mail address is not valid.');
+                            }
+                        }
+                        //Email validation End---------------------------------------
+
+                        if (city.trim() == "") {
+                            alertify.error("Please enter city ", 3500);
+                            $("#city").focus();
+                            return;
+                        }
+                        if (address.trim() == "") {
+                            alertify.error("Please enter city ", 3500);
+                            $("#address").focus();
+                            return;
+                        }
+                        if (password.trim() == "") {
+                            alertify.error("Please enter password ", 3500);
+                            $("#password").focus();
+                            return;
+                        }
+                        if (confirm_password.trim() == "") {
+                            alertify.error("Please enter confirm password ", 3500);
+                            $("#confirm_password").focus();
+                            return;
+                        }
+
+
+
                         $.post("./loaddata.php", {action: 'check_user_email_phone', email: email, phone: phone}, function (e) {
                             alert(e)
                             if (e === undefined || e.length === 0 || e === null) {

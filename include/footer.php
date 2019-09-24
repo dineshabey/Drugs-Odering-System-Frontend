@@ -7,12 +7,83 @@ if (isset($_SESSION['cus_id'])) {
 //    echo "Not Sesseon";
 }
 ?>
-<div class="footer-top bottom_head_cus2" style="background-color: #357ae833; ">
 
+<style type="text/css">
+    .footer_bar{
+        background-image: url("images/site_img/green_bac5.jpg");
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+
+    .h_tag{
+        color: #bdff77;
+        font-size: 20px;
+        font-family: Arial Rounded MT ,Helvetica Rounded,Arial,sans-serif;
+
+
+    }
+
+    .li_clz{
+        color: white;
+        font-size: 20px;
+        font-family: Garamond,Baskerville,Baskerville Old Face,Hoefler Text,Times New Roman,serif;
+    }
+
+</style>
+
+<div class="footer-bottom " style="background-color:#170303e6; padding-top: 15px; color: white;" >
+    <div class="container" style="padding-top: 20px;">
+        <div class="footer-bottom-cate">
+            <h6 class="h_tag"><label class="h_tag">TOP CATEGORIES</label></h6>
+            <ul >
+                <li><a href="#"><span class="li_clz">Vitamin</span></a></li>
+                <li><a href="#"><span class="li_clz">Hearbz</span></a></li>
+                <li><a href="#"><span class="li_clz">Baby Items</span></a></li>
+
+            </ul>
+        </div>
+        <div class="footer-bottom-cate bottom-grid-cat" style="padding: 0 0 6em;">
+            <h6><label class="h_tag">FEATURE ITEMS</label></h6>
+            <ul>
+                <li><a href="#"><span class="li_clz">Vitamin A</span></a></li>
+                <li><a href="#"><span class="li_clz">Vitamin B</span></a></li>
+                <li><a href="#"><span class="li_clz">Vitamin C</span></a></li>
+                <li><a href="#"><span class="li_clz">Vitamin D</span></a></li>
+                <li><a href="#"><span class="li_clz">Vitamin A</span></a></li>
+
+            </ul>
+        </div>
+
+        <div class="footer-bottom-cate cate-bottom">
+            <h6 ><label class="h_tag">OUR ADDRESS</label></h6>
+            <div >
+
+                <ul>
+                    <li><span  class="li_clz">Anamaduwa Road, </span></li>
+                    <li><span  class="li_clz">Nawagathegama</span></li>
+                    <li class="phone" ><span  class="li_clz">Tele : 061 405305848</span></li>
+                    <li class="phone" ><span  class="li_clz">Fax : 061 405305848</span></li>
+                    <li class="phone" ><span  class="li_clz">Email : lionminimart@gmail.com</span></li>
+                    <!--<li class="temp"><p>&copy 2019  All Rights Reserved | Design by  <a href="http://goldendit.com/" target="_blank">Golden-D IT Solution</a> </p></li>-->
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom-cate">
+            <div>
+                <a href="index.php"><img src="images/site_img/edit_logo.jpg" alt=""  style="width:266px; height:308px;" /></a>
+            </div>
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+</div>
+
+<div class=" footer_bar" style=""  >
     <div class="container " >
-        
-        <div class="latter-right" style="padding-bottom: 10px">
-            <p>FOLLOW US</p>
+
+        <div class="latter-right" style="padding-top: 10px;padding-bottom:10px;">
+            <p><span style="color: white;">FOLLOW US</span></p>
             <ul class="face-in-to">
                 <!--<li><a href="#"><span> </span></a></li>-->
                 <li><a href="#"><span class="facebook-in"> </span></a></li>
@@ -25,80 +96,21 @@ if (isset($_SESSION['cus_id'])) {
 
     <!--<hr style="border: 1px solid cornsilk;">-->
     <div class="container" style="padding-bottom: 50px">
-     
+
         <div class="row" style="">
-            <div class="col-lg-2">   <h2>PAY ACCEPTED</h2> </div>
+            <div class="col-lg-2">   <h4><span style="color: white;">PAY ACCEPTED</span></h4> </div>
             <div class="col-lg-8">
                 <img src="images/site_img/payhere_long_banner.png" alt="" class="responsive" style="max-width: 100%;" />
-
             </div>
             <!--<div class="col-lg-2"> </div>-->
         </div>
+        <div class="row" style="padding-top: 40px;">
+            <p style="text-align: center; color: blanchedalmond;">&copy 2019  All Rights Reserved | Design by  <a href="http://goldendit.com/" target="_blank"><span style="color: blanchedalmond;">Golden-D IT Solution</span></a> </p>
+
+        </div>
     </div>
 
 </div>
-<div class="footer-bottom " style="background-color: #ffffffb3; padding-top: 20px" hidden="">
-    <div class="container" style="padding-top: 20px;">
-        <div class="footer-bottom-cate">
-            <h6>CATEGORIES</h6>
-            <ul>
-                <li><a href="#">Curabitur sapien</a></li>
-                <li><a href="#">Dignissim purus</a></li>
-                <li><a href="#">Tempus pretium</a></li>
-                <li ><a href="#">Dignissim neque</a></li>
-                <li ><a href="#">Ornared id aliquet</a></li>
-                <li><a href="#">Ultrices id du</a></li>
-                <li><a href="#">Commodo sit</a></li>
-                <li ><a href="#">Urna ac tortor sc</a></li>
-                <li><a href="#">Ornared id aliquet</a></li>
-                <li><a href="#">Urna ac tortor sc</a></li>
-                <li ><a href="#">Eget nisi laoreet</a></li>
-                <li ><a href="#">Faciisis ornare</a></li>
-            </ul>
-        </div>
-        <div class="footer-bottom-cate bottom-grid-cat">
-            <h6>FEATURE PROJECTS</h6>
-            <ul>
-                <li><a href="#">Curabitur sapien</a></li>
-                <li><a href="#">Dignissim purus</a></li>
-                <li><a href="#">Tempus pretium</a></li>
-                <li ><a href="#">Dignissim neque</a></li>
-                <li ><a href="#">Ornared id aliquet</a></li>
-                <li><a href="#">Ultrices id du</a></li>
-                <li><a href="#">Commodo sit</a></li>
-            </ul>
-        </div>
-        <div class="footer-bottom-cate">
-            <h6>TOP BRANDS</h6>
-            <ul>
-                <li><a href="#">Curabitur sapien</a></li>
-                <li><a href="#">Dignissim purus</a></li>
-                <li><a href="#">Tempus pretium</a></li>
-                <li ><a href="#">Dignissim neque</a></li>
-                <li ><a href="#">Ornared id aliquet</a></li>
-                <li><a href="#">Ultrices id du</a></li>
-                <li><a href="#">Commodo sit</a></li>
-                <li ><a href="#">Urna ac tortor sc</a></li>
-                <li><a href="#">Ornared id aliquet</a></li>
-                <li><a href="#">Urna ac tortor sc</a></li>
-                <li ><a href="#">Eget nisi laoreet</a></li>
-                <li ><a href="#">Faciisis ornare</a></li>
-            </ul>
-        </div>
-        <div class="footer-bottom-cate cate-bottom">
-            <h6>OUR ADDRESS</h6>
-            <ul>
-                <li>Anamaduwa Road, </li>
-                <li>Nawagathegama</li>
-                <li class="phone">061 405305848</li>
-                <li class="temp"><p>&copy 2019  All Rights Reserved | Design by  <a href="http://goldendit.com/" target="_blank">Golden-D IT Solution</a> </p></li>
-            </ul>
-        </div>
-        
-        <div class="clearfix"> </div>
-    </div>
-</div>
-
 <!-- Scripts for jQuery and the plugin --> 
 <!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>--> 
 <!--
@@ -109,34 +121,34 @@ if (isset($_SESSION['cus_id'])) {
 
 <script type="text/javascript">
 //ADD TO CART BTN CLICK ========================================================
-                        $(document).on('click', '#add_to_cart_btn', function () {
-                            var cus_id = $("#cus_id").val();
-                            //NO LOGIN COUSTOMER ------------------------------
-                            if (cus_id == "0") {
-                                var item_id = ($(this).val());
-                                var price = ($(this).data('item_price'));
-                                $.post("./loaddata.php", {action: 'add_to_cart', item_id: item_id, price: price}, function (e) {
-                                    if (e === undefined || e.length === 0 || e === null) {
+    $(document).on('click', '#add_to_cart_btn', function () {
+        var cus_id = $("#cus_id").val();
+        //NO LOGIN COUSTOMER ------------------------------
+        if (cus_id == "0") {
+            var item_id = ($(this).val());
+            var price = ($(this).data('item_price'));
+            $.post("./loaddata.php", {action: 'add_to_cart', item_id: item_id, price: price}, function (e) {
+                if (e === undefined || e.length === 0 || e === null) {
 //                                    $('#').html("NO data Found ! ");
-                                        alert('No data found');
-                                    } else {
-                                        item_tot();
+                    alert('No data found');
+                } else {
+                    item_tot();
 
-                                    }
-                                });
-                            } else {
-                                var item_id = ($(this).val());
-                                $.post("./loaddata.php", {action: 'data_insert_loging_user', item_id: item_id, cus_id: cus_id}, function (e) {
-                                    if (e === undefined || e.length === 0 || e === null) {
+                }
+            });
+        } else {
+            var item_id = ($(this).val());
+            $.post("./loaddata.php", {action: 'data_insert_loging_user', item_id: item_id, cus_id: cus_id}, function (e) {
+                if (e === undefined || e.length === 0 || e === null) {
 //                                    $('#').html("NO data Found ! ");
-                                        alert('No data found');
-                                    } else {
-                                        load_user_added_item();
-                                    }
-                                }, "json");
-                            }
+                    alert('No data found');
+                } else {
+                    load_user_added_item();
+                }
+            }, "json");
+        }
 
-                        });
+    });
 
 
 </script>

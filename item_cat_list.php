@@ -206,8 +206,8 @@ $time = date("h:i:sa");
         </script>
         <!--sub header--////////////////////////////////////////////////////////>-->
         <div class="header">
-            <?php // require_once('include/coustomer_header.php'); ?>
-                 <?php require_once('header2.php'); ?>
+           
+                <?php require_once('header2.php'); ?>
             <!--<a href="navbar.php"></a>-->
 
         </div>

@@ -86,7 +86,7 @@ $time = date("h:i:sa");
                 word-break: break-all;
             }
 
-          
+
             /* Create four equal columns that floats next to each other */
             .column {
                 float: left;
@@ -363,16 +363,16 @@ item_deatails.sub_cat_id DESC
                         <ul class="pagination pagination-lg">
                             <li class="page-item"><a class="page-link" href="<?php echo $page - 1 ?>">Previous</a></li>
 
-<?php
-for ($v = 1; $v <= $pages; $v++) {
+                            <?php
+                            for ($v = 1; $v <= $pages; $v++) {
 
-    if ($v == $page) {
-        echo '<li class="active"><a href="pagination.php?main_cat_id=' . $main_cat . '&sub_cat_id=' . $sub_cat . '&page=' . $v . '">' . $v . '</a></li>';
-    } else {
-        echo '<li><a href="pagination.php?main_cat_id=' . $main_cat . '&sub_cat_id=' . $sub_cat . '&page=' . $v . '">' . $v . '</a></li>';
-    }
-}
-?>
+                                if ($v == $page) {
+                                    echo '<li class="active"><a href="pagination.php?main_cat_id=' . $main_cat . '&sub_cat_id=' . $sub_cat . '&page=' . $v . '">' . $v . '</a></li>';
+                                } else {
+                                    echo '<li><a href="pagination.php?main_cat_id=' . $main_cat . '&sub_cat_id=' . $sub_cat . '&page=' . $v . '">' . $v . '</a></li>';
+                                }
+                            }
+                            ?>
                             <li class="page-item"><a class="page-link" href="<?php echo $page + 1 ?>">Next</a></li>
                         </ul>
 
@@ -427,7 +427,7 @@ for ($v = 1; $v <= $pages; $v++) {
 
 <!--FOTER DIV START ///////////////////////////////////////////////////////////-->
 <div class="footer">
-<?php require_once('include/footer.php'); ?>
+    <?php require_once('include/footer.php'); ?>
     <script type="text/javascript">
         $(document).on('ready', function () {
             //  item_tot();
