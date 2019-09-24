@@ -23,26 +23,11 @@ $time = date("h:i:sa");
         <script src="sliderengine/jquery.js"></script>
         <script src="sliderengine/amazingslider.js"></script>
         <link rel="stylesheet" type="text/css" href="sliderengine/amazingslider-1.css">
-<<<<<<< HEAD
         <script src="sliderengine/initslider-1.js"></script>
-=======
-        <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-        <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
-
-        <link rel="stylesheet"  href= "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
->>>>>>> fbd1357aa81a82604cc63791c960ca519d04ecd2
 
         <?php require_once('include/header.php'); ?>
 
 
-<<<<<<< HEAD
-=======
-        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
-
->>>>>>> fbd1357aa81a82604cc63791c960ca519d04ecd2
         <!--AMAZING SLIDER SCRIPT END-->
 
         <!--ITEM SLIDER CSS START////////////////////-->
@@ -227,14 +212,14 @@ $time = date("h:i:sa");
 
         <div class="container">
 
-            <div class="sort_conditions">
+            <div class="sort_conditions" style="border: 1px solid #ddd; margin: 1.5em 0; padding: 0.5em 1em; background:white; text-align: center;">
 
-<<<<<<< HEAD
+                <!--<div class="btn-group" style="margin-top:10ps;margin-bottom:5px;">-->
                 <div class="btn-group" style="margin-top:10ps;margin-bottom:5px;">
                     <button type="button" class="btn btn-primary">Recently Added</button>
                     <button type="button" class="btn btn-primary">Lowest Price</button>
                     <button type="button" class="btn btn-primary">Highest Price</button>
-                    <div class="btn-group">
+                  <div class="btn-group mr-2" role="group" aria-label="Second group">
                         <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                             Sort By Category <span class="caret"></span></button>
                         <ul class="dropdown-menu" role="menu">
@@ -363,31 +348,9 @@ item_deatails.sub_cat_id DESC
 
                         $item_out_put .= '</div></div>';
                     }//END foreach
-=======
-                <div class="btn-group" style="margin-top:10px;margin-bottom:5px;">
-                    <button type="button" id="recently_added"  class="btn btn-primary">Recently Added</button>
-                    <button type="button" class="btn btn-primary">Lowest Price</button>
-                    <button type="button" class="btn btn-primary">Highest Price</button>
 
-                    <input type="hidden" id="main_cat"  value="<?php echo $_GET["main_cat_id"]; ?>">
-                    <input type="hidden" id="sub_cat"  value="<?php echo $_GET["sub_cat_id"]; ?>">
-                    <input type="hidden" id="page_id"  value="<?php echo $_GET["page"]; ?>">
 
->>>>>>> fbd1357aa81a82604cc63791c960ca519d04ecd2
 
-                    <div class="btn-group"  >
-                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                            Sort By Category</button>
-                               <ul class="dropdown-menu" role="menu">
-                            <li><a href="all">All</a></li>
-                            <li><a href="1">Multi Vitamin</a></li>
-                            <li><a href="2">Later Vitamin</a></li>
-                        </ul>
-                    </div>
-
-                </div>
-
-<<<<<<< HEAD
                     $item_out_put .= '</div></section>';
                     echo $item_out_put;
                 }
@@ -395,7 +358,7 @@ item_deatails.sub_cat_id DESC
 
                 <!-- Pagination -->
 
-                <div class="row">
+                <div class="row" style="text-align: center;">
                     <div class=" center-block" >
 
                         <ul class="pagination pagination-lg">
@@ -417,26 +380,24 @@ item_deatails.sub_cat_id DESC
                     </div>
                 </div>
                 <!-- Pagination End -->
-=======
-            </div>
 
-
-            <?php
-            if (!isset($_GET["main_cat_id"]) && !isset($_GET["sub_cat_id"])) {
-                echo "Not Found POST data !";
-            }
-            ?>
-
->>>>>>> fbd1357aa81a82604cc63791c960ca519d04ecd2
-
-            <!-- items -->
-            <div class=" img_view_panel"  id="img_view_panel">
 
             </div>
             <!--/ items -->
 
+
+
+
+
         </div>
 
+        <!--/ wrapper -->
+
+            <!--<script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>-->
+
+        <!--NEW COUSTOMER ITEM SLIDER END /////////////////////////////////////////3333333333333-->
+
+        <!---728x90--->
     </div>
 </div>
 
@@ -454,11 +415,12 @@ item_deatails.sub_cat_id DESC
                 $(function () {
                     var sub_cat_id = "<?php echo $sub_cat_id = $_GET["sub_cat_id"]; ?>";
                     var main_cat_id = "<?php echo $sub_cat_id = $_GET["main_cat_id"]; ?>";
-                    var pages_id = "<?php echo $sub_cat_id = $_GET["page"]; ?>";
+
                     var sub_cats_id = parseInt(sub_cat_id);
                     var main_cats_id = parseInt(main_cat_id);
-                    var page_id = parseInt(pages_id);
+
                 });
+
             }); //ON LOAD FUCTION END
 </script>
 
@@ -468,45 +430,16 @@ item_deatails.sub_cat_id DESC
 <div class="footer">
     <?php require_once('include/footer.php'); ?>
     <script type="text/javascript">
-
-
-
         $(document).on('ready', function () {
-<<<<<<< HEAD
             //  item_tot();
         });
-=======
->>>>>>> fbd1357aa81a82604cc63791c960ca519d04ecd2
 
-            var main_cats_id = $('#main_cat').val();
-            var sub_cats_id = $('#sub_cat').val();
-            var page_id = $('#page_id').val();
-
-            load_items_with_pagination(main_cats_id, sub_cats_id, page_id);
-            //  item_tot();
-        });
-        $('filter_res').change(function () {
-            // load_filtered_categories();
-        });
-        $('#recently_added').click(function () {
-            
-              var main_cats_id = $('#main_cat').val();
-            var sub_cats_id = $('#sub_cat').val();
-            var page_id = $('#page_id').val();
-            
-            load_recent_items_with_pagination(main_cats_id, sub_cats_id, page_id);
-        });
 
         $('filter_res').change(function () {
             // load_filtered_categories();
         });
 
     </script>
-
-
-
-
-
 
 </div>
 

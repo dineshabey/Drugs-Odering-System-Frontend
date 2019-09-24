@@ -57,7 +57,7 @@ if (isset($_SESSION['cus_id'])) {
         </div>
 
         <div class="footer-bottom-cate cate-bottom">
-            <h6 ><label class="h_tag">OUR ADDRESS</label></h6>
+            <h6 ><label class="h_tag">CONTACT DEATAILS</label></h6>
             <div >
 
                 <ul>
@@ -95,7 +95,7 @@ if (isset($_SESSION['cus_id'])) {
     </div>
 
     <!--<hr style="border: 1px solid cornsilk;">-->
-    <div class="container" style="padding-bottom: 50px">
+    <div class="container" style="padding-bottom: 1px">
 
         <div class="row" style="">
             <div class="col-lg-2">   <h4><span style="color: white;">PAY ACCEPTED</span></h4> </div>
