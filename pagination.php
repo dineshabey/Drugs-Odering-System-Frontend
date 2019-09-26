@@ -334,16 +334,17 @@ item_deatails.sub_cat_id DESC
                         $item_out_put .= '<div class="column cus_font">
                         <div class="content" align="middle">
                         <a href="single.php?item_id=' . $item_id . '&sub_cat_id=' . $sub_cat_id . ' ">
-                        <img class="secial_item responsive card" align="middle" style="text-aling:center;  width:213px; height:213px;" src="../drugs_ordering_system_backend/uploads/' . $val3['item_image'] . '"/>
-                        <h3 style="text-align: center;">' . $item_name . '</h3>
-                        <h3 style="text-align: center;">' . $main_cat_names . '</h3>
-                        <h3 style="text-align: center; color:red;">LKR ' . $item_price . '</h3></a>';
+                        <img class="secial_item img-responsive card" align="middle" style="text-aling:center;" src="../drugs_ordering_system_backend/uploads/' . $val3['item_image'] . '"/>
+                        <h3 style="text-align: center; font-weight: 600;">' . $item_name . '</h3>
+                        <h3 style="text-align: center; font-weight: 600; color:blue;">' . $main_cat_names . '</h3>
+                        <h3 style="text-align: center; color:red; font-weight: 600; ">LKR ' . $item_price . '</h3></a>';
 
                         if ($out_of_stock == '1') {
                             //STOCK OUT ================================
-                            $item_out_put .= '<p style="color:red;">Stock Out</p>';
+                            $item_out_put .= '<p style="color:red; font-weight: 600;">Stock Out</p>';
                         } else {
-                            $item_out_put .= '<p> <button type = "button" class = "btn btn-success" id = "add_to_cart_btn" data-item_price = "' . $item_price . '" value = ' . $item_id . '>Add to cart</button></p>';
+                            $item_out_put .= '<p class="card"> <button  type="button" class="btn btn-secondary" id = "add_to_cart_btn" data-item_price = "' . $item_price . '" value = ' . $item_id . '>Add to cart</button></p>';
+//                            $item_out_put .= '<p> <button type = "button" class = "btn btn-success" id = "add_to_cart_btn" data-item_price = "' . $item_price . '" value = ' . $item_id . '>Add to cart</button></p>';
                         }
 
                         $item_out_put .= '</div></div>';

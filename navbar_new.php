@@ -31,10 +31,10 @@ $time = date("h:i:sa");
             $main_cat_name = '';
 
             $out_put .= '<ul  class="">';
-            $out_put .= '<li><a href="index.php">HOME </a></li>';
+            $out_put .= '<li><a href="index.php" style="border: 2px solid black;  background:#007d1d ; border-radius: 25px;">HOME </a></li>';
             foreach ($main_cat_data as $val) {
                 $main_cat_id = $val['main_cat_id'];
-                $out_put .= '<li><a href="" class="itm-sub-categ-consist-wrapper">' . $val['main_cat_name'] . '<i class="fa fa-chevron-down" aria-hidden="true"></i></a>';
+                $out_put .= '<li><a href="" class="itm-sub-categ-consist-wrapper" style="border: 2px solid black;  background:#3981da ; border-radius: 25px;">' . $val['main_cat_name'] . '<i class="fa fa-chevron-down" aria-hidden="true"></i></a>';
 
                 $sub_cat_data = $system->prepareSelectQuery("SELECT
                                     sub_cat.sub_cat_id,

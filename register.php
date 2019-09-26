@@ -92,7 +92,7 @@
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="textinput">Phone Number</label>  
                         <div class="col-md-4">
-                            <input name="textinput" type="text" id="phone" placeholder="" class="form-control input-md form_input">
+                            <input name="textinput" type="text" id="phone" placeholder="" class="form-control input-md form_input phone_no">
                             <h5 id="phone_msg" style="color: red;"></h5>
                         </div>
                     </div>
@@ -161,7 +161,14 @@
                             //    chosenRefresh();
                         }, "json");
                     }
+                    //PHONE NUMBER FEILD ENTER NUMBERS ONLY VALIDATION ==================================
+                    $(function () {
+                        $('.phone_no').on('input', function () {
+                            this.value = this.value
+                                    .replace(/[^\d]/g, '');// numbers and decimals only
 
+                        });
+                    });
 //                    FORM VALIDATION  START/////////////////////////////////////////////////////////////////////////
 
                     //PASSWORD CONFIRM CHK -------------------------------------
@@ -190,11 +197,41 @@
                     });
                     $(document).on('keyup', '#l_name', function () {
                         setTimeout(function () {
-                            var f_name = $('#f_name').val();
+                            var f_name = $('#l_name').val();
                             if (f_name.trim() == "") {
                                 $('#l_name_msg').html("Last Name can't empty ");
                             } else {
                                 $('#l_name_msg').html('');
+                            }
+                        }, 250);
+                    });
+                    $(document).on('keyup', '#city', function () {
+                        setTimeout(function () {
+                            var city = $('#city').val();
+                            if (city.trim() == "") {
+                                $('#city_msg').html("City Name can't empty ");
+                            } else {
+                                $('#city_msg').html('');
+                            }
+                        }, 250);
+                    });
+                    $(document).on('keyup', '#address', function () {
+                        setTimeout(function () {
+                            var city = $('#address').val();
+                            if (city.trim() == "") {
+                                $('#address_msg').html("Address can't empty ");
+                            } else {
+                                $('#address_msg').html('');
+                            }
+                        }, 250);
+                    });
+                    $(document).on('keyup', '#phone', function () {
+                        setTimeout(function () {
+                            var phone = $('#phone').val();
+                            if (phone.trim() == "") {
+                                $('#phone_msg').html("Phone number  can't empty ");
+                            } else {
+                                $('#phone_msg').html('');
                             }
                         }, 250);
                     });
@@ -204,10 +241,11 @@
                             var email = $('#email').val();
                             if (email.trim() == "") {
                                 $('#email_msg').html("Email can't empty ");
+                                $('#email_msg_suc').html("");
                             } else {
                                 var valid = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/.test(email) && email.length;
                                 if (valid) {
-                                    $('#email_msg_suc').html("E-Mail address is valid");
+//                                    $('#email_msg_suc').html("E-Mail address is valid");
                                     $('#email_msg').html("");
                                 } else {
                                     $('#email_msg').html("E-Mail address is not valid");
@@ -235,56 +273,56 @@
 
 
                         if (f_name.trim() == "") {
-                            alertify.error("Please enter first name ", 3500);
+                            $('#f_name_msg').html("First Name can't empty ");
                             $("#f_name").focus();
                             return;
                         }
                         if (l_name.trim() == "") {
-                            alertify.error("Please enter last name ", 3500);
+                            $('#l_name_msg').html("Last Name can't empty ");
                             $("#l_name").focus();
                             return;
                         }
 
                         //Email validation Start---------------------------------------
                         if (email.trim() == "") {
-                            alertify.error("Please enter email ", 3500);
+                            $('#email_msg').html("Email can't empty ");
                             $("#email").focus();
                             return;
                         } else {
-                            var valid = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/.test(this.value) && this.value.length;
-                            if (valid) {
-                                alert(' E-Mail address is valid.');
-                            } else {
-                                alert(' E-Mail address is not valid.');
+                            var valid = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/.test(email) && email.length;
+                            if (!valid) {
+                                $('#email_msg').html("E-Mail address is not valid ");
                             }
                         }
                         //Email validation End---------------------------------------
 
                         if (city.trim() == "") {
-                            alertify.error("Please enter city ", 3500);
+                            $('#city_msg').html("City can't empty ");
                             $("#city").focus();
                             return;
                         }
                         if (address.trim() == "") {
-                            alertify.error("Please enter city ", 3500);
+                            $('#address_msg').html("Address can't empty ");
                             $("#address").focus();
                             return;
                         }
+                        if (phone.trim() == "") {
+                            $('#phone_msg').html("Phone number  can't empty ");
+                            $("#phone").focus();
+                            return;
+                        }
                         if (password.trim() == "") {
-                            alertify.error("Please enter password ", 3500);
+                            $('#password_msg').html("Password can't empty ");
                             $("#password").focus();
                             return;
                         }
                         if (confirm_password.trim() == "") {
-                            alertify.error("Please enter confirm password ", 3500);
+                            $('#password_msg').html("Please enter confirm password ");
                             $("#confirm_password").focus();
                             return;
                         }
 
-
-
                         $.post("./loaddata.php", {action: 'check_user_email_phone', email: email, phone: phone}, function (e) {
-                            alert(e)
                             if (e === undefined || e.length === 0 || e === null) {
                                 alert('Error in query');
                             } else {
@@ -293,19 +331,25 @@
                                     reg_cus();
                                 }
                                 if (e == 5) {
-                                    alert("Error ! Phone number & email alrady registered");
+                                    $('#phone_msg').html("Error ! Phone number alrady registered");
+                                    $('#email_msg').html("Error ! Email alrady registered");
+                                    $("#email").focus();
+                                    return;
+
                                 }
                                 if (e == 4) {
-                                    alert("Error ! Email alrady registered");
+                                    $('#email_msg').html("Error ! Email alrady registered");
+                                    $("#email").focus();
+                                    return;
                                 }
                                 if (e == 3) {
-                                    alert("Error ! Phone number alrady registered");
+                                    $('#phone_msg').html("Error ! Phone number alrady registered");
+                                    $("#phone").focus();
+                                    return;
                                 }
 
                             }
                         }, "json");
-
-//                        reg_cus();
                     });
 
                     //COUSTOMER REF FUNCTION====================================
@@ -318,10 +362,8 @@
                         var phone = $('#phone').val();
                         var password = $('#password').val();
                         var confirm_password = $('#confirm_password').val();
-
-
+                        
                         var send_obj = {f_name: f_name, l_name: l_name, email: email, city: city, address: address, phone: phone, password: password, confirm_password: confirm_password};
-
                         $.post("./loaddata.php", {action: 'reg_cus', send_obj: send_obj}, function (e) {
                             if (e === undefined || e.length === 0 || e === null) {
                                 alert('Error in create account !');

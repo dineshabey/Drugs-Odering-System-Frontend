@@ -110,7 +110,7 @@ WHERE
         $result = mysqli_query($link, $qry) or die(mysqli_error());
         MainConfig::closeDB();
         $row = mysqli_fetch_assoc($result);
-        
+
         if (($row['phone']) == ($_POST['phone']) && ($row['email']) == ($_POST['email'])) {
 //            echo ("error phone/email matching") . '<hr>';
             echo json_encode("5");
@@ -134,6 +134,18 @@ WHERE
 //COUSTOMER REGISTRATION (INSERT)============ ==================================
     } else if ($_POST['action'] == 'reg_cus') {
         $send_obj = $_POST['send_obj'];
+//Password encript method ///////////////////////////////////////////////////////
+        $add_name = "noonehack";
+        $encript_pwx = (($send_obj['confirm_password']));
+        $encript_pw = (($send_obj['confirm_password']) . $add_name);
+        $pw = explode(" ", $encript_pw);
+        $count = count($pw);
+        $con_pw = "";
+        for ($i = 0; $i < $count; $i++) {
+            $con_pw .= $pw[$i];
+        }
+        $conf_pw = sha1($con_pw);
+//Password encript method end ///////////////////////////////////////////////////
         MainConfig::connectDB();
         $link = MainConfig::conDB();
         $error = TRUE;
@@ -141,7 +153,7 @@ WHERE
 
         $query1 = "INSERT INTO `customer_details` ( `f_name`, `l_name`, `email`, `city`, `address`, `phone`, "
                 . "`password`,  `account_status`, `reg_date`,`reg_time`) "
-                . "VALUES ( '{$send_obj['f_name']}', '{$send_obj['l_name']}', '{$send_obj['email']}', '{$send_obj['city']}', '{$send_obj['address']}', '{$send_obj['phone']}', '{$send_obj['password']}' , '0', '$date','$time');";
+                . "VALUES ( '{$send_obj['f_name']}', '{$send_obj['l_name']}', '{$send_obj['email']}', '{$send_obj['city']}', '{$send_obj['address']}', '{$send_obj['phone']}', '{$conf_pw}' , '0', '$date','$time');";
 
         $insert = mysqli_query($link, $query1);
         if (!$insert) {
@@ -582,12 +594,21 @@ customer_added_item.cus_id = '{$_SESSION['cus_id']}'";
         }
     } else if ($_POST['action'] == 'user_login') {
 // USER LOGIN (COUSTPMER)- -----------------------------------------------------
-
+//Password decript method ///////////////////////////////////////////////////////
+        $add_name = "noonehack";
+        $post_pw = (($_POST['pw'] . $add_name));
+        $pw = explode(" ", $post_pw);
+        $count = count($pw);
+        $con_pw = "";
+        for ($i = 0; $i < $count; $i++) {
+            $con_pw .= $pw[$i];
+        }
+        $conf_pw = sha1($con_pw);
+//Password decript method end ///////////////////////////////////////////////////
         $qry = '';
         $email = $_POST['email'];
 
         if (!stristr($email, "@") OR ! stristr($email, ".")) {
-
 //IF email field is not send an email Login with phone number
             $qry = "SELECT
 customer_details.account_status,
@@ -599,13 +620,11 @@ FROM
 customer_details
 WHERE
 customer_details.account_status = '0' AND
-customer_details.`password` = '{$_POST['pw']}' AND
+customer_details.`password` = '{$conf_pw}' AND
 customer_details.phone = '{$_POST['email']}'
 ";
         } else {
-
 //Login with email
-
             $qry = "SELECT
 customer_details.account_status,
 customer_details.`password`,
@@ -616,11 +635,10 @@ FROM
 customer_details
 WHERE
 customer_details.account_status = '0' AND
-customer_details.`password` = '{$_POST['pw']}' AND
+customer_details.`password` = '{$conf_pw}' AND
 customer_details.email = '{$_POST['email']}'
 ";
         }
-
         MainConfig::connectDB();
         $link = MainConfig::conDB();
         $result = mysqli_query($link, $qry) or die(mysqli_error($link));
@@ -837,8 +855,12 @@ main_cat.main_cat_id DESC");
             $main_cat_name = '';
             foreach ($main_cat_data as $val) {
                 $main_cat_id = $val['main_cat_id'];
-                $out_put .= '<div class="" style="border: 1px solid #ddd; margin: 1.5em 0; padding: 0.5em 1em; background:white;">'
-                        . '<h4  style="font-weight: 700; color:black; font-size: 25px;">' . $val['main_cat_name'] . '</h4></div>';
+//                $out_put .= '<div class="" style="border: 1px solid #ddd; margin: 1.5em 0; padding: 0.5em 1em; background:white; text-aling:center !important;">'
+//                        . '<p  style="font-weight: 700; color:black; font-size: 25px; text-aling:center !important;">' . $val['main_cat_name'] . '</p></div>';
+                $out_put .= '<section class=" "><div style="border: 1px solid #ddd; margin: 1.5em 0; padding: 0.7em 1em; padding-top:10px; background: #8dd10700;  ">'
+                    . '<h4 style="font-weight: 700; color:black; text-align: center; font-size: 35px;">' . $val['main_cat_name'] . '</h4></div> </section>';
+                
+                
                 $sub_cat_data = $system->prepareSelectQuery("SELECT
 sub_cat.sub_cat_id,
 sub_cat.sub_cat_name
@@ -852,8 +874,8 @@ sub_cat.sub_cat_id DESC");
                 if (!empty($sub_cat_data)) {
                     foreach ($sub_cat_data as $val2) {
                         $sub_cat_id = $val2['sub_cat_id'];
-                        $out_put .= '<div style="color: black;">'
-                                . '<h4 style="  text-align: left; color:red;"> ' . $val2['sub_cat_name'] . '</h4></div>'
+                        $out_put .= '<div style="color: black; text-aling:center;">'
+                                . '<h4  style="font-weight: 700; color:black; font-size: 35px; text-aling:center !important;"><span > ' . $val2['sub_cat_name'] . '</span></h4></div>'
 //                                . '<h4 style="  text-align: right; color:blue;"><a style="text-align: right; color:blue;" href="item_cat_list.php?main_cat_id=' . $val['main_cat_id'] . '&sub_cat_id=' . $sub_cat_id . ' "> VIEW ALL ITEMS  </a></h4>'
                                 . '</div>';
 
@@ -892,7 +914,7 @@ item_deatails.item_id DESC LIMIT 4");
                                 $item_id = $val3['item_id'];
                                 $out_of_stock = $val3['out_of_stock'];
                                 $out_put .= '<div align="" class="boder_imgz card cus_font">'
-                                        . '<a href="single.php?item_id=' . $item_id . '&sub_cat_id=' . $sub_cat_id . ' "><img class=""  style="text-aling:center;   opacity:1; background-color: rgba(0,255,255,0.4)  width:222px; height:auto; " src="../drugs_ordering_system_backend/uploads/' . $val3['item_image'] . '"/></a>'
+                                        . '<a href="single.php?item_id=' . $item_id . '&sub_cat_id=' . $sub_cat_id . ' "><img class="img-responsive"  style="text-aling:center;   opacity:1; background-color: rgba(0,255,255,0.4) height:auto; " src="../drugs_ordering_system_backend/uploads/' . $val3['item_image'] . '"/></a>'
                                         . '<p style="padding-top:9px;">' . $item_name . '</p>'
                                         . '<p  class="" style="color:red;">LKR : ' . $item_price . '</p>';
 //                                        . '<p  class="price">d comfy lorem ipsum lorem jeansum. Lorem jeamsun denim lorem jeansum.</p>'
@@ -933,7 +955,7 @@ main_cat.main_cat_id DESC");
             $out_put = '';
             $main_cat_name = '';
             $out_put .= '<section class=" "><div style="border: 1px solid #ddd; margin: 1.5em 0; padding: 0.7em 1em; padding-top:10px; background: #8dd10700;  ">'
-                    . '<h4 style="font-weight: 700; color:black; text-align: center; ">FEATURED COLLECTION</h4></div> </section>';
+                    . '<h4 style="font-weight: 700; color:black; text-align: center; font-size: 30px;">FEATURED COLLECTION</h4></div> </section>';
             foreach ($main_cat_data as $val) {
                 $main_cat_id = $val['main_cat_id'];
                 $sub_cat_data = $system->prepareSelectQuery("SELECT
@@ -996,14 +1018,14 @@ item_deatails.item_id DESC
                                 $out_put .= '<div class="column cus_font ">
                     <div class="content" align="middle">
                     <a href="single.php?item_id=' . $item_id . '&sub_cat_id=' . $sub_cat_id . ' ">
-                    <img class="secial_item responsive card" align="middle" style="text-aling:center;  width:250px; height:350px;" src="../drugs_ordering_system_backend/uploads/' . $val3['item_image'] . '"/>
-                    <h3 style="text-align: center;">' . $item_name . '</h3>
-                    <h3 style="text-align: center;">' . $main_cat_names . '</h3>
-                    <h3 style="text-align: center; color:red;">LKR ' . $item_price . '</h3>
+                    <img class="secial_item img-responsive  " align="middle" style="text-aling:center;  " src="../drugs_ordering_system_backend/uploads/' . $val3['item_image'] . '"/>
+                    <h3 style="text-align: center; font-weight: 600;">' . $item_name . '</h3>
+                    <h3 style="text-align: center; font-weight: 600;">' . $main_cat_names . '</h3>
+                    <h3 style="text-align: center; color:red; font-weight: 600;">LKR ' . $item_price . '</h3>
                         </a>';
                                 if ($out_of_stock == '1') {
                                     //STOCK OUT ================================
-                                    $out_put .= '<p style="color:red;">Stoke Out</p>';
+                                    $out_put .= '<p style="color:red; font-weight: 600;">Stoke Out</p>';
                                 } else {
                                     $out_put .= '<p class="card"> <button type = "button" class = "btn btn-success " id = "add_to_cart_btn" data-item_price = "' . $item_price . '" value = ' . $item_id . '>Add to cart</button></p>';
                                 }
@@ -1097,7 +1119,7 @@ item_deatails.item_id DESC LIMIT 4
                                 $out_put .= '<div class="column cus_font">
                     <div class="content" align="middle">
                     <a href="single.php?item_id=' . $item_id . '&sub_cat_id=' . $sub_cat_id . ' ">
-                    <img class="secial_item responsive card" align="middle" style="text-aling:center;  width:213px; height:213px;" src="../drugs_ordering_system_backend/uploads/' . $val3['item_image'] . '"/>
+                    <img class="secial_item img-responsive card" align="middle" style="text-aling:center;  " src="../drugs_ordering_system_backend/uploads/' . $val3['item_image'] . '"/>
                     <h3 style="text-align: center;">' . $item_name . '</h3>
                     <h3 style="text-align: center;">' . $main_cat_names . '</h3>
                     <h3 style="text-align: center; color:red;">LKR ' . $item_price . '</h3>

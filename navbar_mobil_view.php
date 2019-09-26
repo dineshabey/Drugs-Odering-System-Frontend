@@ -9,6 +9,13 @@ $time = date("h:i:sa");
 <html>
     <body>
 
+        <style type="text/css">
+            .link_font{
+                font-size: 20px;
+            }
+        </style>
+
+
         <!--<!DOCTYPE html>-->
         <?php
 //NAVIGATION BAR MOBILE VIEW==============================================================
@@ -29,10 +36,10 @@ $time = date("h:i:sa");
                     . '<div class="col-md-12">';
             $out_put .= '<ul  class="">';
             $out_put .= '<li class="mob-menu-list-search-wrapper"><input type="text" name="search" maxlength="20"><i class="fa fa-search" aria-hidden="true"></i></li>';
-            $out_put .= '<li><a href="index.php">home</a></li>';
+            $out_put .= '<li class="link_font"><a href="index.php"><span style="text-align:center !important; color:#bdbdff;">home</span></a></li>';
             foreach ($main_cat_data as $val) {
                 $main_cat_id = $val['main_cat_id'];
-                $out_put .= '<li class="mob-itm-sub-categ-consist-wrapper"><a href="#">' . $val['main_cat_name'] . '<i class="fa fa-chevron-down" aria-hidden="true"></i></span></a>';
+                $out_put .= '<li class="mob-itm-sub-categ-consist-wrapper link_font"><a href="#">' . $val['main_cat_name'] . '<i class="fa fa-chevron-down" aria-hidden="true"></i></span></a>';
                 $sub_cat_data = $system->prepareSelectQuery("SELECT
                                     sub_cat.sub_cat_id,
                                     sub_cat.sub_cat_name
@@ -95,8 +102,8 @@ item_deatails.item_id DESC");
                 }
                 $out_put .= '</li>';
             }
-            $out_put .= '<li><a href="login.php">Log In</a></li>';
-            $out_put .= '<li><a href="register.php">Create Account</a></li>';
+            $out_put .= '<li class="link_font" ><a href="login.php" ><span style="text-align:center !important; color:#bdbdff;">Log In</span></a></li>';
+            $out_put .= '<li class="link_font"><a href="register.php"><span style="text-align:center !important; color:#bdbdff;">Create Account</span></a></li>';
 
             $out_put .= '</ul></div></div></div>';
         }

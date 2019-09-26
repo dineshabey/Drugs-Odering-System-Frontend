@@ -69,7 +69,8 @@ if (!isset($_SESSION['cus_id'])) {
         </script>
         <!--sub header--////////////////////////////////////////////////////////>-->
         <div class="header">
-            <?php require_once('include/coustomer_header_for_client.php'); ?>
+            <?php // require_once('include/coustomer_header_for_client.php'); ?>
+             <?php require_once('include/header_client.php'); ?>
         </div>
 
         <!--sub header-- end////////////////////////////////////////////////////>-->

@@ -39,7 +39,7 @@
             }
 
             .slick-slide img {
-                width: 110%;
+                width: 100%;
             }
 
             .slick-prev:before, .slick-next:before {
@@ -319,7 +319,7 @@
             <!-- End of body section HTML codes -->
             <!--ALL ITEM SLIDER START /////////////////////////////////////////3333333333333-->
 
-            <div  class="img_view_panels" >     </div>
+            <!--<div  class="img_view_panels" >     </div>-->
             <!--ALL ITEM SLIDER END /////////////////////////////////////////3333333333333-->
 
 
@@ -361,7 +361,7 @@
 
 <!---728x90--->
 <!--<SLIDER SCRIPT START />////////////////////////////////////////////////////////-->
-<script src="./slick/slick.min.js" type="text/javascript" charset="utf-8"></script>
+<!--<script src="./slick/slick.min.js" type="text/javascript" charset="utf-8"></script>-->
 
 <script type="text/javascript">
             $(document).on('ready', function () {

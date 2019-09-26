@@ -7,6 +7,9 @@ if (isset($_SESSION['cus_id'])) {
 //    echo "Not Sesseon";
 }
 ?>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<!--<a href="../fonts/angle-right-solid.svg"></a>-->
 
 <style type="text/css">
     .footer_bar{
@@ -31,27 +34,31 @@ if (isset($_SESSION['cus_id'])) {
         font-family: Garamond,Baskerville,Baskerville Old Face,Hoefler Text,Times New Roman,serif;
     }
 
+
+
+
 </style>
 
 <div class="footer-bottom " style="background-color:#170303e6; padding-top: 15px; color: white;" >
     <div class="container" style="padding-top: 20px;">
-        <div class="footer-bottom-cate">
+        <div class="footer-bottom-cate cate-bottom">
             <h6 class="h_tag"><label class="h_tag">TOP CATEGORIES</label></h6>
             <ul >
-                <li><a href="#"><span class="li_clz">Vitamin</span></a></li>
-                <li><a href="#"><span class="li_clz">Hearbz</span></a></li>
-                <li><a href="#"><span class="li_clz">Baby Items</span></a></li>
+                <li class="right"><i style="font-size:24px; color: whitesmoke;" class="fa">&#xf0da;</i> &nbsp;<a href="#"><span class="li_clz">Vitamin</span></a></li>
+                <li><i style="font-size:24px; color: whitesmoke;" class="fa">&#xf0da;</i> &nbsp;<a href="#"><span class="li_clz">Hearbz</span></a></li>
+                <li><i style="font-size:24px; color: whitesmoke;" class="fa">&#xf0da;</i> &nbsp;<a href="#"><span class="li_clz">Baby Items</span></a></li>
 
             </ul>
         </div>
-        <div class="footer-bottom-cate bottom-grid-cat" style="padding: 0 0 6em;">
+        <div class="footer-bottom-cate cate-bottom" style="padding: 0 0 6em;">
             <h6><label class="h_tag">FEATURE ITEMS</label></h6>
-            <ul>
-                <li><a href="#"><span class="li_clz">Vitamin A</span></a></li>
-                <li><a href="#"><span class="li_clz">Vitamin B</span></a></li>
-                <li><a href="#"><span class="li_clz">Vitamin C</span></a></li>
-                <li><a href="#"><span class="li_clz">Vitamin D</span></a></li>
-                <li><a href="#"><span class="li_clz">Vitamin A</span></a></li>
+            <ul class="">
+
+                <li> <i style="font-size:24px; color: whitesmoke;" class="fa">&#xf0da;</i> &nbsp;<a href="#"><span class="li_clz">Vitamin B</span></a></li>
+                <li> <i style="font-size:24px; color: whitesmoke;" class="fa">&#xf0da;</i> &nbsp;<a href="#"><span class="li_clz">Vitamin C</span></a></li>
+                <li><i style="font-size:24px; color: whitesmoke;" class="fa">&#xf0da;</i> &nbsp;<a href="#"><span class="li_clz">Vitamin D</span></a></li>
+                <li><i style="font-size:24px; color: whitesmoke;" class="fa">&#xf0da;</i> &nbsp;<a href="#"><span class="li_clz">Vitamin A</span></a></li>
+                <li><i style="font-size:24px; color: whitesmoke;" class="fa">&#xf0da;</i> &nbsp;<a href="#"><span class="li_clz">Vitamin A</span></a></li>
 
             </ul>
         </div>
@@ -60,7 +67,7 @@ if (isset($_SESSION['cus_id'])) {
             <h6 ><label class="h_tag">CONTACT DEATAILS</label></h6>
             <div >
 
-                <ul>
+                <ul >
                     <li><span  class="li_clz">Anamaduwa Road, </span></li>
                     <li><span  class="li_clz">Nawagathegama</span></li>
                     <li class="phone" ><span  class="li_clz">Tele : 061 405305848</span></li>
@@ -72,7 +79,7 @@ if (isset($_SESSION['cus_id'])) {
         </div>
         <div class="footer-bottom-cate">
             <div>
-                <a href="index.php"><img src="images/site_img/edit_logo.jpg" alt=""  style="width:266px; height:308px;" /></a>
+                <a href="index.php"><img class="img-responsive" src="images/site_img/edit_logo.jpg" alt=""   /></a>
             </div>
         </div>
         <div class="clearfix"> </div>
@@ -100,7 +107,7 @@ if (isset($_SESSION['cus_id'])) {
         <div class="row" style="">
             <div class="col-lg-2">   <h4><span style="color: white;">PAY ACCEPTED</span></h4> </div>
             <div class="col-lg-8">
-                <img src="images/site_img/payhere_long_banner.png" alt="" class="responsive" style="max-width: 100%;" />
+                <img src="images/site_img/payhere_long_banner.png" alt="" class="img-responsive" style="max-width: 100%;" />
             </div>
             <!--<div class="col-lg-2"> </div>-->
         </div>
