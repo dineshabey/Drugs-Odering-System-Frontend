@@ -66,25 +66,10 @@
                 opacity: 1!important;
             }
 
-
-            /* If the screen size is 600px wide or less, set the font-size of <div> to 30px */
-            @media screen and (max-width: 900px) {
-
-                .img_slides{
-
-
-                }
-            }
-
             /* If the screen size is 601px wide or more,set the font-size of <div> 80px  */
             @media screen and (min-width: 601px) {
                 table {
-                    font-size: 26px;
-                }
-
-                .img_slides{
-
-
+                    font-size: 25px;
                 }
             }
          
