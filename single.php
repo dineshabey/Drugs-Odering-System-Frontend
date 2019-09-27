@@ -66,6 +66,42 @@
                 opacity: 1!important;
             }
 
+
+            /* If the screen size is 600px wide or less, set the font-size of <div> to 30px */
+            @media screen and (max-width: 900px) {
+
+                .img_slides{
+
+
+                }
+            }
+
+            /* If the screen size is 601px wide or more,set the font-size of <div> 80px  */
+            @media screen and (min-width: 601px) {
+                table {
+                    font-size: 26px;
+                }
+
+                .img_slides{
+
+
+                }
+            }
+         
+            /*--single--*/
+            .images_1_of_2 {
+                display: block;
+                float: left;
+                width: 42%;
+            }
+
+            /* If the screen size is 6991px wide or less, set the font-size of <div> to 30px */
+            @media(max-width:991px){
+                .images_1_of_2 {
+                    width: 100% !important;
+                }
+            }
+            
         </style>
         <!--/*IMAGE SLIDER CSS   END //////////////////////////////////////////*/--> 
         <!--CSS PART ///////////////////////////////////////////////-->
@@ -99,7 +135,8 @@
             <div class="row col-lg-12">
                 <div class="" style="padding-top: 100px;">
                     <div class="single_grid">
-                        <div class="grid images_3_of_2">
+                        <div class="grid images_1_of_2">
+                            <!--<div class="grid images_3_of_2">-->
                             <div class="flexslider">
                                 <!-- FlexSlider -->
                                 <script src="js/imagezoom.js"></script>
@@ -116,10 +153,10 @@
             });
                                 </script>
                                 <!-- //FlexSlider SELECTED ITEM START/////////////////////////////////////////////////////////////-->
-                                <ul class="slides" >
-                                    <li data-thumb="images/s4.jpg">
+                                <ul class="slides "  >
+                                    <li data-thumb="images/si4.jpg">
                                         <div class="thumb-image selected_img" id="selected_img"> 
-                                            <!--<img style=" height:350px; " src="vitamin_image/8.jpg" data-imagezoom="true" class="img-responsive">--> 
+                                            <img style=" height:350px; " src="vitamin_image/8.jpg" data-imagezoom="true" class="img-responsive"> 
                                         </div>
                                     </li>
 
@@ -127,8 +164,8 @@
                                 <!-- //FlexSlider SELECTED ITEM IMG END/////////////////////////////////////////////////////////////-->
                             </div>	
                         </div> 
-                        <div class="desc1 span_3_of_2">
-
+                        <div class=" span_3_of_2">
+                            <!--<div class="desc1 span_3_of_2">-->
 
                             <!--<h4>Vitamin - A</h4>-->
                             <div class="cart-b">
