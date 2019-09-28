@@ -205,8 +205,8 @@ $time = date("h:i:sa");
         <script src="./slick/slick.min.js" type="text/javascript" charset="utf-8"></script>
 
         
-          <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<!--          <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>-->
         
         <script type="text/javascript">
             $(function () {
@@ -457,9 +457,12 @@ item_deatails.sub_cat_id DESC
                     var sub_cats_id = parseInt(sub_cat_id);
                     var main_cats_id = parseInt(main_cat_id);
 
+    load_cat(main_cat_id,sub_cat_id);
+
+
                 });
 
-    load_cat(main_cat_id,sub_cat_id);
+
 
             }); //ON LOAD FUCTION END
     </script>

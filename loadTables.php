@@ -300,21 +300,19 @@ item_deatails.item_id DESC
   $main_cat = $_POST['main_cat'];
     $sub_cat = $_POST['sub_cat'];
  
-     $cat_query = "SELECT
-sub_cat.sub_cat_name,
+     $cat_query = "SELEC
 main_cat.main_cat_name,
 main_cat.main_cat_id
 FROM
-item_deatails
+main_cat
 WHERE
-sub_cat.main_cat_id = '{$main_cat}' 
-
+main_cat.main_cat_id = '{$main_cat}' 
 ";
 
    
-    $item_info_data = $system->prepareSelectQuery($cat_query);
+  //  $item_info_data = $system->prepareSelectQuery($cat_query);
     
-    echo $item_info_data['cat_name'];
+   // echo $item_info_data['cat_name'];
     
    // json_encode($item_info_data['cat_name']); 
 }
