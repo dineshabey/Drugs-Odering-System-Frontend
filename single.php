@@ -66,7 +66,7 @@
                 opacity: 1!important;
             }
 
-            /* If the screen size is 601px wide or more,set the font-size of <div> 80px  */
+            /* If the screen size is 601px wide or more,set the font-size of <div> 25px  */
             @media screen and (min-width: 601px) {
                 table {
                     font-size: 25px;
