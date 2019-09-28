@@ -231,7 +231,7 @@ $time = date("h:i:sa");
             <div class="sort_conditions" style="border: 1px solid #ddd; margin: 1.5em 0; padding: 0.5em 1em; background:white; text-align: center;">
 
                   <div class="btn-group" style="margin-top:10px;margin-bottom:15px;"> 
-                      <a type="button" class="btn btn-outline-info " href="">Home</a>
+                      <a type="button" class="btn btn-outline-info " href="index.php">Home</a>
                       <a type="button" class="btn btn-outline-info cat_name" href=""></a>
               
                   </div>
