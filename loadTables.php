@@ -296,4 +296,26 @@ item_deatails.item_id DESC
     
     
     json_encode($item_out_put);
+}elseif ($_POST['action'] == 'load_cat_name') {
+  $main_cat = $_POST['main_cat'];
+    $sub_cat = $_POST['sub_cat'];
+ 
+     $cat_query = "SELECT
+sub_cat.sub_cat_name,
+main_cat.main_cat_name,
+main_cat.main_cat_id
+FROM
+item_deatails
+WHERE
+sub_cat.main_cat_id = '{$main_cat}' 
+
+";
+
+   
+    $item_info_data = $system->prepareSelectQuery($cat_query);
+    
+    echo $item_info_data['cat_name'];
+    
+   // json_encode($item_info_data['cat_name']); 
 }
+

@@ -225,9 +225,17 @@ $time = date("h:i:sa");
         <!---728x90--->
 
         <div class="container">
-
+                  
+          
+            
             <div class="sort_conditions" style="border: 1px solid #ddd; margin: 1.5em 0; padding: 0.5em 1em; background:white; text-align: center;">
 
+                  <div class="btn-group" style="margin-top:10px;margin-bottom:15px;"> 
+                      <a type="button" class="btn btn-outline-info " href="">Home</a>
+                      <a type="button" class="btn btn-outline-info cat_name" href=""></a>
+              
+                  </div>
+                
                 <!--<div class="btn-group" style="margin-top:10ps;margin-bottom:5px;">-->
                 <div class="btn-group" style="margin-top:10ps;margin-bottom:5px;">
                     <button type="button" class="btn btn-primary btn_size">Recently Added</button>
@@ -363,13 +371,14 @@ item_deatails.sub_cat_id DESC
 
 
 
-                    $item_out_put .= '</div></section>';
+                    $item_out_put .= '</div></section></div>';
                     echo $item_out_put;
                 }
                 ?>
 
                 <!-- Pagination -->
-
+                <hr>
+              
                 <div class="row" style="text-align: center;">
                     <div class=" center-block" >
 
@@ -377,8 +386,8 @@ item_deatails.sub_cat_id DESC
                            
                             <?php
                             
-                            $previous = $page !=0 ? 1:$page-1;
-                            $next = $page <=$page ? $page:$page+1;
+                            $previous = $page >1 ? $page-1:1;
+                            $next = $page <$page ? $page:$page+1;
                             
                             echo '<li class="page-item"><a class="page-link" href="pagination.php?main_cat_id=' . $main_cat . '&sub_cat_id=' . $sub_cat . '&page='. $previous.'">Previous</a></li>';
 
@@ -449,14 +458,23 @@ item_deatails.sub_cat_id DESC
 <div class="footer">
     <?php require_once('include/footer.php'); ?>
     <script type="text/javascript">
+        
+        load_cat();
+        
         $(document).on('ready', function () {
             //  item_tot();
+            
+            load_cat();
         });
 
 
         $('filter_res').change(function () {
             // load_filtered_categories();
         });
+
+
+
+
 
     </script>
 

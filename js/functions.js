@@ -47,3 +47,15 @@ function load_category_wise_items_with_pagination(main_cat,sub_cat,page){
 
     }, "json");
 }//Load Category wise items with Pagination
+
+
+function load_cat(){
+    
+  
+    
+     $.post("./loadTables.php", {action: 'load_cat_name',main_cat:main_cat,sub_cat:sub_cat}, function (e) {
+ 
+        //$('.cat_name').text(e);                  
+
+    }, "json");
+}
