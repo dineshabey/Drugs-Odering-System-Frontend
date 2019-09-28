@@ -204,6 +204,10 @@ $time = date("h:i:sa");
         <!--SLICK SLIDER-->
         <script src="./slick/slick.min.js" type="text/javascript" charset="utf-8"></script>
 
+        
+          <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        
         <script type="text/javascript">
             $(function () {
                 $('#main-menu').smartmenus({
@@ -225,17 +229,17 @@ $time = date("h:i:sa");
         <!---728x90--->
 
         <div class="container">
-                  
-          
-            
+
+
+
             <div class="sort_conditions" style="border: 1px solid #ddd; margin: 1.5em 0; padding: 0.5em 1em; background:white; text-align: center;">
 
-                  <div class="btn-group" style="margin-top:10px;margin-bottom:15px;"> 
-                      <a type="button" class="btn btn-outline-info " href="index.php">Home</a>
-                      <a type="button" class="btn btn-outline-info cat_name" href=""></a>
-              
-                  </div>
-                
+                <div class="btn-group" style="margin-top:10px;margin-bottom:15px;"> 
+                    <a type="button" class="btn btn-outline-info " href="index.php">Home</a>
+                    <a type="button" class="btn btn-outline-info cat_name" href=""></a>
+
+                </div>
+
                 <!--<div class="btn-group" style="margin-top:10ps;margin-bottom:5px;">-->
                 <div class="btn-group" style="margin-top:10ps;margin-bottom:5px;">
                     <button type="button" class="btn btn-primary btn_size">Recently Added</button>
@@ -378,30 +382,27 @@ item_deatails.sub_cat_id DESC
 
                 <!-- Pagination -->
                 <hr>
-              
+
                 <div class="row" style="text-align: center;">
                     <div class=" center-block" >
 
                         <ul class="pagination pagination-lg">
-                           
+
                             <?php
-                            
-                            $previous = $page >1 ? $page-1:1;
-                            $next = $page <$page ? $page:$page+1;
-                            
-                            echo '<li class="page-item"><a class="page-link" href="pagination.php?main_cat_id=' . $main_cat . '&sub_cat_id=' . $sub_cat . '&page='. $previous.'">Previous</a></li>';
+                            $previous = $page > 1 ? $page - 1 : 1;
+                            $next = $page < $page ? $page : $page + 1;
+
+                            echo '<li class="page-item"><a class="page-link" href="pagination.php?main_cat_id=' . $main_cat . '&sub_cat_id=' . $sub_cat . '&page=' . $previous . '">Previous</a></li>';
 
                             for ($v = 1; $v <= $pages; $v++) {
-                                
+
                                 if ($v == $page) {
                                     echo '<li class="active"><a href="pagination.php?main_cat_id=' . $main_cat . '&sub_cat_id=' . $sub_cat . '&page=' . $v . '">' . $v . '</a></li>';
                                 } else {
                                     echo '<li><a href="pagination.php?main_cat_id=' . $main_cat . '&sub_cat_id=' . $sub_cat . '&page=' . $v . '">' . $v . '</a></li>';
                                 }
-                                  
                             }
-                            echo '<li class="page-item"><a class="page-link" href="pagination.php?main_cat_id=' . $main_cat . '&sub_cat_id=' . $sub_cat . '&page='.$next.'">Next</a></li>';
-       
+                            echo '<li class="page-item"><a class="page-link" href="pagination.php?main_cat_id=' . $main_cat . '&sub_cat_id=' . $sub_cat . '&page=' . $next . '">Next</a></li>';
                             ?>
                         </ul>
 
@@ -435,10 +436,19 @@ item_deatails.sub_cat_id DESC
 <!---->
 <script src="./js/functions.js" type="text/javascript" charset="utf-8"></script>
 
-<script type="text/javascript">
+
+
+<!--<SLIDER SCRIPT END />////////////////////////////////////////////////////////-->
+
+<!--FOTER DIV START ///////////////////////////////////////////////////////////-->
+<div class="footer">
+<?php require_once('include/footer.php'); ?>
+
+
+    <script type="text/javascript">
             $(document).on('ready', function () {
 
-
+            
                 //ONLOAD FUNCTION IMAGE MAIN CAT LOAD ------------------------------------------
                 $(function () {
                     var sub_cat_id = "<?php echo $sub_cat_id = $_GET["sub_cat_id"]; ?>";
@@ -449,22 +459,19 @@ item_deatails.sub_cat_id DESC
 
                 });
 
+    load_cat(main_cat_id,sub_cat_id);
+
             }); //ON LOAD FUCTION END
-</script>
+    </script>
 
-<!--<SLIDER SCRIPT END />////////////////////////////////////////////////////////-->
 
-<!--FOTER DIV START ///////////////////////////////////////////////////////////-->
-<div class="footer">
-    <?php require_once('include/footer.php'); ?>
     <script type="text/javascript">
-        
-        load_cat();
-        
+
+
+
         $(document).on('ready', function () {
             //  item_tot();
-            
-            load_cat();
+
         });
 
 

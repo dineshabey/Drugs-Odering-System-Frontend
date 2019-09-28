@@ -35,7 +35,7 @@
                                 </div>
                                 <div class="top-menu-search-sec-wrapper">
                                     <div class="top-menu-search-field-sec-wrapper">
-                                        <input type="text" name="search" style="width: 500px;" maxlength="20">
+                                        <input type="text" name="search" id="search_text" style="width: 500px;" maxlength="20">
                                         <i class="fa fa-search" aria-hidden="true"></i>
                                     </div>
                                 </div>
