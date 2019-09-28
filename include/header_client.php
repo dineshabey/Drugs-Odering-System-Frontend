@@ -42,26 +42,26 @@
                 background-size: cover !important;
                 /*padding: 1.9em 0;*/
             }
-
             .lion_text{
                 /*text-shadow: 0 4px 0 #000,  0 3px 0 #0e0c0c, 0 4px 0 #b9b9b9, 0 5px 0 #aaa, 0 6px 1px #9bbaeca1, 0 0 5px rgba(0,0,0,.1), 0 1px 3px rgba(0,0,0,.3), 0 3px 5px rgba(0,0,0,.2), 0 5px 10px rgba(0,0,0,.25), 0 10px 10px rgba(0,0,0,.2), 0 20px 20px rgba(0,0,0,.15);*/
 
                 font-weight: 600;
-                text-shadow: 0 -2px 0 #ccc, 
+                text-shadow: 0 -2px 0 black, 
                     /*0 2px 0 #c9c9c9,*/
-                    2px 4px 3px #231c1c,
-                    0 4px 0 #b9b9b9,
-                    0 4px 0 #b9b9b9,
-                    0 5px 0 #aaa,
-                    0 6px 1px rgba(0,0,0,.1),
-                    0 0 5px rgba(0,0,0,.1),
-                    0 1px 3px rgba(0,0,0,.3),
-                    0 3px 5px rgba(0,0,0,.2),
-                    0 5px 10px rgba(0,0,0,.25),
-                    0 10px 10px rgba(0,0,0,.2),
-                    0 20px 20px rgba(0,0,0,.15);
+                    5px 4px 6px black,
+                    0 4px 0 black,
+                    0 4px 0 blue,
+                    0 5px 0 blue,
+                    0 6px 1px rgba(300,100,300),
+                    0 0 5px rgba(105,100,300),
+                    0 1px 3px rgba(105,100,300),
+                    0 3px 5px rgba(105,500,300),
+                    0 5px 10px rgba(105,105,300),
+                    0 10px 10px rgba(105,105,300),
+                    0 20px 20px rgba(105,300,200);
                 font-size: 40px;
-                color: #ffff59;
+                color: #ffff59; 
+
             }
 
         </style>
@@ -78,7 +78,7 @@
                         <div class="row" >
                             <div class="col-md-12" style="">
                                 <div class="welcome-left-sec-wrapper">
-                                    <span>Welcome to <span class="txt-highlt">Lion Mini Mart</span>..</span>
+                                    <span style="color: #00811c; font-size: 20px;">Welcome to <span class="txt-highlt">Lion Mini Mart</span>..</span>
                                 </div>
 
                                 <div class="log-sign-right-sec-wrapper">
@@ -92,9 +92,6 @@
                                         echo' <button  type="button" id="log_out" style="background-color:red;" class="btn btn-primary btn-md" ><span></span>LOGOUT</button>';
                                     }
                                     ?>
-
-
-
                                 </div>
                             </div>
                         </div>
@@ -112,12 +109,11 @@
                                 <div class="top-menu-search-sec-wrapper">
                                     <div class="top-menu-search-field-sec-wrapper">
                                         <h2 style="color:#4245bb;">Client Area / Welcome <?php echo $_SESSION['uname'] ?> ! </h2>
-                                   
+
                                     </div>
                                 </div>
                                 <div class="topmenu-righticons-sec-wrapper">
                                     <span class="topmenu-cart-icon-sec-wrapper">
-
                                         <?php
                                         if (!isset($_SESSION['cus_id'])) {
                                             echo '<a href="cart_item.php"><i class="fa fa-shopping-cart" aria-hidden="true"></i><span class="items-num-wrapper item_tot" ></span></a>';

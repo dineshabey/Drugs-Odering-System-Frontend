@@ -12,19 +12,15 @@ if (!isset($_SESSION['cus_id'])) {
 
     <!--MAIN HEAD START -->
     <head> 
-
-
-
         <?php require_once('include/header.php'); ?>
-
-
         <!--UL RIHT MARK STYLE-->
         <style type="text/css">
             /*.inset {border-style: inset;}*/
             .inset {border-style: ridge;}
 
             .size-36 {
-                font-size: 30px;
+                font-size: 20px;
+                border: 1px solid #0008ff;
             }
             input[type=number]::-webkit-inner-spin-button,
             input[type=number]::-webkit-outer-spin-button {
@@ -48,6 +44,7 @@ if (!isset($_SESSION['cus_id'])) {
             /* change border radius for the tab , apply corners on top*/
             /*NAV BAR CSS  END*/
 
+
         </style>
         <!--UL RIHT MARK STYLE-->
         <script src="js/bootstrap.min.js" type="text/javascript"></script>
@@ -70,7 +67,7 @@ if (!isset($_SESSION['cus_id'])) {
         <!--sub header--////////////////////////////////////////////////////////>-->
         <div class="header">
             <?php // require_once('include/coustomer_header_for_client.php'); ?>
-             <?php require_once('include/header_client.php'); ?>
+            <?php require_once('include/header_client.php'); ?>
         </div>
 
         <!--sub header-- end////////////////////////////////////////////////////>-->
@@ -81,25 +78,26 @@ if (!isset($_SESSION['cus_id'])) {
         <div id="exTab1" class="container" >	
             <ul  class="nav nav-pills" style="background-color: #fcfe6d85; font-weight: 400;">
                 <li class="active">
-                    <a  href="#save_item_tab" data-toggle="tab">Save Item </a>
+                    <a  href="#save_item_tab " data-toggle="tab" class="size-36"><span class="">Save Item </span></a>
                 </li>
-                <li><a href="#transaction_tab" data-toggle="tab">Transaction Deatails</a>
+                <li><a href="#transaction_tab" data-toggle="tab" class="size-36">Transaction Deatails</a>
                 </li>
-                <li><a href="#order_deatails_tab" data-toggle="tab">Order Shipping Deatails</a>
+                <li><a href="#order_deatails_tab" data-toggle="tab" class="size-36">Order Shipping Deatails</a>
                 </li>
-                <li><a href="#profile_setting_tab" data-toggle="tab">Profile Setting</a>
+                <li><a href="#profile_setting_tab" data-toggle="tab" class="size-36">Profile Setting</a>
                 </li>
             </ul>
 
-            <div class="tab-content clearfix" style="background-color: #ffffffb5; color: black; border:1px solid #dcb2ec; ">
+            <div class="tab-content clearfix" style="background-color: #ffffffb5; color: black; ">
                 <div class="tab-pane active" id="save_item_tab">
-                    <h3  style="background-color: #ddddef;"></h3>
+                    <h3  style="">Save Items</h3>
+                    <hr style="  border-top: 1px solid red;">
                     <div class="container">
                         <div class="row" style="padding-top: 10px;">
                             <div class="col-lg-9">
                                 <div class="" >
                                     <div class="scrollable" style="height: auto; overflow-y: auto">
-                                        <table class="table table-bordered table-striped table-hover datable load_cart_tbl" id="load_cart_tbl" style="background-color: white;">
+                                        <table class="table table-striped table-hover datable load_cart_tbl" id="load_cart_tbl" style="background-color: white;">
                                             <thead>
                                                 <tr>
                                                     <th>#</th>
@@ -125,12 +123,13 @@ if (!isset($_SESSION['cus_id'])) {
                                 <span style="text-align: center;">
                                     <div class="card" style="border-style: outset; border-radius: 5px; background-color: #ffffff;  border-color:gold;">
                                         <h2 style="background-color: #f7f7f7; color: red; text-align: center;">Order Summary</h2><hr>
+
                                         <div class="card-body">
                                             <h4  class="card-title">Order Value:&nbsp;<label class="item_tot_price"></label></h4>
                                             <input type="text" class="item_tot_price_input_feild" hidden="" id="item_tot_price_input_feild">
                                             <hr>
                                             <!--<a href="order_summary.php" target=""><button type="button" class="btn btn-info">ODER PROCESS</button></a>-->
-                                            <button type="button" class="btn btn-info" id="process_order"> PROCESS ODER</button>
+                                            <button type="button" class="btn btn-info" id="process_order"> PROCESS ORDER</button>
                                             <hr>
                                         </div>
                                     </div>
@@ -139,16 +138,17 @@ if (!isset($_SESSION['cus_id'])) {
 
                         </div>
                     </div>
-
+                    <hr style="  border-top: 1px solid red;">
                 </div>
                 <div class="tab-pane" id="transaction_tab">
                     <h4>Trasaction Deatails</h4>
+                    <hr style="  border-top: 1px solid red;">
                     <div class="row">
                         <div class="container">
                             <div class="col-md-11">
                                 <div>
                                     <div class="scrollable" style="height: auto; overflow-y: auto">
-                                        <table class="table table-bordered table-striped table-hover datable load_transaction_tbl" id="load_transaction_tbl" style="background-color: white;">
+                                        <table class="table table-striped table-hover datable load_transaction_tbl" id="load_transaction_tbl" style="background-color: white;">
                                             <thead>
                                                 <tr>
                                                     <th>#</th>
@@ -170,15 +170,17 @@ if (!isset($_SESSION['cus_id'])) {
                             </div>
                         </div>
                     </div>
+                    <hr style="  border-top: 1px solid red;">
                 </div>
                 <div class="tab-pane" id="order_deatails_tab">
                     <h4>Order Shipping Deatails </h4>
+                    <hr style="  border-top: 1px solid red;">
                     <div class="row">
                         <div class="container">
                             <div class="col-md-11">
                                 <div>
                                     <div class="scrollable" style="height: auto; overflow-y: auto">
-                                        <table class="table table-bordered table-striped table-hover datable load_shipping_tbl" id="load_shipping_tbl" style="background-color: white;">
+                                        <table class="table  table-striped table-hover datable load_shipping_tbl" id="load_shipping_tbl" style="background-color: white;">
                                             <thead>
                                                 <tr>
                                                     <th>#</th>
@@ -201,6 +203,7 @@ if (!isset($_SESSION['cus_id'])) {
                             </div>
                         </div>
                     </div>
+                    <hr style="  border-top: 1px solid red;">
                 </div>
                 <div class="tab-pane" id="profile_setting_tab">
                     <h4>  My Profile Setting</h4>
@@ -220,8 +223,8 @@ if (!isset($_SESSION['cus_id'])) {
                                                 <div class="form-group">
                                                     <label class="col-md-4 control-label" for="textinput">First Name</label>  
                                                     <div class="col-md-7">
-                                                        <input  name="textinput" disabled="" id="f_name" type="text" placeholder="Recipient's Name" class="form-control input-md" required="">
-
+                                                        <input  name="textinput" disabled="" id="f_name" type="text" placeholder="" class="form-control input-md" required="">
+                                                        <h5 id="f_name_msg" style="color: red;"></h5>
                                                     </div>
                                                 </div>
 
@@ -229,28 +232,29 @@ if (!isset($_SESSION['cus_id'])) {
                                                 <div class="form-group">
                                                     <label class="col-md-4 control-label" for="textinput">Last Name</label>  
                                                     <div class="col-md-7">
-                                                        <input  name="textinput" disabled="" id="l_name" type="text" placeholder="077123****" class="form-control input-md">
-
+                                                        <input  name="textinput" disabled="" id="l_name" type="text" placeholder="" class="form-control input-md">
+                                                        <h5 id="l_name_msg" style="color: red;"></h5>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="col-md-4 control-label" for="textinput">Phone</label>  
                                                     <div class="col-md-7">
-                                                        <input  name="textinput" disabled="" id="phone" type="text" placeholder="077123****" class="form-control input-md">
-
+                                                        <input  name="textinput" disabled="" id="phone" type="text" placeholder="" class="form-control input-md">
+                                                        <h5 id="phone_msg" style="color: red;"></h5>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="col-md-4 control-label" for="textinput">E mail</label>  
                                                     <div class="col-md-7">
-                                                        <input  name="textinput" disabled="" id="email" type="text" placeholder="077123****" class="form-control input-md">
-
+                                                        <input  name="textinput" disabled="" id="email" type="text" placeholder="" class="form-control input-md">
+                                                        <h5 id="email_msg" style="color: red;"></h5>
+                                                        <h5 id="email_msg_suc" style="color: red;"></h5>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="col-md-4 control-label" for="textinput">City</label>  
                                                     <div class="col-md-7">
-                                                        <input  name="textinput" disabled="" id="city" type="text" placeholder="077123****" class="form-control input-md">
+                                                        <input  name="textinput" disabled="" id="city" type="text" placeholder="" class="form-control input-md">
                                                     </div>
                                                 </div>
                                                 <!-- Textarea -->
@@ -258,19 +262,22 @@ if (!isset($_SESSION['cus_id'])) {
                                                     <label class="col-md-4 control-label" for="textarea">Address</label>
                                                     <div class="col-md-7">                     
                                                         <textarea class="form-control" disabled=""  id="address" name="textarea"></textarea>
+                                                        <h5 id="address_msg" style="color: red;"></h5>
                                                     </div>
                                                 </div>
                                                 <hr style="  border-top: 1px solid red;" class="col-md-12">
                                                 <div class="form-group password hidden" >
                                                     <label class="col-md-4 control-label" for="textinput">New Password</label>  
                                                     <div class="col-md-7">
-                                                        <input  name="textinput"  id="city" type="password" placeholder="New Password" class="form-control input-md">
+                                                        <input  name="textinput"  id="password" type="password" placeholder="New Password" class="form-control input-md">
+                                                        <h5 id="address_msg" style="color: red;"></h5>
                                                     </div>
                                                 </div>
                                                 <div class="form-group password hidden">
                                                     <label class="col-md-4 control-label" for="textinput">Re-enter password</label>  
                                                     <div class="col-md-7">
-                                                        <input  name="textinput"  id="re-enter_password" type="password" placeholder="Re-enter password" class="form-control input-md">
+                                                        <input  name="textinput"  id="confirm_password" type="password" placeholder="Re-enter password" class="form-control input-md">
+                                                        <h5 id="passMasseg" style="color: red;"></h5>
                                                     </div>
                                                 </div>
 
@@ -307,8 +314,8 @@ if (!isset($_SESSION['cus_id'])) {
             <!--<MODEL DIV />/////////////////////////////////////////////////////-->
             <div class="container">
                 <!-- Modal -->
-                <div class="modal " id="myModal" role="dialog">
-                    <div class="modal-dialog">
+                <div class="modal " id="myModal" role="dialog" >
+                    <div class="modal-dialog" style="z-index: 1 !important ; top:140px !important;">
 
                         <!-- Modal content-->
                         <div class="modal-content">
@@ -364,6 +371,9 @@ if (!isset($_SESSION['cus_id'])) {
                     load_transaction_tbl();
                     load_shipping_tbl();
                     load_profile_setting_tbl();
+                    if (!$(".next_step_update").hasClass("hidden")) {
+                        $(".next_step_update").addClass("hidden");
+                    }
                 });
 
                 $(document).on('click', '#item_list_btn', function () {
@@ -472,7 +482,219 @@ if (!isset($_SESSION['cus_id'])) {
                         $(".next_step_reset").addClass("hidden");
                     }
                 });
-                //LOAD ORDER SHIPPING  DEATAILS====================================
+
+                //PHONE NUMBER FEILD ENTER NUMBERS ONLY VALIDATION ==================================
+                $(function () {
+                    $('.phone_no').on('input', function () {
+                        this.value = this.value
+                                .replace(/[^\d]/g, '');// numbers and decimals only
+
+                    });
+                });
+//                    FORM VALIDATION  START/////////////////////////////////////////////////////////////////////////
+
+                //PASSWORD CONFIRM CHK -------------------------------------
+                $(document).on('keyup', '#confirm_password', function () {
+                    setTimeout(function () {
+                        var password = $('#password').val();
+                        var conpassword = $('#confirm_password').val();
+                        if (password === conpassword) {
+                            $('#passMasseg').html('');
+                        } else {
+                            $('#passMasseg').html('Password Does Not Match');
+                        }
+                    }, 250);
+                });
+
+
+                $(document).on('keyup', '#f_name', function () {
+                    setTimeout(function () {
+                        var f_name = $('#f_name').val();
+                        if (f_name.trim() == "") {
+                            $('#f_name_msg').html("First Name can't empty ");
+                        } else {
+                            $('#f_name_msg').html('');
+                        }
+                    }, 250);
+                });
+                $(document).on('keyup', '#l_name', function () {
+                    setTimeout(function () {
+                        var f_name = $('#l_name').val();
+                        if (f_name.trim() == "") {
+                            $('#l_name_msg').html("Last Name can't empty ");
+                        } else {
+                            $('#l_name_msg').html('');
+                        }
+                    }, 250);
+                });
+                $(document).on('keyup', '#city', function () {
+                    setTimeout(function () {
+                        var city = $('#city').val();
+                        if (city.trim() == "") {
+                            $('#city_msg').html("City Name can't empty ");
+                        } else {
+                            $('#city_msg').html('');
+                        }
+                    }, 250);
+                });
+                $(document).on('keyup', '#address', function () {
+                    setTimeout(function () {
+                        var city = $('#address').val();
+                        if (city.trim() == "") {
+                            $('#address_msg').html("Address can't empty ");
+                        } else {
+                            $('#address_msg').html('');
+                        }
+                    }, 250);
+                });
+                $(document).on('keyup', '#phone', function () {
+                    setTimeout(function () {
+                        var phone = $('#phone').val();
+                        if (phone.trim() == "") {
+                            $('#phone_msg').html("Phone number  can't empty ");
+                        } else {
+                            $('#phone_msg').html('');
+                        }
+                    }, 250);
+                });
+
+                $(document).on('keyup', '#email', function () {
+                    setTimeout(function () {
+                        var email = $('#email').val();
+                        if (email.trim() == "") {
+                            $('#email_msg').html("Email can't empty ");
+                            $('#email_msg_suc').html("");
+                        } else {
+                            var valid = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/.test(email) && email.length;
+                            if (valid) {
+//                                    $('#email_msg_suc').html("E-Mail address is valid");
+                                $('#email_msg').html("");
+                            } else {
+                                $('#email_msg').html("E-Mail address is not valid");
+                                $('#email_msg_suc').html("");
+                            }
+
+                        }
+                    }, 250);
+                });
+
+                //NEXT STEP UPDATE CLICK  ======================================
+                $(document).on('click', '#next_step_update', function () {
+                    var f_name = $('#f_name').val();
+                    var l_name = $('#l_name').val();
+                    var email = $('#email').val();
+                    var city = $('#city').val();
+                    var address = $('#address').val();
+                    var phone = $('#phone').val();
+                    var password = $('#password').val();
+                    var confirm_password = $('#confirm_password').val();
+                    if (f_name.trim() == "") {
+                        $('#f_name_msg').html("First Name can't empty ");
+                        $("#f_name").focus();
+                        return;
+                    }
+                    if (l_name.trim() == "") {
+                        $('#l_name_msg').html("Last Name can't empty ");
+                        $("#l_name").focus();
+                        return;
+                    }
+                    //Email validation Start-------------------------------------
+                    if (email.trim() == "") {
+                        $('#email_msg').html("Email can't empty ");
+                        $("#email").focus();
+                        return;
+                    } else {
+                        var valid = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/.test(email) && email.length;
+                        if (!valid) {
+                            $('#email_msg').html("E-Mail address is not valid ");
+                        }
+                    }
+                    //Email validation End--------------------------------------
+                    if (city.trim() == "") {
+                        $('#city_msg').html("City can't empty ");
+                        $("#city").focus();
+                        return;
+                    }
+                    if (address.trim() == "") {
+                        $('#address_msg').html("Address can't empty ");
+                        $("#address").focus();
+                        return;
+                    }
+                    if (phone.trim() == "") {
+                        $('#phone_msg').html("Phone number  can't empty ");
+                        $("#phone").focus();
+                        return;
+                    }
+                    if (password.trim() == "") {
+                        $('#password_msg').html("Password can't empty ");
+                        $("#password").focus();
+                        return;
+                    }
+                    if (confirm_password.trim() == "") {
+                        $('#password_msg').html("Please enter confirm password ");
+                        $("#confirm_password").focus();
+                        return;
+                    }
+                    $.post("./loaddata.php", {action: 'check_user_email_phone', email: email, phone: phone}, function (e) {
+                        if (e === undefined || e.length === 0 || e === null) {
+                            alert('Error in query');
+                        } else {
+                            if (e == "0") {
+//                                    EMAIL & PHONE NUMBER IS OK -------------------------
+                                update_cus_deatails();
+                            }
+                            if (e == 5) {
+                                $('#phone_msg').html("Error ! Phone number alrady registered");
+                                $('#email_msg').html("Error ! Email alrady registered");
+                                $("#email").focus();
+                                return;
+                            }
+                            if (e == 4) {
+                                $('#email_msg').html("Error ! Email alrady registered");
+                                $("#email").focus();
+                                return;
+                            }
+                            if (e == 3) {
+                                $('#phone_msg').html("Error ! Phone number alrady registered");
+                                $("#phone").focus();
+                                return;
+                            }
+
+                        }
+                    }, "json");
+                });
+
+                //UPDATE CUSTOMER DEATAILS =====================================
+                function update_cus_deatails() {
+                    var f_name = $('#f_name').val();
+                    var l_name = $('#l_name').val();
+                    var email = $('#email').val();
+                    var city = $('#city').val();
+                    var address = $('#address').val();
+                    var phone = $('#phone').val();
+                    var password = $('#password').val();
+                    var confirm_password = $('#confirm_password').val();
+
+                    var send_obj = {f_name: f_name, l_name: l_name, email: email, city: city, address: address, phone: phone, password: password, confirm_password: confirm_password};
+                    $.post("./loaddata.php", {action: 'update_cus_deatails', send_obj: send_obj}, function (e) {
+                        if (e === undefined || e.length === 0 || e === null) {
+                            alert('Error in create account !');
+                        } else {
+                            if (e == 1) {
+                                //SUCCESSFULLY -------------------------
+                                window.location.replace("login.php");
+                            }
+                            if (e == 2) {
+                                //ERROR -------- ------------------------
+                                alert("Error while updating data! code 1");
+                            }
+
+                        }
+                    }, "json");
+                }
+
+
+                //LOAD ORDER SHIPPING  DEATAILS=================================
                 function load_shipping_tbl() {
                     var tableData = '';
                     $.post("./loaddata.php", {action: 'load_shipping_tbl'}, function (e) {
@@ -550,12 +772,12 @@ if (!isset($_SESSION['cus_id'])) {
                                 tableData += '<td width="">' + qData.item_tot_value + '</td>';
                                 if (qData.item_save_status == '5') {
                                     //SAVE STATUS --------------------------------------------
-                                    tableData += '<td width=""><button  id="add_buy" data-item_id = "' + qData.item_id + '" data-bill_no = "' + qData.bill_no + '" class="btn btn-success delStrData btn-sm fa fa-trash-o fa-sm" type="button" value="' + qData.id + '">Add Buy</button></td>';
-                                    tableData += '<td width="10%">  <button  id="delete" data-item_id = "' + qData.item_id + '"  class="btn btn-danger delStrData btn-sm fa fa-trash-o fa-sm" type="button" value="' + qData.id + '">Delete</button></td>';
+                                    tableData += '<td width=""><button  id="add_buy" data-item_id = "' + qData.item_id + '" data-bill_no = "' + qData.bill_no + '" class="btn btn-success delStrData btn-sm fa fa-plus fa-sm" type="button" value="' + qData.id + '">&nbsp;Add Buy</button></td>';
+                                    tableData += '<td width="10%">  <button  id="delete" data-item_id = "' + qData.item_id + '"  class="btn btn-danger delStrData btn-sm fa  fa-trash fa-sm" type="button" value="' + qData.id + '">&nbsp;Delete</button></td>';
                                 } else {
                                     //ADD to BUY --------------------------------------------
                                     tableData += '<td width="" colspan=""> <img width="30px" height="30px" src="images/mark.png"> Added to buy</td>';
-                                    tableData += '<td width="10%" colspan="">  <button  id="remove_buy" data-item_id = "' + qData.item_id + '" data-bill_no = "' + qData.bill_no + '" class="btn btn-danger delStrData   btn-sm fa fa-trash-o fa-sm" type="button" value="' + qData.id + '">Remove Buy</button></td>';
+                                    tableData += '<td width="10%" colspan="">  <button  id="remove_buy" data-item_id = "' + qData.item_id + '" data-bill_no = "' + qData.bill_no + '" class="btn btn-danger delStrData   btn-sm fa  fa-window-close fa-sm" type="button" value="' + qData.id + '">&nbsp;Remove </button></td>';
                                 }
                                 tableData += '</tr>';
                             });

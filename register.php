@@ -260,8 +260,6 @@
 
 
                     $(document).on('click', '#submit_btn', function () {
-
-
                         var f_name = $('#f_name').val();
                         var l_name = $('#l_name').val();
                         var email = $('#email').val();
@@ -270,8 +268,6 @@
                         var phone = $('#phone').val();
                         var password = $('#password').val();
                         var confirm_password = $('#confirm_password').val();
-
-
                         if (f_name.trim() == "") {
                             $('#f_name_msg').html("First Name can't empty ");
                             $("#f_name").focus();

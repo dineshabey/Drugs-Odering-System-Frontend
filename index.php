@@ -23,6 +23,7 @@
             html, body {
                 margin: 0;
                 padding: 0;
+                height: 200px;
             }
 
             * {
@@ -72,15 +73,15 @@
                 word-break: break-all;
             }
 
-/*            .row {
-                margin: 8px -16px;
-            }
-
-             Add padding BETWEEN each column (if you want) 
-            .row,
-            .row > .column {
-                padding: 8px;
-            }*/
+            /*            .row {
+                            margin: 8px -16px;
+                        }
+            
+                         Add padding BETWEEN each column (if you want) 
+                        .row,
+                        .row > .column {
+                            padding: 8px;
+                        }*/
 
             /* Create four equal columns that floats next to each other */
             .column {
@@ -162,8 +163,6 @@
             }
 
             /*CART CSS*/
-
-
             /*special item width height css*/
             .secial_item{
                 width:100%;
@@ -245,10 +244,6 @@
                 margin: 20px 0;
             }
             /*//CUS HEADER CSS ///////////////////////////////////*/
-
-
-
-
         </style>
     </head>
     <!--MAIN HEAD END -->
@@ -471,7 +466,7 @@
     <?php require_once('include/footer.php'); ?>
     <script type="text/javascript">
         $(document).on('ready', function () {
-            
+
         });
 
 

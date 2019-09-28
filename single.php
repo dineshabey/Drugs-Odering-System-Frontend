@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 
 <!DOCTYPE html>
 <html>
@@ -283,7 +284,7 @@
                     var item_description = (e[0]['item_description']);
 //=====================================================================
                     var price = '<div>' + item_price + '</div>';
-                    var img_data = '<div><img style=" height:400px;" src="../drugs_ordering_system_backend/uploads/' + image + '" data-imagezoom="true" class="img-responsive"></div>';
+                    var img_data = '<div style="text-aling:center;"><img align="middle" style="text-aling:center;  width:325px;" class="img-responsive center" src="../drugs_ordering_system_backend/uploads/' + image + '" data-imagezoom="true" ></div>';
                     var vdo = '<div>' + vdo + '</div>';
 //=====================================================================
                     $('.selected_img').html('').append(img_data);

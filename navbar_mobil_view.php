@@ -95,16 +95,17 @@ item_deatails.item_id DESC");
                             }
                             $out_put .= '</ul>';
                         }
-
                         $out_put .= '</li>';
                         $out_put .= '</ul>';
                     }
                 }
                 $out_put .= '</li>';
             }
-            $out_put .= '<li class="link_font" ><a href="login.php" ><span style="text-align:center !important; color:#bdbdff;">Log In</span></a></li>';
-            $out_put .= '<li class="link_font"><a href="register.php"><span style="text-align:center !important; color:#bdbdff;">Create Account</span></a></li>';
-
+                $out_put .= '<li class="link_font" ><a href="about_us.php" ><span style="text-align:center !important; color:#bdbdff;">Our Policies</span></a></li>';
+            if (!isset($_SESSION['cus_id'])) {
+                $out_put .= '<li class="link_font" ><a href="login.php" ><span style="text-align:center !important; color:#bdbdff;">Log In</span></a></li>';
+                $out_put .= '<li class="link_font"><a href="register.php"><span style="text-align:center !important; color:#bdbdff;">Create Account</span></a></li>';
+            }
             $out_put .= '</ul></div></div></div>';
         }
 

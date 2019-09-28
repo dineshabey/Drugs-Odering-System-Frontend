@@ -50,3 +50,15 @@
 <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
 
 <link rel="stylesheet"  href= "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+
+
+<style type="text/css">
+
+    @media screen and (max-width: 600px){
+        .font_size_mobil {
+            color: red !important;
+            font-size: 80px !important;
+        }
+    }
+
+</style>

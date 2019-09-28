@@ -785,9 +785,6 @@ item_deatails.item_id DESC");
 //        $system->prepareSelectQueryForJSON($qry);
     } else if ($_POST['action'] == 'search_text') {
 // GET ITEM INFO. TO CART TBL - ------------------------------------------------
-
-
-
         $qry = "SELECT
 item_deatails.item_name,
 item_deatails.sub_cat_id,
@@ -809,6 +806,38 @@ item_deatails.item_id DESC";
 // ADDED ITEM TBL ADD/MINUS QTY UPDATE- ----------------------------------------
         $query = "UPDATE `customer_added_item` SET  `item_qty`='{$_POST['qty']}'  WHERE (`id`='{$_POST['added_id']}');";
         $system->prepareCommandQueryForAlertify($query, "Update Successfully", "Erro while updating");
+    } else if ($_POST['action'] == 'update_cus_deatails') {
+        $send_obj = $_POST['send_obj'];
+//Password encript method ///////////////////////////////////////////////////////
+        $add_name = "noonehack";
+        $encript_pwx = (($send_obj['confirm_password']));
+        $encript_pw = (($send_obj['confirm_password']) . $add_name);
+        $pw = explode(" ", $encript_pw);
+        $count = count($pw);
+        $con_pw = "";
+        for ($i = 0; $i < $count; $i++) {
+            $con_pw .= $pw[$i];
+        }
+        $conf_pw = sha1($con_pw);
+//Password encript method end ///////////////////////////////////////////////////
+// UPDATE COUSTOMER DEATAILS ---------- ----------------------------------------
+        $query = "UPDATE `customer_details` SET "
+                . " `f_name`='{$send_obj['f_name']}', `l_name`='{$send_obj['l_name']}', `email`='{$send_obj['email']}', "
+                . "`city`='{$send_obj['city']}', `address`='{$send_obj['address']}',"
+                . " `phone`='{$send_obj['phone']}', `password`='{$conf_pw}',"
+                . "`account_status`='0', `update_date`='$date',"
+                . " `update_time`='$time' WHERE (`cus_id`='{$_SESSION['cus_id']}');";
+        MainConfig::connectDB();
+        $link = MainConfig::conDB();
+        $save = mysqli_query($link, $query);
+        MainConfig::closeDB();
+        if (isset($save) && $save) {
+            //SALVE SUCCESSFULY--------------------------------
+            echo json_encode("1");
+        } else {
+            //SALVE ERROR -------------------------------------
+            echo json_encode("2");
+        }
     } else if ($_POST['action'] == 'load_user_added_item') {
 // GET ITEM INFO. USER ADDED ITEM - --------------------------------------------
         $qry = "SELECT
@@ -858,9 +887,7 @@ main_cat.main_cat_id DESC");
 //                $out_put .= '<div class="" style="border: 1px solid #ddd; margin: 1.5em 0; padding: 0.5em 1em; background:white; text-aling:center !important;">'
 //                        . '<p  style="font-weight: 700; color:black; font-size: 25px; text-aling:center !important;">' . $val['main_cat_name'] . '</p></div>';
                 $out_put .= '<section class=" "><div style="border: 1px solid #ddd; margin: 1.5em 0; padding: 0.7em 1em; padding-top:10px; background: #8dd10700;  ">'
-                    . '<h4 style="font-weight: 700; color:black; text-align: center; font-size: 35px;">' . $val['main_cat_name'] . '</h4></div> </section>';
-                
-                
+                        . '<h4 style="font-weight: 700; color:black; text-align: center; font-size: 35px;">' . $val['main_cat_name'] . '</h4></div> </section>';
                 $sub_cat_data = $system->prepareSelectQuery("SELECT
 sub_cat.sub_cat_id,
 sub_cat.sub_cat_name
@@ -1101,8 +1128,6 @@ item_deatails.img_status = '1'
 ORDER BY
 item_deatails.item_id DESC LIMIT 4
 ");
-
-
                         if (!empty($item_info_data)) {
                             $out_put .= '<div style="background: #0492f70d;"><section class="regular" id="" style=" padding-top:10px ;">';
                             foreach ($item_info_data as $val3) {
@@ -1119,10 +1144,10 @@ item_deatails.item_id DESC LIMIT 4
                                 $out_put .= '<div class="column cus_font">
                     <div class="content" align="middle">
                     <a href="single.php?item_id=' . $item_id . '&sub_cat_id=' . $sub_cat_id . ' ">
-                    <img class="secial_item img-responsive card" align="middle" style="text-aling:center;  " src="../drugs_ordering_system_backend/uploads/' . $val3['item_image'] . '"/>
-                    <h3 style="text-align: center;">' . $item_name . '</h3>
-                    <h3 style="text-align: center;">' . $main_cat_names . '</h3>
-                    <h3 style="text-align: center; color:red;">LKR ' . $item_price . '</h3>
+                    <img class="secial_item img-responsive card font_size_mobil" align="middle" style="text-aling:center;  " src="../drugs_ordering_system_backend/uploads/' . $val3['item_image'] . '"/>
+                    <h3 style="text-align: center;" class="font_size_mobil">' . $item_name . '</h3>
+                    <h3 style="text-align: center;" class="font_size_mobil">' . $main_cat_names . '</h3>
+                    <h3 style="text-align: center; color:red;" class="font_size_mobil">LKR ' . $item_price . '</h3>
                         </a>';
                                 if ($out_of_stock == '1') {
                                     //STOCK OUT ================================
