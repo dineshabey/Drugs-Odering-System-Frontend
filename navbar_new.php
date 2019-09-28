@@ -98,6 +98,7 @@ item_deatails.item_id DESC");
                     $out_put .= '</ul>';
                 }
             }
+                $out_put .= '<li><a href="about_us.php" style="border: 2px solid black;  background:#007d1d ; border-radius: 25px;">Our policies </a></li>';
             $out_put .= '</li></ul></div></div></div></div>';
         }
 

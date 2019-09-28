@@ -16,6 +16,13 @@ if (!isset($_SESSION['cus_id'])) {
 
         <!--UL RIHT MARK STYLE-->
         <style type="text/css">
+
+            .alertify .ajs-dialog {
+                top: 20%;
+                /*transform: translateY(-20%);*/    
+                /*margin: auto;*/
+            }
+
             /*.inset {border-style: inset;}*/
             .inset {border-style: ridge;}
 
@@ -52,7 +59,8 @@ if (!isset($_SESSION['cus_id'])) {
         </script>
         <!--sub header--////////////////////////////////////////////////////////>-->
         <div class="header">
-            <?php require_once('include/coustomer_header_for_client.php'); ?>
+            <?php // require_once('include/coustomer_header_for_client.php'); ?>
+            <?php require_once('include/header_client.php'); ?>
         </div>
 
         <!--sub header-- end////////////////////////////////////////////////////>-->
@@ -60,6 +68,7 @@ if (!isset($_SESSION['cus_id'])) {
 
         <div class="container">
             <div class="row" style="padding-top: 50px;"></div>
+            <hr style="  border-top: 1px solid red;">
             <div class="row order_summary" id="order_summary" style="padding-top: 50px; padding-right: 15px; background: white;">
                 <div class="col-lg-6">
                     <div class="" >
@@ -109,7 +118,6 @@ if (!isset($_SESSION['cus_id'])) {
                         <!--HIDDEN VALUE //////////////////////////////////////////////////////////////////////////////////////////////////-->
 
                     </div>
-
                 </div>
 
                 <div class="col-lg-6" style="background-color: antiquewhite;" >
@@ -171,7 +179,7 @@ if (!isset($_SESSION['cus_id'])) {
 
                 </div>
             </div>
-
+            <hr style="  border-top: 1px solid red;">
             <div class="row hidden payment_tab" id="payment_tab">
                 <!--<hr style="  border-top: 1px solid red;">-->
                 <div class="col-lg-12" style="background-color: #f5fdff;">
@@ -501,7 +509,7 @@ if (!isset($_SESSION['cus_id'])) {
                                 tableData += '</tr>';
                                 $('#item_bill_no').val(qData.bill_no);
                             });
-                            tableData += '<tr><td colspan="9" ><a href="user_profil.php"><button type="button" class="btn btn-success">&nbsp; BACK</button></a>&nbsp;&nbsp;&nbsp;<button id="cancel_order" class="btn btn-warning"> CANCEL</button></td></tr>';
+                            tableData += '<tr><td colspan="9" ><a href="user_profil.php"><button type="button" class="btn btn-success">&nbsp; Back</button></a>&nbsp;&nbsp;&nbsp;<button id="cancel_order" class="btn btn-warning"> Remove</button></td></tr>';
                         }
                         $('.added_item_summary tbody').html(tableData);
                     }, "json");
@@ -575,7 +583,11 @@ if (!isset($_SESSION['cus_id'])) {
 
 //ORDER CANCEL FUNCTION =========================================================
                 function cancel_order() {
-                    alertify.confirm('Confirm ', 'Do you really want to delete this order ?', function () {
+
+
+//                    alertify.success('Current position : ' + alertify.get('notifier', 'position'));
+                    alertify.confirm('labels changed!').set('labels', {ok: 'Yes', cancel: 'No'});
+                    alertify.confirm('Confirm ', 'Do you really want to remove this order ?', function () {
                         $.post("./loaddata.php", {action: 'cancel_order'}, function (e) {
                             if (e === undefined || e.length === 0 || e === null) {
                                 alert('Error in deleting');
@@ -595,16 +607,37 @@ if (!isset($_SESSION['cus_id'])) {
                         }, "json");
                     }
                     , function () {
-//                        alertify.error('Cancel')
+
                     });
+                    exit();
+//                    alertify.confirm('Confirm ', 'Do you really want to delete this order ?', function () {
+//                        $.post("./loaddata.php", {action: 'cancel_order'}, function (e) {
+//                            if (e === undefined || e.length === 0 || e === null) {
+//                                alert('Error in deleting');
+//                            } else {
+//                                if (e == 300) {
+//                                    alert('Error deleting ..! Code 300');
+//                                    return;
+//                                }
+//                                if (e == 400) {
+//                                    alert('Error deleting ..! Code 400');
+//                                    return;
+//                                }
+//                                if (e == 1) {
+//                                    window.location.replace("user_profil.php");
+//                                }
+//                            }
+//                        }, "json");
+//                    }
+//                    , function () {
+////                        alertify.error('Cancel')
+//                    });
                 }
 //NEXT STEP BTN  FUNCTION =========================================================
                 function add_shipping_deatail() {
                     if (!$(".order_confirm").hasClass("hidden")) {
                         $(".order_confirm").addClass("hidden");
                     }
-
-
                     var recipient_name = $('#recipient_name').val();
                     var recipient_phone = $('#recipient_phone').val();
                     var msg = $('#msg').val();

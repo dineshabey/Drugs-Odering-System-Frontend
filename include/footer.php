@@ -1,13 +1,18 @@
 <?php
+require_once('./config/dbc.php');
+require_once('./class/systemSetting.php');
+$system = new setting();
+
+$date = date("Y-m-d");
+$time = date("h:i:sa");
+
 if (isset($_SESSION['cus_id'])) {
     echo '<input type="text" hidden="" id="cus_id" value="' . $_SESSION['cus_id'] . '">';
 } else {
     echo '<input type="text" hidden="" id="cus_id" value="0">';
-//    echo "<script>location.href='login.php';</script>";
-//    echo "Not Sesseon";
 }
 ?>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">-->
 
 <!--<a href="../fonts/angle-right-solid.svg"></a>-->
 
@@ -32,6 +37,7 @@ if (isset($_SESSION['cus_id'])) {
         color: white;
         font-size: 20px;
         font-family: Garamond,Baskerville,Baskerville Old Face,Hoefler Text,Times New Roman,serif;
+        /*border: 1px solid yellow;*/
     }
 
 
@@ -39,26 +45,90 @@ if (isset($_SESSION['cus_id'])) {
 
 </style>
 
+
+
+
 <div class="footer-bottom " style="background-color:#170303e6; padding-top: 15px; color: white;" >
     <div class="container" style="padding-top: 20px;">
         <div class="footer-bottom-cate cate-bottom">
             <h6 class="h_tag"><label class="h_tag">TOP CATEGORIES</label></h6>
-            <ul >
-                <li class="right"><i style="font-size:24px; color: whitesmoke;" class="fa">&#xf0da;</i> &nbsp;<a href="#"><span class="li_clz">Vitamin</span></a></li>
-                <li><i style="font-size:24px; color: whitesmoke;" class="fa">&#xf0da;</i> &nbsp;<a href="#"><span class="li_clz">Hearbz</span></a></li>
-                <li><i style="font-size:24px; color: whitesmoke;" class="fa">&#xf0da;</i> &nbsp;<a href="#"><span class="li_clz">Baby Items</span></a></li>
-
+            <ul>
+                <?php
+                $main_cat_data = $system->prepareSelectQuery("SELECT
+main_cat.main_cat_id,
+main_cat.main_cat_name,
+sub_cat.sub_cat_id
+FROM
+main_cat
+INNER JOIN sub_cat ON sub_cat.main_cat_id = main_cat.main_cat_id
+GROUP BY
+main_cat.main_cat_id
+ORDER BY
+main_cat.main_cat_id DESC
+LIMIT 5");
+                if (!empty($main_cat_data)) {
+                    $out_put = '';
+                    foreach ($main_cat_data as $val) {
+                        $main_cat_names = $val['main_cat_name'];
+                        $main_cat_id = $val['main_cat_id'];
+                        $sub_cat_id = $val['sub_cat_id'];
+                        $out_put = '<li><i style = "font-size:24px; color: #d4ff2a;" class = "fa">&#xf0da;</i> &nbsp;<a href="pagination.php?main_cat_id=' . $main_cat_id . '&sub_cat_id=' . $sub_cat_id . '&page=1 "><span class="li_clz">' . $main_cat_names . '</span></a></li>';
+                        echo $out_put;
+                    }
+                }
+                ?>
             </ul>
+
+
+            <!--            <ul>
+                            <li class="right"><i style="font-size:24px; color: whitesmoke;" class="fa">&#xf0da;</i> &nbsp;<a href="#"><span class="li_clz">Vitamin</span></a></li>
+                            <li><i style="font-size:24px; color: whitesmoke;" class="fa">&#xf0da;</i> &nbsp;<a href="#"><span class="li_clz">Hearbz</span></a></li>
+                            <li><i style="font-size:24px; color: whitesmoke;" class="fa">&#xf0da;</i> &nbsp;<a href="#"><span class="li_clz">Baby Items</span></a></li>
+            
+                        </ul>-->
+
+
+
         </div>
         <div class="footer-bottom-cate cate-bottom" style="padding: 0 0 6em;">
             <h6><label class="h_tag">FEATURE ITEMS</label></h6>
             <ul class="">
 
-                <li> <i style="font-size:24px; color: whitesmoke;" class="fa">&#xf0da;</i> &nbsp;<a href="#"><span class="li_clz">Vitamin B</span></a></li>
-                <li> <i style="font-size:24px; color: whitesmoke;" class="fa">&#xf0da;</i> &nbsp;<a href="#"><span class="li_clz">Vitamin C</span></a></li>
-                <li><i style="font-size:24px; color: whitesmoke;" class="fa">&#xf0da;</i> &nbsp;<a href="#"><span class="li_clz">Vitamin D</span></a></li>
-                <li><i style="font-size:24px; color: whitesmoke;" class="fa">&#xf0da;</i> &nbsp;<a href="#"><span class="li_clz">Vitamin A</span></a></li>
-                <li><i style="font-size:24px; color: whitesmoke;" class="fa">&#xf0da;</i> &nbsp;<a href="#"><span class="li_clz">Vitamin A</span></a></li>
+                <ul>
+                    <?php
+                    $featured_item_data = $system->prepareSelectQuery("SELECT
+item_deatails.item_id,
+item_deatails.item_name,
+item_deatails.sub_cat_id
+FROM
+item_deatails
+WHERE
+item_deatails.img_status = '1' AND
+item_deatails.out_of_stock = '0' AND
+item_deatails.item_view_status = '0' AND
+item_deatails.featured_item = '1'
+ORDER BY
+item_deatails.item_id DESC
+LIMIT 5
+
+");
+                    if (!empty($featured_item_data)) {
+                        $out_put = '';
+                        foreach ($featured_item_data as $val) {
+                            $item_names = $val['item_name'];
+                            $item_id = $val['item_id'];
+                            $sub_cat_id = $val['sub_cat_id'];
+
+                            $out_put = '<li><i style = "font-size:24px; color: #d4ff2a;" class = "fa">&#xf0da;</i> &nbsp;<a href="single.php?item_id=' . $item_id . '&sub_cat_id=' . $sub_cat_id . ' "><span class="li_clz">' . $item_names . '</span></a></li>';
+                            echo $out_put;
+                        }
+                    }
+                    ?>
+                </ul>
+
+
+<!--<li> <i style="font-size:24px; color: whitesmoke;" class="fa">&#xf0da;</i> &nbsp;<a href="#"><span class="li_clz">Vitamin B</span></a></li>-->
+<!--<li> <i style="font-size:24px; color: whitesmoke;" class="fa">&#xf0da;</i> &nbsp;<a href="#"><span class="li_clz">Vitamin C</span></a></li>-->
 
             </ul>
         </div>
@@ -79,16 +149,15 @@ if (isset($_SESSION['cus_id'])) {
         </div>
         <div class="footer-bottom-cate">
             <div>
-                <a href="index.php"><img class="img-responsive" src="images/site_img/edit_logo.jpg" alt=""   /></a>
+                <a href="index.php"><img class="img-responsive" src="images/site_img/edit_logo.jpg" style="width: 250px; height: 300px;" alt="logo"   /></a>
             </div>
         </div>
         <div class="clearfix"> </div>
     </div>
 </div>
 
-<div class=" footer_bar" style=""  >
+<div class=" footer_bar" style="">
     <div class="container " >
-
         <div class="latter-right" style="padding-top: 10px;padding-bottom:10px;">
             <p><span style="color: white;">FOLLOW US</span></p>
             <ul class="face-in-to">

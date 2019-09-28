@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 //require 'inc/dbc.php';
 //require 'class/systemSetting.php';
 require_once('./config/dbc.php');
