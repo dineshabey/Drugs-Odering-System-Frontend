@@ -6,8 +6,6 @@ $system = new setting();
 $date = date("Y-m-d");
 $time = date("h:i:sa");
 ?>
-<html>
-    <body>
 
         <style type="text/css">
             .link_font{
@@ -15,10 +13,9 @@ $time = date("h:i:sa");
             }
         </style>
 
-
         <!--<!DOCTYPE html>-->
         <?php
-//NAVIGATION BAR MOBILE VIEW==============================================================
+//NAVIGATION BAR MOBILE VIEW====================================================
         $main_cat_data = $system->prepareSelectQuery("SELECT
                             main_cat.main_cat_name,
                             main_cat.main_cat_id
@@ -112,6 +109,4 @@ item_deatails.item_id DESC");
         echo $out_put;
         ?>
 
-    </body>
 
-</html>

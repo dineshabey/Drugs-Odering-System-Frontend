@@ -6,8 +6,7 @@ $system = new setting();
 $date = date("Y-m-d");
 $time = date("h:i:sa");
 ?>
-<html>
-    <body>
+
         <!--<!DOCTYPE html>-->
 
         <?php
@@ -105,6 +104,3 @@ item_deatails.item_id DESC");
         echo $out_put;
         ?>
 
-    </body>
-
-</html>
