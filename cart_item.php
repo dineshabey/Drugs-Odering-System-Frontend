@@ -20,6 +20,29 @@
             input[type=number]::-webkit-outer-spin-button {
                 opacity: 1;
             }
+
+            /* If the screen size is 601px wide or more, set the font-size of <div> to 80px */
+            @media screen and (min-width: 601px) {
+                table {
+                    font-size: 20px;
+                }
+            }
+
+            /* If the screen size is 600px wide or less, set the font-size of <div> to 30px */
+            @media screen and (max-width: 600px) {
+                table {
+                    font-size: 24px;
+                   
+                }
+                
+                .item_nm {
+                   
+                    font-weight:bold;
+                }
+            }
+
+
+
         </style>
         <!--UL RIHT MARK STYLE-->
 
@@ -28,16 +51,16 @@
 
         <style type="text/css">
 
-/*            input[type=number] {
-                height: 30px;
-            }*/
+            /*            input[type=number] {
+                            height: 30px;
+                        }*/
 
-/*            input[type=number]:hover::-webkit-inner-spin-button {  
-                width: 14px;
-                height: 30px;
-            }*/
-            
-            
+            /*            input[type=number]:hover::-webkit-inner-spin-button {  
+                            width: 14px;
+                            height: 30px;
+                        }*/
+
+
             .input_qty{
                 text-align: center;
                 border: blue 1px solid;
@@ -86,7 +109,7 @@
         </script>
         <!--sub header--////////////////////////////////////////////////////////>-->
         <div class="header">
-           <?php require_once('header2.php'); ?>
+            <?php require_once('header2.php'); ?>
         </div>
 
         <!--sub header-- end////////////////////////////////////////////////////>-->
@@ -156,13 +179,13 @@
                     var tableData = '';
                     $.post("./loaddata.php", {action: 'load_cart_item_list'}, function (e) {
                         if (e === undefined || e.length === 0 || e === null) {
-                            tableData += '<tr><th colspan="4" class="alert alert-warning text-center"> -- No Data Found -- </th></tr>';
+                            tableData += '<tr class="tb_head" ><th colspan="4" class="alert alert-warning text-center"> -- No Data Found -- </th></tr>';
                         } else {
                             $.each(e, function (index, qData) {
                                 index++;
                                 tableData += '<tr>';
                                 tableData += '<td width="5%" height="150">' + index + '</td>';
-                                tableData += '<td width=""><img style=" height:90px;" src="../drugs_ordering_system_backend/uploads/' + qData.item_image + '" data-imagezoom="true" class="img-responsive"> <p style="text"> ' + qData.item_name + '</p></td>';
+                                tableData += '<td width=""><img style=" height:90px;" src="../drugs_ordering_system_backend/uploads/' + qData.item_image + '" data-imagezoom="true" class="img-responsive"> <p style="text"><span class="item_nm"> ' + qData.item_name + '</span></p></td>';
 //                                tableData += '<td width=""> Item Link </td>';
                                 tableData += '<td width="10%"><input class="size-36" step="1"  type="number" min="1" max="50" id="add_item_in_cart" class="form-control text-center"  data-price = "' + qData.item_price + '"  data-cart_id = "' + qData.id + '"  value="' + qData.item_qty + '"></td>';
 
@@ -291,13 +314,7 @@
                 });
 
 
-//                TABALE QTY ADD REMOVE BTN==========================================
-
-
-
-
-
-            </script>
+s            </script>
 
             <!--FOOTER-- end////////////////////////////////////////////////////>-->
         </div>
