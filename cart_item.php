@@ -226,7 +226,8 @@
                         }
                     }, "json");
                 });
-//CART ADDED ITEM TOTAL ===========================================================
+                
+        //CART ADDED ITEM TOTAL ===========================================================
                 function item_tot() {
                     $.post("./loaddata.php", {action: 'item_total'}, function (e) {
                         if (e === undefined || e.length === 0 || e === null) {
@@ -242,7 +243,7 @@
                     }, "json");
                 }
 
-//USER ADDED ITEM TOTAL ===========================================================
+        //USER ADDED ITEM TOTAL ===========================================================
                 function added_item_tot() {
                     $.post("./loaddata.php", {action: 'added_item_tot'}, function (e) {
                         if (e === undefined || e.length === 0 || e === null) {

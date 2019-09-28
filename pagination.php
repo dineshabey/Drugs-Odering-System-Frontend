@@ -365,19 +365,26 @@ item_deatails.sub_cat_id DESC
                     <div class=" center-block" >
 
                         <ul class="pagination pagination-lg">
-                            <li class="page-item"><a class="page-link" href="<?php echo $page - 1 ?>">Previous</a></li>
-
+                           
                             <?php
-                            for ($v = 1; $v <= $pages; $v++) {
+                            
+                            $previous = $page !=0 ? 1:$page-1;
+                            $next = $page <=$page ? $page:$page+1;
+                            
+                            echo '<li class="page-item"><a class="page-link" href="pagination.php?main_cat_id=' . $main_cat . '&sub_cat_id=' . $sub_cat . '&page='. $previous.'">Previous</a></li>';
 
+                            for ($v = 1; $v <= $pages; $v++) {
+                                
                                 if ($v == $page) {
                                     echo '<li class="active"><a href="pagination.php?main_cat_id=' . $main_cat . '&sub_cat_id=' . $sub_cat . '&page=' . $v . '">' . $v . '</a></li>';
                                 } else {
                                     echo '<li><a href="pagination.php?main_cat_id=' . $main_cat . '&sub_cat_id=' . $sub_cat . '&page=' . $v . '">' . $v . '</a></li>';
                                 }
+                                  
                             }
+                            echo '<li class="page-item"><a class="page-link" href="pagination.php?main_cat_id=' . $main_cat . '&sub_cat_id=' . $sub_cat . '&page='.$next.'">Next</a></li>';
+       
                             ?>
-                            <li class="page-item"><a class="page-link" href="<?php echo $page + 1 ?>">Next</a></li>
                         </ul>
 
                     </div>
