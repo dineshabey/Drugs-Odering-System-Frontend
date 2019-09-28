@@ -2,16 +2,17 @@
 
 <title>Lionvitamin</title>
 
+
 <!--//theme-style-->
 <!--<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">-->
 <!--<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">-->
 <!--<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">-->
 
-<meta name="viewport" content="width=600">
+<!--<meta name="viewport" content="width=600">-->
 
 
  <!--Anuja meta tag-->
-        <!--<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 
 
 <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />

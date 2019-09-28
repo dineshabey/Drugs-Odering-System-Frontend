@@ -15,6 +15,20 @@
                 color: red;
                 font-size: 20px;
             }
+            /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+            @media screen and (max-width: 600px) {
+                .column {
+                    width: 50%;
+                }
+
+                .column.cus_font.product-all-sec-wrapper .product-det-content-wrapper {
+                    font-size: 35px;
+                }
+                .table_font_size {
+                    font-size: 23px;
+                }
+
+            }
         </style>
 
     </head>
@@ -54,21 +68,21 @@
 
                     <!-- Text input-->
                     <div class="form-group">
-                        <label class="col-md-4 control-label" for="textinput">First Name</label>  
+                        <label class="col-md-4 control-label table_font_size" for="textinput">First Name</label>  
                         <div class="col-md-4">
                             <input name="textinput" type="text" id="f_name" placeholder="" class="form-control input-md form_input">
                             <h5 id="f_name_msg" style="color: red;"></h5>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-4 control-label" for="textinput">Last Name</label>  
+                        <label class="col-md-4 control-label table_font_size" for="textinput">Last Name</label>  
                         <div class="col-md-4">
                             <input name="textinput" type="text" id="l_name" placeholder="" class="form-control input-md form_input">
                             <h5 id="l_name_msg" style="color: red;"></h5>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-4 control-label" for="textinput">Email</label>  
+                        <label class="col-md-4 control-label table_font_size" for="textinput">Email</label>  
                         <div class="col-md-4">
                             <input name="textinput" type="text" id="email" placeholder=" " class="form-control input-md form_input">
                             <h5 id="email_msg" style="color: red;"></h5>
@@ -76,21 +90,21 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-4 control-label" for="textinput">City</label>  
+                        <label class="col-md-4 control-label table_font_size" for="textinput">City</label>  
                         <div class="col-md-4">
                             <input name="textinput" type="text" id="city" placeholder="" class="form-control input-md form_input" required="">
                             <h5 id="city_msg" style="color: red;"></h5>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-4 control-label" for="textinput">Address</label>  
+                        <label class="col-md-4 control-label table_font_size" for="textinput">Address</label>  
                         <div class="col-md-4">
                             <textarea name="textinput" type="text" id="address" placeholder="  " class="form-control input-md form_input"></textarea>
                             <h5 id="address_msg" style="color: red;"></h5>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-4 control-label" for="textinput">Phone Number</label>  
+                        <label class="col-md-4 control-label table_font_size" for="textinput">Phone Number</label>  
                         <div class="col-md-4">
                             <input name="textinput" type="text" id="phone" placeholder="" class="form-control input-md form_input phone_no">
                             <h5 id="phone_msg" style="color: red;"></h5>
@@ -108,14 +122,14 @@
 
                     <!-- Password input-->
                     <div class="form-group">
-                        <label class="col-md-4 control-label" for="passwordinput">Password </label>
+                        <label class="col-md-4 control-label table_font_size" for="passwordinput">Password </label>
                         <div class="col-md-4">
                             <input  name="passwordinput" type="password" id="password" placeholder="" class="form-control input-md form_input">
                             <span class="help-block"></span>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-4 control-label" for="passwordinput">Confirm Password </label>
+                        <label class="col-md-4 control-label table_font_size" for="passwordinput">Confirm Password </label>
                         <div class="col-md-4">
                             <input  name="passwordinput" type="password" id="confirm_password" placeholder="" class="form-control input-md form_input">
                             <h5 id="passMasseg" style="color: red;"></h5>
@@ -358,7 +372,7 @@
                         var phone = $('#phone').val();
                         var password = $('#password').val();
                         var confirm_password = $('#confirm_password').val();
-                        
+
                         var send_obj = {f_name: f_name, l_name: l_name, email: email, city: city, address: address, phone: phone, password: password, confirm_password: confirm_password};
                         $.post("./loaddata.php", {action: 'reg_cus', send_obj: send_obj}, function (e) {
                             if (e === undefined || e.length === 0 || e === null) {

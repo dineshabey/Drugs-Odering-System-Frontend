@@ -20,7 +20,27 @@
                 color: red;
                 font-size: 20px;
             }
+            @media screen and (max-width: 450px) {
 
+                .column.cus_font.product-all-sec-wrapper .product-det-content-wrapper {
+                    font-size: 35px;
+                }
+
+            }
+            /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+            @media screen and (max-width: 600px) {
+                .column {
+                    width: 50%;
+                }
+
+                .column.cus_font.product-all-sec-wrapper .product-det-content-wrapper {
+                    font-size: 35px;
+                }
+                .table_font_size {
+                    font-size: 25px;
+                }
+
+            }
         </style>
         <!--UL RIHT MARK STYLE-->
 
@@ -59,15 +79,15 @@
 
                     <!-- Text input-->
                     <div class="form-group">
-                        <label class="col-md-4 control-label" for="textinput">User name</label>  
+                        <label class="col-md-4 control-label table_font_size" for="textinput">User name</label>  
                         <div class="col-md-4">
-                            <input name="textinput" type="text" id="email_login_page" placeholder="" class="form-control input-md form_input">
+                            <input name="textinput" type="text" id="email_login_page" placeholder="" class="form-control input-md form_input ">
                             <span class="help-block">** User name should be email or phone number. </span>  
                         </div>
                     </div>
                     <!-- Password input-->
                     <div class="form-group">
-                        <label class="col-md-4 control-label" for="passwordinput">Password </label>
+                        <label class="col-md-4 control-label table_font_size" for="passwordinput">Password </label>
                         <div class="col-md-4">
                             <input  name="passwordinput" type="password" id="password_login_page" placeholder="" class="form-control input-md form_input">
                             <span class="help-block"></span>

@@ -108,18 +108,30 @@ $time = date("h:i:sa");
                 padding: 10px;
             }
 
-            /* Responsive layout - makes a two column-layout instead of four columns */
-            @media screen and (max-width: 900px) {
-                .column {
-                    width: 50%;
-                }
-            }
+            @media screen and (max-width: 450px) {
 
+                .column.cus_font.product-all-sec-wrapper .product-det-content-wrapper {
+                    font-size: 35px;
+                }
+
+            }
             /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
             @media screen and (max-width: 600px) {
                 .column {
                     width: 50%;
                 }
+
+                .column.cus_font.product-all-sec-wrapper .product-det-content-wrapper {
+                    font-size: 35px;
+                }
+                .table_font_size {
+                    font-size: 35px;
+                }
+                .btn_size {
+                    font-size: 22px;
+                    text-align: center;
+                }
+
             }
 
             /*FEATURES ITEMS LIST CSS   END*/
@@ -218,13 +230,13 @@ $time = date("h:i:sa");
 
                 <!--<div class="btn-group" style="margin-top:10ps;margin-bottom:5px;">-->
                 <div class="btn-group" style="margin-top:10ps;margin-bottom:5px;">
-                    <button type="button" class="btn btn-primary">Recently Added</button>
-                    <button type="button" class="btn btn-primary">Lowest Price</button>
-                    <button type="button" class="btn btn-primary">Highest Price</button>
-                  <div class="btn-group mr-2" role="group" aria-label="Second group">
-                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                    <button type="button" class="btn btn-primary btn_size">Recently Added</button>
+                    <button type="button" class="btn btn-primary btn_size">Lowest Price</button>
+                    <button type="button" class="btn btn-primary btn_size">Highest Price</button>
+                    <div class="btn-group mr-2" role="group" aria-label="Second group btn_size" >
+                        <button type="button" class="btn btn-primary dropdown-toggle btn_size" data-toggle="dropdown">
                             Sort By Category <span class="caret"></span></button>
-                        <ul class="dropdown-menu" role="menu">
+                        <ul class="dropdown-menu btn_size" role="menu" >
                             <li><a href="all">All</a></li>
                             <li><a href="#">Multi Vitamin</a></li>
                             <li><a href="#">Later Vitamin</a></li>
@@ -299,16 +311,13 @@ item_deatails.sub_cat_id DESC
                 $end = min(($offset + $limit), $total);
 
                 // The "back" link
-                $prevlink = ($page > 1) ? '<a href="?page=1" title="First page">&laquo;</a> <a href="?page=' . ($page - 1) . '" title="Previous page">&lsaquo;</a>' : '<span class="disabled">&laquo;</span> <span class="disabled">&lsaquo;</span>';
+                $prevlink = ($page > 1) ? '<a href="?page=1" title="First page" >&laquo;</a> <a href="?page=' . ($page - 1) . '" title="Previous page">&lsaquo;</a>' : '<span class="disabled">&laquo;</span> <span class="disabled">&lsaquo;</span>';
 
                 // The "forward" link
                 $nextlink = ($page < $pages) ? '<a href="?page=' . ($page + 1) . '" title="Next page">&rsaquo;</a> <a href="?page=' . $pages . '" title="Last page">&raquo;</a>' : '<span class="disabled">&rsaquo;</span> <span class="disabled">&raquo;</span>';
 
                 // Display the paging information
                 echo '<div id="paging"><p>', $prevlink, ' Page ', $page, ' of ', $pages, ' pages, displaying ', $start, '-', $end, ' of ', $total, ' results ', $nextlink, ' </p></div>';
-
-
-
 
                 if (!empty($item_info_data)) {
 
@@ -337,9 +346,9 @@ item_deatails.sub_cat_id DESC
                         <div class="content" align="middle">
                         <a href="single.php?item_id=' . $item_id . '&sub_cat_id=' . $sub_cat_id . ' ">
                         <img class="secial_item img-responsive card" align="middle" style="text-aling:center;" src="../drugs_ordering_system_backend/uploads/' . $val3['item_image'] . '"/>
-                        <h3 style="text-align: center; font-weight: 600;">' . $item_name . '</h3>
-                        <h3 style="text-align: center; font-weight: 600; color:blue;">' . $main_cat_names . '</h3>
-                        <h3 style="text-align: center; color:red; font-weight: 600; ">LKR ' . $item_price . '</h3></a>';
+                        <h3 class="table_font_size">' . $item_name . '</h3>
+                        <h3 style="color:blue;"  class="table_font_size">' . $main_cat_names . '</h3>
+                        <h3 style="text-align: center; color:red; "  class="table_font_size">LKR ' . $item_price . '</h3></a>';
 
                         if ($out_of_stock == '1') {
                             //STOCK OUT ================================

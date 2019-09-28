@@ -1,13 +1,10 @@
 <?php session_start(); ?>
-
 <!DOCTYPE html>
 <html>
-    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-
     <!--MAIN HEAD START -->
     <head>
+        <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
         <?php require_once('include/header.php'); ?>
-
         <!--AMAZING SLIDER SCRIPT START-->
         <!-- Insert to your webpage before the </head> -->
         <script src="sliderengine/jquery.js"></script>
@@ -20,6 +17,7 @@
         <!--<link rel="stylesheet" type="text/css" href="./slick/slick.css">-->
         <!--<link rel="stylesheet" type="text/css" href="./slick/slick-theme.css">-->
         <style type="text/css">
+
             html, body {
                 margin: 0;
                 padding: 0;
@@ -73,16 +71,6 @@
                 word-break: break-all;
             }
 
-            /*            .row {
-                            margin: 8px -16px;
-                        }
-            
-                         Add padding BETWEEN each column (if you want) 
-                        .row,
-                        .row > .column {
-                            padding: 8px;
-                        }*/
-
             /* Create four equal columns that floats next to each other */
             .column {
                 float: left;
@@ -108,12 +96,26 @@
                     width: 50%;
                 }
             }
+            @media screen and (max-width: 450px) {
 
+                .column.cus_font.product-all-sec-wrapper .product-det-content-wrapper {
+                    font-size: 35px;
+                }
+
+            }
             /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
             @media screen and (max-width: 600px) {
                 .column {
                     width: 50%;
                 }
+
+                .column.cus_font.product-all-sec-wrapper .product-det-content-wrapper {
+                    font-size: 35px;
+                }
+                .table_font_size {
+                    font-size: 35px;
+                }
+
             }
 
             /*FEATURES ITEMS LIST CSS   END*/
@@ -169,8 +171,6 @@
                 heigh:210px;
             }
             /*special item width height css*/
-
-
             .cus_font{
                 font-size: 24px;
                 color: #1e2c9c;
@@ -244,13 +244,12 @@
                 margin: 20px 0;
             }
             /*//CUS HEADER CSS ///////////////////////////////////*/
+
+
         </style>
     </head>
     <!--MAIN HEAD END -->
     <body>
-
-        <!--<script src='../../../../ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'></script><script src="../../../../m.servedby-buysellads.com/monetization.js" type="text/javascript"></script>-->
-
         <!--MENU SCRIPT-->
         <!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>-->
         <script type="text/javascript" src="jquery_menu/jquery.smartmenus.js"></script>
@@ -269,13 +268,7 @@
         </script>
         <!--sub header--////////////////////////////////////////////////////////>-->
         <div class="header">
-
             <?php require_once('header2.php'); ?>
-            <?php // require_once('include/coustomer_header.php'); ?>
-            <?php // require_once('include/custom_header2.php'); ?>
-
-            <!--<a href="navbar.php"></a>-->
-
         </div>
 
 
@@ -308,16 +301,6 @@
             <div class="row load_item_cat " style="background-color: white;" hidden=""> </div>
             <!-- LOAD FEATURED ITEMS END -->
 
-
-
-
-            <!-- End of body section HTML codes -->
-            <!--ALL ITEM SLIDER START /////////////////////////////////////////3333333333333-->
-
-            <!--<div  class="img_view_panels" >     </div>-->
-            <!--ALL ITEM SLIDER END /////////////////////////////////////////3333333333333-->
-
-
             <!-- wrapper -->
             <div class="wrapper" style="background-color: white;">
                 <!--<h1>Our Stock</h1>-->
@@ -339,42 +322,25 @@
             </div>
 
             <!--/ wrapper -->
-
-            <!--<script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>-->
-
-            <!--NEW COUSTOMER ITEM SLIDER END /////////////////////////////////////////3333333333333-->
-
-            <!---728x90--->
         </div>
-    </div>
 
-    <div class="clearfix"> </div>
-</div>
 
-<!---->
-<script src="./js/functions.js" type="text/javascript" charset="utf-8"></script>
+        <div class="clearfix"> </div>
 
-<!---728x90--->
-<!--<SLIDER SCRIPT START />////////////////////////////////////////////////////////-->
-<!--<script src="./slick/slick.min.js" type="text/javascript" charset="utf-8"></script>-->
 
-<script type="text/javascript">
+        <!---->
+        <!--<script src="./js/functions.js" type="text/javascript" charset="utf-8"></script>-->
+
+        <div class="footer">
+            <?php require_once('include/footer.php'); ?>
+        </div>
+
+        <script type="text/javascript">
             $(document).on('ready', function () {
                 setTimeout(function () {
-//                    $(".regular").slick({
-//                        dots: true,
-//                        arrows: true,
-//                        infinite: true,
-//                        slidesToShow: 4,
-//                        slidesToScroll: 3,
-//                        lazyLoad: 'ondemand'
-//                    });
-
-
-//                    new script------------ -
                     $(".regular").slick({
                         // normal options...
-//                        dots: true,
+                        //                        dots: true,
                         infinite: true,
                         slidesToShow: 4,
                         slidesToScroll: 2,
@@ -397,16 +363,11 @@
                                     infinite: true
                                 }}]
                     });
-//                 new script-------------
+                    //                 new script-------------
 
                 }, 2000);
 
-//
-
-
-
-
-
+                //
 
                 //ONLOAD FUNCTION IMAGE MAIN CAT LOAD ------------------------------------------
                 $(function () {
@@ -448,75 +409,55 @@
                     });
                 });
 
+            });
 
 
+            //ADD TO CART ANIMATION --------------------------------------------
+            $(document).on('click', '.add-to', function () {
+                var cart = $('.shopping-cart');
+                var imgtodrag = $(this).parent('.item').find("img").eq(0);
+                if (imgtodrag) {
+                    var imgclone = imgtodrag.clone()
+                            .offset({
+                                top: imgtodrag.offset().top,
+                                left: imgtodrag.offset().left
+                            })
+                            .css({
+                                'opacity': '0.5',
+                                'position': 'absolute',
+                                'height': '150px',
+                                'width': '150px',
+                                'z-index': '100'
+                            })
+                            .appendTo($('body'))
+                            .animate({
+                                'top': cart.offset().top + 10,
+                                'left': cart.offset().left + 10,
+                                'width': 75,
+                                'height': 75
+                            }, 1000, 'easeInOutExpo');
+
+                    //                setTimeout(function () {
+                    //                    cart.effect("shake", {
+                    //                        times: 2
+                    //                    }, 200);
+                    //                }, 1500);
+
+                    imgclone.animate({
+                        'width': 0,
+                        'height': 0
+                    }, function () {
+                        $(this).detach()
+                    });
+                }
+            });
+            //    <!--//ADD TO CART ANIMATION END-->
+
+        </script>
 
 
-            }); //ON LOAD FUCTION END
-
-
-
-
-</script>
-
-<!--<SLIDER SCRIPT END />////////////////////////////////////////////////////////-->
-
-<!--FOTER DIV START ///////////////////////////////////////////////////////////-->
-<div class="footer">
-    <?php require_once('include/footer.php'); ?>
-    <script type="text/javascript">
-        $(document).on('ready', function () {
-
-        });
-
-
-        //ADD TO CART ANIMATION
-        $(document).on('click', '.add-to', function () {
-            var cart = $('.shopping-cart');
-            var imgtodrag = $(this).parent('.item').find("img").eq(0);
-            if (imgtodrag) {
-                var imgclone = imgtodrag.clone()
-                        .offset({
-                            top: imgtodrag.offset().top,
-                            left: imgtodrag.offset().left
-                        })
-                        .css({
-                            'opacity': '0.5',
-                            'position': 'absolute',
-                            'height': '150px',
-                            'width': '150px',
-                            'z-index': '100'
-                        })
-                        .appendTo($('body'))
-                        .animate({
-                            'top': cart.offset().top + 10,
-                            'left': cart.offset().left + 10,
-                            'width': 75,
-                            'height': 75
-                        }, 1000, 'easeInOutExpo');
-
-//                setTimeout(function () {
-//                    cart.effect("shake", {
-//                        times: 2
-//                    }, 200);
-//                }, 1500);
-
-                imgclone.animate({
-                    'width': 0,
-                    'height': 0
-                }, function () {
-                    $(this).detach()
-                });
-            }
-        });
-//    <!--//ADD TO CART ANIMATION END-->
-
-    </script>
-
-</div>
-
-<!--FOTER DIV END ///////////////////////////////////////////////////////////-->
-
+        <!--FOTER DIV END ///////////////////////////////////////////////////////////-->
+    </head>
 </body>
 
 </html>

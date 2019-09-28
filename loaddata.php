@@ -942,8 +942,8 @@ item_deatails.item_id DESC LIMIT 4");
                                 $out_of_stock = $val3['out_of_stock'];
                                 $out_put .= '<div align="" class="boder_imgz card cus_font">'
                                         . '<a href="single.php?item_id=' . $item_id . '&sub_cat_id=' . $sub_cat_id . ' "><img class="img-responsive"  style="text-aling:center;   opacity:1; background-color: rgba(0,255,255,0.4) height:auto; " src="../drugs_ordering_system_backend/uploads/' . $val3['item_image'] . '"/></a>'
-                                        . '<p style="padding-top:9px;">' . $item_name . '</p>'
-                                        . '<p  class="" style="color:red;">LKR : ' . $item_price . '</p>';
+                                        . '<p style="padding-top:9px;" class="table_font_size">' . $item_name . '</p>'
+                                        . '<p style="color:red;" >LKR : ' . $item_price . '</p>';
 //                                        . '<p  class="price">d comfy lorem ipsum lorem jeansum. Lorem jeamsun denim lorem jeansum.</p>'
 //                                        . '<p> Add to Cart<button  class=" add-to-cart" id="add_to_cart_btn"  data-item_price = "' . $item_price . '"    value=' . $item_id . '><label><img  style="height:40px; width:40px;" src="images/site_img/cart_add.png"  alt=" " /></label></button></p>'
 
@@ -1042,13 +1042,13 @@ item_deatails.item_id DESC
                                 $item_id = $val3['item_id'];
                                 $out_of_stock = $val3['out_of_stock'];
 
-                                $out_put .= '<div class="column cus_font ">
+                                $out_put .= '<div class="column cus_font product-all-sec-wrapper">
                     <div class="content" align="middle">
                     <a href="single.php?item_id=' . $item_id . '&sub_cat_id=' . $sub_cat_id . ' ">
                     <img class="secial_item img-responsive  " align="middle" style="text-aling:center;  " src="../drugs_ordering_system_backend/uploads/' . $val3['item_image'] . '"/>
-                    <h3 style="text-align: center; font-weight: 600;">' . $item_name . '</h3>
-                    <h3 style="text-align: center; font-weight: 600;">' . $main_cat_names . '</h3>
-                    <h3 style="text-align: center; color:red; font-weight: 600;">LKR ' . $item_price . '</h3>
+                    <h3 class="product-det-content-wrapper" style="text-align: center; font-weight: 600;">' . $item_name . '</h3>
+                    <h3 class="product-det-content-wrapper" style="text-align: center; font-weight: 600;">' . $main_cat_names . '</h3>
+                    <h3 class="product-det-content-wrapper" style="text-align: center; color:red; font-weight: 600;">LKR ' . $item_price . '</h3>
                         </a>';
                                 if ($out_of_stock == '1') {
                                     //STOCK OUT ================================
@@ -1257,79 +1257,6 @@ item_deatails.item_id DESC");
             }
             echo $out_put;
         }
-    } else if ($_POST['action'] == 'load_nav_bar_menu') {
-//ASHAN RAJAPAKSHA %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-//NAVIGATION BAR ============= =================================================
-        $main_cat_data = $system->prepareSelectQuery("SELECT
-main_cat.main_cat_name,
-main_cat.main_cat_id
-FROM
-main_cat
-WHERE
-main_cat.view_status = '0'
-ORDER BY
-main_cat.main_cat_id DESC");
-
-        $out_put1 = '';
-        if (!empty($main_cat_data)) {
-            $out_put1 = '<div class="menu-container">
-    <div class="menu" >
-        <ul>
-            <li><a href="index.php">Home</a></li>
-            <li><a href="#">Nature Cream</a>
-                <ul>
-                    <li><a href="#">Web Developement</a>
-                        <ul>
-                            <li><a href="#">JavaScript</a></li>
-                            <li><a href="#">HTML5</a></li>
-                            <li><a href="#">CSS3</a></li>
-                            <li><a href="#">PHP</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </li>
-            <li><a href="#">Bio Cream</a>
-                <ul>
-                    <li><a href="#">Web Developement</a>
-                        <ul>
-                            <li><a href="#">JavaScript</a></li>
-                            <li><a href="#">HTML5</a></li>
-                            <li><a href="#">CSS3</a></li>
-                            <li><a href="#">PHP</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </li>
-            <li><a href="#">Suppliment</a>
-                <ul>
-                    <li><a href="#">Web Developement</a>
-                        <ul>
-                            <li><a href="#">JavaScript</a></li>
-                            <li><a href="#">HTML5</a></li>
-                            <li><a href="#">CSS3</a></li>
-                            <li><a href="#">PHP</a></li>
-                        </ul>
-                    </li>
-
-                    <li><a href="#">Graphic Design</a>
-                        <ul>
-                            <li><a href="#">Sketch</a></li>
-                            <li><a href="#">Photoshop</a></li>
-                            <li><a href="#">Illustrator</a></li>
-                            <li><a href="#">Corel Draw</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </li>
-
-            <li><a href="#">About</a> </li>
-            <li><a href="#">Contact</a></li>
-        </ul>
-    </div>
-</div>
-';
-        }
-        echo $out_put1;
     }//END LOAD NAV BAR MENU
 }   //END ARRAY +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 

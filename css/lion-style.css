@@ -52,7 +52,7 @@ header {
 }
 
 .header-main-menu-sec-wrapper .menu-mid-sec-wrapper {
-      /*background-image: url("../images/site_img/green_bac5.jpg");*/
+    /*background-image: url("../images/site_img/green_bac5.jpg");*/
     background: #f9f9f9;
     background: #002e30;
     background: #011a00;
@@ -126,8 +126,8 @@ header {
     height: 20px;
     text-align: center;
     border-radius: 50%;
-    
-    
+
+
 }
 
 .header-main-menu-sec-wrapper .menu-items-sec-wrapper {
@@ -551,7 +551,7 @@ header {
 .mob-main-menu-wrapper .mob-menu-search-field-sec-wrapper i {
     position: absolute;
     right: 15px;
-    line-height: 33.2px;
+    line-height: 42.2px;
     font-size: 16px;
 }
 
@@ -572,15 +572,25 @@ header {
 
 @media only screen and (max-width: 450px) {
 
-    .mob-main-menu-wrapper .mob-main-menu-top-sec-wrapper .mob-view-logo-sec-wrapper a {
-        text-align: center;
-    }
+	.mob-main-menu-wrapper .mob-main-menu-top-sec-wrapper .mob-view-logo-sec-wrapper a {
+		text-align: center;
+	}
 
-    .mob-main-menu-wrapper .mob-main-menu-top-sec-wrapper .mob-view-logo-sec-wrapper a img {
-        width: 85%;
-    }
+	.mob-main-menu-wrapper .mob-main-menu-top-sec-wrapper .mob-view-logo-sec-wrapper a img {
+		width: 85%;
+	}
 
-    .mob-main-menu-wrapper .mob-main-menu-top-sec-wrapper .topmenu-righticons-sec-wrapper .topmenu-cart-icon-sec-wrapper i {
-        font-size: 38px;
-    }
+	.mob-main-menu-wrapper .mob-main-menu-top-sec-wrapper .topmenu-righticons-sec-wrapper .topmenu-cart-icon-sec-wrapper i {
+	    font-size: 38px;
+	}
+
+	
 }
+
+/*@media only screen and (max-width: 500px) {
+
+    .mob-main-menu-wrapper .mob-menu-items-wrapper ul li {
+        font-size: 20px;
+    }
+
+}*/
