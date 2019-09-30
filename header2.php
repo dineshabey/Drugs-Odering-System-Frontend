@@ -45,7 +45,8 @@
                                         if (!isset($_SESSION['cus_id'])) {
                                             echo '<a href="cart_item.php"><i class="fa fa-shopping-cart" aria-hidden="true"></i><span class="items-num-wrapper item_tot" ></span></a>';
                                         } else {
-                                            echo '<a href="cart_item.php" ><i class="fa fa-shopping-cart" aria-hidden="true"></i><span class="items-num-wrapper item_tot" ></span></a>';
+//                                            echo '<a href="cart_item.php" ><i class="fa fa-shopping-cart" aria-hidden="true"></i><span class="items-num-wrapper item_tot" ></span></a>';
+                                            echo '<a href="user_profil.php" ><i class="fa fa-shopping-cart" aria-hidden="true"></i><span class="items-num-wrapper itm_qty_user_log" ></span></a>';
                                         }
                                         ?>
                                     </span>
@@ -90,7 +91,8 @@
                                         if (!isset($_SESSION['cus_id'])) {
                                             echo '<a href="cart_item.php"> <i class="fa fa-shopping-cart" style="font-size: 50px; color:blue;" aria-hidden="true"></i>  <span class="items-num-wrapper item_tot">0</span></a>';
                                         } else {
-                                            echo '<a href="cart_item.php"> <i style="font-size: 50px;" class="fa fa-shopping-cart" aria-hidden="true"></i>  <span class="items-num-wrapper item_tot">0</span></a>';
+                                            echo '<a href="user_profil.php"> <i class="fa fa-shopping-cart" style="font-size: 50px; color:blue;" aria-hidden="true"></i>  <span class="items-num-wrapper itm_qty_user_log"></span></a>';
+//                                            echo '<a href="cart_item.php"> <i style="font-size: 50px;" class="fa fa-shopping-cart" aria-hidden="true"></i>  <span class="items-num-wrapper item_tot">0</span></a>';
                                         }
                                         ?>
                                     </span>

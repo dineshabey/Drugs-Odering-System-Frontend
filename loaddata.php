@@ -399,7 +399,20 @@ web_cart
 WHERE
 web_cart.user_key = '$user_key'";
         $system->prepareSelectQueryForJSONSingleData($qry);
-    } else if ($_POST['action'] == 'added_item_tot') {
+    } else if ($_POST['action'] == 'itm_qty_user_log') {
+// GET CART ITEM TOT AFTER USER LOG - ------------------------------------------------------------
+        $qry = "SELECT
+Sum(customer_added_item.item_qty) AS itm_qty_user_log
+FROM
+customer_added_item
+INNER JOIN item_deatails ON customer_added_item.item_id = item_deatails.item_id
+WHERE
+customer_added_item.cus_id = '{$_SESSION['cus_id']}' AND
+customer_added_item.item_save_status = '5' AND
+item_deatails.item_view_status = '0'";
+        $system->prepareSelectQueryForJSONSingleData($qry);
+    } 
+    else if ($_POST['action'] == 'added_item_tot') {
 // ADDED ITEM TOTAL - ----------------------------------------------------------
         $qry = "SELECT
 customer_added_item.id,

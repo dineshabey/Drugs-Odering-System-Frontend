@@ -7,10 +7,10 @@ if (!isset($_SESSION['cus_id'])) {
 
 <!DOCTYPE html>
 <html>
-    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 
     <!--MAIN HEAD START -->
     <head> 
+        <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
         <?php require_once('include/header.php'); ?>
 
 
@@ -33,7 +33,27 @@ if (!isset($_SESSION['cus_id'])) {
             input[type=number]::-webkit-outer-spin-button {
                 opacity: 1;
             }
+            @media screen and (max-width: 450px) {
 
+                .column.cus_font.product-all-sec-wrapper .product-det-content-wrapper {
+                    font-size: 35px;
+                }
+
+            }
+            /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+            @media screen and (max-width: 600px) {
+                .column {
+                    width: 50%;
+                }
+
+                .column.cus_font.product-all-sec-wrapper .product-det-content-wrapper {
+                    font-size: 35px;
+                }
+                .table_font_size {
+                    font-size: 25px;
+                }
+
+            }
 
         </style>
         <!--UL RIHT MARK STYLE-->
@@ -67,14 +87,14 @@ if (!isset($_SESSION['cus_id'])) {
 
 
         <div class="container">
-            <div class="row" style="padding-top: 50px;"></div>
+            <div class="row " style="padding-top: 50px;"></div>
             <hr style="  border-top: 1px solid red;">
             <div class="row order_summary" id="order_summary" style="padding-top: 50px; padding-right: 15px; background: white;">
                 <div class="col-lg-6">
                     <div class="" >
                         <legend>Order Summary</legend>
                         <div class="scrollable" style="height: auto; overflow-y: auto">
-                            <table class="table table-bordered table-striped table-hover datable added_item_summary" id="added_item_summary">
+                            <table class="table table-bordered table-striped table-hover datable added_item_summary table_font_size" id="added_item_summary">
                                 <thead>
                                     <tr style="background-color: #dcfdff;">
                                         <th>#</th>
@@ -92,19 +112,19 @@ if (!isset($_SESSION['cus_id'])) {
                             </table>
                         </div>
                     </div>
-                    <div class="row" style="color: ;">
-                        <div class="form-horizontal ">
+                    <div class="" >
+                        <div class="form-horizontal table_font_size" style="text-align: center;">
                             <div class="form-group">
                                 <label class="col-md-5 control-label" for="textinput">Total Item Price (LKR):</label>  
-                                <label class="col-md-4 control-label tot_price" for="textinput"></label>  
+                                <label class="col-md-6 control-label tot_price"   for="textinput"></label>  
                             </div>
                             <div class="form-group">
                                 <label class="col-md-5 control-label" for="textinput">Total Discount Price (LKR):</label>  
-                                <label class="col-md-4 control-label tot_discount"  for="textinput"></label>  
+                                <label class="col-md-6 control-label tot_discount"  for="textinput"></label>  
                             </div>
                             <div class="form-group" >
                                 <label class="col-md-5 control-label" for="textinput">Total Order Value  (LKR):</label>  
-                                <label style="color:red ;" class="col-md-4 control-label tot_order_val"  for="textinput"></label>  
+                                <label style="color:red ;" class="col-md-6 control-label tot_order_val"  for="textinput"></label>  
                             </div>
                         </div>
                         <!--HIDDEN VALUE //////////////////////////////////////////////////////////////////////////////////////////////////-->
@@ -120,11 +140,11 @@ if (!isset($_SESSION['cus_id'])) {
                     </div>
                 </div>
 
-                <div class="col-lg-6" style="background-color: antiquewhite;" >
+                <div class="col-lg-6 table_font_size" style="background-color: antiquewhite; text-align: center;" >
                     <div class="form-horizontal">
                         <fieldset>
                             <!-- Form Name -->
-                            <legend>Delivery Details</legend>
+                            <legend class="" style="color: blue; font-size: 30px;">Delivery Details</legend>
 
                             <!-- Text input-->
                             <div class="form-group">
@@ -163,12 +183,12 @@ if (!isset($_SESSION['cus_id'])) {
                             <!-- Button -->
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for=""></label>
-                                <div class=" btn-group" role="group">
-                                    <button type="button" id="next_step" name=""  class="next_step btn btn-primary hidden">NEXT STEP</button>
-                                    <button  type="button" id="next_step_edit" name="" class="next_step_edit btn btn-primary ">EDIT DEATAILS</button>
-                                    <button  type="button" id="next_step_reset" name="" class="next_step_reset btn btn-danger hidden">RESET</button>
-                                    <button id="next_step_update" name=""  class="next_step_update btn btn-info ">UPDATE DEATAILS</button>
-                                    <button  type="button" id="order_confirm" name="" class="order_confirm btn btn-success hidden">ODER CONFIRM</button>
+                                <div class="btn-group" role="group">
+                                    <button type="button" id="next_step" name=""  class="next_step btn btn-primary hidden table_font_size">NEXT STEP</button>
+                                    <button  type="button" id="next_step_edit" name="" class="next_step_edit btn btn-primary table_font_size">EDIT DEATAILS</button>
+                                    <button  type="button" id="next_step_reset" name="" class="next_step_reset btn btn-danger hidden table_font_size">RESET</button>
+                                    <button id="next_step_update" name=""  class="next_step_update btn btn-info table_font_size">UPDATE DEATAILS</button>
+                                    <button  type="button" id="order_confirm" name="" class="order_confirm btn btn-success hidden table_font_size">ODER CONFIRM</button>
                                 </div>
                                 <div class="col-md-3">
                                 </div>
@@ -199,7 +219,7 @@ if (!isset($_SESSION['cus_id'])) {
                             <!-- Form Name -->
 
                             <!-- Text input-->
-                            <div class="row">
+                            <div class="row ">
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <select class="form-control" id="payment_method">
@@ -211,7 +231,7 @@ if (!isset($_SESSION['cus_id'])) {
                                     </div>
                                 </div>
 
-                                <div class="col-md-9 hidden normal_payment" id="normal_payment" style="border-style:dotted solid; border-width: 2px 2px 2px 10px; border-color:red; background-color: white; color: #0b33ce;">
+                                <div class="col-md-9 hidden normal_payment table_font_size" id="normal_payment" style="border-style:dotted solid; border-width: 2px 2px 2px 10px; border-color:red; background-color: white; color: #0b33ce;">
                                     <span class="border border-primary" > 
                                         <h3>CARD PAYMENT</h3>
                                         <p>You can pay now , 
@@ -253,7 +273,7 @@ if (!isset($_SESSION['cus_id'])) {
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-9 hidden bank_payment" id="bank_payment" style="border-style:dotted solid; border-width: 2px 2px 2px 10px; border-color:red; background-color: white; color: #0b33ce;">
+                                <div class="col-md-9 hidden bank_payment table_font_size" id="bank_payment" style="border-style:dotted solid; border-width: 2px 2px 2px 10px; border-color:red; background-color: white; color: #0b33ce;">
                                     <h3>NORMAL PAYMENT</h3>
                                     <p >When you gonna pay make sure to select the payment method as Send/Transfer/Deposit. Then you can pay using any of these methods. Just send us a photo or screenshot of receipt.</p>
                                     <h4>Bank Deatails</h4>
@@ -319,6 +339,7 @@ if (!isset($_SESSION['cus_id'])) {
 
             <script type="text/javascript">
                 $(document).on('ready', function () {
+                    added_item_qty_user_log();
                     load_user_added_item();
                     added_item_tot();
                     get_shipping_deatails();
@@ -509,7 +530,7 @@ if (!isset($_SESSION['cus_id'])) {
                                 tableData += '</tr>';
                                 $('#item_bill_no').val(qData.bill_no);
                             });
-                            tableData += '<tr><td colspan="9" ><a href="user_profil.php"><button type="button" class="btn btn-success">&nbsp; Back</button></a>&nbsp;&nbsp;&nbsp;<button id="cancel_order" class="btn btn-warning"> Remove</button></td></tr>';
+                            tableData += '<tr><td colspan="9" ><a href="user_profil.php"><button type="button" class="btn btn-success table_font_size">&nbsp; Back</button></a>&nbsp;&nbsp;&nbsp;<button id="cancel_order" class="btn btn-warning table_font_size"> Remove</button></td></tr>';
                         }
                         $('.added_item_summary tbody').html(tableData);
                     }, "json");

@@ -12,10 +12,6 @@ if (isset($_SESSION['cus_id'])) {
     echo '<input type="text" hidden="" id="cus_id" value="0">';
 }
 ?>
-<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">-->
-
-<!--<a href="../fonts/angle-right-solid.svg"></a>-->
-
 <style type="text/css">
     .footer_bar{
         background-image: url("images/site_img/green_bac5.jpg");
@@ -29,8 +25,6 @@ if (isset($_SESSION['cus_id'])) {
         color: #bdff77;
         font-size: 20px;
         font-family: Arial Rounded MT ,Helvetica Rounded,Arial,sans-serif;
-
-
     }
 
     .li_clz{
@@ -39,9 +33,6 @@ if (isset($_SESSION['cus_id'])) {
         font-family: Garamond,Baskerville,Baskerville Old Face,Hoefler Text,Times New Roman,serif;
         /*border: 1px solid yellow;*/
     }
-
-
-
 
 </style>
 
@@ -195,13 +186,21 @@ LIMIT 5
 <script src="js/megamenu.js"></script>
 <script type="text/javascript"></script>
 
-  <!-- bootstrap js -->
-        <script src="js/bootstrap.min.js"></script>
+<!-- bootstrap js -->
+<script src="js/bootstrap.min.js"></script>
 
-        <!-- custom js -->
-        <script src="js/lion-custom.js"></script>
+<!-- custom js -->
+<script src="js/lion-custom.js"></script>
 
 <script type="text/javascript">
+
+    //ON LOAD FUNCTION ===========================================================
+    $(document).on('ready', function () {
+        item_tot();
+        added_item_qty_user_log();
+    });
+
+
 //ADD TO CART BTN CLICK ========================================================
     $(document).on('click', '#add_to_cart_btn', function () {
         var cus_id = $("#cus_id").val();
@@ -224,6 +223,7 @@ LIMIT 5
 //                                    $('#').html("NO data Found ! ");
                     alert('No data found');
                 } else {
+                    added_item_qty_user_log();
                     load_user_added_item();
                 }
             }, "json");
@@ -232,24 +232,50 @@ LIMIT 5
     });
 //header anuja js
 
-    $(document).on('ready', function () {
-        item_tot();
-    });
+    //USER ADDED ITEM QTY USRER LOG ========================================
+    function added_item_qty_user_log() {
+        $.post("./loaddata.php", {action: 'itm_qty_user_log'}, function (e) {
+            if (e === undefined || e.length === 0 || e === null) {
+                $('.itm_qty_user_log').html("NO data Found ! ");
+            } else {
+                var itm_qty_user_log = parseInt(e['itm_qty_user_log']);
+                if (isNaN(itm_qty_user_log)) {
+                    $('.itm_qty_user_log').html(0);
+                } else {
+                    if (itm_qty_user_log == null) {
+                        $('.itm_qty_user_log').html(0);
+                    } else {
+                        $('.itm_qty_user_log').html(itm_qty_user_log);
+                    }
+                }
+            }
+            //                            chosenRefresh();
+        }, "json");
+    }
+
 //CART ADDED ITEM TOTAL ===========================================================
     function item_tot() {
         $.post("./loaddata.php", {action: 'item_total'}, function (e) {
             if (e === undefined || e.length === 0 || e === null) {
                 $('#').html("NO data Found ! ");
             } else {
-                var item_tot = (e['item_tot']);
+                var item_tot = parseInt(e['item_tot']);
                 var item_tot_price = (e['item_tot_price']);
-                if (item_tot == null) {
+                if (isNaN(item_tot)) {
                     $('.item_tot').html("0");
                 } else {
-                    $('.item_tot').html(item_tot);
+                    if (item_tot == null) {
+                        $('.item_tot').html("0");
+                    } else {
+                        $('.item_tot').html(item_tot);
+                    }
                 }
 
-                $('.item_tot_price').html(item_tot_price);
+                if (item_tot_price == null) {
+                    $('.item_tot_price').html("0.00");
+                } else {
+                    $('.item_tot_price').html(item_tot_price);
+                }
                 //                    load_cart_item_list();
             }
             //    chosenRefresh();
@@ -270,6 +296,11 @@ LIMIT 5
             }
         }, "json");
     });
+    
+    
+    
+    
+    
     //GO TO PROFIL BTN =================================================================
     $(document).on('click', '#profil', function () {
         window.location.replace("user_profil.php");
