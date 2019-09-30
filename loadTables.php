@@ -134,7 +134,7 @@ item_deatails.sub_cat_id DESC
 
     $item_out_put .= '<div class="row"> <div class=" center-block" > <ul class="pagination pagination-lg">
                             <li class="page-item">';
-    $item_out_put .= '<a class="page-link" href="' . ($page - 1) . '">Previous</a></li>';
+    $item_out_put .= '<a class="page-link" href="'. $main_cat . '&sub_cat_id=' . $sub_cat . '&page=' . ($page - 1) . '">Previous</a></li>';
 
 
     for ($v = 1; $v <= $pages; $v++) {
@@ -146,7 +146,7 @@ item_deatails.sub_cat_id DESC
         }
     }
 
-    $item_out_put .= '<li class="page-item"><a class="page-link" href="' . ($page - 1) . '">Next</a></li>
+    $item_out_put .= '<li class="page-item"><a class="page-link" href="' . $main_cat . '&sub_cat_id=' . $sub_cat . '&page='. ($page - 1) . '">Next</a></li>
                         </ul>
 
                     </div>
@@ -213,10 +213,10 @@ item_deatails.item_id DESC
     $end = min(($offset + $limit), $total);
 
 // The "back" link
-    $prevlink = ($page > 1) ? '<a href="?page=1" title="First page">&laquo;</a> <a href="?page=' . ($page - 1) . '" title="Previous page">&lsaquo;</a>' : '<span class="disabled">&laquo;</span> <span class="disabled">&lsaquo;</span>';
+    $prevlink = ($page > 1) ? '<a href="?page=1" title="First page">&laquo;</a> <a href="?page='. $main_cat . '&sub_cat_id=' . $sub_cat . '&page=' . ($page - 1) . '" title="Previous page">&lsaquo;</a>' : '<span class="disabled">&laquo;</span> <span class="disabled">&lsaquo;</span>';
 
 // The "forward" link
-    $nextlink = ($page < $pages) ? '<a href="?page=' . ($page + 1) . '" title="Next page">&rsaquo;</a> <a href="?page=' . $pages . '" title="Last page">&raquo;</a>' : '<span class="disabled">&rsaquo;</span> <span class="disabled">&raquo;</span>';
+    $nextlink = ($page < $pages) ? '<a href="?page='. $main_cat . '&sub_cat_id=' . $sub_cat . '&page=' . ($page + 1) . '" title="Next page">&rsaquo;</a> <a href="?page=' . $pages . '" title="Last page">&raquo;</a>' : '<span class="disabled">&rsaquo;</span> <span class="disabled">&raquo;</span>';
 
 // Display the paging information
 //  echo '<div id="paging"><p>', $prevlink, ' Page ', $page, ' of ', $pages, ' pages, displaying ', $start, '-', $end, ' of ', $total, ' results ', $nextlink, ' </p></div>';
@@ -296,4 +296,24 @@ item_deatails.item_id DESC
     
     
     json_encode($item_out_put);
+}elseif ($_POST['action'] == 'load_cat_name') {
+  $main_cat = $_POST['main_cat'];
+    $sub_cat = $_POST['sub_cat'];
+ 
+     $cat_query = "SELEC
+main_cat.main_cat_name,
+main_cat.main_cat_id
+FROM
+main_cat
+WHERE
+main_cat.main_cat_id = '{$main_cat}' 
+";
+
+   
+  //  $item_info_data = $system->prepareSelectQuery($cat_query);
+    
+   // echo $item_info_data['cat_name'];
+    
+   // json_encode($item_info_data['cat_name']); 
 }
+

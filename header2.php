@@ -35,7 +35,7 @@
                                 </div>
                                 <div class="top-menu-search-sec-wrapper">
                                     <div class="top-menu-search-field-sec-wrapper">
-                                        <input type="text" name="search" style="width: 500px;" maxlength="20">
+                                        <input type="text" name="search" id="search_text" style="width: 500px;" maxlength="20">
                                         <i class="fa fa-search" aria-hidden="true"></i>
                                     </div>
                                 </div>
@@ -76,11 +76,13 @@
                                     <span class="menu-txt" style="padding-top: 16px; font-size: 26px;">menu</span>
                                 </div>
                                 <div class="mob-view-logo-sec-wrapper">
+                                   
                                     <!--<a href="index.php"><img src="img/lion-mini-mart-logo.png" alt="Lion Mini Mart Logo"></a>-->
                                     <a href="#" style="text-decoration: none;"><p id="index_id" class="lion_text" style="">LION MINI MART</p>
                                         <div class="mob-menu-search-field-sec-wrapper" style="width: 100% !important ;">
-                                            <input type="text" style="color: black; font-size: 20px; font-weight: bold;" name="search" placeholder="s e a r c h .." maxlength="20">
+                                            <input type="text"  style="color: black; font-size: 20px; font-weight: bold;" name="search" placeholder="s e a r c h .." maxlength="20">
                                             <i class="fa fa-search" aria-hidden="true"></i>
+                                              <!--<input type="text" name="search" id="search_text" style="width: 500px;" maxlength="20">-->
                                         </div>
                                     </a>
                                 </div>

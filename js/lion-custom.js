@@ -8,7 +8,7 @@ $(document).ready(function(){
 		}
 		
 		else if($(".mob-menu-items-wrapper").css("display") == 'none') {
-			console.log("aa");
+			//console.log("aa");
 			$(".mob-main-menu-top-sec-wrapper").css({'margin-bottom': '10px'});
 			$(".mob-main-menu-wrapper .mob-menu-search-field-sec-wrapper").show();
 		}*/
