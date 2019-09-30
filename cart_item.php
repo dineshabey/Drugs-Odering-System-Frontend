@@ -4,7 +4,7 @@
 
     <!--MAIN HEAD START -->
     <head> 
-    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+        <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
         <?php require_once('include/header.php'); ?>
 
 
@@ -32,11 +32,11 @@
             @media screen and (max-width: 600px) {
                 table {
                     font-size: 24px;
-                   
+
                 }
-                
+
                 .item_nm {
-                   
+
                     font-weight:bold;
                 }
             }
@@ -172,9 +172,7 @@
                 $(document).on('ready', function () {
                     load_cart_item_list();
                     item_tot();
-
                 });
-
                 function load_cart_item_list() {
                     var tableData = '';
                     $.post("./loaddata.php", {action: 'load_cart_item_list'}, function (e) {
@@ -187,22 +185,18 @@
                                 tableData += '<td width="5%" height="150">' + index + '</td>';
                                 tableData += '<td width=""><img style=" height:90px;" src="../drugs_ordering_system_backend/uploads/' + qData.item_image + '" data-imagezoom="true" class="img-responsive"> <p style="text"><span class="item_nm"> ' + qData.item_name + '</span></p></td>';
 //                                tableData += '<td width=""> Item Link </td>';
-                              
+
 //    tableData += '<td width="10%"><input class="size-36" step="1"  type="number" min="1" max="50" id="add_item_in_cart" class="form-control text-center"  data-price = "' + qData.item_price + '"  data-cart_id = "' + qData.id + '"  value="' + qData.item_qty + '"></td>';
 
 
 //                                tableData += '<td width="10%"><span class="input-number-decrement">–</span><input class="size-36" step="1"  type="number" min="1" max="50" id="add_item_in_cart" class="form-control text-center"  data-price = "' + qData.item_price + '"  data-cart_id = "' + qData.id + '"  value="' + qData.item_qty + '"><span class="input-number-increment">+</span></td>';
 
 //                                tableData += '<td width="10%"><input class="size-36" step="1"  type="number" min="1" max="50" id="add_item_in_cart" class="form-control text-center"  data-price = "' + qData.item_price + '"  data-cart_id = "' + qData.id + '"  value="' + qData.item_qty + '"> <div id="inc-button" class="spinner-button">+</div><div id="dec-button" class="spinner-button">-</div></td>';
-                 //ITEM QUTY CHANGE      
-    tableData += '<td width="" align="center" >  <input class="input_qty qty " id="qty"  data-price = "' + qData.item_price + '"  data-cart_id = "' + qData.id + '"  value="' + qData.item_qty + '" data-item_id = "' + qData.item_price + '" />  <div><button class="dec qty_btn minus_item_btn" id="minus_item_btn" onclick="modif_qty(-1)">-</button></div><div><button class="inc qty_btn plus_item_btn" id="plus_item_btn">+</button></div></td>';
-    
-    
-    
-    tableData += '<td width="" style="text-aling:left;">' + qData.item_price + '</td>';
+                                //ITEM QUTY CHANGE      
+                                tableData += '<td width="" align="center" >  <input class="input_qty qty " id="qty"  data-price = "' + qData.item_price + '"  data-cart_id = "' + qData.id + '"  value="' + qData.item_qty + '" data-item_id = "' + qData.item_price + '" />  <div><button class="dec qty_btn minus_item_btn" id="minus_item_btn" onclick="modif_qty(-1)">-</button></div><div><button class="inc qty_btn plus_item_btn" id="plus_item_btn">+</button></div></td>';
+                                tableData += '<td width="" style="text-aling:left;">' + qData.item_price + '</td>';
                                 tableData += '<td width="">' + qData.tot_price + '</td>';
                                 tableData += '<td width=""><button  id="delete" class="btn btn-danger delStrData   btn-sm fa fa-trash-o fa-sm" type="button" value="' + qData.id + '"></button></td>';
-
                                 tableData += '</tr>';
                             });
                             tableData += '<tr><td colspan="7" ><a href="index.php"><button type="button" class="btn btn-success">< KEEP SHOPPING</button></a></td></tr>';
@@ -223,7 +217,6 @@
                     var price = ($(this).data('price'));
                     var qty = $(this).val();
                     var tot_price = (qty * price);
-
                     $.post("./loaddata.php", {action: 'update_cart_in_tbl', id: cart_id, tot_price: tot_price, qty: qty}, function (e) {
                         if (e === undefined || e.length === 0 || e === null) {
                             alert('Error in deleting');
@@ -231,10 +224,10 @@
                             item_tot();
                         }
                     }, "json");
-                });
-<<<<<<< HEAD
-//CART ADDED ITEM TOTAL ===========================================================
-//                function item_tot() {
+                }
+                );
+                //CART ADDED ITEM TOTAL ===========================================================
+                //                function item_tot() {
 //                    $.post("./loaddata.php", {action: 'item_total'}, function (e) {
 //                        if (e === undefined || e.length === 0 || e === null) {
 //                            $('#').html("NO data Found ! ");
@@ -248,9 +241,7 @@
 //                        //    chosenRefresh();
 //                    }, "json");
 //                }
-=======
-                
-        //CART ADDED ITEM TOTAL ===========================================================
+                //CART ADDED ITEM TOTAL ===========================================================
                 function item_tot() {
                     $.post("./loaddata.php", {action: 'item_total'}, function (e) {
                         if (e === undefined || e.length === 0 || e === null) {
@@ -265,10 +256,9 @@
                         //    chosenRefresh();
                     }, "json");
                 }
->>>>>>> dcd0887212429d8791594efed72698acc0abf5fd
 
-//USER ADDED ITEM TOTAL ===========================================================
-//                function added_item_tot() {
+                //USER ADDED ITEM TOTAL ===========================================================
+                //                function added_item_tot() {
 //                    $.post("./loaddata.php", {action: 'added_item_tot'}, function (e) {
 //                        if (e === undefined || e.length === 0 || e === null) {
 //                            $('.item_tot').html("NO data Found ! ");
@@ -296,7 +286,7 @@
                 }
 
 
-//                TABALE QTY ADD REMOVE BTN==========================================
+                //                TABALE QTY ADD REMOVE BTN==========================================
                 function modify_qty(val) {
                     var qty = document.getElementById('qty').value;
                     var new_qty = parseInt(qty, 10) + val;
@@ -307,43 +297,34 @@
                     return new_qty;
                 }
 
-//              ITEM PLUS (+) BTNBTN==========================================
+                //              ITEM PLUS (+) BTNBTN==========================================
                 $(document).on('click', '.plus_item_btn ', function () {
-                    
+
                     var qty = parseInt($('#qty').val());
                     var new_qty = qty + 1;
-                                     
-                   $(this).closest("tr")   // Finds the closest row <tr> 
-                       .find(".input_qty")     // Gets a descendent with class="nr"
-                       .val(new_qty);  
-
+                    $(this).closest("tr")   // Finds the closest row <tr> 
+                            .find(".input_qty")     // Gets a descendent with class="nr"
+                            .val(new_qty);
                 });
-//              ITEM MINUS(-) BTNBTN==========================================
+                //              ITEM MINUS(-) BTNBTN==========================================
                 $(document).on('click', '.minus_item_btn', function () {
                     var qty = parseInt($('#qty').val());
-<<<<<<< HEAD
 
                     var a = $('#qty').data('item_id'); //getter
                     var item_id = ($(this).data('item_id'));
-//                      var price = ($(this).data('price'));
-//                    alert(a)
-=======
->>>>>>> dcd0887212429d8791594efed72698acc0abf5fd
+                    //                      var price = ($(this).data('price'));
+                    //                    alert(a)
                     var new_qty = qty - 1;
-                  
+
                     if (new_qty < 0) {
                         new_qty = 0;
                     }
-<<<<<<< HEAD
                     $(this).data('item_id').val(new_qty);
-=======
+                    $(this).closest("tr")   // Finds the closest row <tr> 
+                            .find(".input_qty")     // Gets a descendent with class="nr"
+                            .val(new_qty);
 
-                       $(this).closest("tr")   // Finds the closest row <tr> 
-                       .find(".input_qty")     // Gets a descendent with class="nr"
-                       .val(new_qty); 
-
-                  //  $(this).data('item_id').val(new_qty);
->>>>>>> dcd0887212429d8791594efed72698acc0abf5fd
+//  $(this).data('item_id').val(new_qty);
 //                    $($(this).data('item_id')).val(new_qty);
 
                 });
