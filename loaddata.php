@@ -25,7 +25,6 @@ function getUserIpAddr() {
 }
 
 $user_key = getUserIpAddr();
-
 // GET USER IP ADDRESS END------------------------------------------------------
 if (array_key_exists("action", $_POST)) {
 //SINGAL PAGE LOAD SLIDER DATA =================================================
@@ -35,7 +34,8 @@ item_deatails.sub_cat_id,
 item_deatails.item_id,
 item_deatails.item_image,
 item_deatails.item_name,
-item_deatails.item_price
+item_deatails.item_price,
+item_deatails.out_of_stock
 FROM
 item_deatails
 WHERE
@@ -61,8 +61,99 @@ item_deatails
 WHERE
 item_deatails.item_id = '{$_POST['item_id']}'";
         $system->prepareSelectQueryForJSON($query);
-        //DELETE(CANCEL) ORDER -================================================
-    } else if ($_POST['action'] == 'cancel_order') {
+    } else if ($_POST['action'] == 'distroy_session') {
+        $cus_id_pw = ($_SESSION['cus_id_pw_recover']);
+        //select tem pw & cus id availabel or not -----------------------
+        $updatexx = "UPDATE `tem_pw` SET  `pw_status`='1' WHERE (`cus_id`='{$cus_id_pw}');";
+        MainConfig::connectDB();
+        $link = MainConfig::conDB();
+        $update1 = mysqli_query($link, $updatexx) or die(mysqli_error());
+        if ($update1) {
+            // SESSEON UNSET /////////////////////////////////////////////////////
+            unset($_SESSION['cus_id_pw_recover']);
+            // SESSEON UNSET End /////////////////////////////////////////////////
+            //pw update succssfully -----------------------------
+            echo json_encode("1");
+        } else {
+//error  update ----------------
+            echo json_encode("2");
+        }
+    } else if ($_POST['action'] == 'email_chk') {
+        //EMAIL CHK  -==========================================================
+        $query = "SELECT
+customer_details.cus_id,
+customer_details.f_name,
+customer_details.l_name
+FROM
+customer_details
+WHERE
+customer_details.account_status = '0' AND
+customer_details.email = '{$_POST['email']}'";
+        MainConfig::connectDB();
+        $link = MainConfig::conDB();
+        $result = mysqli_query($link, $query) or die(mysqli_error());
+        $row = mysqli_fetch_assoc($result);
+        if (!empty($row)) {
+            //data found ----
+            //generate tem pw --------------------------------------------
+            $length = 4;
+            $characters = '0123456789';
+            $charactersLength = strlen($characters);
+            $randomPw = '';
+            for ($i = 0; $i < $length; $i++) {
+                $randomPw .= $characters[rand(0, $charactersLength - 1)];
+            }
+            $randomPw;
+            //generate tem pw end--------------------------------------------
+            //select tem pw & cus id availabel or not -----------------------
+            $select = "SELECT
+tem_pw.cus_id,
+tem_pw.id
+FROM
+tem_pw
+WHERE
+tem_pw.cus_id = '{$row['cus_id']}'
+";
+            $result1 = mysqli_query($link, $select) or die(mysqli_error());
+            $row1 = mysqli_fetch_assoc($result1);
+
+            if (!empty($row1)) {
+                //update qry----------
+                $update = "UPDATE `tem_pw` SET `tem_pw`='{$randomPw}', `time`='{$time}', `date`='{$date}', `pw_status`='0' WHERE (`id`='{$row1['id']}');";
+                $update1 = mysqli_query($link, $update);
+                if ($update1) {
+                    // SESSEON SET /////////////////////////////////////////////////////
+                    $_SESSION['cus_id_pw_recover'] = $row1['cus_id'];
+                    // SESSEON SET End /////////////////////////////////////////////////
+                    //pw update succssfully -----------------------------
+                    echo json_encode("6");
+                } else {
+//error pw update ----------------
+                    echo json_encode("7");
+                }
+            } else {
+                //insert qry----------
+                //insert tem pw -------------------------------------------------
+                $insert = "INSERT INTO `tem_pw` (`cus_id`, `tem_pw`, `date`, `time`, `pw_status`) VALUES ('{$row['cus_id']}','{$randomPw}', '{$date}', '{$time}', '0');";
+                $insert = mysqli_query($link, $insert);
+                if ($insert) {
+                    // SESSEON SET /////////////////////////////////////////////////////
+                    $_SESSION['cus_id_pw_recover'] = $row['cus_id'];
+                    // SESSEON SET End /////////////////////////////////////////////////
+                    //pw insert succssfully -----------------------------
+                    echo json_encode("1");
+                } else {
+//error pw insert ----------------
+                    echo json_encode("5");
+                }
+            }
+        } else {
+            //not found email address ------------------
+            echo json_encode("0");
+        }
+    }
+    //DELETE(CANCEL) ORDER -================================================
+    else if ($_POST['action'] == 'cancel_order') {
         $query1 = "DELETE FROM `customer_added_item` WHERE (`cus_id`='{$_SESSION['cus_id']}' AND `pay_status` = '0' AND `item_save_status`= '7')";
         $query2 = "DELETE FROM `shipping_details` WHERE (`cus_id`='{$_SESSION['cus_id']}' AND `pay_status` = '0')";
         MainConfig::connectDB();
@@ -201,11 +292,11 @@ customer_added_item.item_id = '{$_POST['item_id']}'
         if (!empty($row)) {
             $new_qty = ($row['item_qty']) + 1;
 //data update ------------------------------------------------------------------
-            $update_qry = "UPDATE `customer_added_item` SET  `item_qty`='$new_qty', `pay_status`='0',`item_save_status`='5' WHERE (`id`='{$row['id']}');";
+            $update_qry = "UPDATE `customer_added_item` SET  `item_qty`='$new_qty', `pay_status`='0',`item_save_status`='7' WHERE (`id`='{$row['id']}');";
             $system->prepareCommandQueryForAlertify($update_qry, "Update Successfully", "Erro while updating");
         } else {
 //data insert in first time ----------------------------------------------------
-            $qry_insert = "INSERT INTO `customer_added_item` (`cus_id`, `item_id`, `item_qty`, `pay_status`, `item_add_date`, `item_add_time`, `item_save_status`) VALUES ( '{$_POST['cus_id']}', '{$_POST['item_id']}', '1', '0', '$date', '$time', '5');";
+            $qry_insert = "INSERT INTO `customer_added_item` (`cus_id`, `item_id`, `item_qty`, `pay_status`, `item_add_date`, `item_add_time`, `item_save_status`) VALUES ( '{$_POST['cus_id']}', '{$_POST['item_id']}', '1', '0', '$date', '$time', '7');";
             $system->prepareCommandQueryForAlertify($qry_insert, "Insert Successfully", "Erro while Inserting ");
         }
     }
@@ -348,7 +439,7 @@ customer_added_item.id = '{$row1['customer_added_item_id']}'");
 //            ALL UPDATE QRY END------------------------------------------------
 //            ALL INSERT  QRY START---------------------------------------------
             //%%%%%%%%%% INSERT pay_completed_invoice_summary TABLE %%%%%%%%%%%%
-            $qry1_in = "INSERT INTO `pay_completed_invoice_summary` (`shipping_id`, `order_value`, `order_discount`, `pay_date`, `pay_time`, `pay_status`) VALUES ( '{$send_obj['shipping_id']}', '{$item_tot_bill_price_count}', '{$item_tot_bill_discount_count}', '$date', '$time', '2');";
+            $qry1_in = "INSERT INTO `pay_completed_invoice_summary` (`shipping_id`, `order_value`, `order_discount`, `pay_date`, `pay_time`, `pay_status`, `pay_method`) VALUES ( '{$send_obj['shipping_id']}', '{$item_tot_bill_price_count}', '{$item_tot_bill_discount_count}', '$date', '$time', '2','1');";
 
             $result_qry1_up = mysqli_query($link, $qry1_up) or die(mysqli_error());
             $result_qry2_up = mysqli_query($link, $qry2_up) or die(mysqli_error());
@@ -411,15 +502,14 @@ customer_added_item.cus_id = '{$_SESSION['cus_id']}' AND
 customer_added_item.item_save_status = '5' AND
 item_deatails.item_view_status = '0'";
         $system->prepareSelectQueryForJSONSingleData($qry);
-    } 
-    else if ($_POST['action'] == 'added_item_tot') {
+    } else if ($_POST['action'] == 'added_item_tot') {
 // ADDED ITEM TOTAL - ----------------------------------------------------------
         $qry = "SELECT
 customer_added_item.id,
 customer_added_item.cus_id,
 customer_added_item.item_save_status,
 customer_added_item.pay_status,
-customer_added_item.item_qty,
+Sum(customer_added_item.item_qty) AS itm_qty_user_log,
 item_deatails.item_price,
 item_deatails.item_view_status,
 item_deatails.item_discount,
@@ -438,7 +528,7 @@ customer_added_item.cus_id = '{$_SESSION['cus_id']}'
 ";
         $system->prepareSelectQueryForJSONSingleData($qry);
     } else if ($_POST['action'] == 'get_shipping_deatails') {
-// HET SHIPPING DEATAILS - ----------------------------------------------------------
+// GET SHIPPING DEATAILS - ----------------------------------------------------------
         $qry = "SELECT
 shipping_details.shipping_id,
 shipping_details.cus_id,
@@ -511,6 +601,21 @@ pay_completed_item_summary.bill_no = '{$_POST['bill_no']}'
 ORDER BY
 pay_completed_item_summary.id DESC
 ";
+        $system->prepareSelectQueryForJSON($qry);
+    } else if ($_POST['action'] == 'pw_change') {
+// PASSWORD UPDATE  - -----------------------------------------------
+        //Password decript method ///////////////////////////////////////////////////////
+        $add_name = "noonehack";
+        $post_pw = (($_POST['pw'] . $add_name));
+        $pw = explode(" ", $post_pw);
+        $count = count($pw);
+        $con_pw = "";
+        for ($i = 0; $i < $count; $i++) {
+            $con_pw .= $pw[$i];
+        }
+        $conf_pw = sha1($con_pw);
+        $qry = "UPDATE `customer_details` SET `password` = '{$conf_pw}', `update_date` = '{$date}', `update_time` = {'$time'} WHERE (`cus_id` = '{$_POST['cus_id_pw_chg']}');";
+
         $system->prepareSelectQueryForJSON($qry);
     } else if ($_POST['action'] == 'load_profile_setting_tbl') {
 // LOAD PROFILE SETTING DEATAILS - ---------------------------------------------
@@ -703,7 +808,7 @@ customer_added_item.item_save_status = '0'
                     if (!empty($row1)) {
                         $new_qty = ($row1['item_qty']) + 1;
                         //WEB CART DATA UPDATE TO ITEM ADDED TABLE ---------------------------------------
-                        $qry_update = "UPDATE `customer_added_item` SET    `item_qty`='$new_qty', `pay_status`='0', `item_add_date`='$date', `item_add_time`='$time', `item_save_status`='0' WHERE (`id`='{$row1['id']}');";
+                        $qry_update = "UPDATE `customer_added_item` SET    `item_qty`='$new_qty', `pay_status`='0', `item_add_date`='$date', `item_add_time`='$time', `item_save_status`='7' WHERE (`id`='{$row1['id']}');";
                         $save = mysqli_query($link, $qry_update);
                         if (!$save) {
                             $error = FALSE;
@@ -712,9 +817,9 @@ customer_added_item.item_save_status = '0'
                         }
                     } else {
                         //WEB CART DATA CPPY TO ITEM ADDED TABLE ------------------------------------------
-                        $qry_insert = "INSERT INTO `customer_added_item` (`cus_id`, `item_id`,`item_qty`, `pay_status`,`item_add_date`,`item_add_time`) "
+                        $qry_insert = "INSERT INTO `customer_added_item` (`cus_id`, `item_id`,`item_qty`, `pay_status`,`item_add_date`,`item_add_time`,`item_save_status`) "
                                 . "VALUES"
-                                . " ('{$row['cus_id']}', '{$val['item_id']}','{$val['item_qty']}', '0','$date','$time');";
+                                . " ('{$row['cus_id']}', '{$val['item_id']}','{$val['item_qty']}', '0','$date','$time','7');";
 
                         $save = mysqli_query($link, $qry_insert);
                         if (!$save) {
@@ -923,6 +1028,7 @@ sub_cat.sub_cat_id DESC");
 item_deatails.item_id,
 item_deatails.item_name,
 item_deatails.item_price,
+item_deatails.item_old_price,
 item_deatails.item_image,
 item_deatails.item_discount,
 sub_cat.sub_cat_name,
@@ -938,8 +1044,7 @@ WHERE
 item_deatails.sub_cat_id = '$sub_cat_id' AND
 item_deatails.img_status = '1' AND
 item_deatails.item_view_status = '0'
-ORDER BY
-item_deatails.item_id DESC LIMIT 4");
+");
 
                         if (!empty($item_info_data)) {
                             $out_put .= '<div style="background:white"><section class="regular slider" id="regular2" style=" padding-top:10px ;">';
@@ -953,12 +1058,26 @@ item_deatails.item_id DESC LIMIT 4");
                                 $item_price = $val3['item_price'];
                                 $item_id = $val3['item_id'];
                                 $out_of_stock = $val3['out_of_stock'];
-                                $out_put .= '<div align="" class="boder_imgz card cus_font">'
-                                        . '<a href="single.php?item_id=' . $item_id . '&sub_cat_id=' . $sub_cat_id . ' "><img class="img-responsive"  style="text-aling:center;   opacity:1; background-color: rgba(0,255,255,0.4) height:auto; " src="../drugs_ordering_system_backend/uploads/' . $val3['item_image'] . '"/></a>'
-                                        . '<p style="padding-top:9px;" class="table_font_size">' . $item_name . '</p>'
-                                        . '<p style="color:red;" >LKR : ' . $item_price . '</p>';
-//                                        . '<p  class="price">d comfy lorem ipsum lorem jeansum. Lorem jeamsun denim lorem jeansum.</p>'
-//                                        . '<p> Add to Cart<button  class=" add-to-cart" id="add_to_cart_btn"  data-item_price = "' . $item_price . '"    value=' . $item_id . '><label><img  style="height:40px; width:40px;" src="images/site_img/cart_add.png"  alt=" " /></label></button></p>'
+                                $item_old_price = $val3['item_old_price'];
+
+//                                $out_put .= '<div align="" class="boder_imgz card cus_font">'
+//                                        . '<a href="single.php?item_id=' . $item_id . '&sub_cat_id=' . $sub_cat_id . '&item_price=' . $item_price . '&out_of_stock=' . $out_of_stock . ' "><img class="img-responsive"  style="text-aling:center;   opacity:1; background-color: rgba(0,255,255,0.4) height:auto; " src="../drugs_ordering_system_backend/uploads/' . $val3['item_image'] . '"/></a>'
+//                                        . '<p style="padding-top:9px;" class="table_font_size">' . $item_name . '</p>'
+//                                        . '<p style="color:red;" >LKR : ' . $item_old_price . '</p>'
+//                                        . '<p style="color:red;" >LKR : ' . $item_price . '</p>';
+
+                                $out_put .= '<div class="boder_imgz cus_font card">
+                    <div class="content" align="middle">
+                    <a href="single.php?item_id=' . $item_id . '&sub_cat_id=' . $sub_cat_id . '&item_price=' . $item_price . '&out_of_stock=' . $out_of_stock . ' ">
+                    <img class="secial_item img-responsive  " align="middle" style="text-aling:center;  " src="../drugs_ordering_system_backend/uploads/' . $val3['item_image'] . '"/></a>
+                   
+                     <div class="cus_boder_for_item_deatails">
+                     <a href="single.php?item_id=' . $item_id . '&sub_cat_id=' . $sub_cat_id . '&item_price=' . $item_price . '&out_of_stock=' . $out_of_stock . ' ">
+
+                    <h3 class="product-det-content-wrapper" style="text-align: center; font-weight: 600;">' . $item_name . '</h3>
+                    <h3 class="product-det-content-wrapper" style="text-align: center; color:red; font-weight: 600;  text-decoration: line-through;">LKR ' . $item_old_price . '</h3>
+                    <h3 class="product-det-content-wrapper" style="text-align: center; color:blue; font-weight: 600;">LKR ' . $item_price . '</h3>
+                        </a>';
 
                                 if ($out_of_stock == '1') {
                                     //STOCK OUT ================================
@@ -967,14 +1086,17 @@ item_deatails.item_id DESC LIMIT 4");
                                     $out_put .= '<p> <button  type="button" class="btn btn-warning" id="add_to_cart_btn"  data-item_price = "' . $item_price . '"    value=' . $item_id . '>Add to cart</button></p>';
                                 }
 
+//                                $out_put .= '</div>';
                                 $out_put .= '</div>';
-//                                $out_put .= '<div>    </div>';
+
+                                $out_put .= '</div></div>';
+
 //
                             }
 
                             $out_put .= '</div></section>';
                         }
-                        $out_put .= '<div class="view_all_itm"> <h4 style="ext-align: right; color:blue; " class="view_all_itm"><a style="text-align: right; color:blue; background: yellow;"  href="pagination.php?main_cat_id=' . $val['main_cat_id'] . '&sub_cat_id=' . $sub_cat_id . '&page=1 "> View all items  &nbsp;> </a></h4></div>';
+                        $out_put .= '<div class="view_all_itm"> <h4 style="ext-align: right; color:blue; " class="view_all_itm"><a class="table_font_size" style="text-align: right; color:blue; background: yellow;"  href="pagination.php?main_cat_id=' . $val['main_cat_id'] . '&sub_cat_id=' . $sub_cat_id . '&sub_cat_name=' . $sub_cat_name . '&page=1"> View all items  &nbsp;> </a></h4></div>';
                     }
                 }
             }
@@ -1018,6 +1140,7 @@ sub_cat.sub_cat_id DESC");
 item_deatails.item_id,
 item_deatails.item_name,
 item_deatails.item_price,
+item_deatails.item_old_price,
 item_deatails.item_image,
 item_deatails.item_discount,
 sub_cat.sub_cat_name,
@@ -1052,16 +1175,21 @@ item_deatails.item_id DESC
                                 $item_name = $val3['item_name'];
                                 $item_img = $val3['item_image'];
                                 $item_price = $val3['item_price'];
+                                $item_old_price = $val3['item_old_price'];
                                 $item_id = $val3['item_id'];
                                 $out_of_stock = $val3['out_of_stock'];
 
                                 $out_put .= '<div class="column cus_font product-all-sec-wrapper">
                     <div class="content" align="middle">
-                    <a href="single.php?item_id=' . $item_id . '&sub_cat_id=' . $sub_cat_id . ' ">
-                    <img class="secial_item img-responsive  " align="middle" style="text-aling:center;  " src="../drugs_ordering_system_backend/uploads/' . $val3['item_image'] . '"/>
+                    <a href="single.php?item_id=' . $item_id . '&sub_cat_id=' . $sub_cat_id . '&item_price=' . $item_price . '&out_of_stock=' . $out_of_stock . ' ">
+                    <img class="secial_item img-responsive  " align="middle" style="text-aling:center;  " src="../drugs_ordering_system_backend/uploads/' . $val3['item_image'] . '"/></a>
+                   
+                     <div class="cus_boder_for_item_deatails">
+                     <a href="single.php?item_id=' . $item_id . '&sub_cat_id=' . $sub_cat_id . '&item_price=' . $item_price . '&out_of_stock=' . $out_of_stock . ' ">
+
                     <h3 class="product-det-content-wrapper" style="text-align: center; font-weight: 600;">' . $item_name . '</h3>
-                    <h3 class="product-det-content-wrapper" style="text-align: center; font-weight: 600;">' . $main_cat_names . '</h3>
-                    <h3 class="product-det-content-wrapper" style="text-align: center; color:red; font-weight: 600;">LKR ' . $item_price . '</h3>
+                    <h3 class="product-det-content-wrapper" style="text-align: center; color:red; font-weight: 600;  text-decoration: line-through;">LKR ' . $item_old_price . '</h3>
+                    <h3 class="product-det-content-wrapper" style="text-align: center; color:blue; font-weight: 600;">LKR ' . $item_price . '</h3>
                         </a>';
                                 if ($out_of_stock == '1') {
                                     //STOCK OUT ================================
@@ -1070,6 +1198,7 @@ item_deatails.item_id DESC
                                     $out_put .= '<p class="card"> <button type = "button" class = "btn btn-success " id = "add_to_cart_btn" data-item_price = "' . $item_price . '" value = ' . $item_id . '>Add to cart</button></p>';
                                 }
 
+                                $out_put .= '</div>';
 
                                 $out_put .= '</div></div>';
                             }
@@ -1122,6 +1251,7 @@ sub_cat.sub_cat_id DESC");
 item_deatails.item_id,
 item_deatails.item_name,
 item_deatails.item_price,
+item_deatails.item_old_price,
 item_deatails.item_image,
 item_deatails.item_discount,
 sub_cat.sub_cat_name,
@@ -1153,13 +1283,14 @@ item_deatails.item_id DESC LIMIT 4
                                 $item_price = $val3['item_price'];
                                 $item_id = $val3['item_id'];
                                 $out_of_stock = $val3['out_of_stock'];
+                                $item_old_price = $val3['item_old_price'];
 
                                 $out_put .= '<div class="column cus_font">
                     <div class="content" align="middle">
-                    <a href="single.php?item_id=' . $item_id . '&sub_cat_id=' . $sub_cat_id . ' ">
+                    <a href="single.php?item_id=' . $item_id . '&sub_cat_id=' . $sub_cat_id . '&item_price=' . $item_price . '&out_of_stock=' . $out_of_stock . ' ">
                     <img class="secial_item img-responsive card font_size_mobil" align="middle" style="text-aling:center;  " src="../drugs_ordering_system_backend/uploads/' . $val3['item_image'] . '"/>
                     <h3 style="text-align: center;" class="font_size_mobil">' . $item_name . '</h3>
-                    <h3 style="text-align: center;" class="font_size_mobil">' . $main_cat_names . '</h3>
+                    <h3 class="product-det-content-wrapper" style="text-align: center; color:red; font-weight: 600;  text-decoration: line-through;">LKR ' . $item_old_price . '</h3>
                     <h3 style="text-align: center; color:red;" class="font_size_mobil">LKR ' . $item_price . '</h3>
                         </a>';
                                 if ($out_of_stock == '1') {
@@ -1272,6 +1403,7 @@ item_deatails.item_id DESC");
         }
     }//END LOAD NAV BAR MENU
 }   //END ARRAY +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 
 
 

@@ -27,13 +27,6 @@ if (isset($_SESSION['cus_id'])) {
         font-family: Arial Rounded MT ,Helvetica Rounded,Arial,sans-serif;
     }
 
-    .li_clz{
-        color: white;
-        font-size: 20px;
-        font-family: Garamond,Baskerville,Baskerville Old Face,Hoefler Text,Times New Roman,serif;
-        /*border: 1px solid yellow;*/
-    }
-
 </style>
 
 
@@ -63,7 +56,7 @@ LIMIT 5");
                         $main_cat_names = $val['main_cat_name'];
                         $main_cat_id = $val['main_cat_id'];
                         $sub_cat_id = $val['sub_cat_id'];
-                        $out_put = '<li><i style = "font-size:24px; color: #d4ff2a;" class = "fa">&#xf0da;</i> &nbsp;<a href="pagination.php?main_cat_id=' . $main_cat_id . '&sub_cat_id=' . $sub_cat_id . '&page=1 "><span class="li_clz">' . $main_cat_names . '</span></a></li>';
+                        $out_put = '<li><i style = "font-size:24px; color:#d4ff2a;" class = "fa">&#xf0da;</i> &nbsp;<a href="pagination.php?main_cat_id=' . $main_cat_id . '&sub_cat_id=' . $sub_cat_id . '&page=1 "><span class="li_clz">' . $main_cat_names . '</span></a></li>';
                         echo $out_put;
                     }
                 }
@@ -90,7 +83,9 @@ LIMIT 5");
                     $featured_item_data = $system->prepareSelectQuery("SELECT
 item_deatails.item_id,
 item_deatails.item_name,
-item_deatails.sub_cat_id
+item_deatails.sub_cat_id,
+item_deatails.item_price,
+item_deatails.out_of_stock
 FROM
 item_deatails
 WHERE
@@ -101,7 +96,6 @@ item_deatails.featured_item = '1'
 ORDER BY
 item_deatails.item_id DESC
 LIMIT 5
-
 ");
                     if (!empty($featured_item_data)) {
                         $out_put = '';
@@ -109,8 +103,10 @@ LIMIT 5
                             $item_names = $val['item_name'];
                             $item_id = $val['item_id'];
                             $sub_cat_id = $val['sub_cat_id'];
+                            $out_of_stock = $val['out_of_stock'];
+                            $item_price = $val['item_price'];
 
-                            $out_put = '<li><i style = "font-size:24px; color: #d4ff2a;" class = "fa">&#xf0da;</i> &nbsp;<a href="single.php?item_id=' . $item_id . '&sub_cat_id=' . $sub_cat_id . ' "><span class="li_clz">' . $item_names . '</span></a></li>';
+                            $out_put = '<li><i style = "font-size:24px; color: #d4ff2a;" class = "fa">&#xf0da;</i> &nbsp;<a href="single.php?item_id=' . $item_id . '&sub_cat_id=' . $sub_cat_id . '&item_price=' . $item_price . '&out_of_stock=' . $out_of_stock . ' "><span class="li_clz">' . $item_names . '</span></a></li>';
                             echo $out_put;
                         }
                     }
@@ -129,11 +125,12 @@ LIMIT 5
             <div >
 
                 <ul >
-                    <li><span  class="li_clz">Anamaduwa Road, </span></li>
-                    <li><span  class="li_clz">Nawagathegama</span></li>
-                    <li class="phone" ><span  class="li_clz">Tele : 061 405305848</span></li>
-                    <li class="phone" ><span  class="li_clz">Fax : 061 405305848</span></li>
-                    <li class="phone" ><span  class="li_clz">Email : lionminimart@gmail.com</span></li>
+                    <li><span  class="li_clz2">Anamaduwa Road, </span></li>
+                    <li><span  class="li_clz2">Nawagathegama</span></li>
+                    <li class="phone" ><span  class="li_clz2">Tele : 061 405305848</span></li>
+                    <li class="phone" ><span  class="li_clz2">Fax : 061 405305848</span></li>
+                    <li class="phone" ><span  class="li_clz2">Email : lionminimart@gmail.com</span></li>
+                    <li class="" ><span  class="li_clz2"><a href="about_us.php">OUR POLICIES</a></span></li>
                     <!--<li class="temp"><p>&copy 2019  All Rights Reserved | Design by  <a href="http://goldendit.com/" target="_blank">Golden-D IT Solution</a> </p></li>-->
                 </ul>
             </div>
@@ -196,9 +193,14 @@ LIMIT 5
 
     //ON LOAD FUNCTION ===========================================================
     $(document).on('ready', function () {
-        item_tot();
-        added_item_qty_user_log();
-    });
+        var cus_id = $('#cus_id').val();
+        if (cus_id == '0') {
+            item_tot();
+        } else {
+            added_item_qty_user_log();
+        }
+
+    }); //ONLOAD FUCTION END ----------------------------
 
 
 //ADD TO CART BTN CLICK ========================================================
@@ -230,10 +232,10 @@ LIMIT 5
         }
 
     });
-//header anuja js
+    //header anuja js
 
     //USER ADDED ITEM QTY USRER LOG ========================================
-    function added_item_qty_user_log() {
+    function added_item_qty_user_logff() {
         $.post("./loaddata.php", {action: 'itm_qty_user_log'}, function (e) {
             if (e === undefined || e.length === 0 || e === null) {
                 $('.itm_qty_user_log').html("NO data Found ! ");
@@ -253,34 +255,83 @@ LIMIT 5
         }, "json");
     }
 
+    //NEW FUCTION ///////////////////////////////////////////////////////////////////
+    //USER ADDED ITEM TOTAL WHEN USER AFTER LOG========================================
+    function added_item_qty_user_log() {
+        $.post("./loaddata.php", {action: 'added_item_tot'}, function (e) {
+            if (e === undefined || e.length === 0 || e === null) {
+                $('.item_tot').html("NO data Found ! ");
+            } else {
+                var oder_full_tot = parseFloat(e['oder_full_tot']);
+                var oder_full_pay_val = parseFloat(e['oder_full_pay_val']);
+                var oder_full_discount = parseFloat(e['oder_full_discount']);
+                var itm_qty_user_log = parseFloat(e['itm_qty_user_log']);
+
+                if (isNaN(itm_qty_user_log)) {
+                    $('.itm_qty_user_log').html("0.00");
+                } else {
+                    $('.itm_qty_user_log').html(itm_qty_user_log);
+                }
+                if (isNaN(oder_full_pay_val)) {
+                    $('.item_tot_price').html("0.00");
+                } else {
+                    $('.item_tot_price').html(oder_full_pay_val);
+                }
+                if (isNaN(oder_full_tot)) {
+                    $('.oder_full_tot').html("0.00");
+                } else {
+                    $('.oder_full_tot').html(oder_full_tot);
+                }
+                if (isNaN(oder_full_discount)) {
+                    $('.oder_full_discount').html("0.00");
+                } else {
+                    $('.oder_full_discount').html(oder_full_discount);
+                }
+
+                //                            $('.item_tot').html(oder_full_tot);
+                $('#oder_full_tot_input_feild').val(oder_full_tot);
+                $('#oder_full_discount_input_feild').val(oder_full_discount);
+                $('#item_tot_price_input_feild').val(oder_full_pay_val);
+//                            load_cart_item_list();
+            }
+//                            chosenRefresh();
+        }, "json");
+    }
+//NEW FUCTION ///////////////////////////////////////////////////////////////////
+
+
+
+
+//CART ITEM TOTAL BEFORE USER LOG Start//////////////////////////////////////////
 //CART ADDED ITEM TOTAL ===========================================================
     function item_tot() {
         $.post("./loaddata.php", {action: 'item_total'}, function (e) {
             if (e === undefined || e.length === 0 || e === null) {
                 $('#').html("NO data Found ! ");
             } else {
-                var item_tot = parseInt(e['item_tot']);
-                var item_tot_price = (e['item_tot_price']);
+                var item_tot = parseFloat(e['item_tot']);
+                var item_tot_price = parseFloat(e['item_tot_price']);
                 if (isNaN(item_tot)) {
                     $('.item_tot').html("0");
                 } else {
-                    if (item_tot == null) {
-                        $('.item_tot').html("0");
-                    } else {
-                        $('.item_tot').html(item_tot);
-                    }
+                    $('.item_tot').html(item_tot);
                 }
-
-                if (item_tot_price == null) {
+                if (isNaN(item_tot_price)) {
                     $('.item_tot_price').html("0.00");
                 } else {
                     $('.item_tot_price').html(item_tot_price);
                 }
-                //                    load_cart_item_list();
+
+//                $('.item_tot').html(item_tot);
+//                $('.item_tot_price').html(item_tot_price);
+                load_cart_item_list();
             }
             //    chosenRefresh();
         }, "json");
     }
+    //CART ITEM TOTAL BEFORE USER LOG End/////////////////////////////////////////////
+
+
 
     //LOG OUT BTN ======================================================
     $(document).on('click', '#log_out', function () {
@@ -296,11 +347,11 @@ LIMIT 5
             }
         }, "json");
     });
-    
-    
-    
-    
-    
+
+
+
+
+
     //GO TO PROFIL BTN =================================================================
     $(document).on('click', '#profil', function () {
         window.location.replace("user_profil.php");
@@ -312,7 +363,16 @@ LIMIT 5
     });
 
 
-
-
+    //SCROLL HIDDEN BAR ============================================
+    $(window).scroll(function () {
+        if ($(this).scrollTop() > 50)
+        {
+            $('.hidden_bar').hide(1000);
+        } else
+        {
+            $('.hidden_bar').show(1000);
+        }
+    });
+//SCROLL HIDDEN BAR ============================================
 
 </script>

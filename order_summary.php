@@ -16,50 +16,13 @@ if (!isset($_SESSION['cus_id'])) {
 
         <!--UL RIHT MARK STYLE-->
         <style type="text/css">
-
             .alertify .ajs-dialog {
-                top: 20%;
-                /*transform: translateY(-20%);*/    
-                /*margin: auto;*/
+                top: 30%;
+                /*transform: translateY(-50%);*/
+                margin: auto;
             }
-
-            /*.inset {border-style: inset;}*/
-            .inset {border-style: ridge;}
-
-            .size-36 {
-                font-size: 30px;
-            }
-            input[type=number]::-webkit-inner-spin-button,
-            input[type=number]::-webkit-outer-spin-button {
-                opacity: 1;
-            }
-            @media screen and (max-width: 450px) {
-
-                .column.cus_font.product-all-sec-wrapper .product-det-content-wrapper {
-                    font-size: 35px;
-                }
-
-            }
-            /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
-            @media screen and (max-width: 600px) {
-                .column {
-                    width: 50%;
-                }
-
-                .column.cus_font.product-all-sec-wrapper .product-det-content-wrapper {
-                    font-size: 35px;
-                }
-                .table_font_size {
-                    font-size: 25px;
-                }
-
-            }
-
         </style>
         <!--UL RIHT MARK STYLE-->
-
-
-
 
     </head>
 
@@ -87,250 +50,323 @@ if (!isset($_SESSION['cus_id'])) {
 
 
         <div class="container">
-            <div class="row " style="padding-top: 50px;"></div>
-            <hr style="  border-top: 1px solid red;">
-            <div class="row order_summary" id="order_summary" style="padding-top: 50px; padding-right: 15px; background: white;">
-                <div class="col-lg-6">
-                    <div class="" >
-                        <legend>Order Summary</legend>
-                        <div class="scrollable" style="height: auto; overflow-y: auto">
-                            <table class="table table-bordered table-striped table-hover datable added_item_summary table_font_size" id="added_item_summary">
-                                <thead>
-                                    <tr style="background-color: #dcfdff;">
-                                        <th>#</th>
-                                        <th>Item</th>
-                                        <th>QTY</th>
-                                        <th>Per Item</th>
-                                        <th>Discount</th>
-                                        <th>Net Total</th>
-                                    </tr>
-                                </thead>
-                                <input type="hidden" id="hideStrt">
-                                <tbody style="background-color: #dcfdff;">                                                             
-                                    <!--<tr><td>Btton</td></tr>-->
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="" >
-                        <div class="form-horizontal table_font_size" style="text-align: center;">
-                            <div class="form-group">
-                                <label class="col-md-5 control-label" for="textinput">Total Item Price (LKR):</label>  
-                                <label class="col-md-6 control-label tot_price"   for="textinput"></label>  
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-5 control-label" for="textinput">Total Discount Price (LKR):</label>  
-                                <label class="col-md-6 control-label tot_discount"  for="textinput"></label>  
-                            </div>
-                            <div class="form-group" >
-                                <label class="col-md-5 control-label" for="textinput">Total Order Value  (LKR):</label>  
-                                <label style="color:red ;" class="col-md-6 control-label tot_order_val"  for="textinput"></label>  
+            <div class="row " style="padding-top: 2px;"></div>
+            <!--<hr style="  border-top: 1px solid red;">-->
+            <h3 style="text-align: center;"><a href="index.php"><span style="border: 1px solid blue;"> HOME </span></a> >><a href="user_profil.php"><span style="border: 1px solid blue;">Client Area</span></a>>><span>Order Summary</span></h3>
+
+
+            <!--ORDER SUMMARY DIV START======================================================================-->
+            <div class="" hidden="">
+                <div class="order_summary" id="order_summary" style="padding-top: 50px;  background: white;">
+                    <!--<legend>Order Summary</legend>-->
+                    <div id="order_smry_tab" style="background: bisque;">
+                        <div class="col-lg-6" id="order_smry_tab" style="border: 1px solid blue;">
+                            <div class="scrollable" style="height: auto; overflow-y: auto">
+                                <table class="table table-hover datable added_item_summary table_font_size" id="added_item_summary">
+                                    <thead>
+                                        <tr style="background-color: #dcfdff;">
+                                            <th>#</th>
+                                            <th>Item</th>
+                                            <th>QTY</th>
+                                            <th>Per Item</th>
+                                            <th>Discount</th>
+                                            <th> Total</th>
+                                        </tr>
+                                    </thead>
+                                    <input type="hidden" id="hideStrt">
+                                    <tbody style="background-color: #f6f78061;">                                                             
+                                        <!--<tr><td>Btton</td></tr>-->
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
-                        <!--HIDDEN VALUE //////////////////////////////////////////////////////////////////////////////////////////////////-->
-                        <!--ODER VALUES ==============================================================-->
-                        <input type="text" hidden="" class="tot_order_val" id="tot_order_val_hidden">
-                        <input type="text" hidden="" class="tot_discount" id="tot_discount_hidden">
-                        <input type="text"  hidden="" class="item_bill_no" id="item_bill_no">
-                        <!--ODER VALUES ==============================================================-->
-                        <input type="text" id="shipping_id"  hidden="">
-                        <input type="text" hidden="" >
-                        <!--HIDDEN VALUE //////////////////////////////////////////////////////////////////////////////////////////////////-->
+                        <div class="col-lg-6" style="border: 1px solid white; background: white;" hidden="">
+                            <div class="row" style="text-align: center;" >
+                                <div class="form-horizontal table_font_size" >
+                                    <legend>Order Summary</legend>
+                                    <div class="form-group">
+                                        <label style="width: 50%; text-align: ;" class="col-md-6 control-label" for="textinput">Total Item Price (LKR):</label>  
+                                        <label style="text-align: left;" class="col-md-6 control-label tot_price"   for="textinput"></label>  
+                                    </div>
+                                    <div class="form-group">
+                                        <label style="width: 50%; text-align: ;" class="col-md-6 control-label" for="textinput">Total Discount Price (LKR):</label>  
+                                        <label style="text-align: left;" class="col-md-6 control-label tot_discount"  for="textinput"></label>  
+                                    </div>
+                                    <div class="form-group" >
+                                        <label style="width: 50%; text-align: ; color:red;" class="col-md-6 control-label" for="textinput">Total Order Value  (LKR):</label>  
+                                        <label style="color:red; text-align: left;" class="col-md-6 control-label tot_order_val"  for="textinput"></label>  
+                                    </div>
+                                </div>
+                            </div>
+                            <!--HIDDEN VALUE //////////////////////////////////////////////////////////////////////////////////////////////////-->
+                            <!--ODER VALUES ==============================================================-->
+                            <input type="text" hidden="" class="tot_order_val" id="tot_order_val_hidden">
+                            <input type="text" hidden="" class="tot_discount" id="tot_discount_hidden">
+                            <input type="text"  hidden="" class="item_bill_no" id="item_bill_no">
+                            <!--ODER VALUES ==============================================================-->
+                            <input type="text" id="shipping_id"  hidden="">
+                            <input type="text" hidden="" >
+                            <!--HIDDEN VALUE //////////////////////////////////////////////////////////////////////////////////////////////////-->
 
+                        </div>
                     </div>
-                </div>
-
-                <div class="col-lg-6 table_font_size" style="background-color: antiquewhite; text-align: center;" >
-                    <div class="form-horizontal">
-                        <fieldset>
-                            <!-- Form Name -->
-                            <legend class="" style="color: blue; font-size: 30px;">Delivery Details</legend>
-
-                            <!-- Text input-->
-                            <div class="form-group">
-                                <label class="col-md-4 control-label" for="textinput">Recipient's Name</label>  
-                                <div class="col-md-7">
-                                    <input  name="textinput" disabled="" id="recipient_name" type="text" placeholder="Recipient's Name" class="form-control input-md" required="">
-
-                                </div>
-                            </div>
-
-                            <!-- Text input-->
-                            <div class="form-group">
-                                <label class="col-md-4 control-label" for="textinput">Recipient's Phone</label>  
-                                <div class="col-md-7">
-                                    <input  name="textinput" disabled="" id="recipient_phone" type="text" placeholder="077123****" class="form-control input-md">
-
-                                </div>
-                            </div>
-
-                            <!-- Textarea -->
-                            <div class="form-group">
-                                <label class="col-md-4 control-label" for="textarea">Message (Optional)</label>
-                                <div class="col-md-7">                     
-                                    <textarea class="form-control" disabled=""  id="msg" name="textarea"></textarea>
-                                </div>
-                            </div>
-
-                            <!-- Textarea -->
-                            <div class="form-group">
-                                <label class="col-md-4 control-label" for="textarea">Delivery Address</label>
-                                <div class="col-md-7">                     
-                                    <textarea class="form-control "  disabled="" id="address" name="textarea"></textarea>
-                                </div>
-                            </div>
-
-                            <!-- Button -->
-                            <div class="form-group">
-                                <label class="col-md-4 control-label" for=""></label>
-                                <div class="btn-group" role="group">
-                                    <button type="button" id="next_step" name=""  class="next_step btn btn-primary hidden table_font_size">NEXT STEP</button>
-                                    <button  type="button" id="next_step_edit" name="" class="next_step_edit btn btn-primary table_font_size">EDIT DEATAILS</button>
-                                    <button  type="button" id="next_step_reset" name="" class="next_step_reset btn btn-danger hidden table_font_size">RESET</button>
-                                    <button id="next_step_update" name=""  class="next_step_update btn btn-info table_font_size">UPDATE DEATAILS</button>
-                                    <button  type="button" id="order_confirm" name="" class="order_confirm btn btn-success hidden table_font_size">ODER CONFIRM</button>
-                                </div>
-                                <div class="col-md-3">
-                                </div>
-                            </div>
-
-                        </fieldset>
-                    </div>
-
                 </div>
             </div>
-            <hr style="  border-top: 1px solid red;">
-            <div class="row hidden payment_tab" id="payment_tab">
+
+            <div class="row" style="padding-bottom: 10px; padding-top: 10px; ">
+                <!--<div class="col-lg-12 next_stp_delivery_deatils" style="text-align: center; background: #b3b3f7; margin: 15px;"><button class="btn btn-primary table_font_size" id="next_stp_delivery_deatils">NEXT STEP >></button></div>-->
+                <div class="col-lg-12 next_stp_delivery_deatils_back" style="text-align: center; background: green; margin: 15px;"><button class="btn btn-primary table_font_size" id="next_stp_delivery_deatils_back"><< BACK TO ORDER SUMMARY</button></div>
+            </div>
+            <!--ORDER SUMMARY DIV END========================================================================-->
+
+
+
+            <!--DELIVERY DEATAILS SUMMARY DIV START========================================================================-->
+            <div class="row" id="delivery_deatails_tab">
+                <div class="col-lg-12 table_font_size" style="background-color: antiquewhite; text-align: center;" >
+                    <div class="form-horizontal" >
+                        <fieldset>
+                            <!-- Form Name -->
+                            <!--<div><button class="btn btn-primary" id="next_stp_delivery_deatils">NEXT STEUP</button></div>-->
+                            <!--                            <div><button class="btn btn-primary" id="next_stp_delivery_deatils_back">BACK</button></div>-->
+                            <legend class="table_font_size">Delivery Details</legend>
+
+                            <div class="table_font_size">
+                                <!-- Text input-->
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="textinput">Recipient's Name</label>  
+                                    <div class="col-md-7">
+                                        <input  name="textinput" disabled="" id="recipient_name" type="text" placeholder="Recipient's Name" class="form-control input-md" required="">
+                                        <h5 id="recipient_name_error_msg" class="table_font_size help-block" style="color: red;"></h5>
+                                    </div>
+                                </div>
+
+                                <!-- Text input-->
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="textinput">Recipient's Phone</label>  
+                                    <div class="col-md-7">
+                                        <input  name="textinput" disabled="" id="recipient_phone" type="text" placeholder="077123****" class="form-control input-md">
+                                        <h5 id="phone_error_msg" class="table_font_size help-block" style="color: red;"></h5>
+
+                                    </div>
+                                </div>
+
+                                <!-- Textarea -->
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="textarea">Message (Optional)</label>
+                                    <div class="col-md-7">                     
+                                        <textarea class="form-control textarea_input" disabled=""  id="msg" name="textarea"></textarea>
+                                        <h5 id="user_error_msg" class="table_font_size help-block" style="color: red;"></h5>
+                                    </div>
+                                </div>
+
+                                <!-- Textarea -->
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="textarea">Delivery Address</label>
+                                    <div class="col-md-7">                     
+                                        <textarea class="form-control textarea_input"  disabled="" id="address" name="textarea"></textarea>
+                                        <h5 id="address_error_msg" class="table_font_size help-block" style="color: red;"></h5>
+                                    </div>
+                                </div>
+
+                                <!-- Multiple Radios -->
+                                <div class="form-group" hidden="">
+                                    <label class="col-md-4 control-label" for="radios">Payment option</label>
+                                    <div class="col-md-4"> 
+                                        <label class="radio-inline" for="radios-0">
+                                            <input type="radio" name="radios" id="card" value="1" checked="checked">
+                                            Card Payment
+                                        </label> 
+                                        <label class="radio-inline" for="radios-1">
+                                            <input type="radio" name="radios" id="bank" value="2">
+                                            Normal Bank Payment
+                                        </label> 
+                                    </div>
+                                </div>
+
+
+                                <!-- Button -->
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for=""></label>
+                                    <div class="btn-group" role="group">
+                                        <button type="button" id="next_step" name=""  class="next_step btn btn-primary hidden btn_font_size">NEXT STEP >></button>
+                                        <button  type="button" id="next_step_edit" name="" class="next_step_edit btn btn-primary btn_font_size">EDIT DEATAILS</button>
+                                        <button  type="button" id="next_step_reset" name="" class="next_step_reset btn btn-danger hidden table_font_size">RESET</button>
+                                        <button id="next_step_update" name=""  class="next_step_update btn btn-info table_font_size">UPDATE DEATAILS</button>
+                                        <button  type="button" id="order_confirm" name="" class="order_confirm btn btn-success hidden btn_font_size">ODER CONFIRM >></button>
+                                        <!--<button id="start_card_payment_btn"  name="" class="start_card_payment_btn btn btn-info btn-md table_font_size hidden">COMPLETE TRANSACTION</button>-->
+                                    </div>
+                                    <div class="col-md-3">
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+            <!--DELIVERY DEATAILS SUMMARY DIV END  ========================================================================-->
+
+            <!--PAYMENT OPTION  DIV START  =================================================================================-->
+
+            <!--<hr style="  border-top: 1px solid red;">-->
+
+            <div class="hidden payment_tab" id="payment_tab" style=" padding-top:20px;">
+                <div class="row"  style="background-color: green; text-align: center;">
+                    <!--<button class="btn btn-primary table_font_size"  id="show_delevery_deatails"><< BACK TO DELIVERY DEATAILS</button>-->
+                </div>
+
                 <!--<hr style="  border-top: 1px solid red;">-->
-                <div class="col-lg-12" style="background-color: #f5fdff;">
-                    <div class="row">
-                        <div class="col-md-9"></div>
-                        <div class="col-md-3">
-                            <button class="btn btn-primary" style="background-color: #47bb39;" id="show_delevery_deatails">SHOW DELIVERY DEATAILS</button>
+                <div class="" style="background-color: #f5fdff;">
+                    <!-- Text input-->
+
+                    <!--NEW PAYMENT OPTION RADIO BTN -------------------------------->
+                    <div>
+                        <h3 class="">Payment option</h3>
+                        <div class="row">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label table_font_size">Card Payment</label> 
+                                <div class="col-md-4"> 
+                                    <label class="" for="radios-0">
+                                        <input type="radio" name="radios" id="card" value="1" checked="checked">
+                                    </label> 
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label table_font_size">Normal Bank Payment</label> 
+                                <div class="col-md-4"> 
+                                    <label class="" for="radios-1">
+                                        <input type="radio" name="radios" id="bank" value="2">
+                                    </label> 
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <hr style="  border-top: 1px solid red;">
-                    <!--<hr style="  border-top: 1px solid #e1c0ff;">-->
-                    <div class="form-horizontal">
-                        <fieldset>
-
-                            <legend>Payment Option</legend>
-
-                            <!-- Form Name -->
-
-                            <!-- Text input-->
-                            <div class="row ">
-                                <div class="col-md-4">
-                                    <div class="form-group">
+                    <!--NEW PAYMENT OPTION RADIO BTN -------------------------------->
+                    <div>
+                        <form class="form-horizontal table_font_size" hidden="">
+                            <fieldset>
+                                <!-- Form Name -->
+                                <legend>Payment Option</legend>
+                                <!-- Select Basic -->
+                                <div class="form-group table_font_size">
+                                    <label class="col-md-4 control-label" for="selectbasic">Select payment option </label>
+                                    <div class="col-md-5">
                                         <select class="form-control" id="payment_method">
                                             <option value="0">--SELECT PAYMENT METHOD--</option>
                                             <option value="1">Card Payment</option>
                                             <option value="2">Normal bank payment</option>
                                         </select>
-                                        <!--<label class="col-md-6" for="sel1">Select list:</label>-->
                                     </div>
                                 </div>
+                            </fieldset>
+                        </form>
 
-                                <div class="col-md-9 hidden normal_payment table_font_size" id="normal_payment" style="border-style:dotted solid; border-width: 2px 2px 2px 10px; border-color:red; background-color: white; color: #0b33ce;">
-                                    <span class="border border-primary" > 
-                                        <h3>CARD PAYMENT</h3>
-                                        <p>You can pay now , 
-                                        <table class="table">
-                                            <thead>
-                                                <tr>
-                                                    <th>Cradit / Debit Card</th>
-                                                    <th>Mobile Wallet</th>
-                                                    <th>Internet Banking</th>
-                                                </tr>
-                                            </thead>
+                        <div class="form-group" >
+                            <button id="start_card_payment_btn"  name="" class="start_card_payment_btn btn btn-info btn-md table_font_size ">COMPLETE TRANSACTION</button>
+                        </div>
 
-                                            <tbody>
-                                                <tr>
-                                                    <td>Visa Card</td>
-                                                    <td>Ezi Cash</td>
-                                                    <td>Sampath Vishwa</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Master Card</td>
-                                                    <td>M Cash</td>
-                                                    <td>HNB </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>American Express</td>
-                                                    <td>E Wallet</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-
-                                        </p>
-                                    </span>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="col-md-4 control-label" for=""></label>
-                                            <div class="col-md-4">
-                                                <button id="start_card_payment_btn"  name="" class="btn btn-info btn-lg">COMPLETE TRANSACTION</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-9 hidden bank_payment table_font_size" id="bank_payment" style="border-style:dotted solid; border-width: 2px 2px 2px 10px; border-color:red; background-color: white; color: #0b33ce;">
-                                    <h3>NORMAL PAYMENT</h3>
-                                    <p >When you gonna pay make sure to select the payment method as Send/Transfer/Deposit. Then you can pay using any of these methods. Just send us a photo or screenshot of receipt.</p>
-                                    <h4>Bank Deatails</h4>
-                                    <p style="">
-                                        <label>Bank  : Sampath Bank</label><br>
-                                        <label>Branch : Anamaduwa</label><br>
-                                        <label>Account No : 33102560</label>
-                                    </p>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="col-md-4 control-label" for=""></label>
-                                            <div class="col-md-4">
-                                                <button id="start_normal_payment_btn"  name="" class="btn btn-info btn-lg">COMPLETE TRANSACTION</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6" hidden="">
-                                <img src="images/visa_master.png" width="200" height="100" title="White flower" alt="Flower">
-                                <input type="checkbox" checked="checked" >
-                            </div>
-
-
-                            <!--PAY HEARE FORM START ////////////////////////////////////////////////////////////-->
-                            <form method="post" action="https://sandbox.payhere.lk/pay/checkout" hidden="">   
-                                <input type="hidden" name="merchant_id" value="121XXXX">    <!-- Replace your Merchant ID -->
-                                <input type="hidden" name="return_url" value="http://sample.com/return">
-                                <input type="hidden" name="cancel_url" value="http://sample.com/cancel">
-                                <input type="hidden" name="notify_url" value="http://sample.com/notify">  
-                                <br><br>Item Details<br>
-                                <input type="text" name="order_id" value="ItemNo12345">
-                                <input type="text" name="items" value="Door bell wireless"><br>
-                                <input type="text" name="currency" value="LKR">
-                                <input type="text" name="amount" value="1000">  
-                                <br><br>Customer Details<br>
-                                <input type="text" name="first_name" value="Saman">
-                                <input type="text" name="last_name" value="Perera"><br>
-                                <input type="text" name="email" value="samanp@gmail.com">
-                                <input type="text" name="phone" value="0771234567"><br>
-                                <input type="text" name="address" value="No.1, Galle Road">
-                                <input type="text" name="city" value="Colombo">
-                                <input type="hidden" name="country" value="Sri Lanka"><br><br> 
-                                <input type="submit" value="Buy Now">   
-                            </form> 
-                            <!--PAY HEARE FORM END   ////////////////////////////////////////////////////////////-->
-
-
-                        </fieldset>
                     </div>
 
-                    <hr style="  border-top: 1px solid red;">
+                    <div class="row col-md-12 hidden normal_payment table_font_size" id="normal_payment" style="border-style:dotted solid; border-width: 2px 2px 2px 10px; border-color:red; background-color: white; color: #0b33ce;">
+                        <span class="border border-primary" > 
+                            <h3>CARD PAYMENT</h3>
+                            <p>You can pay now , 
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Cradit / Debit Card</th>
+                                        <th>Mobile Wallet</th>
+                                        <th>Internet Banking</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    <tr>
+                                        <td>Visa Card</td>
+                                        <td>Ezi Cash</td>
+                                        <td>Sampath Vishwa</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Master Card</td>
+                                        <td>M Cash</td>
+                                        <td>HNB </td>
+                                    </tr>
+                                    <tr>
+                                        <td>American Express</td>
+                                        <td>E Wallet</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            </p>
+                        </span>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for=""></label>
+                                <div class="col-md-4">
+                                    <button id="start_card_payment_btn"  name="" class="btn btn-info btn-lg">COMPLETE TRANSACTION</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row col-md-12 hidden bank_payment table_font_size" id="bank_payment" style="border-style:dotted solid; border-width: 2px 2px 2px 10px; border-color:red; background-color: white; color: #0b33ce;">
+                        <h3>NORMAL PAYMENT</h3>
+                        <p >When you gonna pay make sure to select the payment method as Send/Transfer/Deposit. Then you can pay using any of these methods. Just send us a photo or screenshot of receipt.</p>
+                        <h4>Bank Deatails</h4>
+                        <p style="">
+                            <label>Bank  : Sampath Bank</label><br>
+                            <label>Branch : Anamaduwa</label><br>
+                            <label>Account No : 33102560</label>
+                        </p>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for=""></label>
+                                <div class="col-md-4">
+                                    <button id="start_normal_payment_btn"  name="" class="btn btn-info btn-lg">COMPLETE TRANSACTION</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
+                <div class="col-md-6" hidden="">
+                    <img src="images/visa_master.png" width="200" height="100" title="White flower" alt="Flower">
+                    <input type="checkbox" checked="checked" >
+                </div>
+
+
+                <!--PAY HEARE FORM START ////////////////////////////////////////////////////////////-->
+                <form method="post" action="https://sandbox.payhere.lk/pay/checkout" hidden="">   
+                    <input type="hidden" name="merchant_id" value="121XXXX">    <!-- Replace your Merchant ID -->
+                    <input type="hidden" name="return_url" value="http://sample.com/return">
+                    <input type="hidden" name="cancel_url" value="http://sample.com/cancel">
+                    <input type="hidden" name="notify_url" value="http://sample.com/notify">  
+                    <br><br>Item Details<br>
+                    <input type="text" name="order_id" value="ItemNo12345">
+                    <input type="text" name="items" value="Door bell wireless"><br>
+                    <input type="text" name="currency" value="LKR">
+                    <input type="text" name="amount" value="1000">  
+                    <br><br>Customer Details<br>
+                    <input type="text" name="first_name" value="Saman">
+                    <input type="text" name="last_name" value="Perera"><br>
+                    <input type="text" name="email" value="samanp@gmail.com">
+                    <input type="text" name="phone" value="0771234567"><br>
+                    <input type="text" name="address" value="No.1, Galle Road">
+                    <input type="text" name="city" value="Colombo">
+                    <input type="hidden" name="country" value="Sri Lanka"><br><br> 
+                    <input type="submit" value="Buy Now">   
+                </form> 
+                <!--PAY HEARE FORM END   ////////////////////////////////////////////////////////////-->
+
             </div>
 
         </div>
+        <hr style="  border-top: 1px solid red;">
+
+        <!--PAYMENT OPTION  DIV START  ========================================================================-->
+
         <!---->
         <!---728x90--->
         <!--FOOTER--////////////////////////////////////////////////////////>-->
@@ -339,10 +375,17 @@ if (!isset($_SESSION['cus_id'])) {
 
             <script type="text/javascript">
                 $(document).on('ready', function () {
+                    added_item_tot();
                     added_item_qty_user_log();
                     load_user_added_item();
-                    added_item_tot();
                     get_shipping_deatails();
+//                    if (!$("#delivery_deatails_tab").hasClass("hidden")) {
+//                        $("#delivery_deatails_tab").addClass("hidden");
+//                    }
+                    if (!$(".next_stp_delivery_deatils_back").hasClass("hidden")) {
+                        $(".next_stp_delivery_deatils_back").addClass("hidden");
+                    }
+
                 });
                 //DELETE ADDED ITEM  ===========================================
                 $(document).on('click', '#cancel_order', function () {
@@ -350,12 +393,22 @@ if (!isset($_SESSION['cus_id'])) {
                 });
                 //ODER CONFIRM BTN ===========================================
                 $(document).on('click', '#order_confirm', function () {
-                    if ($("#payment_tab").hasClass("hidden")) {
-                        $("#payment_tab").removeClass("hidden");
-                    }
-                    if (!$(".order_summary").hasClass("hidden")) {
-                        $(".order_summary").addClass("hidden");
-                    }
+
+
+                    window.location.replace("transaction_method.php");
+
+//                    if ($("#payment_tab").hasClass("hidden")) {
+//                        $("#payment_tab").removeClass("hidden");
+//                    }
+//                    if (!$(".order_summary").hasClass("hidden")) {
+//                        $(".order_summary").addClass("hidden");
+//                    }
+//                    if (!$("#delivery_deatails_tab").hasClass("hidden")) {
+//                        $("#delivery_deatails_tab").addClass("hidden");
+//                    }
+//                    if (!$("#next_stp_delivery_deatils_back").hasClass("hidden")) {
+//                        $("#next_stp_delivery_deatils_back").addClass("hidden");
+//                    }
                 });
                 //PAUMENT METHOD BTN ===========================================
                 $(document).on('change', '#payment_method', function () {
@@ -412,6 +465,9 @@ if (!isset($_SESSION['cus_id'])) {
                     if (!$(".next_step_edit").hasClass("hidden")) {
                         $(".next_step_edit").addClass("hidden");
                     }
+                    if (!$("#order_confirm").hasClass("hidden")) {
+                        $("#order_confirm").addClass("hidden");
+                    }
                 });
                 //NEXT STEP RESET CLICK  ===========================================
                 $(document).on('click', '#next_step_reset', function () {
@@ -422,6 +478,9 @@ if (!isset($_SESSION['cus_id'])) {
                     $('#msg').prop('disabled', true);
                     if ($(".next_step_edit").hasClass("hidden")) {
                         $(".next_step_edit").removeClass("hidden");
+                    }
+                    if ($("#order_confirm").hasClass("hidden")) {
+                        $("#order_confirm").removeClass("hidden");
                     }
                     if (!$(".next_step_update").hasClass("hidden")) {
                         $(".next_step_update").addClass("hidden");
@@ -437,6 +496,36 @@ if (!isset($_SESSION['cus_id'])) {
                     }
                     add_shipping_deatail();
                 });
+                //NEXT STEP DELIVERY DEATAILS BTN  ===========================================
+                $(document).on('click', '#next_stp_delivery_deatils', function () {
+                    if ($("#delivery_deatails_tab").hasClass("hidden")) {
+                        $("#delivery_deatails_tab").removeClass("hidden");
+                    }
+                    if ($(".next_stp_delivery_deatils_back").hasClass("hidden")) {
+                        $(".next_stp_delivery_deatils_back").removeClass("hidden");
+                    }
+                    if (!$("#order_smry_tab").hasClass("hidden")) {
+                        $("#order_smry_tab").addClass("hidden");
+                    }
+                    if (!$(".next_stp_delivery_deatils").hasClass("hidden")) {
+                        $(".next_stp_delivery_deatils").addClass("hidden");
+                    }
+                });
+                //NEXT STEP DELIVERY DEATAILS BACK BTN  ===========================================
+                $(document).on('click', '#next_stp_delivery_deatils_back', function () {
+                    if ($("#order_smry_tab").hasClass("hidden")) {
+                        $("#order_smry_tab").removeClass("hidden");
+                    }
+                    if ($(".next_stp_delivery_deatils").hasClass("hidden")) {
+                        $(".next_stp_delivery_deatils").removeClass("hidden");
+                    }
+                    if (!$(".next_stp_delivery_deatils_back").hasClass("hidden")) {
+                        $(".next_stp_delivery_deatils_back").addClass("hidden");
+                    }
+                    if (!$("#delivery_deatails_tab").hasClass("hidden")) {
+                        $("#delivery_deatails_tab").addClass("hidden");
+                    }
+                });
                 //NEXT STEP BTN UPDATE  ===========================================
                 $(document).on('click', '#next_step_update', function () {
                     update_shipping_deatail();
@@ -449,7 +538,46 @@ if (!isset($_SESSION['cus_id'])) {
                     if (!$("#payment_tab").hasClass("hidden")) {
                         $("#payment_tab").addClass("hidden");
                     }
+                    if ($("#delivery_deatails_tab").hasClass("hidden")) {
+                        $("#delivery_deatails_tab").removeClass("hidden");
+                    }
+                    if ($("#next_stp_delivery_deatils_back").hasClass("hidden")) {
+                        $("#next_stp_delivery_deatils_back").removeClass("hidden");
+                    }
                 });
+
+                $(document).on('keyup', '#recipient_name', function () {
+                    setTimeout(function () {
+                        var recipient_name = $('#recipient_name').val();
+                        if (recipient_name.trim() == "") {
+                            $('#recipient_name_error_msg').html("Please enter recipient name !. ");
+                        } else {
+                            $('#recipient_name_error_msg').html('');
+                        }
+                    }, 250);
+                });
+                $(document).on('keyup', '#recipient_phone', function () {
+                    setTimeout(function () {
+                        var recipient_phone = $('#recipient_phone').val();
+                        if (recipient_phone.trim() == "") {
+                            $('#phone_error_msg').html("Please enter recipient phone !.");
+                        } else {
+                            $('#phone_error_msg').html('');
+                        }
+                    }, 250);
+                });
+                $(document).on('keyup', '#address', function () {
+                    setTimeout(function () {
+                        var address = $('#address').val();
+                        if (address.trim() == "") {
+                            $('#address_error_msg').html("Please enter recipient address !.");
+                        } else {
+                            $('#address_error_msg').html('');
+                        }
+                    }, 250);
+                });
+
+
                 //START CARD PAYMENT BTB  ======================================
                 $(document).on('click', '#start_card_payment_btn', function () {
                     added_item_tot();
@@ -511,6 +639,75 @@ if (!isset($_SESSION['cus_id'])) {
                         }
                     }, "json");
                 });
+                //NEW FUCTION ////////////////////////////////////////////////////////////////////////
+//                PAY CARD PAYMENT FUNCTION  START##########################################################
+                function card_payment() {
+                    added_item_tot();
+                    var oder_val = parseFloat($('#tot_order_val_hidden').val());
+                    var tot_discount_val = parseFloat($('#tot_discount_hidden').val());
+                    var shipping_id = parseInt($('#shipping_id').val());
+                    var item_bill_no = parseInt($('#item_bill_no').val());
+                    if (isNaN(oder_val)) {
+                        alert('Not found item Order value');
+                        return;
+                    }
+                    if (isNaN(tot_discount_val)) {
+                        alert('Not found item discount');
+                        return;
+                    }
+                    if (isNaN(shipping_id)) {
+                        alert('Not found shipping id');
+                        return;
+                    }
+                    if (isNaN(item_bill_no)) {
+                        alert('Not found item bill_no ');
+                        return;
+                    }
+                    var send_object = {oder_val: oder_val, tot_discount_val: tot_discount_val, shipping_id: shipping_id, bill_no: item_bill_no};
+                    $.post("./loaddata.php", {action: 'card_payment_complete', send_obj: send_object}, function (e) {
+                        if (e === null || e === undefined || e.length === 0) {
+                            alert("Data not found");
+                        } else {
+
+                            if (e == 100) {
+                                alert('Error ! Error code 100');
+                                return;
+                            }
+                            if (e == 200) {
+                                alert('Error ! Error code 200');
+                                return;
+                            }
+                            if (e == 300) {
+                                alert('Error ! Error code 300');
+                                return;
+                            }
+                            if (e == 400) {
+                                alert('Error ! Error code 400');
+                                return;
+                            }
+                            if (e == 500) {
+                                alert('Error ! Error code 500');
+                                return;
+                            }
+                            if (e == 1) {
+                                alertify.success("Thank you ! Payment successfully ..");
+                                window.open('user_profil.php', '_top');
+                                return;
+                            }
+                            if (e == 2) {
+                                alert('Error Transaction');
+                                return;
+                            }
+                        }
+                    }, "json");
+                }
+//                PAY CARD PAYMENT FUNCTION   END##########################################################
+                //NEW FUCTION ////////////////////////////////////////////////////////////////////////
+
+
+
+
+
                 //LOAD USER ADDED ITEM TABLE====================================================
                 function load_user_added_item() {
                     var tableData = '';
@@ -520,7 +717,7 @@ if (!isset($_SESSION['cus_id'])) {
                         } else {
                             $.each(e, function (index, qData) {
                                 index++;
-                                tableData += '<tr >';
+                                tableData += '<tr style="font-weight: bold;  font-size: 18px;">';
                                 tableData += '<td width="">' + index + '</td>';
                                 tableData += '<td width=""> ' + qData.item_name + ' </td>';
                                 tableData += '<td width=""> ' + qData.item_qty + ' </td>';
@@ -530,7 +727,7 @@ if (!isset($_SESSION['cus_id'])) {
                                 tableData += '</tr>';
                                 $('#item_bill_no').val(qData.bill_no);
                             });
-                            tableData += '<tr><td colspan="9" ><a href="user_profil.php"><button type="button" class="btn btn-success table_font_size">&nbsp; Back</button></a>&nbsp;&nbsp;&nbsp;<button id="cancel_order" class="btn btn-warning table_font_size"> Remove</button></td></tr>';
+                            tableData += '<tr><td colspan="9" ><a href="user_profil.php"><button type="button" class="btn btn-success table_font_size"> << Back</button></a>&nbsp;&nbsp;&nbsp;<button id="cancel_order" class="btn btn-danger table_font_size fa fa-times btn-lg"> Remove order</button></td></tr>';
                         }
                         $('.added_item_summary tbody').html(tableData);
                     }, "json");
@@ -548,6 +745,7 @@ if (!isset($_SESSION['cus_id'])) {
                             $('.tot_price').html(oder_full_tot);
                             $('.tot_discount').html(oder_full_discount);
                             $('.tot_order_val').html(oder_full_pay_val);
+                            $('.item_tot_price').html(oder_full_pay_val);
                             //HIDEN VAL SET==========================
                             $('#tot_order_val_hidden').val(oder_full_pay_val);
                             $('#tot_discount_hidden').val(oder_full_discount);
@@ -560,6 +758,7 @@ if (!isset($_SESSION['cus_id'])) {
                 function get_shipping_deatails() {
                     $.post("./loaddata.php", {action: 'get_shipping_deatails'}, function (e) {
                         if (e === null || e === undefined || e.length === 0) {
+
                             if ($("#next_step").hasClass("hidden")) {
                                 $("#next_step").removeClass("hidden");
                             }
@@ -602,11 +801,11 @@ if (!isset($_SESSION['cus_id'])) {
                     }, "json");
                 }
 
-//ORDER CANCEL FUNCTION =========================================================
+                //ORDER CANCEL FUNCTION =========================================================
                 function cancel_order() {
 
 
-//                    alertify.success('Current position : ' + alertify.get('notifier', 'position'));
+                    //                    alertify.success('Current position : ' + alertify.get('notifier', 'position'));
                     alertify.confirm('labels changed!').set('labels', {ok: 'Yes', cancel: 'No'});
                     alertify.confirm('Confirm ', 'Do you really want to remove this order ?', function () {
                         $.post("./loaddata.php", {action: 'cancel_order'}, function (e) {
@@ -630,32 +829,35 @@ if (!isset($_SESSION['cus_id'])) {
                     , function () {
 
                     });
-                    exit();
-//                    alertify.confirm('Confirm ', 'Do you really want to delete this order ?', function () {
-//                        $.post("./loaddata.php", {action: 'cancel_order'}, function (e) {
-//                            if (e === undefined || e.length === 0 || e === null) {
-//                                alert('Error in deleting');
-//                            } else {
-//                                if (e == 300) {
-//                                    alert('Error deleting ..! Code 300');
-//                                    return;
-//                                }
-//                                if (e == 400) {
-//                                    alert('Error deleting ..! Code 400');
-//                                    return;
-//                                }
-//                                if (e == 1) {
-//                                    window.location.replace("user_profil.php");
-//                                }
-//                            }
-//                        }, "json");
-//                    }
-//                    , function () {
-////                        alertify.error('Cancel')
-//                    });
+//                    exit();
+                    //                    alertify.confirm('Confirm ', 'Do you really want to delete this order ?', function () {
+                    //                        $.post("./loaddata.php", {action: 'cancel_order'}, function (e) {
+                    //                            if (e === undefined || e.length === 0 || e === null) {
+                    //                                alert('Error in deleting');
+                    //                            } else {
+                    //                                if (e == 300) {
+                    //                                    alert('Error deleting ..! Code 300');
+                    //                                    return;
+                    //                                }
+                    //                                if (e == 400) {
+                    //                                    alert('Error deleting ..! Code 400');
+                    //                                    return;
+                    //                                }
+                    //                                if (e == 1) {
+                    //                                    window.location.replace("user_profil.php");
+                    //                                }
+                    //                            }
+                    //                        }, "json");
+                    //                    }
+                    //                    , function () {
+                    ////                        alertify.error('Cancel')
+                    //                    });
                 }
-//NEXT STEP BTN  FUNCTION =========================================================
+                //NEXT STEP BTN  FUNCTION =========================================================
                 function add_shipping_deatail() {
+                    if (!$(".start_card_payment_btn").hasClass("hidden")) {
+                        $(".start_card_payment_btn").addClass("hidden");
+                    }
                     if (!$(".order_confirm").hasClass("hidden")) {
                         $(".order_confirm").addClass("hidden");
                     }
@@ -666,18 +868,21 @@ if (!isset($_SESSION['cus_id'])) {
                     var tot_order_val = parseFloat($('#tot_order_val_hidden').val());
                     var order_discount = parseFloat($('#tot_discount_hidden').val());
                     if (recipient_name.trim() == "") {
-                        alertify.error('Please enter recipient name.');
+//                        alertify.error('Please enter recipient name.');
+                        $('#recipient_name_error_msg').html("Please enter recipient name !.");
                         $('#recipient_name').focus();
                         return;
                     }
                     if (recipient_phone.trim() == "") {
-                        alertify.error('Please enter recipient phone.');
+//                        alertify.error('Please enter recipient phone.');
+                        $('#phone_error_msg').html("Please enter recipient phone !.");
                         $('#recipient_phone').focus();
                         return;
                     }
                     if (address.trim() == "") {
-                        alertify.error('Please enter recipient address.');
-                        $('#address').focus();
+//                        alertify.error('Please enter recipient address.');
+                        $('#address_error_msg').html("Please enter recipient address !.");
+                        $('#address_error_msg').focus();
                         return;
                     }
 
@@ -696,13 +901,25 @@ if (!isset($_SESSION['cus_id'])) {
                         } else {
                             if (e == "1") {
                                 get_shipping_deatails();
+                                //CHECK CARD PAYMENT OR NOT //////////////////////
+//                                if ($("#card:checked").val()) {
+//                                    //card payment --
+//                                    card_payment();
+//                                } else {
+//                                    //normal payment --
+//                                    alert("normal payment");
+//                                }
+
                             } else {
                                 alert('Error ! data inserting ..!')
                             }
                         }
                     }, "json");
                 }
-//NEXT STEP BTN UPDATE  FUNCTION =========================================================
+
+
+
+                //NEXT STEP BTN UPDATE  FUNCTION =========================================================
                 function update_shipping_deatail() {
                     var recipient_name = $('#recipient_name').val();
                     var recipient_phone = $('#recipient_phone').val();
@@ -711,19 +928,23 @@ if (!isset($_SESSION['cus_id'])) {
                     var address = $('#address').val();
                     var tot_order_val = parseFloat($('#tot_order_val_hidden').val());
                     var order_discount = parseFloat($('#tot_discount_hidden').val());
+
                     if (recipient_name.trim() == "") {
-                        alertify.error('Please enter recipient name.');
+//                        alertify.error('Please enter recipient name.');
+                        $('#recipient_name_error_msg').html("Please enter recipient name !.");
                         $('#recipient_name').focus();
                         return;
                     }
                     if (recipient_phone.trim() == "") {
-                        alertify.error('Please enter recipient phone.');
+//                        alertify.error('Please enter recipient phone.');
+                        $('#phone_error_msg').html("Please enter recipient phone !.");
                         $('#recipient_phone').focus();
                         return;
                     }
                     if (address.trim() == "") {
-                        alertify.error('Please enter recipient address.');
-                        $('#address').focus();
+//                        alertify.error('Please enter recipient address.');
+                        $('#address_error_msg').html("Please enter recipient address !.");
+                        $('#address_error_msg').focus();
                         return;
                     }
 
@@ -761,4 +982,4 @@ if (!isset($_SESSION['cus_id'])) {
         <!--FOOTER-- end////////////////////////////////////////////////////>-->
 
     </body>
-
+</html>

@@ -1,35 +1,12 @@
 
 <!DOCTYPE html>
 <html>
-    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 
     <!--MAIN HEAD START -->
     <head> 
+        <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
         <?php require_once('include/header.php'); ?>
 
-        <style type="text/css">
-            .form_input{
-                border: 1px solid #1ad41a;
-                border-radius: 4px;
-                height: 39px;
-                color: red;
-                font-size: 20px;
-            }
-            /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
-            @media screen and (max-width: 600px) {
-                .column {
-                    width: 50%;
-                }
-
-                .column.cus_font.product-all-sec-wrapper .product-det-content-wrapper {
-                    font-size: 35px;
-                }
-                .table_font_size {
-                    font-size: 23px;
-                }
-
-            }
-        </style>
 
     </head>
 
@@ -71,43 +48,43 @@
                         <label class="col-md-4 control-label table_font_size" for="textinput">First Name</label>  
                         <div class="col-md-4">
                             <input name="textinput" type="text" id="f_name" placeholder="" class="form-control input-md form_input">
-                            <h5 id="f_name_msg" style="color: red;"></h5>
+                            <h5 id="f_name_msg" class="table_font_size" style="color: red;"></h5>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-4 control-label table_font_size" for="textinput">Last Name</label>  
                         <div class="col-md-4">
                             <input name="textinput" type="text" id="l_name" placeholder="" class="form-control input-md form_input">
-                            <h5 id="l_name_msg" style="color: red;"></h5>
+                            <h5 id="l_name_msg" class="table_font_size" style="color: red;"></h5>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-4 control-label table_font_size" for="textinput">Email</label>  
                         <div class="col-md-4">
                             <input name="textinput" type="text" id="email" placeholder=" " class="form-control input-md form_input">
-                            <h5 id="email_msg" style="color: red;"></h5>
-                            <h5 id="email_msg_suc" style="color: blue;"></h5>
+                            <h5 id="email_msg" class="table_font_size" style="color: red;"></h5>
+                            <h5 id="email_msg_suc" class="table_font_size" style="color: blue;"></h5>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-4 control-label table_font_size" for="textinput">City</label>  
                         <div class="col-md-4">
                             <input name="textinput" type="text" id="city" placeholder="" class="form-control input-md form_input" required="">
-                            <h5 id="city_msg" style="color: red;"></h5>
+                            <h5 id="city_msg" class="table_font_size" style="color: red;"></h5>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-4 control-label table_font_size" for="textinput">Address</label>  
                         <div class="col-md-4">
-                            <textarea name="textinput" type="text" id="address" placeholder="  " class="form-control input-md form_input"></textarea>
-                            <h5 id="address_msg" style="color: red;"></h5>
+                            <textarea name="textinput" type="text" id="address" placeholder="  " class="form-control input-md textarea_input"></textarea>
+                            <h5 id="address_msg" class="table_font_size" style="color: red;"></h5>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-4 control-label table_font_size" for="textinput">Phone Number</label>  
                         <div class="col-md-4">
-                            <input name="textinput" type="text" id="phone" placeholder="" class="form-control input-md form_input phone_no">
-                            <h5 id="phone_msg" style="color: red;"></h5>
+                            <input name="textinput" type="text" id="phone" placeholder="" class="form-control input-md textarea_input phone_no">
+                            <h5 id="phone_msg" class="table_font_size" style="color: red;"></h5>
                         </div>
                     </div>
                 </fieldset>
@@ -124,22 +101,32 @@
                     <div class="form-group">
                         <label class="col-md-4 control-label table_font_size" for="passwordinput">Password </label>
                         <div class="col-md-4">
-                            <input  name="passwordinput" type="password" id="password" placeholder="" class="form-control input-md form_input">
+                            <input  name="passwordinput" type="password" id="password" placeholder="" class="form-control input-md textarea_input pw">
                             <span class="help-block"></span>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-4 control-label table_font_size" for="passwordinput">Confirm Password </label>
                         <div class="col-md-4">
-                            <input  name="passwordinput" type="password" id="confirm_password" placeholder="" class="form-control input-md form_input">
-                            <h5 id="passMasseg" style="color: red;"></h5>
+                            <input  name="passwordinput" type="password" id="confirm_password" placeholder="" class="form-control input-md textarea_input pw">
+                            <h5 id="passMasseg" class="table_font_size" style="color: red;"></h5>
                         </div>
                     </div>
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label table_font_size" for="passwordinput"> Show Password</label>
+                        <div class="col-md-4">
+                            <label>
+                                <input type="checkbox" onclick="myFunction()">
+                            </label>
+                        </div>
+                    </div>
+
                     <div class="form-group">
                         <!--<label class="col-md-4 control-label" for="singlebutton"></label>-->
                         <label class="col-md-4 control-label " for="textinput"> </label>
                         <div class="col-md-4">
-                            <button class="btn btn-warning"  id="submit_btn">CREATE ACCOUNT</button>
+                            <button class="btn btn-warning btn_font_size"  id="submit_btn">CREATE ACCOUNT</button>
                         </div>
                     </div>
                     <hr>
@@ -158,28 +145,15 @@
 
                 <script type="text/javascript">
                     $(document).on('ready', function () {
+                        load_cart_item_list();
                         item_tot();
                     });
-//CART ADDED ITEM TOTAL ===========================================================
-                    function item_tot() {
-                        $.post("./loaddata.php", {action: 'item_total'}, function (e) {
-                            if (e === undefined || e.length === 0 || e === null) {
-                                $('#').html("NO data Found ! ");
-                            } else {
-                                var item_tot = (e['item_tot']);
-                                var item_tot_price = (e['item_tot_price']);
-                                $('.item_tot').html(item_tot);
-                                $('.item_tot_price').html(item_tot_price);
-//                    load_cart_item_list();
-                            }
-                            //    chosenRefresh();
-                        }, "json");
-                    }
                     //PHONE NUMBER FEILD ENTER NUMBERS ONLY VALIDATION ==================================
                     $(function () {
-                        $('.phone_no').on('input', function () {
+                        $('.phone_nod').on('input', function () {
                             this.value = this.value
                                     .replace(/[^\d]/g, '');// numbers and decimals only
+//                                    .replace(^[\d\(\)\-+]+$,'');// numbers and decimals only
 
                         });
                     });
@@ -393,6 +367,21 @@
 
                             }
                         }, "json");
+                    }
+                    //password show function ------------------------------
+                    function myFunction() {
+                        var x = document.getElementById("password");
+                        var y = document.getElementById("confirm_password");
+                        if (x.type === "password") {
+                            x.type = "text";
+                        } else {
+                            x.type = "password";
+                        }
+                        if (y.type === "password") {
+                            y.type = "text";
+                        } else {
+                            y.type = "password";
+                        }
                     }
 
                 </script>

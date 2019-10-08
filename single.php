@@ -1,11 +1,15 @@
-<?php session_start(); ?>
-
+<?php
+session_start();
+if (!isset($_GET["item_id"]) && !isset($_GET["sub_cat_id"])) {
+    echo "<script>location.href='index.php';</script>";
+}
+?>
 <!DOCTYPE html>
 <html>
-    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 
     <!--MAIN HEAD START -->
     <head> 
+        <meta http-equiv="content-type" cZontent="text/html;charset=UTF-8" />
         <?php require_once('include/header.php'); ?>
 
         <!--CSS PART ///////////////////////////////////////////////-->
@@ -44,7 +48,7 @@
             }
 
             .slider {
-                width: 100%;
+                width: 95%;
                 margin: 10px auto;
 
             }
@@ -54,7 +58,7 @@
             }
 
             .slick-slide img {
-                width: 90%;
+                width: 100%;
             }
 
             .slick-prev:before,
@@ -67,29 +71,34 @@
                 opacity: 1!important;
             }
 
-            /* If the screen size is 601px wide or more,set the font-size of <div> 25px  */
-            @media screen and (min-width: 601px) {
-                table {
-                    font-size: 25px;
-                }
-            }
-         
             /*--single--*/
             .images_1_of_2 {
                 display: block;
                 float: left;
                 width: 42%;
             }
+            /*<!--IMAGE SLIDER CSS   END //////////////////////////////////////////-->*/ 
 
-            /* If the screen size is 6991px wide or less, set the font-size of <div> to 30px */
-            @media(max-width:991px){
-                .images_1_of_2 {
-                    width: 100% !important;
+            /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+            @media screen and (max-width: 600px) {
+                .column {
+                    width: 50%;
                 }
+
+                .column.cus_font.product-all-sec-wrapper .product-det-content-wrapper {
+                    font-size: 35px;
+                }
+                .table_font_size {
+                    font-size: 35px;
+                }
+
+                .img_div_center{
+                    text-align: center;
+                }
+
             }
-            
+
         </style>
-        <!--/*IMAGE SLIDER CSS   END //////////////////////////////////////////*/--> 
         <!--CSS PART ///////////////////////////////////////////////-->
 
     </head>
@@ -119,7 +128,8 @@
 
         <div class="container" > 
             <div class="row col-lg-12">
-                <div class="" style="padding-top: 100px;">
+                <div class="" style="padding-top: 10px;">
+                    <h3 style="text-align: center;"><a href="index.php"><span style="border: 1px solid blue;"> HOME </span></a> >><span>Item Details</span></h3><hr>
                     <div class="single_grid">
                         <div class="grid images_1_of_2">
                             <!--<div class="grid images_3_of_2">-->
@@ -155,14 +165,28 @@
 
                             <!--<h4>Vitamin - A</h4>-->
                             <div class="cart-b">
-                                <div class="left-n ">$329.58</div>
-                                <a class="now-get get-cart-in" href="#">ADD TO CART</a> 
+                                <div class="left-n "></div>
+
+
+                                <?php
+                                $item_price = $_GET['item_price'];
+                                $item_id = $_GET['item_id'];
+                                if (($_GET['out_of_stock']) == '1') {
+                                    //STOCK OUT ================================
+                                    echo '<p class="table_font_size" style="color:red; font-weight: 600;">Stoke Out</p>';
+                                } else {
+                                    echo '<button type = "button" class="btn btn-success now-get get-cart-in table_font_size" id = "add_to_cart_btn" data-item_price = ' . $item_price . ' value = ' . $item_id . '> Add to cart</button>';
+                                }
+                                ?>
+
+
+                                <!--<a class="now-get get-cart-in" href="#">ADD TO CART</a>--> 
                                 <div class="clearfix"></div>
                             </div>
                             <div>
                                 <span class="border">
-                                    <ul style="font-weight: 100;font-size: 21px; color: #777fa5;"><li class="mb-3">
-                                        </li><li class="mb-3">
+                                    <ul class="" style="font-weight: 100;font-size: 21px; color: #777fa5; "><li class="mb-3">
+                                        </li><li class="table_font_size">
                                             <div><h3> Item Name : <label id="item_name"></label></h3></div>
                                         </li>
                                         <div><h3> Item Price : <label id="price"></label></h3></div>
@@ -193,28 +217,27 @@
             <!--IMAGE VIDEO ///////////////////////////////////////////////////////////////////////////////////////-->
             <div class="row" id="">
                 <div class="toogle">
-                    <div class="col-lg-5">
+                    <div class="col-lg-5" id="vdo_panel">
                         <div class="video-responsive" id="img_vdo">
 <!--                                    <iframe width="420" height="315" src="https://www.youtube.com/embed/NIeFXPGS7-A" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             -->
                         </div>
                     </div>
                     <!--IMAGE VIDEO ///////////////////////////////////////////////////////////////////////////////////////-->
-                    <div class="col-lg-7 desc1 span_3_of_2 inset" >
-                        <h3 class="m_3">About Item</h3>
-                        <p class="m_text " id="item_description">
-                        </p>
+                    <div class="col-lg-7  span_3_of_2 inset table_font_size" >
+                        <h3 class="">About Item</h3>
+                        <p class="table_font_size" id="item_description" style="color: black; font-weight: bold; background:#42ff6208; ">  </p>
                     </div>
                 </div>
             </div>
             <hr>
             <div style="padding-bottom:10px; " > 
-                <h2 style="color:#6969ab;">Related Items</h2>
+                <h2 style="color:#6969ab; text-align: center;">Related Items</h2>
             </div>
 
 
             <!--SLIDER DIV START///////////////////////////////////////////////////////////////////////////////////////////////-->
-            <section class="regular slider" style="background-color: #FFD700; padding-top:10px ;">
+            <section class="regular slider" style="background-color: ; padding-top:10px ;">
                 <?php
                 if (!isset($_GET["item_id"]) && !isset($_GET["sub_cat_id"])) {
                     echo "Not Found POST data !";
@@ -242,30 +265,57 @@
 //SLICK SLIDER FUCTION START/////////////////////////////////////////
                 setTimeout(function () {
                     $(".regular").slick({
-                        dots: true,
-                        arrows: true,
-                        infinite: true,
-                        slidesToShow: 5,
-                        slidesToScroll: 3,
-                        lazyLoad: 'ondemand',
+                        // normal options...
                         autoplay: true,
-                        autoplaySpeed: 2000
-
+                        autoplaySpeed: 2000,
+                        infinite: true,
+                        slidesToShow: 4,
+                        slidesToScroll: 3,
+                        mobileFirst: true,
+                        responsive: [{
+                                breakpoint: 1000,
+                                settings: {
+                                    slidesToShow: 4,
+                                    infinite: true
+                                }
+                            }, {
+                                breakpoint: 768,
+                                settings: {
+                                    slidesToShow: 3,
+                                    infinite: true
+                                }}, {
+                                breakpoint: 550,
+                                settings: {
+                                    slidesToShow: 3,
+                                    infinite: true
+                                }}]
                     });
+                    //                 new script-------------
 
                 }, 1000);
+//                setTimeout(function () {
+//                    $(".regular").slick({
+//                        dots: true,
+//                        arrows: true,
+//                        infinite: true,
+//                        slidesToShow: 5,
+//                        slidesToScroll: 3,
+//                        lazyLoad: 'ondemand',
+//                        autoplay: true,
+//                        autoplaySpeed: 2000
+//
+//                    });
+//
+//                }, 1000);
             });
 //SLICK SLIDER FUCTION END/////////////////////////////////////////
             //ONLOAD FUCTION =======================================
             load_slider(3);
             single_page_selected_item();
-
         });
-
         //LOAD SLIDER FUNCTION START=========================================================
         function load_slider(category) {
             var sub_cat_id = "<?php echo $sub_cat_id = $_GET["sub_cat_id"]; ?>";
-
             var sliderData = '';
             $.post("./loaddata.php", {action: 'single_page_lode_slider', category: category, sub_cat_id: sub_cat_id}, function (e) {
                 if (e === undefined || e.length === 0 || e === null) {
@@ -275,8 +325,17 @@
                 } else {
                     $.each(e, function (index, qData) {
                         if (e !== null || e.length !== 0) {
-                            sliderData += '<div ><img  onClick="sendimg(this); id="" class="img-responsive" width="60px" src="../drugs_ordering_system_backend/uploads/' + qData.item_image + '"></div>';
-                            sliderData += '<div>' + qData.item_name + '<br>' + qData.item_price + '<br>  <input type="button"  class="btn btn-primary" style="background-color:#ad9936;" onclick="myFunction(' + qData.item_id + ')" value="Deatails"  id="img_select"></button></div>';
+//                            sliderData += '<div class="img_div_center" style="font-size:20px; text-aling:center;">\n\
+//                            <a href="single.php?item_id=' + qData.item_id + '&sub_cat_id=' + qData.sub_cat_id + '&item_price=' + qData.item_price + '&out_of_stock=' + qData.out_of_stock + ' ">\n\
+//                            <img  id="" class="img-responsive img_div_center" width="" src="../drugs_ordering_system_backend/uploads/' + qData.item_image + '"></a>\n\
+//                            <div class="cus_boder_for_item_deatails" style="text-align: center;"><h3>' + qData.item_name + '</h3><h3>LKR :' + qData.item_price + '</h3></div></div>';
+//                       
+                            sliderData += '<div class="column cus_font product-all-sec-wrapper"> <div class="content" align="middle">\n\
+                            <a href="single.php?item_id=' + qData.item_id + '&sub_cat_id=' + qData.sub_cat_id + '&item_price=' + qData.item_price + '&out_of_stock=' + qData.out_of_stock + ' ">\n\
+                            <img  id="" class="img-responsive img_div_center" width="" src="../drugs_ordering_system_backend/uploads/' + qData.item_image + '"></a>\n\
+                            <div class="cus_boder_for_item_deatails" style="text-align: center;">\n\
+<a href="single.php?item_id=' + qData.item_id + '&sub_cat_id=' + qData.sub_cat_id + '&item_price=' + qData.item_price + '&out_of_stock=' + qData.out_of_stock + ' "><h3 class="product-det-content-wrapper" style="text-align: center; ">' + qData.item_name + '</h3><h3 class="product-det-content-wrapper" style="text-align: center; font-weight: 600;">LKR :' + qData.item_price + '</h3></a></div></div></div>';
+
                         }
                     });
                     $('.regular').html('').append(sliderData);
@@ -289,7 +348,6 @@
         //ON LOAD SELECTED ITEM FUNCTION START=========================================================
         function single_page_selected_item(item_id) {
             var item_id = "<?php echo $sub_cat_id = $_GET["item_id"]; ?>";
-
             var sliderData = '';
             $.post("./loaddata.php", {action: 'single_page_selected_item', item_id: item_id}, function (e) {
                 if (e === undefined || e.length === 0 || e === null) {
@@ -301,6 +359,7 @@
                     var image = (e[0]['item_image']);
                     var item_price = (e[0]['item_price']);
                     var vdo = (e[0]['item_video']);
+                    var vdo_status = (e[0]['vdo_status']);
                     var item_discount = (e[0]['item_discount']);
                     var item_name = (e[0]['item_name']);
                     var item_description = (e[0]['item_description']);
@@ -308,6 +367,11 @@
                     var price = '<div>' + item_price + '</div>';
                     var img_data = '<div style="text-aling:center;"><img align="middle" style="text-aling:center;  width:325px;" class="img-responsive center" src="../drugs_ordering_system_backend/uploads/' + image + '" data-imagezoom="true" ></div>';
                     var vdo = '<div>' + vdo + '</div>';
+                    if (vdo_status == '0') {
+                        $('#vdo_panel').hide();
+                    } else {
+                        var vdo = '<div>' + vdo + '</div>';
+                    }
 //=====================================================================
                     $('.selected_img').html('').append(img_data);
                     $('#price').html('').append(price);
@@ -315,8 +379,6 @@
                     $('#img_vdo').html('').append(vdo);
                     $('#item_name').html('').append(item_name);
                     $('#item_description').html('').append(item_description);
-
-
                     $.each(e, function (index, qData) {
                         if (e !== null || e.length !== 0) {
 //                                    sliderData += '<div><img style=" height:400px;" src="../drugs_ordering_system_backend/uploads/' + qData.item_image + '" data-imagezoom="true" class="img-responsive"></div>';
@@ -341,6 +403,7 @@
                 } else {
 //=====================================================================
                     var image = (e[0]['item_image']);
+                    var vdo_status = (e[0]['vdo_status']);
                     var item_price = (e[0]['item_price']);
                     var vdo = (e[0]['item_video']);
                     var item_discount = (e[0]['item_discount']);
@@ -348,8 +411,13 @@
                     var item_description = (e[0]['item_description']);
 //=====================================================================
                     var price = '<div>' + item_price + '</div>';
-                    var img_data = '<div><img style=" height:400px;" src="../drugs_ordering_system_backend/uploads/' + image + '" data-imagezoom="true" class="img-responsive"></div>';
-                    var vdo = '<div>' + vdo + '</div>';
+                    var img_data = '<div class="column cus_font product-all-sec-wrapper><img style=" height:400px;" src="../drugs_ordering_system_backend/uploads/' + image + '" data-imagezoom="true" class="img-responsive"></div>';
+                    if (vdo_status == '0') {
+                        $('#vdo_panel').hide();
+                    } else {
+                        var vdo = '<div>' + vdo + '</div>';
+                    }
+
 //=====================================================================
                     $('.selected_img').html('').append(img_data);
                     $('#price').html('').append(price);
@@ -357,8 +425,6 @@
                     $('#img_vdo').html('').append(vdo);
                     $('#item_name').html('').append(item_name);
                     $('#item_description').html('').append(item_description);
-
-
                     $.each(e, function (index, qData) {
                         if (e !== null || e.length !== 0) {
 //                                    sliderData += '<div><img style=" height:400px;" src="../drugs_ordering_system_backend/uploads/' + qData.item_image + '" data-imagezoom="true" class="img-responsive"></div>';
@@ -394,4 +460,5 @@
     <!--FOOTER-- end////////////////////////////////////////////////////>-->
 </div>
 </body>
+</html>
 

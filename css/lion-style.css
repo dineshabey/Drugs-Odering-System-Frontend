@@ -82,7 +82,7 @@ header {
 }
 
 .header-main-menu-sec-wrapper .menu-mid-sec-wrapper .menu-mid-sec-inner-wrapper .top-menu-search-sec-wrapper .top-menu-search-field-sec-wrapper input {
-	padding: 7px 32px 7px 12px;
+	padding: 4px 32px 7px 12px;
 	width: 420px;
 	border-radius: 20px;
 	border: 1px solid #ffffff;
@@ -161,7 +161,7 @@ header {
 .header-main-menu-sec-wrapper .menu-items-sec-wrapper .menu-items-inner-wrapper > ul li > a {
 	display: block;
 	text-transform: uppercase;
-	padding: 15px 22px;
+	padding: 5px 35px;
 	color: #ffffff;
 	font-weight: 600;
 	-webkit-transition: ease-in-out 0.2s;
@@ -190,12 +190,14 @@ header {
 .header-main-menu-sec-wrapper .menu-items-sec-wrapper .menu-items-inner-wrapper > ul > li > a > i {
 	padding-left: 10px;
 	position: absolute;
-	top: 16px;
+	top: 8px;
 	font-size: 13px;
 }
 
 .header-main-menu-sec-wrapper .menu-items-sec-wrapper .menu-items-inner-wrapper li .itm-sub-categ-consist-wrapper {
-	padding: 15px 38px 15px 22px;
+	/*padding: 1px 38px 15px 22px;*/
+	padding:3px 47px 8px 22px;
+        
 }
 
 .header-main-menu-sec-wrapper .menu-items-sec-wrapper .menu-items-inner-wrapper li .sub-categ-wrapper {

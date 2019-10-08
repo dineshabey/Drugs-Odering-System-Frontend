@@ -10,31 +10,12 @@ $system = new setting();
 $date = date("Y-m-d");
 $time = date("h:i:sa");
 ?>
-
-
-
 <!DOCTYPE html>
 <html>
-    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-
     <!--MAIN HEAD START -->
     <head>
-
-        <!--AMAZING SLIDER SCRIPT START-->
-        <!-- Insert to your webpage before the </head> -->
-        <script src="sliderengine/jquery.js"></script>
-        <script src="sliderengine/amazingslider.js"></script>
-        <link rel="stylesheet" type="text/css" href="sliderengine/amazingslider-1.css">
-        <script src="sliderengine/initslider-1.js"></script>
-
+        <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
         <?php require_once('include/header.php'); ?>
-
-
-        <!--AMAZING SLIDER SCRIPT END-->
-
-        <!--ITEM SLIDER CSS START////////////////////-->
-        <!--<link rel="stylesheet" type="text/css" href="./slick/slick.css">-->
-        <!--<link rel="stylesheet" type="text/css" href="./slick/slick-theme.css">-->
         <style type="text/css">
             html, body {
                 margin: 0;
@@ -108,32 +89,6 @@ $time = date("h:i:sa");
                 padding: 10px;
             }
 
-            @media screen and (max-width: 450px) {
-
-                .column.cus_font.product-all-sec-wrapper .product-det-content-wrapper {
-                    font-size: 35px;
-                }
-
-            }
-            /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
-            @media screen and (max-width: 600px) {
-                .column {
-                    width: 50%;
-                }
-
-                .column.cus_font.product-all-sec-wrapper .product-det-content-wrapper {
-                    font-size: 35px;
-                }
-                .table_font_size {
-                    font-size: 35px;
-                }
-                .btn_size {
-                    font-size: 22px;
-                    text-align: center;
-                }
-
-            }
-
             /*FEATURES ITEMS LIST CSS   END*/
 
             /*CART CSS*/
@@ -189,6 +144,29 @@ $time = date("h:i:sa");
                 text-decoration:none !important;
             }
 
+
+
+
+            /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+            @media screen and (max-width: 600px) {
+                .column {
+                    width: 50%;
+                }
+
+                .column.cus_font.product-all-sec-wrapper .product-det-content-wrapper {
+                    font-size: 35px;
+                }
+                .table_font_size {
+                    font-size: 35px;
+                }
+                .btn_size {
+                    font-size: 22px;
+                    text-align: center;
+                }
+
+            }
+
+
         </style>
     </head>
     <!--MAIN HEAD END -->
@@ -204,10 +182,10 @@ $time = date("h:i:sa");
         <!--SLICK SLIDER-->
         <script src="./slick/slick.min.js" type="text/javascript" charset="utf-8"></script>
 
-        
-<!--          <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>-->
-        
+
+        <!--          <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+                 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>-->
+
         <script type="text/javascript">
             $(function () {
                 $('#main-menu').smartmenus({
@@ -218,28 +196,17 @@ $time = date("h:i:sa");
         </script>
         <!--sub header--////////////////////////////////////////////////////////>-->
         <div class="header">
-            <?php // require_once('include/coustomer_header.php'); ?>
             <?php require_once('header2.php'); ?>
-            <?php // require_once('include/header2.php'); ?>
-            <!--<a href="navbar.php"></a>-->
-
         </div>
-
-
         <!---728x90--->
 
         <div class="container">
-
-
-
+            <h3 style="text-align: center;"><a href="index.php"><span style="border: 1px solid blue; "> HOME </span></a> >><span>Item Category </span></h3><hr>
             <div class="sort_conditions" style="border: 1px solid #ddd; margin: 1.5em 0; padding: 0.5em 1em; background:white; text-align: center;">
 
                 <div class="btn-group" style="margin-top:10px;margin-bottom:15px;"> 
-                    <a type="button" class="btn btn-outline-info " href="index.php">Home</a>
                     <a type="button" class="btn btn-outline-info cat_name" href=""></a>
-
                 </div>
-
                 <!--<div class="btn-group" style="margin-top:10ps;margin-bottom:5px;">-->
                 <div class="btn-group" style="margin-top:10ps;margin-bottom:5px;">
                     <button type="button" class="btn btn-primary btn_size">Recently Added</button>
@@ -256,21 +223,19 @@ $time = date("h:i:sa");
                     </div>
                 </div>
             </div>
-
             <!-- items -->
             <div class=" img_view_panel" >
                 <?php
                 if (!isset($_GET["main_cat_id"]) && !isset($_GET["sub_cat_id"])) {
                     echo "Not Found POST data !";
                 }
-
-
                 $item_query = "SELECT
 item_deatails.item_id,
 item_deatails.item_name,
 item_deatails.item_price,
 item_deatails.item_image,
 item_deatails.item_discount,
+item_deatails.item_old_price,
 sub_cat.sub_cat_name,
 main_cat.main_cat_name,
 main_cat.main_cat_id,
@@ -301,7 +266,7 @@ item_deatails.sub_cat_id DESC
                 $total = $item_count;
 
                 // How many items to list per page
-                $limit = 4;
+                $limit = 8;
 
                 // How many pages will there be
                 $pages = ceil($total / $limit);
@@ -333,7 +298,7 @@ item_deatails.sub_cat_id DESC
 
                 if (!empty($item_info_data)) {
 
-                    $pg = count($item_info_data) / 4;
+                    $pg = count($item_info_data) / 8;
 
                     $cols = array_chunk($item_info_data, ceil(count($item_info_data) / $pg));
 
@@ -351,16 +316,33 @@ item_deatails.sub_cat_id DESC
                         $item_name = $val3['item_name'];
                         $item_img = $val3['item_image'];
                         $item_price = $val3['item_price'];
+                        $item_old_price = $val3['item_old_price'];
                         $item_id = $val3['item_id'];
                         $out_of_stock = $val3['out_of_stock'];
 
-                        $item_out_put .= '<div class="column cus_font">
-                        <div class="content" align="middle">
-                        <a href="single.php?item_id=' . $item_id . '&sub_cat_id=' . $sub_cat_id . ' ">
-                        <img class="secial_item img-responsive card" align="middle" style="text-aling:center;" src="../drugs_ordering_system_backend/uploads/' . $val3['item_image'] . '"/>
-                        <h3 class="table_font_size">' . $item_name . '</h3>
-                        <h3 style="color:blue;"  class="table_font_size">' . $main_cat_names . '</h3>
-                        <h3 style="text-align: center; color:red; "  class="table_font_size">LKR ' . $item_price . '</h3></a>';
+//                        $item_out_put .= '<div class="column cus_font">
+//                        <div class="content" align="middle">
+//                         <a href="single.php?item_id=' . $item_id . '&sub_cat_id=' . $sub_cat_id . '&item_price=' . $item_price . '&out_of_stock=' . $out_of_stock . ' ">
+//                        <img class="secial_item img-responsive card" align="middle" style="text-aling:center;" src="../drugs_ordering_system_backend/uploads/' . $val3['item_image'] . '"/></a>
+//                            
+//                        <div class="cus_boder_for_item_deatails">
+//                        <a href="single.php?item_id=' . $item_id . '&sub_cat_id=' . $sub_cat_id . '&item_price=' . $item_price . '&out_of_stock=' . $out_of_stock . ' ">
+//                        <h3 class="table_font_size">' . $item_name . '</h3>
+//                        <h3 style="color:blue;"  class="table_font_size">' . $main_cat_names . '</h3>
+//                        <h3 style="text-align: center; color:red; "  class="table_font_size">LKR ' . $item_price . '</h3></a>';
+
+                        $item_out_put .= '<div class="column cus_font product-all-sec-wrapper">
+                    <div class="content" align="middle">
+                    <a href="single.php?item_id=' . $item_id . '&sub_cat_id=' . $sub_cat_id . '&item_price=' . $item_price . '&out_of_stock=' . $out_of_stock . ' ">
+                    <img class="secial_item img-responsive  " align="middle" style="text-aling:center;  " src="../drugs_ordering_system_backend/uploads/' . $val3['item_image'] . '"/></a>
+                   
+                     <div class="cus_boder_for_item_deatails">
+                     <a href="single.php?item_id=' . $item_id . '&sub_cat_id=' . $sub_cat_id . '&item_price=' . $item_price . '&out_of_stock=' . $out_of_stock . ' ">
+
+                    <h3 class="product-det-content-wrapper" style="text-align: center; font-weight: 600;">' . $item_name . '</h3>
+                    <h3 class="product-det-content-wrapper" style="text-align: center; color:red; font-weight: 600;  text-decoration: line-through;">LKR ' . $item_old_price . '</h3>
+                    <h3 class="product-det-content-wrapper" style="text-align: center; color:blue; font-weight: 600;">LKR ' . $item_price . '</h3>
+                        </a>';
 
                         if ($out_of_stock == '1') {
                             //STOCK OUT ================================
@@ -370,6 +352,7 @@ item_deatails.sub_cat_id DESC
 //                            $item_out_put .= '<p> <button type = "button" class = "btn btn-success" id = "add_to_cart_btn" data-item_price = "' . $item_price . '" value = ' . $item_id . '>Add to cart</button></p>';
                         }
 
+                        $item_out_put .= '</div>';
                         $item_out_put .= '</div></div>';
                     }//END foreach
 
@@ -442,13 +425,13 @@ item_deatails.sub_cat_id DESC
 
 <!--FOTER DIV START ///////////////////////////////////////////////////////////-->
 <div class="footer">
-<?php require_once('include/footer.php'); ?>
+    <?php require_once('include/footer.php'); ?>
 
 
     <script type="text/javascript">
             $(document).on('ready', function () {
-
-            
+                load_cart_item_list();
+                item_tot();
                 //ONLOAD FUNCTION IMAGE MAIN CAT LOAD ------------------------------------------
                 $(function () {
                     var sub_cat_id = "<?php echo $sub_cat_id = $_GET["sub_cat_id"]; ?>";
@@ -457,7 +440,7 @@ item_deatails.sub_cat_id DESC
                     var sub_cats_id = parseInt(sub_cat_id);
                     var main_cats_id = parseInt(main_cat_id);
 
-    load_cat(main_cat_id,sub_cat_id);
+                    load_cat(main_cat_id, sub_cat_id);
 
 
                 });

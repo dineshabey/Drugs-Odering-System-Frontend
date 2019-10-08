@@ -1,4 +1,16 @@
-<?php session_start(); ?>
+<?php session_start();
+
+if (!empty($_GET['msg'])) {
+    
+} else {
+    ?>
+    <style type="text/css">#success_msg{
+            display:none;
+        }</style>
+        <?php
+    }
+
+?>
 <!DOCTYPE html>
 <html>
     <!--MAIN HEAD START -->
@@ -88,34 +100,6 @@
             .content {
                 background-color: white;
                 padding: 10px;
-            }
-
-            /* Responsive layout - makes a two column-layout instead of four columns */
-            @media screen and (max-width: 900px) {
-                .column {
-                    width: 50%;
-                }
-            }
-            @media screen and (max-width: 450px) {
-
-                .column.cus_font.product-all-sec-wrapper .product-det-content-wrapper {
-                    font-size: 35px;
-                }
-
-            }
-            /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
-            @media screen and (max-width: 600px) {
-                .column {
-                    width: 50%;
-                }
-
-                .column.cus_font.product-all-sec-wrapper .product-det-content-wrapper {
-                    font-size: 35px;
-                }
-                .table_font_size {
-                    font-size: 35px;
-                }
-
             }
 
             /*FEATURES ITEMS LIST CSS   END*/
@@ -246,6 +230,22 @@
             /*//CUS HEADER CSS ///////////////////////////////////*/
 
 
+            /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+            @media screen and (max-width: 600px) {
+                .column {
+                    width: 50%;
+                }
+
+                .column.cus_font.product-all-sec-wrapper .product-det-content-wrapper {
+                    font-size: 35px;
+                }
+                .table_font_size {
+                    font-size: 35px;
+                }
+
+            }
+
+
         </style>
     </head>
     <!--MAIN HEAD END -->
@@ -273,7 +273,6 @@
 
 
         <!---728x90--->
-
         <div class="container">
             <div class="row" style="padding-bottom: 1px; padding-top: 5px;">
                 <!-- Insert to your webpage where you want to display the slider -->
@@ -291,7 +290,16 @@
                     </div>
                 </div>
             </div>
-
+  <!--//navigation end------------------------------------------------------->    
+        <div id="success_msg">
+            <div class="alert info success" id="" >
+                <div onclick="this.parentElement.style.display = 'none';" >
+                    <h4 class="alert-heading">Order confirmed  !</h4>
+                    <span class="closebtn" onclick="this.parentElement.style.display = 'none';">&times</span> 
+                    <strong></strong> Thank you ! Our agent will call you .
+                </div>
+            </div>
+        </div>
             <!-- LOAD FEATURED ITEMS START-->
             <div class="row load_featured_items " style="background-color: white;" > </div>
             <!-- LOAD FEATURED ITEMS END -->
@@ -310,14 +318,14 @@
                     if (!isset($_SESSION['cus_id'])) {
                         echo '<div class="cart"><a href="cart_item.php"><span class="shopping-cart"> </span></a><span style="font-weight: bold; background:#0000e6; font-size: large; color: #ffd700; border-radius: 32px 32px;" class="item_tot"> </span></div>';
                     } else {
-                        echo '<div class="cart hidden" ><a href="cart_item.php"><span class=""> </span></a><span style="font-weight: bold; background:#0000e6; font-size: large; color: #ffd700; border-radius: 32px 32px;" class="item_tot"> </span></div>';
+                        echo '<div class="cart hidden"><a href="cart_item.php"><span class=""> </span></a><span style="font-weight: bold; background:#0000e6; font-size: large; color: #ffd700; border-radius: 32px 32px;" class="item_tot"> </span></div>';
                     }
                     ?>
                 </span>
 
                 <div class="clear"></div>
                 <!-- items -->
-                <div class=" img_view_panel" >   </div>
+                <div class="img_view_panel">   </div>
                 <!--/ items -->
             </div>
 
@@ -337,13 +345,47 @@
 
         <script type="text/javascript">
             $(document).on('ready', function () {
+//                setTimeout(function () {
+//                    $(".regular").slick({
+//                        // normal options...
+//                        //                        dots: true,
+//                        infinite: true,
+//                        slidesToShow: 4,
+//                        slidesToScroll: 3,
+//                        mobileFirst: true,
+//                        responsive: [{
+//                                breakpoint: 1000,
+//                                settings: {
+//                                    slidesToShow: 4,
+//                                    infinite: true
+//                                }
+//                            }, {
+//                                breakpoint: 600,
+//                                settings: {
+//                                    slidesToShow: 2,
+//                                    infinite: true
+//                                }}, {
+//                                breakpoint: 550,
+//                                settings: {
+//                                    slidesToShow: 2,
+//                                    infinite: true
+//                                }}]
+//                    });
+//                    //                 new script-------------
+//
+//                }, 2000);
+
+                //
+
+
                 setTimeout(function () {
                     $(".regular").slick({
                         // normal options...
-                        //                        dots: true,
+//                        autoplay: true,
+                        autoplaySpeed: 2000,
                         infinite: true,
                         slidesToShow: 4,
-                        slidesToScroll: 2,
+                        slidesToScroll: 3,
                         mobileFirst: true,
                         responsive: [{
                                 breakpoint: 1000,
@@ -365,9 +407,7 @@
                     });
                     //                 new script-------------
 
-                }, 2000);
-
-                //
+                }, 1000);
 
                 //ONLOAD FUNCTION IMAGE MAIN CAT LOAD ------------------------------------------
                 $(function () {

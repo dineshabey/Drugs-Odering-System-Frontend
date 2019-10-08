@@ -71,8 +71,10 @@ session_start();
         <!-- Nav tabs -->
 
         <!--<div class="container"><h5 style="color:#4245bb;">Client Area / Welcome <?php echo $_SESSION['uname'] ?> </h5></div>-->
-        <hr style="border: 1px solid #d1cbea;">
+        <!--<hr style="border: 1px solid #d1cbea;">-->
         <div id="exTab1" class="container" >	
+            <!--<hr style="border: 1px solid #d1cbea;">-->
+            <h3 style="text-align: center;"><a href="index.php"><span style="border: 1px solid blue;"> HOME </span></a> >><span>Our policies</span></h3><hr>
             <ul  class="nav nav-pills" style="background-color: #fcfe6d85; font-weight: 400;">
                 <li class="active">
                     <a  href="#our_policies_tab" data-toggle="tab" class="size-36"><span class="">Our policies </span></a>
@@ -313,13 +315,20 @@ session_start();
         <!--FOOTER--////////////////////////////////////////////////////////>-->
         <div class="footer">
             <?php require_once('include/footer.php'); ?>
-        </script>
-    </div>
+            <script type="text/javascript">
+                $(document).on('ready', function () {
+                    load_cart_item_list();
+                    item_tot();
+                });
+
+            </script>
+        </div>
 
 
 
 
-    <!--FOOTER-- end////////////////////////////////////////////////////>-->
+        <!--FOOTER-- end////////////////////////////////////////////////////>-->
 
-</body>
+    </body>
+</html>
 

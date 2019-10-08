@@ -1,20 +1,14 @@
 <header>
     <div class="header-main-menu-sec-wrapper top_head_cus2">
-        <div class="menu-top-sec-wrapper" >
-            <div class="container"  >
+        <div class="menu-top-sec-wrapper hidden_bar">
+            <div class="container">
                 <div class="row" >
                     <div class="col-md-12" style="">
-
-
                         <a href="index.php">
-
                             <div class="welcome-left-sec-wrapper">
                                 <span style="color: #00811c; font-size: 20px; "> <i class="fa fa-home" aria-hidden="true" style="text-align: center;"></i> <span class="txt-highlt">HOME</span></span>
                             </div>
                         </a>
-
-
-
                         <div class="log-sign-right-sec-wrapper">
                             <?php
                             if (!isset($_SESSION['cus_id'])) {
@@ -42,18 +36,17 @@
                         <div class="top-menu-search-sec-wrapper">
                             <div class="top-menu-search-field-sec-wrapper">
                                 <h2 style="color:#4245bb;">Client Area / Welcome <?php echo $_SESSION['uname'] ?> ! </h2>
-
                             </div>
                         </div>
                         <div class="topmenu-righticons-sec-wrapper">
                             <span class="topmenu-cart-icon-sec-wrapper">
+                                <span class="" style="color:red; font-size: 20px; font-weight:bold; text-align: right; background: #fdff6e;" ><a href="user_profil.php">Order (LKR) = <span class="item_tot_price"></span></a></span>
                                 <?php
                                 if (!isset($_SESSION['cus_id'])) {
-                                    echo '<a href="cart_item.php"><i class="fa fa-shopping-cart" aria-hidden="true"></i><span class="items-num-wrapper item_tot" ></span></a>';
+                                    echo '<a href="cart_item.php"><i style="font-size:56px; color:blue;" class="fa fa-shopping-cart" aria-hidden="true"></i><span class="items-num-wrapper itm_qty_user_log" ></span></a>';
                                 } else {
 //                                    echo '<a href="cart_item.php" ><i class="fa fa-shopping-cart" aria-hidden="true"></i><span class="items-num-wrapper item_tot" ></span></a>';
-                                    echo '<a href="user_profil.php" ><i class="fa fa-shopping-cart" aria-hidden="true"></i><span class="items-num-wrapper itm_qty_user_log" ></span></a>';
-                                    
+                                    echo '<a href="user_profil.php" ><i style="font-size:56px; color:blue;" class="fa fa-shopping-cart" aria-hidden="true"></i><span class="items-num-wrapper itm_qty_user_log" ></span></a>';
                                 }
                                 ?>
 
@@ -95,10 +88,10 @@
                             <span class="topmenu-cart-icon-sec-wrapper">
                                 <?php
                                 if (!isset($_SESSION['cus_id'])) {
-                                    echo '<a href="cart_item.php"> <i class="fa fa-shopping-cart" style="font-size: 50px; color:blue;" aria-hidden="true"></i>  <span class="items-num-wrapper item_tot">0</span></a>';
+                                    echo '<a href="cart_item.php"> <i class="fa fa-shopping-cart" style="font-size: 60px; color:blue;" aria-hidden="true"></i>  <span class="items-num-wrapper item_tot">0</span></a>';
                                 } else {
 //                                    echo '<a href="cart_item.php"> <i style="font-size: 50px;" class="fa fa-shopping-cart" aria-hidden="true"></i>  <span class="items-num-wrapper item_tot">0</span></a>';
-                                    echo '<a href="user_profil.php"> <i style="font-size: 50px;" class="fa fa-shopping-cart" aria-hidden="true"></i>  <span class="items-num-wrapper itm_qty_user_log">0</span></a>';
+                                    echo '<a href="user_profil.php"> <i style="font-size: 60px;" class="fa fa-shopping-cart" aria-hidden="true"></i>  <span class="items-num-wrapper itm_qty_user_log">0</span></a>';
                                 }
                                 ?>
                             </span>
@@ -129,7 +122,7 @@
                                     ?>
 
                                 </span>
-                                <!--<span class="col-lg-8" style="color:blue; font-size: 30px; font-weight:bold; text-align: center;" ><a href="login.php">Sampale text</a></span>-->
+                                <span class="col-lg-8" style="color:blue; font-size: 20px; font-weight:bold; text-align: right; border: 1px #ffffff solid; background: #fdff6e" ><a href="user_profil.php">Order (LKR) = <span class="item_tot_price"></span></a></span>
                             </div>
                         </div>
                     </div>
@@ -148,23 +141,8 @@
 
 <script type="text/javascript">
     $(document).on('ready', function () {
-        item_tot();
+//        item_tot();
     });
-    //CART ADDED ITEM TOTAL ===========================================================
-    function item_tot() {
-        $.post("./loaddata.php", {action: 'item_total'}, function (e) {
-            if (e === undefined || e.length === 0 || e === null) {
-                $('#').html("NO data Found ! ");
-            } else {
-                var item_tot = (e['item_tot']);
-                var item_tot_price = (e['item_tot_price']);
-                $('.item_tot').html(item_tot);
-                $('.item_tot_price').html(item_tot_price);
-                //                    load_cart_item_list();
-            }
-            //    chosenRefresh();
-        }, "json");
-    }
 
     //LOG OUT BTN ======================================================
     $(document).on('click', '#log_out', function () {
